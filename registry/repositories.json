@@ -166,7 +166,7 @@
       "certified_release": {
         "version": "1.1.0",
         "commit": "8d1c06c9a02489ed10ba52b459c3a9bcc21a40d8",
-        "control_plane_compatibility": "1.4.0",
+        "control_plane_compatibility": "1.4.1",
         "status": "certified"
       },
       "applicable_rules": [
