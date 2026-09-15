@@ -24,3 +24,21 @@ This file records observed evidence, not policy authority. Final live verificati
 Այս գրառումը փաստում է դիտարկված ապացույցը, ոչ թե policy authority-ն։ Սկզբնական source SHA-256-ը պահպանվում է՝ `a15b6b22aeecc7beaaf2f13e9de20e45b1a49be24c6ba280a5b3ac364f034491`։ Identity-ն և namespace-ը `HouseNet-Projects` են։ Codex bootstrap-ը տեղադրված է `/home/gevorg/.codex/AGENTS.md`-ում։ Claude Code-ը այս WSL-ում բացակայում է, ուստի managed hook-երը սպասման մեջ են։
 
 GitHub-ը ընթացիկ personal private plan-ով մերժել է branch protection-ը՝ պահանջելով Pro կամ public repository։ Սա server-side gap է, և կեղծ protection չի ստեղծվել։
+
+---
+
+## Phase 1 certification · English
+
+Certified against current `main` commit `0863d219f2f16cac2f6733e1b98a9fd554b28803` on 2026-09-15. Identity was `HouseNet-Projects`; origin was canonical; the checkout was clean; preflight passed with policy `1.1.0`, 44 unique rules, 30 source sections and one registered Class A repository. The latest main CI run `34970954420` passed, 48 tests passed, syntax checks passed, and policy validation passed.
+
+Enforcement truth: policy/schema/source coverage, registry, snapshot consistency, bilingual document markers, negative fixtures, action pinning, workflow restrictions, and self-CI are CI enforced. Identity, canonical remote, Git baseline and remote freshness are local enforced by preflight. Codex bootstrap is agent guidance confirmed by `codex debug prompt-input`; the fresh `codex exec` probe could not initialize in this read-only runtime. Claude local enforcement is pending because Claude Code is not installed in this WSL. GitHub main branch protection is plan-limited for private personal repositories. No broken control-plane gate remains.
+
+Fail-closed coverage includes wrong identity, missing registration, invalid classification, stale policy references, malformed JSON, duplicate rule IDs, missing English/Armenian sections, empty bilingual sections, forbidden workflow patterns and invalid registration metadata. Valid fixtures pass. The original approved source checksum remains `a15b6b22aeecc7beaaf2f13e9de20e45b1a49be24c6ba280a5b3ac364f034491`.
+
+## Phase 1 certification · Հայերեն
+
+2026-09-15-ին ստուգվել է ընթացիկ `main` commit `0863d219f2f16cac2f6733e1b98a9fd554b28803`-ի վրա։ Identity-ն `HouseNet-Projects` էր, origin-ը՝ կանոնական, checkout-ը՝ մաքուր, իսկ preflight-ը անցավ՝ policy `1.1.0`, 44 եզակի կանոն, 30 աղբյուրային բաժին և մեկ գրանցված Class A պահոց։ Main-ի վերջին CI run `34970954420`-ը green է, 48 թեստ անցել է, syntax checks-ը և policy validation-ը նույնպես անցել են։
+
+Enforcement-ի ճշմարտություն՝ policy/schema/source coverage-ը, registry-ն, snapshot consistency-ն, երկլեզու marker-ները, negative fixtures-ը, action pinning-ը, workflow սահմանափակումները և self-CI-ն CI-ով enforced են։ Identity-ը, կանոնական remote-ը, Git baseline-ը և remote freshness-ը local preflight-ով enforced են։ Codex bootstrap-ը agent guidance է, հաստատված `codex debug prompt-input`-ով, իսկ fresh `codex exec` փորձը այս read-only runtime-ում չմեկնարկեց։ Claude-ի տեղային enforcement-ը սպասման մեջ է, քանի որ Claude Code-ը այս WSL-ում տեղադրված չէ։ GitHub main branch protection-ը plan-limited է private personal repository-ի համար։ Control-plane-ի կոտրված gate չի մնացել։
+
+Fail-closed ստուգումները ներառում են սխալ identity, բացակայող registration, սխալ դաս, stale policy reference, սխալ JSON, duplicate rule ID, բացակայող English/Armenian բաժիններ, դատարկ bilingual section, արգելված workflow pattern և սխալ registration metadata։ Valid fixture-ները անցնում են։ Սկզբնական հաստատված source checksum-ը պահպանվում է՝ `a15b6b22aeecc7beaaf2f13e9de20e45b1a49be24c6ba280a5b3ac364f034491`։
