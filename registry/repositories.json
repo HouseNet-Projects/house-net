@@ -8,7 +8,7 @@
       "owner": "HouseNet-Projects",
       "visibility": "public",
       "control_plane_version": "1.4.0",
-      "control_plane_commit": "4cfa33a21ab9910027b83d467e9f9e61d585c214",
+      "control_plane_commit": "664239478695ac3c13e77dfe998f01edd47ed825",
       "versioned": true,
       "canonical_version_source": {
         "path": "release/manifest.json",
@@ -136,7 +136,7 @@
       "owner": "HouseNet-Projects",
       "visibility": "public",
       "control_plane_version": "1.4.0",
-      "control_plane_commit": "4cfa33a21ab9910027b83d467e9f9e61d585c214",
+      "control_plane_commit": "664239478695ac3c13e77dfe998f01edd47ed825",
       "versioned": true,
       "canonical_version_source": {
         "path": "release/manifest.json",
@@ -267,7 +267,7 @@
       "owner": "HouseNet-Projects",
       "visibility": "public",
       "control_plane_version": "1.4.0",
-      "control_plane_commit": "4cfa33a21ab9910027b83d467e9f9e61d585c214",
+      "control_plane_commit": "664239478695ac3c13e77dfe998f01edd47ed825",
       "versioned": false,
       "release_state": "active",
       "applicable_rules": [
