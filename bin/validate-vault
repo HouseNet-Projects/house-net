@@ -1,26 +1,49 @@
 #!/usr/bin/env python3
-import json,re,sys
+import argparse, json, re, subprocess, sys
 from pathlib import Path
-root=Path(__file__).resolve().parents[1]
-def fail(msg): print('FAIL — '+msg); raise SystemExit(1)
-def main():
- schema=json.loads((root/'schemas/vault-reference.schema.json').read_text()); idx=json.loads((root/'vault/index.json').read_text())
- if idx.get('generated') is not True: fail('vault index must be generated')
+try:
+ from jsonschema import Draft202012Validator
+except Exception:
+ print('FAIL — jsonschema dependency unavailable'); raise SystemExit(2)
+SECRET=re.compile(rb'(?:-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----|(?:password|passwd|secret|token|api[_-]?key)\s*[:=]\s*[^\s<>{}]{8,}|gh[pousr]_[A-Za-z0-9]{30,}|github_pat_[A-Za-z0-9_]{40,})',re.I)
+REF=re.compile(r'^(?:external|encrypted|local)://[A-Za-z0-9._/@:+-]+$')
+def fail(msg): raise ValueError(msg)
+def scan_history(root):
+ if not (root/'.git').exists(): return
+ try: names=subprocess.check_output(['git','rev-list','--objects','--all'],cwd=root,text=True,stderr=subprocess.DEVNULL).splitlines()
+ except subprocess.CalledProcessError: fail('unable to enumerate reachable history')
+ seen=set()
+ for line in names:
+  parts=line.split(' ',1); oid=parts[0]; path=parts[1] if len(parts)>1 else ''
+  if path.startswith(('bin/','tests/')) or path.endswith('.py'): continue
+  if oid in seen: continue
+  seen.add(oid)
+  try: raw=subprocess.check_output(['git','cat-file','-p',oid],cwd=root,stderr=subprocess.DEVNULL)
+  except subprocess.CalledProcessError: continue
+  if SECRET.search(raw): fail('possible plaintext secret pattern in reachable Git history; value withheld')
+def run(root):
+ root=Path(root); schema=json.loads((root/'schemas/vault-reference.schema.json').read_text()); validator=Draft202012Validator(schema); idx=json.loads((root/'vault/index.json').read_text())
+ if idx.get('version') != 1 or idx.get('generated') is not True: fail('vault index contract invalid')
  ids=[]
  for p in sorted((root/'vault/references').glob('*.json')):
-  x=json.loads(p.read_text())
-  if any(k not in x for k in schema['required']): fail(f'metadata incomplete: {p}')
-  if x['storage']['encrypted'] is not True: fail(f'plaintext backend: {p}')
-  if x['storage']['reference'].startswith(('secret://','value://')): fail(f'inline secret reference: {p}')
-  if x['recovery']['available'] and not x['recovery']['requirements']: fail(f'recovery requirements missing: {p}')
-  ids.append(x['id'])
+  raw=p.read_bytes()
+  if SECRET.search(raw): fail(f'possible plaintext secret pattern: {p.relative_to(root)}')
+  try: obj=json.loads(raw)
+  except Exception: fail(f'invalid JSON: {p.relative_to(root)}')
+  errors=sorted(validator.iter_errors(obj), key=lambda e:list(e.path))
+  if errors: fail(f'schema violation {p.relative_to(root)}: {errors[0].message}')
+  if not REF.fullmatch(obj['storage']['reference']): fail(f'unsafe storage reference: {p.relative_to(root)}')
+  if obj['storage']['encrypted'] is not True: fail(f'unencrypted storage: {p.relative_to(root)}')
+  if obj['required_for_bootstrap'] and not obj['recovery']['available']: fail(f'bootstrap reference lacks recovery: {p.relative_to(root)}')
+  if obj['recovery']['available'] and not obj['recovery']['requirements']: fail(f'recovery requirements missing: {p.relative_to(root)}')
+  ids.append(obj['id'])
  if len(ids)!=len(set(ids)): fail('duplicate vault reference id')
- if sorted(ids)!=sorted(x['id'] for x in idx.get('references',[])): fail('vault index is stale')
- tracked=__import__('subprocess').check_output(['git','ls-files','-z'],cwd=root).split(b'\0')
- bad=re.compile(rb'(-----BEGIN .*PRIVATE KEY-----|(?:password|passwd|secret|token|api[_-]?key)\s*[:=]\s*[^\s<>{}]{8,})',re.I)
- for raw in tracked:
-  if not raw: continue
-  p=root/raw.decode(); data=p.read_bytes()
-  if bad.search(data) and p.name not in {'validate-vault'}: fail(f'possible plaintext secret pattern: {raw.decode()}')
- print(f'PASS — vault validation ({len(ids)} references; no plaintext secrets)')
-if __name__=='__main__': main()
+ if sorted(ids)!=sorted(x.get('id') for x in idx.get('references',[])): fail('vault index is stale')
+ scan_history(root)
+ print(f'PASS — vault validation ({len(ids)} references; schema, recovery and reachable history verified)')
+def main():
+ ap=argparse.ArgumentParser(); ap.add_argument('--root',type=Path,default=Path(__file__).resolve().parents[1]); args=ap.parse_args()
+ try: run(args.root)
+ except Exception as e: print('FAIL — '+str(e)); return 1
+ return 0
+if __name__=='__main__': raise SystemExit(main())
