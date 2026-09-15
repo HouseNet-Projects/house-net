@@ -87,7 +87,7 @@ def human_facing_paths(root):
     """Discover active human-facing Markdown surfaces from the canonical contract."""
     paths = []
     for p in root.rglob('*.md'):
-        if '.git' in p.parts or p.name in {'AGENTS.md','CLAUDE.md'} or '.claude' in p.parts or '.secure' in p.parts or 'docs/source' in str(p.relative_to(root)) or 'audit' in p.parts:
+        if '.git' in p.parts or p.name in {'AGENTS.md','CLAUDE.md'} or '.claude' in p.parts or '.secure' in p.parts or 'docs/source' in str(p.relative_to(root)) or 'audit' in p.parts or '05_Archive' in p.parts:
             continue
         paths.append(p)
     return sorted(paths)
