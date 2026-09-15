@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["title", "type", "version", "owner", "control_plane_version", "design_system_version", "languages"],
+  "properties": {
+    "title": {"type": "string", "minLength": 1},
+    "type": {"enum": ["policy", "procedure", "report", "proposal", "memo", "operational-review"]},
+    "version": {"type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$"},
+    "owner": {"type": "string", "minLength": 1},
+    "control_plane_version": {"const": "1.1.0"},
+    "design_system_version": {"const": "1.0.0"},
+    "languages": {"const": ["en", "hy"]}
+  },
+  "additionalProperties": false
+}

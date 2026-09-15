@@ -1,0 +1,31 @@
+{
+  "$schema": "../schemas/design-tokens.schema.json",
+  "version": "1.0.0",
+  "source": "HouseNet first-party logo and website CSS; see assets/brand/BRAND.md",
+  "color": {
+    "primary": {"value": "#E4003A", "role": "authority"},
+    "secondary": {"value": "#1C2125", "role": "control surface"},
+    "accent": {"value": "#A9143D", "role": "secondary emphasis"},
+    "dark-background": {"value": "#1C2125", "role": "dark canvas"},
+    "light-background": {"value": "#F6F9FB", "role": "light canvas"},
+    "foreground": {"value": "#1D1D1B", "role": "primary text"},
+    "muted": {"value": "#6F6F6E", "role": "secondary text"},
+    "surface": {"value": "#EDF3F6", "role": "quiet surface"},
+    "border": {"value": "#D1DCE2", "role": "structure"},
+    "success": {"value": "#78AD57", "role": "active state"},
+    "warning": {"value": "#A9143D", "role": "warning state"},
+    "critical": {"value": "#E4003A", "role": "critical state"}
+  },
+  "typography": {
+    "font-family-sans": {"value": "Inter, Arial, sans-serif"},
+    "font-family-mono": {"value": "ui-monospace, SFMono-Regular, Consolas, monospace"},
+    "display-size": {"value": "2.75rem"},
+    "body-size": {"value": "1rem"},
+    "small-size": {"value": "0.875rem"},
+    "line-height": {"value": 1.5}
+  },
+  "space": {"1": {"value": "0.25rem"}, "2": {"value": "0.5rem"}, "3": {"value": "0.75rem"}, "4": {"value": "1rem"}, "6": {"value": "1.5rem"}, "8": {"value": "2rem"}, "12": {"value": "3rem"}},
+  "radius": {"sm": {"value": "0.375rem"}, "md": {"value": "0.75rem"}, "lg": {"value": "1.25rem"}},
+  "shadow": {"card": {"value": "0 8px 24px rgba(28,33,37,.10)"}, "focus": {"value": "0 0 0 3px rgba(228,0,58,.28)"}},
+  "status": {"active": {"color": "{color.success}"}, "attention": {"color": "{color.warning}"}, "blocked": {"color": "{color.critical}"}}
+}

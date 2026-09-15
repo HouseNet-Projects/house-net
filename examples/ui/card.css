@@ -1,0 +1,5 @@
+:root { --hn-primary:#E4003A; --hn-ink:#1D1D1B; --hn-surface:#EDF3F6; --hn-success:#78AD57; --hn-radius:12px; }
+.hn-card { max-width: 22rem; padding: 1.5rem; border: 1px solid #D1DCE2; border-radius: var(--hn-radius); background: #fff; color: var(--hn-ink); box-shadow: 0 8px 24px rgba(28,33,37,.10); }
+.hn-card__eyebrow { color: var(--hn-success); font: 700 .75rem/1.2 Arial,sans-serif; letter-spacing: .08em; }
+.hn-card__value { margin: 1rem 0 .25rem; color: var(--hn-primary); font: 700 2.5rem/1 Arial,sans-serif; }
+.hn-card__meta { color: #6F6F6E; }
