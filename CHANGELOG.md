@@ -2,6 +2,10 @@
 
 ## English
 
+### 1.3.0 — 2026-09-15
+
+- Added provider-neutral agent contracts, staged migration governance, independent data classification, source-of-truth controls, and AI provider independence enforcement.
+
 ### 1.2.0 — 2026-09-15
 
 - Added the mandatory universal single-source version authority and drift contract.
@@ -11,6 +15,10 @@
 Added mandatory bilingual English + Armenian coverage for human-facing HouseNet content, with deterministic document markers and repository-gate validation. The official HouseNet visual system is retained and presented with first-party logo provenance.
 
 ## Հայերեն
+
+### 1.3.0 — 15.09.2026
+
+- Ավելացվել են մատակարարից անկախ գործակալների պայմանագիրը, փուլային միգրացիայի կառավարումը, տվյալների անկախ դասակարգումը, աղբյուրի ճշմարտության վերահսկումը և AI մատակարարից անկախության կիրարկումը։
 
 ### 1.2.0 — 15.09.2026
 

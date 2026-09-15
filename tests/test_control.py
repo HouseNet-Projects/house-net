@@ -193,7 +193,7 @@ class PolicyTests(unittest.TestCase):
 
     def test_machine_files_are_english_only_allowed(self):
         self.assertIsNone(c.validate_bilingual_documents(self.root))
-        self.assertEqual(json.loads((self.root/'policy/manifest.json').read_text())['version'],'1.2.0')
+        self.assertEqual(json.loads((self.root/'policy/manifest.json').read_text())['version'],'1.3.0')
 
     def test_preflight_wrong_identity_blocks(self):
         with patch.object(c,'command',return_value='WrongIdentity'):

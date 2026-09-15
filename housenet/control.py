@@ -17,7 +17,7 @@ from referencing import Registry, Resource
 OWNER = 'HouseNet-Projects'
 CANONICAL = OWNER + '/house-net-control-plane'
 SOURCE_SHA = 'a15b6b22aeecc7beaaf2f13e9de20e45b1a49be24c6ba280a5b3ac364f034491'
-POLICY_VERSION = '1.2.0'
+POLICY_VERSION = '1.3.0'
 ROOT = Path(__file__).resolve().parents[1]
 SEMVER_RE = re.compile(r'^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$')
 
@@ -211,6 +211,11 @@ def registry(root, validators, items):
     for r in data['repositories']:
         require(r['applicable_rules'] == applicable(items, r['classification']), 'Applicable rule set incomplete: ' + r['repository'])
         require(r['approval']['state'] == 'approved', 'Repository not approved: ' + r['repository'])
+        require(r.get('data_classification') in {'PUBLIC','INTERNAL','CONFIDENTIAL','RESTRICTED','UNKNOWN'}, 'Invalid data classification: ' + r['repository'])
+        migration = r.get('migration')
+        require(isinstance(migration, dict) and migration.get('stage') in ['DISCOVERED','QUARANTINED','AUDITED','PROPOSED','OWNER_APPROVED','MIGRATED','CERTIFIED','CANONICAL'], 'Migration registration missing: ' + r['repository'])
+        if migration.get('stage') == 'CANONICAL':
+            require(migration.get('canonical_status') == 'CANONICAL' and migration.get('certification_status') == 'CERTIFIED', 'Canonical repository lacks certification: ' + r['repository'])
         for e in r['profile']['exceptions']:
             require(e['rule_id'] in r['applicable_rules'], 'Unknown exception rule')
         if r['repository'] == CANONICAL:
@@ -292,6 +297,15 @@ def scan_workflows(root, record, values, action_reviews):
                         require('${{ github.event.' not in step['run'], 'Untrusted event expression in shell; pass through environment')
     return warnings
 
+def check_provider_independence(target, record):
+    providers = {'OPENAI_API_KEY': 'OpenAI', 'ANTHROPIC_API_KEY': 'Anthropic', 'GEMINI_API_KEY': 'Google'}
+    registered = {d.get('provider','').lower() for d in record.get('external_dependencies', []) if d.get('runtime') and d.get('approval') == 'approved'}
+    for path in sorted((target / '.github/workflows').glob('*.y*ml')):
+        text = path.read_text()
+        for variable, provider in providers.items():
+            if variable in text and provider.lower() not in registered:
+                raise Invalid('Unregistered runtime AI provider dependency in ' + path.name + ': ' + variable)
+
 def check_content(root):
     # Conservative tripwires, not a complete secret scanner.
     patterns = [re.compile(rb'-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----'), re.compile(rb'gh[pousr]_[A-Za-z0-9]{30,}'), re.compile(rb'github_pat_[A-Za-z0-9_]{40,}')]
@@ -342,6 +356,7 @@ def validate_repository(root, target, expected_repository=None):
     require(not any(p.is_file() for p in target.glob('LICENSE*')), 'License requires separately registered owner decision')
     reviews = load(root / 'policy-dependencies.json')['actions']
     scan_workflows(target, r, values, reviews)
+    check_provider_independence(target, r)
     check_content(target)
     validate_bilingual_documents(target)
     return {'repository':r['repository'],'classification':r['classification'],'policy_version':manifest['version'],'policy_commit':r['control_plane_commit'],'rules':len(r['applicable_rules'])}

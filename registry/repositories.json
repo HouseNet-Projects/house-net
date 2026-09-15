@@ -1,5 +1,5 @@
 {
-  "version": "1.2.0",
+  "version": "1.3.0",
   "repositories": [
     {
       "repository": "HouseNet-Projects/house-net-control-plane",
@@ -7,18 +7,30 @@
       "purpose": "Canonical engineering policy, approval, classification and agent control plane.",
       "owner": "HouseNet-Projects",
       "visibility": "private",
-      "control_plane_version": "1.2.0",
-      "control_plane_commit": "aac27644f1bee99c38298bb73d235dd06993ce3c",
+      "control_plane_version": "1.3.0",
+      "control_plane_commit": "9d107f083d963a9bcbe952de88be4c6b20d17ce7",
       "versioned": true,
-      "canonical_version_source": {"path": "release/manifest.json", "field": "version"},
-      "current_version": "1.2.0",
+      "canonical_version_source": {
+        "path": "release/manifest.json",
+        "field": "version"
+      },
+      "current_version": "1.3.0",
       "version_scheme": "semver",
       "release_state": "active",
       "version_surfaces": [
-        {"path": "README.md", "field": "policy_version", "kind": "text"},
-        {"path": "docs/POLICY.md", "field": "policy_version", "kind": "generated"}
+        {
+          "path": "README.md",
+          "field": "policy_version",
+          "kind": "text"
+        },
+        {
+          "path": "docs/POLICY.md",
+          "field": "policy_version",
+          "kind": "generated"
+        }
       ],
       "applicable_rules": [
+        "HN-ARCH-AI-PROVIDER-INDEPENDENCE",
         "HN-AUTHOR-EMAIL",
         "HN-AUTHOR-NAME",
         "HN-BRANCH",
@@ -30,6 +42,7 @@
         "HN-CONFIGURATION",
         "HN-CREATE",
         "HN-CREATION",
+        "HN-DATA-CLASSIFICATION",
         "HN-DEPENDENCIES",
         "HN-DEPLOYMENT",
         "HN-DEPRECATION",
@@ -44,6 +57,7 @@
         "HN-LEVELS",
         "HN-LICENSE",
         "HN-METHODS",
+        "HN-MIGRATION-STAGED-ADOPTION",
         "HN-NAMESPACE",
         "HN-NAMING",
         "HN-OPERATING-FLOW",
@@ -59,6 +73,7 @@
         "HN-SCOPE",
         "HN-SECRETS",
         "HN-SIGNAL",
+        "HN-SOURCE-OF-TRUTH",
         "HN-SOURCES",
         "HN-VERSION-SINGLE-SOURCE",
         "HN-VERSIONING"
@@ -91,7 +106,17 @@
           "docs/REPOSITORY-LIFECYCLE.md"
         ],
         "exceptions": []
-      }
+      },
+      "data_classification": "INTERNAL",
+      "migration": {
+        "stage": "CANONICAL",
+        "source_type": "git",
+        "mode": "FULL_HISTORY",
+        "source": "HouseNet-Projects/house-net-control-plane",
+        "canonical_status": "CANONICAL",
+        "certification_status": "CERTIFIED"
+      },
+      "external_dependencies": []
     },
     {
       "repository": "HouseNet-Projects/house-net-design-system",
@@ -99,18 +124,30 @@
       "purpose": "Canonical HouseNet brand, UI and bilingual document design system for products and operational documents.",
       "owner": "HouseNet-Projects",
       "visibility": "private",
-      "control_plane_version": "1.2.0",
-      "control_plane_commit": "aac27644f1bee99c38298bb73d235dd06993ce3c",
+      "control_plane_version": "1.3.0",
+      "control_plane_commit": "9d107f083d963a9bcbe952de88be4c6b20d17ce7",
       "versioned": true,
-      "canonical_version_source": {"path": "release/manifest.json", "field": "version"},
+      "canonical_version_source": {
+        "path": "release/manifest.json",
+        "field": "version"
+      },
       "current_version": "1.0.0",
       "version_scheme": "semver",
       "release_state": "active",
       "version_surfaces": [
-        {"path": "README.md", "field": "product_version", "kind": "generated"},
-        {"path": "CHANGELOG.md", "field": "release_version", "kind": "generated"}
+        {
+          "path": "README.md",
+          "field": "product_version",
+          "kind": "generated"
+        },
+        {
+          "path": "CHANGELOG.md",
+          "field": "release_version",
+          "kind": "generated"
+        }
       ],
       "applicable_rules": [
+        "HN-ARCH-AI-PROVIDER-INDEPENDENCE",
         "HN-AUTHOR-EMAIL",
         "HN-AUTHOR-NAME",
         "HN-BRANCH",
@@ -122,6 +159,7 @@
         "HN-CONFIGURATION",
         "HN-CREATE",
         "HN-CREATION",
+        "HN-DATA-CLASSIFICATION",
         "HN-DEPENDENCIES",
         "HN-DEPLOYMENT",
         "HN-DEPRECATION",
@@ -136,6 +174,7 @@
         "HN-LEVELS",
         "HN-LICENSE",
         "HN-METHODS",
+        "HN-MIGRATION-STAGED-ADOPTION",
         "HN-NAMESPACE",
         "HN-NAMING",
         "HN-OPERATING-FLOW",
@@ -151,6 +190,7 @@
         "HN-SCOPE",
         "HN-SECRETS",
         "HN-SIGNAL",
+        "HN-SOURCE-OF-TRUTH",
         "HN-SOURCES",
         "HN-VERSION-SINGLE-SOURCE",
         "HN-VERSIONING"
@@ -162,14 +202,35 @@
       },
       "profile": {
         "kind": "code",
-        "technology": ["Portable JSON tokens", "Markdown", "SVG", "Python 3.12+", "OOXML source definitions"],
+        "technology": [
+          "Portable JSON tokens",
+          "Markdown",
+          "SVG",
+          "Python 3.12+",
+          "OOXML source definitions"
+        ],
         "dependencies": true,
         "meaningful_ci": true,
         "deployment": "none",
         "data_sensitivity": "private_design_governance_no_secrets",
-        "required_files": ["README.md", ".gitignore", ".editorconfig", ".gitattributes"],
+        "required_files": [
+          "README.md",
+          ".gitignore",
+          ".editorconfig",
+          ".gitattributes"
+        ],
         "exceptions": []
-      }
+      },
+      "data_classification": "INTERNAL",
+      "migration": {
+        "stage": "CANONICAL",
+        "source_type": "git",
+        "mode": "FULL_HISTORY",
+        "source": "HouseNet-Projects/house-net-design-system",
+        "canonical_status": "CANONICAL",
+        "certification_status": "CERTIFIED"
+      },
+      "external_dependencies": []
     }
   ]
 }

@@ -1,5 +1,5 @@
 {
-  "version": "1.2.0",
+  "version": "1.3.0",
   "domain": "repository-baseline",
   "rules": [
     {
@@ -339,6 +339,58 @@
       },
       "approval_requirement": "explicit_owner",
       "enforcement": {"mechanism": "repository_validator_and_ci"},
+      "source_sections": []
+    },
+    {
+      "id": "HN-ARCH-AI-PROVIDER-INDEPENDENCE",
+      "primitive": "architecture.ai_provider_independence",
+      "scope": "repository",
+      "level": "MANDATORY",
+      "applicability": {"classes": ["A", "B", "C"]},
+      "expected": {
+        "build_time_agent_is_not_runtime_dependency": true,
+        "runtime_ai_requires": ["registered_external_dependency", "explicit_owner_approval", "business_justification", "fallback_or_outage_impact"],
+        "unapproved_provider_credentials_in_ci_or_deployment": "forbidden"
+      },
+      "approval_requirement": "explicit_owner",
+      "enforcement": {"mechanism": "dependency_registry_and_deterministic_gate"},
+      "source_sections": []
+    },
+    {
+      "id": "HN-MIGRATION-STAGED-ADOPTION",
+      "primitive": "migration.lifecycle",
+      "scope": "repository",
+      "level": "MANDATORY",
+      "applicability": {"classes": ["A", "B", "C"]},
+      "expected": {
+        "stages": ["DISCOVERED", "QUARANTINED", "AUDITED", "PROPOSED", "OWNER_APPROVED", "MIGRATED", "CERTIFIED", "CANONICAL"],
+        "direct_legacy_to_canonical": false,
+        "destructive_cleanup_during_intake": false
+      },
+      "approval_requirement": "explicit_owner",
+      "enforcement": {"mechanism": "migration_registry_and_import_validator"},
+      "source_sections": []
+    },
+    {
+      "id": "HN-DATA-CLASSIFICATION",
+      "primitive": "repository.data_classification",
+      "scope": "repository",
+      "level": "MANDATORY",
+      "applicability": {"classes": ["A", "B", "C"]},
+      "expected": {"levels": ["PUBLIC", "INTERNAL", "CONFIDENTIAL", "RESTRICTED"], "independent_of_operational_class": true, "unknown_requires_owner_decision": true},
+      "approval_requirement": "explicit_owner",
+      "enforcement": {"mechanism": "registration_schema_and_owner_review"},
+      "source_sections": []
+    },
+    {
+      "id": "HN-SOURCE-OF-TRUTH",
+      "primitive": "migration.source_of_truth",
+      "scope": "repository",
+      "level": "MANDATORY",
+      "applicability": {"classes": ["A", "B", "C"]},
+      "expected": {"one_canonical_source": true, "conflicting_candidates": "block_canonicalization", "legacy_preserved": true},
+      "approval_requirement": "explicit_owner",
+      "enforcement": {"mechanism": "migration_evidence_and_validator"},
       "source_sections": []
     }
   ]

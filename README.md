@@ -12,7 +12,7 @@
 
 <p align="center">
   <a href="https://github.com/HouseNet-Projects/house-net-control-plane/actions/workflows/control-plane-ci.yml"><img alt="Control plane CI" src="https://github.com/HouseNet-Projects/house-net-control-plane/actions/workflows/control-plane-ci.yml/badge.svg?branch=main"></a>
-  <a href="https://github.com/HouseNet-Projects/house-net-control-plane/blob/main/docs/POLICY.md">Policy 1.2.0</a> <!-- housenet-version: policy_version -->
+  <a href="https://github.com/HouseNet-Projects/house-net-control-plane/blob/main/docs/POLICY.md">Policy 1.3.0</a> <!-- housenet-version: policy_version -->
   <a href="https://github.com/HouseNet-Projects/house-net-control-plane/blob/main/docs/ENFORCEMENT.md">Enforcement map</a>
 </p>
 
@@ -75,6 +75,7 @@ Every future repository must be proposed and classified before creation. The reg
 | Ownership, approval and scope | [`policy/authority.json`](policy/authority.json) |
 | A/B/C classification | [`policy/repository-classes.json`](policy/repository-classes.json) |
 | Repository foundation and lifecycle | [`policy/repository-baseline.json`](policy/repository-baseline.json) |
+| Migration intake and adoption | [`docs/MIGRATION-LIFECYCLE.md`](docs/MIGRATION-LIFECYCLE.md) · `bin/housenet-import` |
 | Git and merge behavior | [`policy/git.json`](policy/git.json) · [`policy/merge.json`](policy/merge.json) |
 | Actions and CI | [`policy/actions.json`](policy/actions.json) |
 | Dependency security | [`policy/security.json`](policy/security.json) |
@@ -120,7 +121,7 @@ HouseNet-Projects owns this private control plane. The goal is the minimum corre
 | :--- | :--- |
 | Կառավարման հարթակ | ԱԿՏԻՎ |
 | CI | ԿԱՆԱՉ |
-| Քաղաքականություն | 1.2.0 | <!-- housenet-version: policy_version -->
+| Քաղաքականություն | 1.3.0 | <!-- housenet-version: policy_version -->
 | Դասակարգում | CLASS A — CRITICAL |
 | Իրավասու սեփականատեր | HouseNet-Projects |
 | Codex bootstrap | ԿԻՐԱՐԿՎԱԾ |

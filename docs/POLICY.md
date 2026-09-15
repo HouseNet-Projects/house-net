@@ -1,8 +1,27 @@
-# HouseNet policy · 1.2.0 <!-- housenet-version: policy_version -->
+# HouseNet policy · 1.3.0 <!-- housenet-version: policy_version -->
 
 ## English
 
 Generated from machine authority. Do not edit by hand. Original approved text is preserved in [source](source/HouseNet-GitHub-Policy-v1.0.md).
+
+### HN-ARCH-AI-PROVIDER-INDEPENDENCE · architecture.ai_provider_independence
+
+MANDATORY · repository · Classes A, B, C
+
+```json
+{
+  "build_time_agent_is_not_runtime_dependency": true,
+  "runtime_ai_requires": [
+    "registered_external_dependency",
+    "explicit_owner_approval",
+    "business_justification",
+    "fallback_or_outage_impact"
+  ],
+  "unapproved_provider_credentials_in_ci_or_deployment": "forbidden"
+}
+```
+
+Approval: explicit_owner. Enforcement: dependency_registry_and_deterministic_gate. Source sections: .
 
 ### HN-AUTHOR-EMAIL · git.user.email
 
@@ -268,6 +287,25 @@ MANDATORY · repository · Classes A, B, C
 
 Approval: explicit_owner. Enforcement: registry_and_owner_review. Source sections: 2.
 
+### HN-DATA-CLASSIFICATION · repository.data_classification
+
+MANDATORY · repository · Classes A, B, C
+
+```json
+{
+  "levels": [
+    "PUBLIC",
+    "INTERNAL",
+    "CONFIDENTIAL",
+    "RESTRICTED"
+  ],
+  "independent_of_operational_class": true,
+  "unknown_requires_owner_decision": true
+}
+```
+
+Approval: explicit_owner. Enforcement: registration_schema_and_owner_review. Source sections: .
+
 ### HN-DEPENDENCIES · security.dependencies
 
 MANDATORY · repository · Classes A, B, C
@@ -512,6 +550,29 @@ RECOMMENDED · repository · Classes A, B, C
 ```
 
 Approval: explicit_owner. Enforcement: repository_settings_audit. Source sections: 11.
+
+### HN-MIGRATION-STAGED-ADOPTION · migration.lifecycle
+
+MANDATORY · repository · Classes A, B, C
+
+```json
+{
+  "stages": [
+    "DISCOVERED",
+    "QUARANTINED",
+    "AUDITED",
+    "PROPOSED",
+    "OWNER_APPROVED",
+    "MIGRATED",
+    "CERTIFIED",
+    "CANONICAL"
+  ],
+  "direct_legacy_to_canonical": false,
+  "destructive_cleanup_during_intake": false
+}
+```
+
+Approval: explicit_owner. Enforcement: migration_registry_and_import_validator. Source sections: .
 
 ### HN-NAMESPACE · github.namespace
 
@@ -769,6 +830,20 @@ MANDATORY · account · Classes A, B, C
 
 Approval: explicit_owner. Enforcement: owner_review. Source sections: 27.
 
+### HN-SOURCE-OF-TRUTH · migration.source_of_truth
+
+MANDATORY · repository · Classes A, B, C
+
+```json
+{
+  "one_canonical_source": true,
+  "conflicting_candidates": "block_canonicalization",
+  "legacy_preserved": true
+}
+```
+
+Approval: explicit_owner. Enforcement: migration_evidence_and_validator. Source sections: .
+
 ### HN-SOURCES · actions.sources
 
 MANDATORY · repository · Classes A, B, C
@@ -825,9 +900,28 @@ Approval: explicit_owner. Enforcement: owner_review. Source sections: 22.
 
 ## Հայերեն
 
-# HouseNet-ի քաղաքականություն · 1.2.0
+# HouseNet-ի քաղաքականություն · 1.3.0
 
 Մեքենայական հեղինակությունից ստեղծված ներկայացում է։ Խմբագրել միայն մեքենայական կանոնները։ Սկզբնական հաստատված քաղաքականությունը պահպանված է [աղբյուրում](source/HouseNet-GitHub-Policy-v1.0.md)։
+
+### HN-ARCH-AI-PROVIDER-INDEPENDENCE · architecture.ai_provider_independence
+
+Մակարդակ՝ MANDATORY · Տիրույթ՝ repository · Դասեր՝ A, B, C
+
+```json
+{
+  "build_time_agent_is_not_runtime_dependency": true,
+  "runtime_ai_requires": [
+    "registered_external_dependency",
+    "explicit_owner_approval",
+    "business_justification",
+    "fallback_or_outage_impact"
+  ],
+  "unapproved_provider_credentials_in_ci_or_deployment": "forbidden"
+}
+```
+
+Հաստատում՝ explicit_owner։ Կիրարկում՝ dependency_registry_and_deterministic_gate։ Աղբյուրի բաժիններ՝ ։
 
 ### HN-AUTHOR-EMAIL · git.user.email
 
@@ -1093,6 +1187,25 @@ Approval: explicit_owner. Enforcement: owner_review. Source sections: 22.
 
 Հաստատում՝ explicit_owner։ Կիրարկում՝ registry_and_owner_review։ Աղբյուրի բաժիններ՝ 2։
 
+### HN-DATA-CLASSIFICATION · repository.data_classification
+
+Մակարդակ՝ MANDATORY · Տիրույթ՝ repository · Դասեր՝ A, B, C
+
+```json
+{
+  "levels": [
+    "PUBLIC",
+    "INTERNAL",
+    "CONFIDENTIAL",
+    "RESTRICTED"
+  ],
+  "independent_of_operational_class": true,
+  "unknown_requires_owner_decision": true
+}
+```
+
+Հաստատում՝ explicit_owner։ Կիրարկում՝ registration_schema_and_owner_review։ Աղբյուրի բաժիններ՝ ։
+
 ### HN-DEPENDENCIES · security.dependencies
 
 Մակարդակ՝ MANDATORY · Տիրույթ՝ repository · Դասեր՝ A, B, C
@@ -1337,6 +1450,29 @@ Approval: explicit_owner. Enforcement: owner_review. Source sections: 22.
 ```
 
 Հաստատում՝ explicit_owner։ Կիրարկում՝ repository_settings_audit։ Աղբյուրի բաժիններ՝ 11։
+
+### HN-MIGRATION-STAGED-ADOPTION · migration.lifecycle
+
+Մակարդակ՝ MANDATORY · Տիրույթ՝ repository · Դասեր՝ A, B, C
+
+```json
+{
+  "stages": [
+    "DISCOVERED",
+    "QUARANTINED",
+    "AUDITED",
+    "PROPOSED",
+    "OWNER_APPROVED",
+    "MIGRATED",
+    "CERTIFIED",
+    "CANONICAL"
+  ],
+  "direct_legacy_to_canonical": false,
+  "destructive_cleanup_during_intake": false
+}
+```
+
+Հաստատում՝ explicit_owner։ Կիրարկում՝ migration_registry_and_import_validator։ Աղբյուրի բաժիններ՝ ։
 
 ### HN-NAMESPACE · github.namespace
 
@@ -1593,6 +1729,20 @@ Approval: explicit_owner. Enforcement: owner_review. Source sections: 22.
 ```
 
 Հաստատում՝ explicit_owner։ Կիրարկում՝ owner_review։ Աղբյուրի բաժիններ՝ 27։
+
+### HN-SOURCE-OF-TRUTH · migration.source_of_truth
+
+Մակարդակ՝ MANDATORY · Տիրույթ՝ repository · Դասեր՝ A, B, C
+
+```json
+{
+  "one_canonical_source": true,
+  "conflicting_candidates": "block_canonicalization",
+  "legacy_preserved": true
+}
+```
+
+Հաստատում՝ explicit_owner։ Կիրարկում՝ migration_evidence_and_validator։ Աղբյուրի բաժիններ՝ ։
 
 ### HN-SOURCES · actions.sources
 

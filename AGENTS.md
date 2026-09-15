@@ -8,3 +8,4 @@ Validate this repository with `bin/validate-repository <repository-path> --expec
 Owner approval is required for configuration, repository creation, reclassification and exact destructive actions. A template or registry entry does not independently prove owner consent.
 Human-facing HouseNet artifacts require complete English and Armenian content under the current control-plane policy; machine and agent files may remain English-only.
 Never manually invent or synchronize HouseNet versions. Read the repository canonical version authority and use the approved version/release tooling; keep own and consumed versions distinct.
+Follow the provider-neutral contract in `docs/AGENT-CONTRACT.md`; Codex, Claude, and future agents are adapters, not policy authorities.
