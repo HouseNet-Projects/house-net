@@ -1123,7 +1123,17 @@
     "actions": "operational_live_state",
     "journal": "historical_reference_current_tree_redacted",
     "deputy_identity": "single_thin_canonical_reference",
-    "history_redaction": "current_tree_only_reachable_history_unchanged",
+    "history_redaction": "current_tree_only_reachable_history_reviewed",
     "secrets": "no_live_credentials_added"
+  },
+  "credential_history_review": {
+    "detected_class": "A_consumed_or_expired_action_runtime_approval_tokens",
+    "unique_identifiers_count": 8,
+    "current_records": "6_consumed_2_unconsumed_but_expired",
+    "reusable_live_credential_found": false,
+    "rotation_required": false,
+    "history_rewrite_justified": false,
+    "values_redacted_from_reports": true,
+    "owner_gate": "none_for_consumed_expired_tokens; destructive_rewrite_not_required"
   }
 }
