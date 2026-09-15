@@ -1,7 +1,8 @@
 # Reviewed package sources: official PyPI release metadata. Python 3.12, Linux x86_64.
 # Exact versions plus SHA-256; no dependency resolution during CI.
-jsonschema==4.19.2 \
-    --hash=sha256:eee9e502c788e89cb166d4d37f43084e3b64ab405c795c03d343a4dbc2c810fc
+jsonschema==4.26.0 \
+    --hash=sha256:0c26707e2efad8aa1bfc5b7ce170f3fccc2e4918ff85989ba9ffa9facb2be326 \
+    --hash=sha256:d489f15263b8d200f8387e64b4c3a75f06629559fb73deb8fdfb525f2dab50ce
 PyYAML==6.0.3 \
     --hash=sha256:ba1cc08a7ccde2d2ec775841541641e4548226580ab850948cbfda66a1befcdc
 attrs==26.1.0 \
