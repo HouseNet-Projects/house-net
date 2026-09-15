@@ -2,35 +2,35 @@
   "kind": "generated_upload_artifacts",
   "source_format": "SVG",
   "generator": "sharp@0.33.5",
-  "source_commit": "ef6373ec680a1805675ab8bf71ef1bf488739515",
+  "source_commit": "360af2f823cb3a3a9cd73903282a4fc637bc922e",
   "artifacts": [
     {
       "file": "housenet-avatar.png",
       "source": "../profile/housenet-avatar.svg",
       "width": 512,
       "height": 512,
-      "sha256": "47f3dbcb8727d49cb6121a805393dce342e31c1acfa1291584e67d03db6c8a1a"
+      "sha256": "2c398bdac2cfe8796c82568d6e8e894788ba46522a1a22e98b12381d2b6e7846"
     },
     {
       "file": "control-plane.png",
       "source": "../social/control-plane.svg",
       "width": 1280,
       "height": 640,
-      "sha256": "e063815e786d628574eccf29be0106e391a01c0dd00a2f3a52d8bf9a9b831d62"
+      "sha256": "7fd791da98a999d3a13ec87f9ca36b9025d426515d009d02e9c09b2f6db7afec"
     },
     {
       "file": "design-system.png",
       "source": "../social/design-system.svg",
       "width": 1280,
       "height": 640,
-      "sha256": "c7ea41a900252f4d328280c6780d745c4f5023edfb623ee20ba6f74dbcf32c61"
+      "sha256": "f3ed7df4af4f44de93e11979884d69a3129468aca35ac2d002a5e7b50477bbe9"
     },
     {
       "file": "command-center.png",
       "source": "../social/command-center.svg",
       "width": 1280,
       "height": 640,
-      "sha256": "f49d479df7ebafa8eac8f7af2f5ffa8d1350ba6639befc4a4835a591d5ecf684"
+      "sha256": "c5ea47d72b335ee4846cf1fb0386e5ddb692604d5e0eb3302de6127de6ed11f7"
     }
   ]
 }
