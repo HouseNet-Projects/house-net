@@ -142,7 +142,7 @@
         "path": "release/manifest.json",
         "field": "version"
       },
-      "current_version": "1.0.0",
+      "current_version": "1.1.0",
       "version_scheme": "semver",
       "release_state": "active",
       "version_surfaces": [
@@ -251,7 +251,7 @@
       },
       "external_dependencies": [],
       "design_system": {
-        "version": "1.0.0",
+        "version": "1.1.0",
         "category": "DESIGN_SYSTEM",
         "asset_source": "HouseNet-Projects/house-net-design-system",
         "readme_contract": "bilingual_status_navigation",
