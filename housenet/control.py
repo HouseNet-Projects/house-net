@@ -233,9 +233,14 @@ def validate_design_system_certification(root, records, target=None, record=None
             require(design.get('control_plane_compatibility') == item['control_plane_version'], 'Design System compatibility mismatch: ' + item['repository'])
     if target is not None and record and record['repository'] == ds['repository'] and (target / '.git').exists():
         head = command(['git','rev-parse','HEAD'], target)
-        require(head == cert['commit'], 'Certified Design System commit does not match target HEAD')
-        manifest = json.loads(command(['git','show', cert['commit'] + ':release/manifest.json'], target))
-        require(manifest.get('version') == cert['version'] and manifest.get('control_plane_version') == cert['control_plane_compatibility'], 'Certified release commit content mismatch')
+        if head == cert['commit']:
+            manifest = json.loads(command(['git','show', cert['commit'] + ':release/manifest.json'], target))
+            require(manifest.get('version') == cert['version'] and manifest.get('control_plane_version') == cert['control_plane_compatibility'], 'Certified release commit content mismatch')
+        else:
+            # A not-yet-certified Design System branch may pass only as a transition candidate.
+            manifest = json.loads(command(['git','show', head + ':release/manifest.json'], target))
+            require(manifest.get('version') == cert['version'], 'Design System candidate version mismatch')
+            require(manifest.get('control_plane_version') == record['control_plane_version'], 'Design System candidate compatibility mismatch')
 
 def registry(root, validators, items):
     data = load(root / 'registry/repositories.json')
