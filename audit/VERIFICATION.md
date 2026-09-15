@@ -42,3 +42,13 @@ Fail-closed coverage includes wrong identity, missing registration, invalid clas
 Enforcement-ի ճշմարտություն՝ policy/schema/source coverage-ը, registry-ն, snapshot consistency-ն, երկլեզու marker-ները, negative fixtures-ը, action pinning-ը, workflow սահմանափակումները և self-CI-ն CI-ով enforced են։ Identity-ը, կանոնական remote-ը, Git baseline-ը և remote freshness-ը local preflight-ով enforced են։ Codex bootstrap-ը agent guidance է, հաստատված `codex debug prompt-input`-ով, իսկ fresh `codex exec` փորձը այս read-only runtime-ում չմեկնարկեց։ Claude-ի տեղային enforcement-ը սպասման մեջ է, քանի որ Claude Code-ը այս WSL-ում տեղադրված չէ։ GitHub main branch protection-ը plan-limited է private personal repository-ի համար։ Control-plane-ի կոտրված gate չի մնացել։
 
 Fail-closed ստուգումները ներառում են սխալ identity, բացակայող registration, սխալ դաս, stale policy reference, սխալ JSON, duplicate rule ID, բացակայող English/Armenian բաժիններ, դատարկ bilingual section, արգելված workflow pattern և սխալ registration metadata։ Valid fixture-ները անցնում են։ Սկզբնական հաստատված source checksum-ը պահպանվում է՝ `a15b6b22aeecc7beaaf2f13e9de20e45b1a49be24c6ba280a5b3ac364f034491`։
+
+## Post-remediation certification
+
+### English
+
+After the initial certification record, three reachable-reference defects were found during the authorized future-repository gate test and remediated without weakening policy: PR #11 updated the reusable validator pin, PR #12 aligned the distribution snapshot and registrations, and PR #13 updated the reusable gate to that aligned snapshot. Final main commit `2608841f350924befdaeb19a7756879f60a40f08` passed CI run `34974318624`; the design-system gate then passed against the registered Class B repository.
+
+### Հայերեն
+
+Սկզբնական certification record-ից հետո ապագա repository gate-ի ստուգման ժամանակ հայտնաբերվեցին reachable reference-ի երեք defect և ուղղվեցին՝ առանց policy-ն թուլացնելու։ PR #11-ը թարմացրեց reusable validator pin-ը, PR #12-ը համաժամացրեց distribution snapshot-ը և registrations-ը, իսկ PR #13-ը reusable gate-ը pin արեց այդ snapshot-ին։ Վերջնական main commit `2608841f350924befdaeb19a7756879f60a40f08`-ը անցավ CI run `34974318624`-ով, իսկ design-system gate-ը անցավ գրանցված Class B repository-ի վրա։
