@@ -1,1 +1,26 @@
-{"version":1,"generated":true,"items":[]}
+{
+  "version": 1,
+  "generated": true,
+  "items": [
+    {
+      "id": "HN-KNOW-CMD-ACTIONS",
+      "status": "draft",
+      "path": "knowledge/intake/HN-KNOW-CMD-ACTIONS.json"
+    },
+    {
+      "id": "HN-KNOW-CMD-JOURNAL",
+      "status": "draft",
+      "path": "knowledge/intake/HN-KNOW-CMD-JOURNAL.json"
+    },
+    {
+      "id": "HN-KNOW-DEPUTY-ROLE",
+      "status": "draft",
+      "path": "knowledge/intake/HN-KNOW-DEPUTY-ROLE.json"
+    },
+    {
+      "id": "HN-KNOW-DEPUTY-CHARTER",
+      "status": "draft",
+      "path": "knowledge/intake/HN-KNOW-DEPUTY-CHARTER.json"
+    }
+  ]
+}

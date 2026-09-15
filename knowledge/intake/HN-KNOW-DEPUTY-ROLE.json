@@ -1,0 +1,21 @@
+{
+  "id": "HN-KNOW-DEPUTY-ROLE",
+  "title": ".claude/docs/Role.md",
+  "domain": "Deputy operating role",
+  "owner": "HOUSE_NET_OWNER",
+  "status": "draft",
+  "source": {
+    "type": "repository",
+    "uri": "repo://HouseNet-Projects/house-net-command-center/.claude/docs/Role.md@9e15dd1c00f8c9a5c4a531fa45e7b4c99fce6b8f",
+    "hash": "024fb34d2d93eee257c98f97230b2cfa885423e389f133ef95b39b473f9e698e"
+  },
+  "sensitivity": "INTERNAL",
+  "language": [
+    "en",
+    "hy"
+  ],
+  "last_verified": "2026-09-16",
+  "freshness": {
+    "state": "unverified"
+  }
+}

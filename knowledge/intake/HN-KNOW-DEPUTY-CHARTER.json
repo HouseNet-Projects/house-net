@@ -1,0 +1,21 @@
+{
+  "id": "HN-KNOW-DEPUTY-CHARTER",
+  "title": ".claude/docs/Job-description.md",
+  "domain": "Deputy operating charter",
+  "owner": "HOUSE_NET_OWNER",
+  "status": "draft",
+  "source": {
+    "type": "repository",
+    "uri": "repo://HouseNet-Projects/house-net-command-center/.claude/docs/Job-description.md@9e15dd1c00f8c9a5c4a531fa45e7b4c99fce6b8f",
+    "hash": "6c40ad24a4fc0075a01f55815ca4ab827032c0729f2148ce51a15de51ed67cc8"
+  },
+  "sensitivity": "INTERNAL",
+  "language": [
+    "en",
+    "hy"
+  ],
+  "last_verified": "2026-09-16",
+  "freshness": {
+    "state": "unverified"
+  }
+}
