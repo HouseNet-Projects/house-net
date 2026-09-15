@@ -237,6 +237,160 @@
         "certification_status": "CERTIFIED"
       },
       "external_dependencies": []
+    },
+    {
+      "repository": "HouseNet-Projects/command-center",
+      "classification": "A",
+      "purpose": "Canonical HouseNet repository for the Command-center operational workspace and Deputy agent runtime.",
+      "owner": "HouseNet-Projects",
+      "visibility": "private",
+      "control_plane_version": "1.3.0",
+      "control_plane_commit": "f233adae4286171cc0f4c1bf7fc0218db64abba8",
+      "versioned": false,
+      "release_state": "active",
+      "applicable_rules": [
+        "HN-ARCH-AI-PROVIDER-INDEPENDENCE",
+        "HN-AUTHOR-EMAIL",
+        "HN-AUTHOR-NAME",
+        "HN-BRANCH",
+        "HN-BRANCH-NAMES",
+        "HN-CI",
+        "HN-CLASS-A",
+        "HN-CLASSIFICATION",
+        "HN-COMMITS",
+        "HN-CONFIGURATION",
+        "HN-CREATE",
+        "HN-CREATION",
+        "HN-DATA-CLASSIFICATION",
+        "HN-DEPENDENCIES",
+        "HN-DEPLOYMENT",
+        "HN-DEPRECATION",
+        "HN-DESTRUCTIVE",
+        "HN-DEVELOPMENT",
+        "HN-DOC-HUMAN-VISIBLE-BILINGUAL",
+        "HN-EXPLICIT-IDENTITY",
+        "HN-FILES",
+        "HN-GOVERNANCE",
+        "HN-IDENTITY",
+        "HN-INIT-BRANCH",
+        "HN-LEVELS",
+        "HN-LICENSE",
+        "HN-METHODS",
+        "HN-MIGRATION-STAGED-ADOPTION",
+        "HN-NAMESPACE",
+        "HN-NAMING",
+        "HN-OPERATING-FLOW",
+        "HN-OUT-OF-SCOPE",
+        "HN-PERMISSIONS",
+        "HN-PROPORTIONALITY",
+        "HN-PROTECTION",
+        "HN-PRS",
+        "HN-PULL",
+        "HN-PURPOSE",
+        "HN-RECLASSIFY",
+        "HN-REVIEW",
+        "HN-SCOPE",
+        "HN-SECRETS",
+        "HN-SIGNAL",
+        "HN-SOURCE-OF-TRUTH",
+        "HN-SOURCES",
+        "HN-VERSION-SINGLE-SOURCE",
+        "HN-VERSIONING"
+      ],
+      "approval": {
+        "state": "approved",
+        "reference": "OWNER-APPROVAL-DEPUTY-MIGRATION-2026-09-15",
+        "approved_by": "HouseNet-Projects"
+      },
+      "profile": {
+        "kind": "code",
+        "technology": [
+          "Python 3.12+",
+          "GPG",
+          "Git LFS",
+          "Windows/WSL integrations",
+          "Office documents"
+        ],
+        "dependencies": true,
+        "meaningful_ci": true,
+        "deployment": "nonproduction",
+        "data_sensitivity": "mixed_INTERNAL_CONFIDENTIAL_RESTRICTED_boundaries",
+        "required_files": [
+          "README.md",
+          ".gitignore",
+          ".gitattributes",
+          "CLAUDE.md",
+          "bootstrap.py"
+        ],
+        "exceptions": []
+      },
+      "data_classification": "CONFIDENTIAL",
+      "migration": {
+        "stage": "MIGRATED",
+        "source_type": "git",
+        "mode": "FULL_HISTORY",
+        "source": "https://github.com/ohanyan88-cmd/Command-center@d49d60bdff468b662d88d21e00458ce59646a5ca",
+        "canonical_status": "LEGACY",
+        "certification_status": "PENDING"
+      },
+      "external_dependencies": [
+        {
+          "service": "Outlook desktop",
+          "provider": "Microsoft Outlook",
+          "purpose": "calendar and mail adapters",
+          "environment": [
+            "development",
+            "operational"
+          ],
+          "criticality": "high",
+          "approval": "pending",
+          "runtime": true
+        },
+        {
+          "service": "Telegram Bot API",
+          "provider": "Telegram",
+          "purpose": "approved messaging integration",
+          "environment": [
+            "operational"
+          ],
+          "criticality": "high",
+          "approval": "pending",
+          "runtime": true
+        },
+        {
+          "service": "WhatsApp Cloud API",
+          "provider": "Meta",
+          "purpose": "approved messaging integration",
+          "environment": [
+            "operational"
+          ],
+          "criticality": "high",
+          "approval": "pending",
+          "runtime": true
+        },
+        {
+          "service": "Bitrix24",
+          "provider": "Bitrix24",
+          "purpose": "CRM integration",
+          "environment": [
+            "operational"
+          ],
+          "criticality": "high",
+          "approval": "pending",
+          "runtime": true
+        },
+        {
+          "service": "MikroBILL",
+          "provider": "MikroBILL",
+          "purpose": "billing integration",
+          "environment": [
+            "operational"
+          ],
+          "criticality": "critical",
+          "approval": "pending",
+          "runtime": true
+        }
+      ]
     }
   ]
 }
