@@ -1,29 +1,59 @@
 #!/usr/bin/env python3
-import json,sys,re
-from pathlib import Path
+import argparse, json, re, sys
 from datetime import date
-root=Path(__file__).resolve().parents[1]
-def fail(msg): print('FAIL — '+msg); raise SystemExit(1)
-def main():
- schema=json.loads((root/'schemas/knowledge-item.schema.json').read_text())
+from pathlib import Path
+try:
+ from jsonschema import Draft202012Validator
+except Exception as e:
+ print('FAIL — jsonschema dependency unavailable'); raise SystemExit(2)
+SECRET=re.compile(rb'(?:-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----|(?:password|passwd|secret|token|api[_-]?key)\s*[:=]\s*[^\s<>{}]{8,}|gh[pousr]_[A-Za-z0-9]{30,}|github_pat_[A-Za-z0-9_]{40,})',re.I)
+def fail(msg): raise ValueError(msg)
+def run(root):
+ root=Path(root); schema=json.loads((root/'schemas/knowledge-item.schema.json').read_text()); validator=Draft202012Validator(schema)
  catalog=json.loads((root/'knowledge/index/catalog.json').read_text())
- if catalog.get('generated') is not True: fail('catalog must be generated')
- ids=[]
+ if catalog.get('version') != 1 or catalog.get('generated') is not True: fail('catalog contract invalid')
+ items=[]; paths={}
  for p in sorted((root/'knowledge').glob('**/*.json')):
-  if p.name=='catalog.json': continue
-  if p.parts[-2] not in {'canonical','intake','archive'}: continue
+  if p.name=='catalog.json' or p.parent.name=='index': continue
+  if p.parent.name not in {'canonical','intake','archive'}: continue
   raw=p.read_bytes()
-  if re.search(rb'(?:password|passwd|secret|token|api[_-]?key)\s*[:=]\s*[^\s<>{}]{8,}', raw, re.I): fail(f'possible plaintext secret pattern: {p}')
-  try: x=json.loads(raw)
-  except Exception: fail(f'invalid JSON: {p}')
-  for k in schema['required']:
-   if k not in x: fail(f'missing {k}: {p}')
-  if not re.fullmatch(schema['properties']['id']['pattern'][1:-1],x['id']): fail(f'invalid id: {p}')
-  if x['status']=='canonical' and p.parts[-2] != 'canonical': fail(f'canonical item outside canonical/: {p}')
-  if x['status'] in {'draft','historical','archived','superseded'} and p.parts[-2]=='canonical': fail(f'non-canonical item in canonical/: {p}')
-  if x['sensitivity'] in {'CONFIDENTIAL','RESTRICTED'}: fail(f'sensitive knowledge cannot be stored: {p}')
-  ids.append(x['id'])
- if len(ids)!=len(set(ids)): fail('duplicate knowledge id')
- if sorted(i['id'] for i in catalog.get('items',[])) != sorted(ids): fail('catalog is stale')
- print(f'PASS — knowledge validation ({len(ids)} items)')
-if __name__=='__main__': main()
+  if SECRET.search(raw): fail(f'possible plaintext secret pattern: {p.relative_to(root)}')
+  try: obj=json.loads(raw)
+  except Exception as e: fail(f'invalid JSON: {p.relative_to(root)}')
+  errors=sorted(validator.iter_errors(obj), key=lambda e:list(e.path))
+  if errors: fail(f'schema violation {p.relative_to(root)}: {errors[0].message}')
+  expected={'canonical':'canonical','intake':'draft','archive':'historical'}[p.parent.name]
+  if obj['status'] != expected: fail(f'status/directory mismatch: {p.relative_to(root)}')
+  if obj['status']=='canonical' and obj['sensitivity'] in {'CONFIDENTIAL','RESTRICTED','UNKNOWN'}: fail(f'canonical sensitivity is not publishable: {p.relative_to(root)}')
+  try: date.fromisoformat(obj['last_verified'])
+  except ValueError: fail(f'invalid last_verified date: {p.relative_to(root)}')
+  fresh=obj.get('freshness')
+  if fresh and fresh.get('review_after'):
+   try: review=date.fromisoformat(fresh['review_after'])
+   except ValueError: fail(f'invalid review_after date: {p.relative_to(root)}')
+   if fresh['state']=='current' and review < date.today(): fail(f'current item past review_after: {p.relative_to(root)}')
+  ids=obj['id'];
+  if ids in paths: fail(f'duplicate knowledge id: {ids}')
+  paths[ids]=obj; items.append(obj)
+ catids=[x.get('id') for x in catalog.get('items',[])]
+ if len(catids)!=len(set(catids)) or set(catids)!=set(paths): fail('catalog IDs do not match knowledge items')
+ for obj in items:
+  for field in ('supersedes','superseded_by'):
+   ref=obj.get(field)
+   if ref is not None and ref not in paths: fail(f'{field} references unknown id: {obj["id"]}')
+  if obj.get('supersedes')==obj['id'] or obj.get('superseded_by')==obj['id']: fail(f'self-supersession: {obj["id"]}')
+ # Directed supersession cycles are forbidden.
+ graph={i:paths[i].get('supersedes') for i in paths if paths[i].get('supersedes')}
+ for start in graph:
+  seen=set(); cur=start
+  while cur in graph:
+   if cur in seen: fail(f'supersession cycle at {cur}')
+   seen.add(cur); cur=graph[cur]
+  if cur not in paths: fail(f'broken supersession reference: {start}')
+ print(f'PASS — knowledge validation ({len(items)} items; schema, provenance, freshness and catalog verified)')
+def main():
+ ap=argparse.ArgumentParser(); ap.add_argument('--root',type=Path,default=Path(__file__).resolve().parents[1]); args=ap.parse_args()
+ try: run(args.root)
+ except Exception as e: print('FAIL — '+str(e)); return 1
+ return 0
+if __name__=='__main__': raise SystemExit(main())
