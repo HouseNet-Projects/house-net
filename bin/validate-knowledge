@@ -1,0 +1,29 @@
+#!/usr/bin/env python3
+import json,sys,re
+from pathlib import Path
+from datetime import date
+root=Path(__file__).resolve().parents[1]
+def fail(msg): print('FAIL — '+msg); raise SystemExit(1)
+def main():
+ schema=json.loads((root/'schemas/knowledge-item.schema.json').read_text())
+ catalog=json.loads((root/'knowledge/index/catalog.json').read_text())
+ if catalog.get('generated') is not True: fail('catalog must be generated')
+ ids=[]
+ for p in sorted((root/'knowledge').glob('**/*.json')):
+  if p.name=='catalog.json': continue
+  if p.parts[-2] not in {'canonical','intake','archive'}: continue
+  raw=p.read_bytes()
+  if re.search(rb'(?:password|passwd|secret|token|api[_-]?key)\s*[:=]\s*[^\s<>{}]{8,}', raw, re.I): fail(f'possible plaintext secret pattern: {p}')
+  try: x=json.loads(raw)
+  except Exception: fail(f'invalid JSON: {p}')
+  for k in schema['required']:
+   if k not in x: fail(f'missing {k}: {p}')
+  if not re.fullmatch(schema['properties']['id']['pattern'][1:-1],x['id']): fail(f'invalid id: {p}')
+  if x['status']=='canonical' and p.parts[-2] != 'canonical': fail(f'canonical item outside canonical/: {p}')
+  if x['status'] in {'draft','historical','archived','superseded'} and p.parts[-2]=='canonical': fail(f'non-canonical item in canonical/: {p}')
+  if x['sensitivity'] in {'CONFIDENTIAL','RESTRICTED'}: fail(f'sensitive knowledge cannot be stored: {p}')
+  ids.append(x['id'])
+ if len(ids)!=len(set(ids)): fail('duplicate knowledge id')
+ if sorted(i['id'] for i in catalog.get('items',[])) != sorted(ids): fail('catalog is stale')
+ print(f'PASS — knowledge validation ({len(ids)} items)')
+if __name__=='__main__': main()

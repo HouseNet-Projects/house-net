@@ -1,0 +1,25 @@
+name: HouseNet Knowledge CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  policy-gate:
+    name: HouseNet policy gate
+    uses: HouseNet-Projects/house-net-control-plane/.github/workflows/reusable-policy-gate.yml@7da87427df33a04cdc1576c535b42b4e27fa6e8e
+  knowledge:
+    name: Knowledge contracts
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - name: Validate knowledge catalog
+        run: python3 bin/validate-knowledge
+      - name: Run tests
+        run: python3 -m unittest discover -s tests -v
