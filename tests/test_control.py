@@ -2,6 +2,7 @@ import copy
 import hashlib
 import json
 import os
+import re
 from pathlib import Path
 import shutil
 import subprocess
@@ -156,7 +157,8 @@ class PolicyTests(unittest.TestCase):
         self.reject(lambda:c.validate_repository(self.root,self.root,c.CANONICAL),'trusted review')
 
     def test_mutable_action_tag(self):
-        self.mutate_workflow('11d5960a326750d5838078e36cf38b85af677262','v4')
+        sha = re.search(r'actions/checkout@([0-9a-f]{40})', (self.root/'.github/workflows/control-plane-ci.yml').read_text()).group(1)
+        self.mutate_workflow(sha,'v4')
         self.reject(lambda:c.validate_repository(self.root,self.root,c.CANONICAL),'full commit SHA')
 
     def test_privileged_pr_trigger(self):
