@@ -540,12 +540,12 @@
       },
       "data_classification": "INTERNAL",
       "migration": {
-        "stage": "OWNER_APPROVED",
+        "stage": "CANONICAL",
         "source_type": "git",
         "mode": "CLEAN_IMPORT",
-        "source": "HouseNet-Projects/house-net-knowledge",
+        "source": "HouseNet-Projects/house-net-knowledge@d4b6cb7c5d1a7058ee5249e9227294e4749f7fc2",
         "canonical_status": "CANONICAL",
-        "certification_status": "PENDING"
+        "certification_status": "CERTIFIED"
       },
       "external_dependencies": [],
       "design_system": {
@@ -651,12 +651,12 @@
       },
       "data_classification": "RESTRICTED",
       "migration": {
-        "stage": "OWNER_APPROVED",
+        "stage": "CANONICAL",
         "source_type": "git",
         "mode": "CLEAN_IMPORT",
-        "source": "HouseNet-Projects/house-net-vault",
+        "source": "HouseNet-Projects/house-net-vault@274b5bfbe692726f41b2b0d2ceca7bb09fe172cf",
         "canonical_status": "CANONICAL",
-        "certification_status": "PENDING"
+        "certification_status": "CERTIFIED"
       },
       "external_dependencies": [],
       "design_system": {
