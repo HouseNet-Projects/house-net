@@ -326,12 +326,12 @@
       },
       "data_classification": "CONFIDENTIAL",
       "migration": {
-        "stage": "MIGRATED",
+        "stage": "CANONICAL",
         "source_type": "git",
         "mode": "FULL_HISTORY",
         "source": "https://github.com/ohanyan88-cmd/Command-center@d49d60bdff468b662d88d21e00458ce59646a5ca",
-        "canonical_status": "LEGACY",
-        "certification_status": "PENDING"
+        "canonical_status": "CANONICAL",
+        "certification_status": "CERTIFIED"
       },
       "external_dependencies": [
         {
