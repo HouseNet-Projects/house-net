@@ -22,4 +22,4 @@ jobs:
         with:
           python-version: '3.12'
       - name: Validate against immutable HouseNet authority
-        uses: HouseNet-Projects/house-net-control-plane@72bb4b4bded5ffda7bf6f99a4a7f4fbccb07a871
+        uses: HouseNet-Projects/house-net-control-plane@4dc9575acd3af9ff0b17f109fe08518c980d7f3e
