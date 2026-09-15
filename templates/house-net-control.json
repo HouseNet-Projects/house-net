@@ -1,8 +1,8 @@
 {
-  "repository": "HouseNet-Projects/proposed-repository",
+  "repository": "HouseNet-Projects/house-net-proposed-repository",
   "classification": "B",
   "control_plane": "HouseNet-Projects/house-net-control-plane",
-  "policy_version": "1.3.0",
-  "policy_commit": "72bb4b4bded5ffda7bf6f99a4a7f4fbccb07a871",
+  "policy_version": "1.4.0",
+  "policy_commit": "4cfa33a21ab9910027b83d467e9f9e61d585c214",
   "approval_reference": "PROPOSAL-ONLY-NOT-AUTHORIZED"
 }

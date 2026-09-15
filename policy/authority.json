@@ -1,5 +1,5 @@
 {
-  "version": "1.3.0",
+  "version": "1.4.0",
   "domain": "authority",
   "rules": [
     {
@@ -290,6 +290,35 @@
       "source_sections": [
         30
       ]
+    },
+    {
+      "id": "HN-PERSON-INDEPENDENT-AUTHORITY",
+      "primitive": "architecture.person_independent_authority",
+      "scope": "repository",
+      "level": "MANDATORY",
+      "applicability": {
+        "classes": [
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      "expected": {
+        "machine_authority_uses": [
+          "OWNER",
+          "AUTHORIZED_OWNER",
+          "HOUSE_NET_OWNER",
+          "stable_principal_id"
+        ],
+        "display_names_optional": true,
+        "historical_evidence_exempt": true,
+        "literal_person_names_as_machine_keys": "forbidden"
+      },
+      "approval_requirement": "explicit_owner",
+      "enforcement": {
+        "mechanism": "registration_schema_and_target_validator"
+      },
+      "source_sections": []
     }
   ]
 }

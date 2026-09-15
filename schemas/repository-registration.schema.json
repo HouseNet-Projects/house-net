@@ -4,7 +4,7 @@
   "properties": {
     "repository": {
       "type": "string",
-      "pattern": "^HouseNet-Projects/[a-z0-9]+(?:-[a-z0-9]+)*$"
+      "pattern": "^HouseNet-Projects/house-net-[a-z0-9]+(?:-[a-z0-9]+)*$"
     },
     "classification": {
       "enum": [
@@ -21,43 +21,129 @@
       "const": "HouseNet-Projects"
     },
     "visibility": {
-      "const": "private"
+      "enum": [
+        "public",
+        "private"
+      ]
     },
     "control_plane_version": {
-      "const": "1.3.0"
+      "const": "1.4.0"
     },
     "control_plane_commit": {
       "type": "string",
       "pattern": "^[0-9a-f]{40}$"
     },
-    "versioned": {"type": "boolean"},
+    "versioned": {
+      "type": "boolean"
+    },
     "canonical_version_source": {
       "type": "object",
       "properties": {
-        "path": {"type": "string", "minLength": 1},
-        "field": {"type": "string", "minLength": 1}
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "field": {
+          "type": "string",
+          "minLength": 1
+        }
       },
-      "required": ["path", "field"],
+      "required": [
+        "path",
+        "field"
+      ],
       "additionalProperties": false
     },
     "current_version": {
       "type": "string",
       "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
     },
-    "version_scheme": {"enum": ["semver", "explicit_exception"]},
-    "release_state": {"enum": ["active", "pre-release", "deprecated", "archived"]},
-    "data_classification": {"enum": ["PUBLIC", "INTERNAL", "CONFIDENTIAL", "RESTRICTED", "UNKNOWN"]},
+    "version_scheme": {
+      "enum": [
+        "semver",
+        "explicit_exception"
+      ]
+    },
+    "release_state": {
+      "enum": [
+        "active",
+        "pre-release",
+        "deprecated",
+        "archived"
+      ]
+    },
+    "data_classification": {
+      "enum": [
+        "PUBLIC",
+        "INTERNAL",
+        "CONFIDENTIAL",
+        "RESTRICTED",
+        "UNKNOWN"
+      ]
+    },
     "migration": {
       "type": "object",
       "properties": {
-        "stage": {"enum": ["DISCOVERED", "QUARANTINED", "AUDITED", "PROPOSED", "OWNER_APPROVED", "MIGRATED", "CERTIFIED", "CANONICAL"]},
-        "source_type": {"enum": ["git", "local", "archive", "server", "shared_drive", "unknown"]},
-        "mode": {"enum": ["FULL_HISTORY", "CLEAN_IMPORT", "SOURCE_SNAPSHOT", "REBUILD", "ARCHIVE_ONLY"]},
-        "source": {"type": "string", "minLength": 1},
-        "canonical_status": {"enum": ["LEGACY", "SUPERSEDED", "ARCHIVED", "CANONICAL"]},
-        "certification_status": {"enum": ["PENDING", "PARTIALLY_VERIFIED", "CERTIFIED", "BLOCKED"]}
+        "stage": {
+          "enum": [
+            "DISCOVERED",
+            "QUARANTINED",
+            "AUDITED",
+            "PROPOSED",
+            "OWNER_APPROVED",
+            "MIGRATED",
+            "CERTIFIED",
+            "CANONICAL"
+          ]
+        },
+        "source_type": {
+          "enum": [
+            "git",
+            "local",
+            "archive",
+            "server",
+            "shared_drive",
+            "unknown"
+          ]
+        },
+        "mode": {
+          "enum": [
+            "FULL_HISTORY",
+            "CLEAN_IMPORT",
+            "SOURCE_SNAPSHOT",
+            "REBUILD",
+            "ARCHIVE_ONLY"
+          ]
+        },
+        "source": {
+          "type": "string",
+          "minLength": 1
+        },
+        "canonical_status": {
+          "enum": [
+            "LEGACY",
+            "SUPERSEDED",
+            "ARCHIVED",
+            "CANONICAL"
+          ]
+        },
+        "certification_status": {
+          "enum": [
+            "PENDING",
+            "PARTIALLY_VERIFIED",
+            "CERTIFIED",
+            "BLOCKED"
+          ]
+        }
       },
-      "required": ["stage", "source_type", "mode", "source", "canonical_status", "certification_status"],
+      "required": [
+        "stage",
+        "source_type",
+        "mode",
+        "source",
+        "canonical_status",
+        "certification_status"
+      ],
       "additionalProperties": false
     },
     "external_dependencies": {
@@ -65,27 +151,85 @@
       "items": {
         "type": "object",
         "properties": {
-          "service": {"type": "string", "minLength": 1},
-          "provider": {"type": "string", "minLength": 1},
-          "purpose": {"type": "string", "minLength": 1},
-          "environment": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
-          "criticality": {"enum": ["low", "medium", "high", "critical"]},
-          "approval": {"enum": ["approved", "pending", "not_applicable"]},
-          "runtime": {"type": "boolean"}
+          "service": {
+            "type": "string",
+            "minLength": 1
+          },
+          "provider": {
+            "type": "string",
+            "minLength": 1
+          },
+          "purpose": {
+            "type": "string",
+            "minLength": 1
+          },
+          "environment": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "uniqueItems": true
+          },
+          "criticality": {
+            "enum": [
+              "low",
+              "medium",
+              "high",
+              "critical"
+            ]
+          },
+          "approval": {
+            "enum": [
+              "approved",
+              "pending",
+              "not_applicable"
+            ]
+          },
+          "runtime": {
+            "type": "boolean"
+          }
         },
-        "required": ["service", "provider", "purpose", "environment", "criticality", "approval", "runtime"],
+        "required": [
+          "service",
+          "provider",
+          "purpose",
+          "environment",
+          "criticality",
+          "approval",
+          "runtime"
+        ],
         "additionalProperties": false
       }
     },
     "certified_release": {
       "type": "object",
       "properties": {
-        "version": {"type": "string", "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"},
-        "commit": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
-        "control_plane_compatibility": {"type": "string", "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"},
-        "status": {"enum": ["certified", "pending", "deprecated"]}
+        "version": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+        },
+        "commit": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40}$"
+        },
+        "control_plane_compatibility": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+        },
+        "status": {
+          "enum": [
+            "certified",
+            "pending",
+            "deprecated"
+          ]
+        }
       },
-      "required": ["version", "commit", "control_plane_compatibility", "status"],
+      "required": [
+        "version",
+        "commit",
+        "control_plane_compatibility",
+        "status"
+      ],
       "additionalProperties": false
     },
     "version_surfaces": {
@@ -93,11 +237,28 @@
       "items": {
         "type": "object",
         "properties": {
-          "path": {"type": "string", "minLength": 1},
-          "field": {"type": "string", "minLength": 1},
-          "kind": {"enum": ["text", "json", "yaml", "generated"]}
+          "path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "field": {
+            "type": "string",
+            "minLength": 1
+          },
+          "kind": {
+            "enum": [
+              "text",
+              "json",
+              "yaml",
+              "generated"
+            ]
+          }
         },
-        "required": ["path", "field", "kind"],
+        "required": [
+          "path",
+          "field",
+          "kind"
+        ],
         "additionalProperties": false
       },
       "uniqueItems": true
@@ -217,6 +378,55 @@
         "exceptions"
       ],
       "additionalProperties": false
+    },
+    "design_system": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+        },
+        "category": {
+          "enum": [
+            "CONTROL",
+            "PRODUCT",
+            "DESIGN_SYSTEM",
+            "TOOLING",
+            "DATA",
+            "DOCUMENTATION",
+            "LEGACY_ARCHIVE"
+          ]
+        },
+        "asset_source": {
+          "const": "HouseNet-Projects/house-net-design-system"
+        },
+        "readme_contract": {
+          "const": "bilingual_status_navigation"
+        },
+        "human_docs_policy": {
+          "const": "en_hy_required"
+        },
+        "social_preview": {
+          "enum": [
+            "present",
+            "exempt"
+          ]
+        },
+        "control_plane_compatibility": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+        }
+      },
+      "required": [
+        "version",
+        "category",
+        "asset_source",
+        "readme_contract",
+        "human_docs_policy",
+        "social_preview",
+        "control_plane_compatibility"
+      ],
+      "additionalProperties": false
     }
   },
   "required": [
@@ -231,13 +441,25 @@
     "approval",
     "profile",
     "versioned",
-    "release_state"
+    "release_state",
+    "design_system"
   ],
   "allOf": [
     {
-      "if": {"properties": {"versioned": {"const": true}}},
+      "if": {
+        "properties": {
+          "versioned": {
+            "const": true
+          }
+        }
+      },
       "then": {
-        "required": ["canonical_version_source", "current_version", "version_scheme", "version_surfaces"]
+        "required": [
+          "canonical_version_source",
+          "current_version",
+          "version_scheme",
+          "version_surfaces"
+        ]
       }
     }
   ],

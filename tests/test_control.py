@@ -87,12 +87,25 @@ class PolicyTests(unittest.TestCase):
         self.edit('house-net-control.json',lambda d:d.update(repository='unapproved/example'))
         self.reject(lambda:c.validate_repository(self.root,self.root,c.CANONICAL),'pattern')
 
+    def test_canonical_name_requires_house_net_prefix(self):
+        for name in ['HouseNet-Projects/command-center', 'HouseNet-Projects/House-Net-Test', 'HouseNet-Projects/random-repository', 'HouseNet-Projects/house-net--bad']:
+            self.edit('house-net-control.json',lambda d,n=name:d.update(repository=n))
+            self.reject(lambda n=name:c.validate_repository(self.root,self.root,n),'pattern|Canonical HouseNet repository name')
+
+    def test_design_system_contract_required(self):
+        self.edit('registry/repositories.json',lambda d:d['repositories'][0].pop('design_system'))
+        self.reject(lambda:c.validate_control_plane(self.root),'required|Design System declaration')
+
+    def test_design_system_source_must_be_approved(self):
+        self.edit('registry/repositories.json',lambda d:d['repositories'][0]['design_system'].update(asset_source='unapproved/logo'))
+        self.reject(lambda:c.validate_control_plane(self.root),'const|Unapproved Design System asset source')
+
     def test_caller_cannot_impersonate_control_plane(self):
-        self.reject(lambda:c.validate_repository(self.root,self.root,'HouseNet-Projects/other'),'Caller identity')
+        self.reject(lambda:c.validate_repository(self.root,self.root,'HouseNet-Projects/house-net-other'),'Caller identity')
 
     def test_unregistered_caller(self):
-        self.edit('house-net-control.json',lambda d:d.update(repository='HouseNet-Projects/other'))
-        self.reject(lambda:c.validate_repository(self.root,self.root,'HouseNet-Projects/other'),'not registered')
+        self.edit('house-net-control.json',lambda d:d.update(repository='HouseNet-Projects/house-net-unknown'))
+        self.reject(lambda:c.validate_repository(self.root,self.root,'HouseNet-Projects/house-net-unknown'),'not registered')
 
     def test_unapproved_registration(self):
         self.edit('registry/repositories.json',lambda d:d['repositories'][0]['approval'].update(state='proposed'))
@@ -156,15 +169,15 @@ class PolicyTests(unittest.TestCase):
 
     def test_template_is_not_creation_approval(self):
         shutil.copy(self.root/'templates/house-net-control.json',self.root/'house-net-control.json')
-        self.reject(lambda:c.validate_repository(self.root,self.root,'HouseNet-Projects/proposed-repository'),'not registered')
+        self.reject(lambda:c.validate_repository(self.root,self.root,'HouseNet-Projects/house-net-proposed-repository'),'not registered')
 
     def test_control_plane_cannot_downgrade(self):
         self.edit('registry/repositories.json',lambda d:d['repositories'][0].update(classification='C',applicable_rules=c.applicable(c.rules(self.root),'C')))
         self.reject(lambda:c.validate_control_plane(self.root),'must be Class A')
 
-    def test_private_visibility_required(self):
+    def test_public_visibility_is_registered(self):
         self.edit('registry/repositories.json',lambda d:d['repositories'][0].update(visibility='public'))
-        self.reject(lambda:c.validate_control_plane(self.root),'const')
+        self.assertEqual(c.validate_control_plane(self.root)['registered_repositories'],3)
 
     def test_caller_action_distribution_without_git(self):
         self.assertFalse((self.root/'.git').exists())
@@ -193,7 +206,7 @@ class PolicyTests(unittest.TestCase):
 
     def test_machine_files_are_english_only_allowed(self):
         self.assertIsNone(c.validate_bilingual_documents(self.root))
-        self.assertEqual(json.loads((self.root/'policy/manifest.json').read_text())['version'],'1.3.0')
+        self.assertEqual(json.loads((self.root/'policy/manifest.json').read_text())['version'],'1.4.0')
 
     def test_preflight_wrong_identity_blocks(self):
         with patch.object(c,'command',return_value='WrongIdentity'):

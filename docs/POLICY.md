@@ -1,4 +1,4 @@
-# HouseNet policy · 1.3.0 <!-- housenet-version: policy_version -->
+# HouseNet policy · 1.4.0 <!-- housenet-version: policy_version -->
 
 ## English
 
@@ -367,6 +367,24 @@ MANDATORY · repository · Classes A, B, C
 
 Approval: explicit_owner. Enforcement: owner_review. Source sections: 26.
 
+### HN-DESIGN-SYSTEM-ADOPTION · repository.design_system_adoption
+
+MANDATORY · repository · Classes A, B, C
+
+```json
+{
+  "contract": "required",
+  "version": "certified_design_system_release",
+  "category": "registered_visual_repository_category",
+  "asset_source": "HouseNet-owned_design_system",
+  "readme": "bilingual_status_navigation",
+  "human_docs": "en_hy_required",
+  "social_preview": "present_or_justified_exemption"
+}
+```
+
+Approval: explicit_owner. Enforcement: registration_schema_and_repository_validator. Source sections: .
+
 ### HN-DESTRUCTIVE · operation.destructive
 
 MANDATORY · repository · Classes A, B, C
@@ -586,11 +604,11 @@ Approval: explicit_owner. Enforcement: repository_validator. Source sections: 2.
 
 ### HN-NAMING · repository.naming
 
-RECOMMENDED · repository · Classes A, B, C
+MANDATORY · repository · Classes A, B, C
 
 ```json
 {
-  "format": "lowercase-kebab-case",
+  "format": "^house-net-[a-z0-9]+(?:-[a-z0-9]+)*$",
   "avoid": [
     "final",
     "final-v2",
@@ -598,11 +616,15 @@ RECOMMENDED · repository · Classes A, B, C
     "new-project",
     "stuff"
   ],
-  "exception": "justified_product_convention"
+  "exception": "justified_product_convention",
+  "exceptions": [
+    ".github",
+    "account-profile"
+  ]
 }
 ```
 
-Approval: explicit_owner. Enforcement: repository_validator. Source sections: 7.
+Approval: explicit_owner. Enforcement: repository_registration_schema_and_validator. Source sections: 7.
 
 ### HN-OPERATING-FLOW · engineering.operating_flow
 
@@ -651,6 +673,26 @@ MANDATORY · repository · Classes A, B, C
 ```
 
 Approval: explicit_owner. Enforcement: workflow_validator. Source sections: 13.
+
+### HN-PERSON-INDEPENDENT-AUTHORITY · architecture.person_independent_authority
+
+MANDATORY · repository · Classes A, B, C
+
+```json
+{
+  "machine_authority_uses": [
+    "OWNER",
+    "AUTHORIZED_OWNER",
+    "HOUSE_NET_OWNER",
+    "stable_principal_id"
+  ],
+  "display_names_optional": true,
+  "historical_evidence_exempt": true,
+  "literal_person_names_as_machine_keys": "forbidden"
+}
+```
+
+Approval: explicit_owner. Enforcement: registration_schema_and_target_validator. Source sections: .
 
 ### HN-PROPORTIONALITY · engineering.proportionality
 
@@ -900,7 +942,7 @@ Approval: explicit_owner. Enforcement: owner_review. Source sections: 22.
 
 ## Հայերեն
 
-# HouseNet-ի քաղաքականություն · 1.3.0
+# HouseNet-ի քաղաքականություն · 1.4.0
 
 Մեքենայական հեղինակությունից ստեղծված ներկայացում է։ Խմբագրել միայն մեքենայական կանոնները։ Սկզբնական հաստատված քաղաքականությունը պահպանված է [աղբյուրում](source/HouseNet-GitHub-Policy-v1.0.md)։
 
@@ -1267,6 +1309,24 @@ Approval: explicit_owner. Enforcement: owner_review. Source sections: 22.
 
 Հաստատում՝ explicit_owner։ Կիրարկում՝ owner_review։ Աղբյուրի բաժիններ՝ 26։
 
+### HN-DESIGN-SYSTEM-ADOPTION · repository.design_system_adoption
+
+Մակարդակ՝ MANDATORY · Տիրույթ՝ repository · Դասեր՝ A, B, C
+
+```json
+{
+  "contract": "required",
+  "version": "certified_design_system_release",
+  "category": "registered_visual_repository_category",
+  "asset_source": "HouseNet-owned_design_system",
+  "readme": "bilingual_status_navigation",
+  "human_docs": "en_hy_required",
+  "social_preview": "present_or_justified_exemption"
+}
+```
+
+Հաստատում՝ explicit_owner։ Կիրարկում՝ registration_schema_and_repository_validator։ Աղբյուրի բաժիններ՝ ։
+
 ### HN-DESTRUCTIVE · operation.destructive
 
 Մակարդակ՝ MANDATORY · Տիրույթ՝ repository · Դասեր՝ A, B, C
@@ -1486,11 +1546,11 @@ Approval: explicit_owner. Enforcement: owner_review. Source sections: 22.
 
 ### HN-NAMING · repository.naming
 
-Մակարդակ՝ RECOMMENDED · Տիրույթ՝ repository · Դասեր՝ A, B, C
+Մակարդակ՝ MANDATORY · Տիրույթ՝ repository · Դասեր՝ A, B, C
 
 ```json
 {
-  "format": "lowercase-kebab-case",
+  "format": "^house-net-[a-z0-9]+(?:-[a-z0-9]+)*$",
   "avoid": [
     "final",
     "final-v2",
@@ -1498,11 +1558,15 @@ Approval: explicit_owner. Enforcement: owner_review. Source sections: 22.
     "new-project",
     "stuff"
   ],
-  "exception": "justified_product_convention"
+  "exception": "justified_product_convention",
+  "exceptions": [
+    ".github",
+    "account-profile"
+  ]
 }
 ```
 
-Հաստատում՝ explicit_owner։ Կիրարկում՝ repository_validator։ Աղբյուրի բաժիններ՝ 7։
+Հաստատում՝ explicit_owner։ Կիրարկում՝ repository_registration_schema_and_validator։ Աղբյուրի բաժիններ՝ 7։
 
 ### HN-OPERATING-FLOW · engineering.operating_flow
 
@@ -1551,6 +1615,26 @@ Approval: explicit_owner. Enforcement: owner_review. Source sections: 22.
 ```
 
 Հաստատում՝ explicit_owner։ Կիրարկում՝ workflow_validator։ Աղբյուրի բաժիններ՝ 13։
+
+### HN-PERSON-INDEPENDENT-AUTHORITY · architecture.person_independent_authority
+
+Մակարդակ՝ MANDATORY · Տիրույթ՝ repository · Դասեր՝ A, B, C
+
+```json
+{
+  "machine_authority_uses": [
+    "OWNER",
+    "AUTHORIZED_OWNER",
+    "HOUSE_NET_OWNER",
+    "stable_principal_id"
+  ],
+  "display_names_optional": true,
+  "historical_evidence_exempt": true,
+  "literal_person_names_as_machine_keys": "forbidden"
+}
+```
+
+Հաստատում՝ explicit_owner։ Կիրարկում՝ registration_schema_and_target_validator։ Աղբյուրի բաժիններ՝ ։
 
 ### HN-PROPORTIONALITY · engineering.proportionality
 

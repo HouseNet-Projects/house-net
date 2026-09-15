@@ -17,7 +17,7 @@ from referencing import Registry, Resource
 OWNER = 'HouseNet-Projects'
 CANONICAL = OWNER + '/house-net-control-plane'
 SOURCE_SHA = 'a15b6b22aeecc7beaaf2f13e9de20e45b1a49be24c6ba280a5b3ac364f034491'
-POLICY_VERSION = '1.3.0'
+POLICY_VERSION = '1.4.0'
 ROOT = Path(__file__).resolve().parents[1]
 SEMVER_RE = re.compile(r'^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$')
 
@@ -209,9 +209,15 @@ def registry(root, validators, items):
     require(len(names) == len(set(names)), 'Duplicate registration')
     require(CANONICAL in names, 'Control plane not registered')
     for r in data['repositories']:
+        require(re.fullmatch(r'HouseNet-Projects/house-net-[a-z0-9]+(?:-[a-z0-9]+)*', r['repository']) is not None, 'Canonical HouseNet repository name required: ' + r['repository'])
         require(r['applicable_rules'] == applicable(items, r['classification']), 'Applicable rule set incomplete: ' + r['repository'])
         require(r['approval']['state'] == 'approved', 'Repository not approved: ' + r['repository'])
         require(r.get('data_classification') in {'PUBLIC','INTERNAL','CONFIDENTIAL','RESTRICTED','UNKNOWN'}, 'Invalid data classification: ' + r['repository'])
+        design = r.get('design_system')
+        require(isinstance(design, dict), 'Design System declaration missing: ' + r['repository'])
+        require(design.get('asset_source') == 'HouseNet-Projects/house-net-design-system', 'Unapproved Design System asset source: ' + r['repository'])
+        require(design.get('readme_contract') == 'bilingual_status_navigation' and design.get('human_docs_policy') == 'en_hy_required', 'Design System documentation contract invalid: ' + r['repository'])
+        require(design.get('category') in {'CONTROL','PRODUCT','DESIGN_SYSTEM','TOOLING','DATA','DOCUMENTATION','LEGACY_ARCHIVE'}, 'Invalid Design System repository category: ' + r['repository'])
         migration = r.get('migration')
         require(isinstance(migration, dict) and migration.get('stage') in ['DISCOVERED','QUARANTINED','AUDITED','PROPOSED','OWNER_APPROVED','MIGRATED','CERTIFIED','CANONICAL'], 'Migration registration missing: ' + r['repository'])
         if migration.get('stage') == 'CANONICAL':
@@ -326,6 +332,7 @@ def validate_repository(root, target, expected_repository=None):
     validate_schema(validators, 'repository-lock.schema.json', lock)
     if expected_repository:
         require(lock['repository'] == expected_repository, 'Caller identity does not match repository lock')
+    require(re.fullmatch(r'HouseNet-Projects/house-net-[a-z0-9]+(?:-[a-z0-9]+)*', lock['repository']) is not None, 'Canonical HouseNet repository name required')
     matches = [r for r in records if r['repository'] == lock['repository']]
     require(len(matches) == 1, 'Repository is not registered in trusted control plane')
     r = matches[0]

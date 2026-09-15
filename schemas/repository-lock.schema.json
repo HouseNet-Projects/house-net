@@ -4,7 +4,7 @@
   "properties": {
     "repository": {
       "type": "string",
-      "pattern": "^HouseNet-Projects/[a-z0-9]+(?:-[a-z0-9]+)*$"
+      "pattern": "^HouseNet-Projects/house-net-[a-z0-9]+(?:-[a-z0-9]+)*$"
     },
     "classification": {
       "enum": [
@@ -17,7 +17,7 @@
       "const": "HouseNet-Projects/house-net-control-plane"
     },
     "policy_version": {
-      "const": "1.3.0"
+      "const": "1.4.0"
     },
     "policy_commit": {
       "type": "string",

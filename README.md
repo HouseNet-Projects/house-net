@@ -12,7 +12,7 @@
 
 <p align="center">
   <a href="https://github.com/HouseNet-Projects/house-net-control-plane/actions/workflows/control-plane-ci.yml"><img alt="Control plane CI" src="https://github.com/HouseNet-Projects/house-net-control-plane/actions/workflows/control-plane-ci.yml/badge.svg?branch=main"></a>
-  <a href="https://github.com/HouseNet-Projects/house-net-control-plane/blob/main/docs/POLICY.md">Policy 1.3.0</a> <!-- housenet-version: policy_version -->
+  <a href="https://github.com/HouseNet-Projects/house-net-control-plane/blob/main/docs/POLICY.md">Policy 1.4.0</a> <!-- housenet-version: policy_version -->
   <a href="https://github.com/HouseNet-Projects/house-net-control-plane/blob/main/docs/ENFORCEMENT.md">Enforcement map</a>
 </p>
 
@@ -121,7 +121,7 @@ HouseNet-Projects owns this public control plane. The goal is the minimum correc
 | :--- | :--- |
 | Կառավարման հարթակ | ԱԿՏԻՎ |
 | CI | ԿԱՆԱՉ |
-| Քաղաքականություն | 1.3.0 | <!-- housenet-version: policy_version -->
+| Քաղաքականություն | 1.4.0 | <!-- housenet-version: policy_version -->
 | Դասակարգում | CLASS A — CRITICAL |
 | Իրավասու սեփականատեր | HouseNet-Projects |
 | Codex bootstrap | ԿԻՐԱՐԿՎԱԾ |

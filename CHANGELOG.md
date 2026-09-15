@@ -2,6 +2,27 @@
 
 ## English
 
+### 1.4.0 — 2026-09-15
+
+- Enforces canonical `house-net-*` repository naming.
+- Adds the machine-validated Design System adoption contract.
+- Adds person-independent machine authority guidance and validation boundaries.
+
+---
+
+## Հայերեն
+
+### 1.4.0 — 15.09.2026
+
+- Պարտադիր է դարձնում `house-net-*` canonical repository naming-ը։
+- Ավելացնում է մեքենայով ստուգվող Design System adoption contract-ը։
+- Ավելացնում է անձից անկախ machine authority-ի կանոններն ու validation սահմանները։
+
+---
+
+
+## English
+
 ### 1.3.0 — 2026-09-15
 
 - Added provider-neutral agent contracts, staged migration governance, independent data classification, source-of-truth controls, and AI provider independence enforcement.
