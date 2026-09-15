@@ -8,7 +8,7 @@
       "owner": "HouseNet-Projects",
       "visibility": "private",
       "control_plane_version": "1.1.0",
-      "control_plane_commit": "5692801c0029dffb31eaedc9fa2e187ca640fb1f",
+      "control_plane_commit": "28a12bb7657c335eaf0ddaa82e4149016dbdb7cc",
       "applicable_rules": [
         "HN-AUTHOR-EMAIL",
         "HN-AUTHOR-NAME",
