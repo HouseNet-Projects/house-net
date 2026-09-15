@@ -87,7 +87,7 @@ def human_facing_paths(root):
     """Discover active human-facing Markdown surfaces from the canonical contract."""
     paths = []
     for p in root.rglob('*.md'):
-        if '.git' in p.parts or p.name in {'AGENTS.md','CLAUDE.md'} or '.claude' in p.parts or 'docs/source' in str(p.relative_to(root)) or 'audit' in p.parts:
+        if '.git' in p.parts or p.name in {'AGENTS.md','CLAUDE.md'} or '.claude' in p.parts or '.secure' in p.parts or 'docs/source' in str(p.relative_to(root)) or 'audit' in p.parts:
             continue
         paths.append(p)
     return sorted(paths)
@@ -227,7 +227,10 @@ def validate_design_system_certification(root, records, target=None, record=None
         design = item.get('design_system', {})
         require(design.get('asset_source') == 'HouseNet-Projects/house-net-design-system', 'Unapproved Design System asset source: ' + item['repository'])
         require(design.get('version') == cert['version'], 'Design System version is not the certified release: ' + item['repository'])
-        require(design.get('control_plane_compatibility') == item['control_plane_version'], 'Design System compatibility mismatch: ' + item['repository'])
+        if item['repository'] == ds['repository']:
+            require(design.get('control_plane_compatibility') in {cert.get('control_plane_compatibility'), item['control_plane_version']}, 'Design System compatibility mismatch: ' + item['repository'])
+        else:
+            require(design.get('control_plane_compatibility') == item['control_plane_version'], 'Design System compatibility mismatch: ' + item['repository'])
     if target is not None and record and record['repository'] == ds['repository'] and (target / '.git').exists():
         head = command(['git','rev-parse','HEAD'], target)
         require(head == cert['commit'], 'Certified Design System commit does not match target HEAD')

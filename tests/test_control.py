@@ -327,3 +327,9 @@ class ProviderScopeTests(unittest.TestCase):
             root=Path(td); (root/'.claude/docs').mkdir(parents=True)
             (root/'.claude/docs/adapter.md').write_text('Claude adapter implementation notes')
             c.validate_provider_neutral_surfaces(root)
+
+class AdapterRecoveryScopeTests(unittest.TestCase):
+    def test_secure_recovery_docs_are_not_provider_architecture(self):
+        with tempfile.TemporaryDirectory(prefix='housenet-secure-') as td:
+            root=Path(td); (root/'.secure').mkdir(); (root/'.secure/README.md').write_text('Use .claude/runtime adapter only')
+            c.validate_provider_neutral_surfaces(root)
