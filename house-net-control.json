@@ -2,7 +2,7 @@
   "repository": "HouseNet-Projects/house-net-design-system",
   "classification": "B",
   "control_plane": "HouseNet-Projects/house-net-control-plane",
-  "policy_version": "1.4.0",
-  "policy_commit": "664239478695ac3c13e77dfe998f01edd47ed825",
+  "policy_version": "1.4.1",
+  "policy_commit": "5642bc01e92a8f0d76eea56defcb6247a97f47b1",
   "approval_reference": "OWNER-MISSION-DESIGN-SYSTEM-1.0-2026-09-15"
 }
