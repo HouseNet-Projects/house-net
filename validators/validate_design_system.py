@@ -9,6 +9,8 @@ from pathlib import Path
 HEX = re.compile(r"^#[0-9A-Fa-f]{6}$")
 REF = re.compile(r"\{([A-Za-z0-9_-]+)\.([A-Za-z0-9_-]+)\}")
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
+from versioning import manifest as read_version_manifest, check as check_versions
 
 class Invalid(ValueError): pass
 def require(condition, message):
@@ -33,9 +35,13 @@ def human_docs(root):
         if p.is_file(): yield p
 
 def validate(root=ROOT):
+    release = read_version_manifest(root)
+    require(release['repository'] == 'HouseNet-Projects/house-net-design-system', 'Release manifest repository mismatch')
+    require(release['control_plane_version'] == '1.2.0', 'Release manifest control-plane version mismatch')
+    require(not check_versions(root), 'VERSION DRIFT')
     brand = load(root/'tokens/brand-tokens.json')
     document = load(root/'tokens/document-tokens.json')
-    require(brand['version'] == document['version'] == '1.0.0', 'Token versions must match design-system version')
+    require(brand['version'] == document['version'] == release['version'], 'Token versions must match design-system version')
     all_tokens = flatten_tokens(brand) | flatten_tokens(document)
     require(len(all_tokens) == len(set(all_tokens)), 'Duplicate token path')
     for name, token in brand.get('color', {}).items():
@@ -49,7 +55,7 @@ def validate(root=ROOT):
         actual = hashlib.sha256((root/'assets/brand/original'/name).read_bytes()).hexdigest()
         require(actual == sha, f'Logo provenance checksum mismatch: {name}')
     manifest = load(root/'documents/templates/template-manifest.json')
-    require(manifest['version'] == '1.0.0' and manifest['templates'], 'Template manifest invalid')
+    require(manifest['version'] == release['version'] and manifest['templates'], 'Template manifest invalid')
     for item in manifest['templates']:
         path = root/item['source']; require(path.is_file(), f'Missing template source: {item["source"]}')
         if path.suffix == '.md':
@@ -65,7 +71,7 @@ def validate(root=ROOT):
     for path in [root/'tokens/brand-tokens.json', root/'tokens/document-tokens.json']:
         data = path.read_text()
         for group, name in REF.findall(data): require(f'{group}.{name}' in all_tokens, f'Unknown token reference: {group}.{name}')
-    return {'version': brand['version'], 'human_docs': len(list(human_docs(root))), 'templates': len(manifest['templates']), 'tokens': len(all_tokens)}
+    return {'version': release['version'], 'human_docs': len(list(human_docs(root))), 'templates': len(manifest['templates']), 'tokens': len(all_tokens)}
 
 if __name__ == '__main__':
     try: print(json.dumps({'ok': True, **validate(Path(sys.argv[1]) if len(sys.argv)>1 else ROOT)}, sort_keys=True))

@@ -6,6 +6,7 @@ from pathlib import Path
 import sys
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from validators.validate_design_system import Invalid, validate
+from versioning import check
 
 class DesignSystemTests(unittest.TestCase):
     def setUp(self):
@@ -26,5 +27,14 @@ class DesignSystemTests(unittest.TestCase):
     def test_human_doc_requires_bilingual(self):
         p=self.root/'docs/UI-SYSTEM.md'; p.write_text('# English only\n\n## English\n\nText\n')
         with self.assertRaisesRegex(Invalid,'Armenian'): validate(self.root)
+    def test_readme_version_drift_fails(self):
+        p=self.root/'README.md'; p.write_text(p.read_text().replace('1.0.0','1.0.124'))
+        self.assertTrue(any('README.md' in e for e in check(self.root)))
+    def test_generated_hero_version_drift_fails(self):
+        p=self.root/'assets/brand/derived/design-system-hero-dark.svg'; p.write_text(p.read_text().replace('1.0.0','1.0.124'))
+        self.assertTrue(any('hero-dark.svg' in e for e in check(self.root)))
+    def test_malformed_canonical_version_fails(self):
+        p=self.root/'release/manifest.json'; d=json.loads(p.read_text()); d['version']='1.0.x'; p.write_text(json.dumps(d))
+        with self.assertRaisesRegex(ValueError,'Invalid canonical'): check(self.root)
 
 if __name__ == '__main__': unittest.main()

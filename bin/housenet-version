@@ -1,0 +1,23 @@
+#!/usr/bin/env python3
+from pathlib import Path
+import json, subprocess, sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from versioning import manifest, valid_semver
+root=Path.cwd(); mode=sys.argv[1] if len(sys.argv)>1 else ''
+if mode=='get': print(manifest(root)['version']); raise SystemExit
+if mode=='check': raise SystemExit(subprocess.call([str(root/'bin/check-version-consistency'),str(root)]))
+if mode!='set' or len(sys.argv)!=3 or not valid_semver(sys.argv[2]):
+    print('usage: housenet-version get|check|set X.Y.Z',file=sys.stderr); raise SystemExit(2)
+if subprocess.check_output(['git','status','--porcelain'],text=True).strip():
+    print('FAIL — working tree must be clean',file=sys.stderr); raise SystemExit(1)
+d=manifest(root); old=d['version']; new=sys.argv[2]; d['version']=new
+(root/'release/manifest.json').write_text(json.dumps(d,indent=2)+'\n')
+for s in d['version_surfaces']:
+    p=root/s['path']; text=p.read_text()
+    if s['kind']=='json':
+        value=json.loads(text); cur=value; parts=s.get('field','version').split('.')
+        for part in parts[:-1]: cur=cur[part]
+        cur[parts[-1]]=new; p.write_text(json.dumps(value,indent=2,ensure_ascii=False)+'\n')
+    else: p.write_text(text.replace(old,new))
+print('CHANGED release/manifest.json and registered surfaces')
+raise SystemExit(subprocess.call([str(root/'bin/check-version-consistency'),str(root)]))

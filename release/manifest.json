@@ -1,0 +1,21 @@
+{
+  "repository": "HouseNet-Projects/house-net-design-system",
+  "product": "HouseNet Design System",
+  "version": "1.0.0",
+  "release_state": "active",
+  "version_scheme": "semver",
+  "control_plane_version": "1.2.0",
+  "schema_version": "1.0.0",
+  "version_surfaces": [
+    {"path": "README.md", "kind": "text"},
+    {"path": "CHANGELOG.md", "kind": "text"},
+    {"path": "docs/VERSION.md", "kind": "text"},
+    {"path": "assets/brand/derived/design-system-hero-dark.svg", "kind": "generated"},
+    {"path": "assets/brand/derived/design-system-hero-light.svg", "kind": "generated"},
+    {"path": "tokens/brand-tokens.json", "kind": "json", "field": "version"},
+    {"path": "tokens/document-tokens.json", "kind": "json", "field": "version"},
+    {"path": "documents/templates/template-manifest.json", "kind": "json", "field": "version"},
+    {"path": "documents/templates/powerpoint/executive.json", "kind": "json", "field": "version"},
+    {"path": "documents/templates/excel/dashboard.json", "kind": "json", "field": "version"}
+  ]
+}

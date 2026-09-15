@@ -9,7 +9,7 @@ permissions:
   contents: read
 jobs:
   policy:
-    uses: HouseNet-Projects/house-net-control-plane/.github/workflows/reusable-policy-gate.yml@2608841f350924befdaeb19a7756879f60a40f08
+    uses: HouseNet-Projects/house-net-control-plane/.github/workflows/reusable-policy-gate.yml@41dfe4faf2d500e6e50bce7c664db2c6511f8e8e
   design-system:
     name: Design system integrity
     runs-on: ubuntu-24.04
@@ -23,6 +23,8 @@ jobs:
           python-version: '3.12'
       - name: Validate tokens, provenance and bilingual documents
         run: python validators/validate_design_system.py .
+      - name: Check version surfaces
+        run: bin/check-version-consistency .
       - name: Run design-system tests
         run: python -m unittest discover -s tests -q
       - name: Check Python syntax
