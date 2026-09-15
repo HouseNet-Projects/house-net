@@ -1,5 +1,5 @@
 {
-  "version": "1.1.0",
+  "version": "1.2.0",
   "repositories": [
     {
       "repository": "HouseNet-Projects/house-net-control-plane",
@@ -7,8 +7,17 @@
       "purpose": "Canonical engineering policy, approval, classification and agent control plane.",
       "owner": "HouseNet-Projects",
       "visibility": "private",
-      "control_plane_version": "1.1.0",
-      "control_plane_commit": "28a12bb7657c335eaf0ddaa82e4149016dbdb7cc",
+      "control_plane_version": "1.2.0",
+      "control_plane_commit": "d20c658815cc6f70fd307e1d8da4eeb32cc1c4d6",
+      "versioned": true,
+      "canonical_version_source": {"path": "release/manifest.json", "field": "version"},
+      "current_version": "1.2.0",
+      "version_scheme": "semver",
+      "release_state": "active",
+      "version_surfaces": [
+        {"path": "README.md", "field": "policy_version", "kind": "text"},
+        {"path": "docs/POLICY.md", "field": "policy_version", "kind": "generated"}
+      ],
       "applicable_rules": [
         "HN-AUTHOR-EMAIL",
         "HN-AUTHOR-NAME",
@@ -51,6 +60,7 @@
         "HN-SECRETS",
         "HN-SIGNAL",
         "HN-SOURCES",
+        "HN-VERSION-SINGLE-SOURCE",
         "HN-VERSIONING"
       ],
       "approval": {
@@ -89,8 +99,17 @@
       "purpose": "Canonical HouseNet brand, UI and bilingual document design system for products and operational documents.",
       "owner": "HouseNet-Projects",
       "visibility": "private",
-      "control_plane_version": "1.1.0",
-      "control_plane_commit": "28a12bb7657c335eaf0ddaa82e4149016dbdb7cc",
+      "control_plane_version": "1.2.0",
+      "control_plane_commit": "d20c658815cc6f70fd307e1d8da4eeb32cc1c4d6",
+      "versioned": true,
+      "canonical_version_source": {"path": "release/manifest.json", "field": "version"},
+      "current_version": "1.0.0",
+      "version_scheme": "semver",
+      "release_state": "active",
+      "version_surfaces": [
+        {"path": "README.md", "field": "product_version", "kind": "generated"},
+        {"path": "CHANGELOG.md", "field": "release_version", "kind": "generated"}
+      ],
       "applicable_rules": [
         "HN-AUTHOR-EMAIL",
         "HN-AUTHOR-NAME",
@@ -133,6 +152,7 @@
         "HN-SECRETS",
         "HN-SIGNAL",
         "HN-SOURCES",
+        "HN-VERSION-SINGLE-SOURCE",
         "HN-VERSIONING"
       ],
       "approval": {

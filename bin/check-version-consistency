@@ -1,0 +1,31 @@
+#!/usr/bin/env python3
+from pathlib import Path
+import json, re, sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from housenet.versioning import read_manifest, valid_semver
+
+root = Path(sys.argv[1]).resolve() if len(sys.argv) > 1 else Path.cwd()
+try:
+    manifest = read_manifest(root)
+    expected = manifest['version']
+    if not valid_semver(expected): raise ValueError('invalid canonical SemVer')
+    errors = []
+    for surface in manifest.get('version_surfaces', []):
+        path = root / surface['path']
+        if not path.is_file():
+            errors.append(f'file={surface["path"]} expected={expected} actual=missing')
+            continue
+        text = path.read_text()
+        marker = surface.get('marker', '')
+        marked = [line for line in text.splitlines() if marker in line] if marker else [text]
+        if not marked or not any(expected in line for line in marked):
+            actual = next((re.search(r'\b\d+\.\d+\.\d+\b', line).group(0) for line in marked if re.search(r'\b\d+\.\d+\.\d+\b', line)), 'missing')
+            errors.append(f'file={surface["path"]} field={marker} expected={expected} actual={actual}')
+    if errors:
+        print('FAIL — VERSION DRIFT')
+        print('\n'.join(errors))
+        raise SystemExit(1)
+    print('PASS — version surfaces synchronized (' + expected + ')')
+except (OSError, ValueError, KeyError, json.JSONDecodeError) as exc:
+    print('FAIL — ' + str(exc))
+    raise SystemExit(1)

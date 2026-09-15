@@ -17,8 +17,9 @@ from referencing import Registry, Resource
 OWNER = 'HouseNet-Projects'
 CANONICAL = OWNER + '/house-net-control-plane'
 SOURCE_SHA = 'a15b6b22aeecc7beaaf2f13e9de20e45b1a49be24c6ba280a5b3ac364f034491'
-POLICY_VERSION = '1.1.0'
+POLICY_VERSION = '1.2.0'
 ROOT = Path(__file__).resolve().parents[1]
+SEMVER_RE = re.compile(r'^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$')
 
 class Invalid(ValueError):
     pass
@@ -49,6 +50,30 @@ def safe_path(root, relative):
 
 def digest(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
+
+def require_semver(value, where):
+    require(isinstance(value, str) and SEMVER_RE.fullmatch(value) is not None, 'Invalid SemVer at ' + where)
+
+def version_contract(target, record):
+    if not record.get('versioned', False):
+        return
+    source = record.get('canonical_version_source')
+    require(isinstance(source, dict), 'Versioned repository lacks canonical source: ' + record['repository'])
+    path = safe_path(target, source['path'])
+    require(path.is_file(), 'Canonical version source missing: ' + source['path'])
+    value = load(path)
+    actual = value
+    for part in source['field'].split('.'):
+        require(isinstance(actual, dict) and part in actual, 'Canonical version field missing: ' + source['field'])
+        actual = actual[part]
+    require_semver(actual, source['path'] + '#' + source['field'])
+    require(actual == record['current_version'], 'Registered current version mismatch: ' + record['repository'])
+    require(record['version_scheme'] == 'semver', 'Unsupported version scheme without explicit exception')
+    for surface in record.get('version_surfaces', []):
+        surface_path = safe_path(target, surface['path'])
+        require(surface_path.is_file(), 'Registered version surface missing: ' + surface['path'])
+        text = surface_path.read_text()
+        require(actual in text, 'VERSION DRIFT: ' + surface['path'] + ' expected ' + actual)
 
 def command(args, cwd=None, timeout=20):
     try:
@@ -101,7 +126,7 @@ def applicable(items, classification):
     return sorted(r['id'] for r in items if classification in r['applicability']['classes'])
 
 def human_view(items):
-    english = '# HouseNet policy · ' + POLICY_VERSION + '\n\n## English\n\nGenerated from machine authority. Do not edit by hand. Original approved text is preserved in [source](source/HouseNet-GitHub-Policy-v1.0.md).\n\n' + ''.join(
+    english = '# HouseNet policy · ' + POLICY_VERSION + ' <!-- housenet-version: policy_version -->\n\n## English\n\nGenerated from machine authority. Do not edit by hand. Original approved text is preserved in [source](source/HouseNet-GitHub-Policy-v1.0.md).\n\n' + ''.join(
         '### ' + r['id'] + ' · ' + r['primitive'] + '\n\n' + r['level'] + ' · ' + r['scope'] + ' · Classes ' + ', '.join(r['applicability']['classes']) + '\n\n```json\n' + json.dumps(r['expected'], indent=2, ensure_ascii=False) + '\n```\n\nApproval: ' + r['approval_requirement'] + '. Enforcement: ' + r['enforcement']['mechanism'] + '. Source sections: ' + ', '.join(map(str, r['source_sections'])) + '.\n\n' for r in sorted(items, key=lambda x: x['id']))
     armenian = '# HouseNet-ի քաղաքականություն · ' + POLICY_VERSION + '\n\nՄեքենայական հեղինակությունից ստեղծված ներկայացում է։ Խմբագրել միայն մեքենայական կանոնները։ Սկզբնական հաստատված քաղաքականությունը պահպանված է [աղբյուրում](source/HouseNet-GitHub-Policy-v1.0.md)։\n\n' + ''.join(
         '### ' + r['id'] + ' · ' + r['primitive'] + '\n\nՄակարդակ՝ ' + r['level'] + ' · Տիրույթ՝ ' + r['scope'] + ' · Դասեր՝ ' + ', '.join(r['applicability']['classes']) + '\n\n```json\n' + json.dumps(r['expected'], indent=2, ensure_ascii=False) + '\n```\n\nՀաստատում՝ ' + r['approval_requirement'] + '։ Կիրարկում՝ ' + r['enforcement']['mechanism'] + '։ Աղբյուրի բաժիններ՝ ' + ', '.join(map(str, r['source_sections'])) + '։\n\n' for r in sorted(items, key=lambda x: x['id']))
@@ -309,6 +334,7 @@ def validate_repository(root, target, expected_repository=None):
     for name in sorted(required):
         p = safe_path(target, name)
         require(p.is_file() and p.stat().st_size > 0, 'Required file missing/empty: ' + name)
+    version_contract(target, r)
     for agent_file in ['AGENTS.md', 'CLAUDE.md']:
         text = (target / agent_file).read_text()
         require(all(x in text for x in ['house-net-control.json', 'housenet-preflight', 'house-net-control-plane']), 'Agent bootstrap map incomplete: ' + agent_file)

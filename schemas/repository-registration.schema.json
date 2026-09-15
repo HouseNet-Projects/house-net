@@ -24,11 +24,41 @@
       "const": "private"
     },
     "control_plane_version": {
-      "const": "1.1.0"
+      "const": "1.2.0"
     },
     "control_plane_commit": {
       "type": "string",
       "pattern": "^[0-9a-f]{40}$"
+    },
+    "versioned": {"type": "boolean"},
+    "canonical_version_source": {
+      "type": "object",
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "field": {"type": "string", "minLength": 1}
+      },
+      "required": ["path", "field"],
+      "additionalProperties": false
+    },
+    "current_version": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+    },
+    "version_scheme": {"enum": ["semver", "explicit_exception"]},
+    "release_state": {"enum": ["active", "pre-release", "deprecated", "archived"]},
+    "version_surfaces": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "path": {"type": "string", "minLength": 1},
+          "field": {"type": "string", "minLength": 1},
+          "kind": {"enum": ["text", "json", "yaml", "generated"]}
+        },
+        "required": ["path", "field", "kind"],
+        "additionalProperties": false
+      },
+      "uniqueItems": true
     },
     "applicable_rules": {
       "type": "array",
@@ -157,7 +187,17 @@
     "control_plane_commit",
     "applicable_rules",
     "approval",
-    "profile"
+    "profile",
+    "versioned",
+    "release_state"
+  ],
+  "allOf": [
+    {
+      "if": {"properties": {"versioned": {"const": true}}},
+      "then": {
+        "required": ["canonical_version_source", "current_version", "version_scheme", "version_surfaces"]
+      }
+    }
   ],
   "additionalProperties": false
 }

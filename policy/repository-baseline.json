@@ -1,5 +1,5 @@
 {
-  "version": "1.1.0",
+  "version": "1.2.0",
   "domain": "repository-baseline",
   "rules": [
     {
@@ -319,6 +319,26 @@
       },
       "approval_requirement": "explicit_owner",
       "enforcement": {"mechanism": "bilingual_document_validator"},
+      "source_sections": []
+    },
+    {
+      "id": "HN-VERSION-SINGLE-SOURCE",
+      "primitive": "repository.version_single_source",
+      "scope": "repository",
+      "level": "MANDATORY",
+      "applicability": {"classes": ["A", "B", "C"]},
+      "expected": {
+        "when": "versioned=true",
+        "canonical_source": "one_registered_machine_readable_source",
+        "preferred_path": "release/manifest.json",
+        "version_scheme": "MAJOR.MINOR.PATCH",
+        "surface_registry": "required",
+        "derived_surfaces": "generated_or_validated",
+        "drift": "ci_failure",
+        "consumer_versions": "explicit_and_distinct_from_own_version"
+      },
+      "approval_requirement": "explicit_owner",
+      "enforcement": {"mechanism": "repository_validator_and_ci"},
       "source_sections": []
     }
   ]

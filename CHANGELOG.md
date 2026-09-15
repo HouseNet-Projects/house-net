@@ -2,11 +2,19 @@
 
 ## English
 
+### 1.2.0 — 2026-09-15
+
+- Added the mandatory universal single-source version authority and drift contract.
+
 ### 1.1.0 — 2026-09-15
 
 Added mandatory bilingual English + Armenian coverage for human-facing HouseNet content, with deterministic document markers and repository-gate validation. The official HouseNet visual system is retained and presented with first-party logo provenance.
 
 ## Հայերեն
+
+### 1.2.0 — 15.09.2026
+
+- Ավելացվել է տարբերակների միասնական մեքենայական աղբյուրի և շեղումների ձախողման պարտադիր պայմանը։
 
 ### 1.1.0 — 15.09.2026
 

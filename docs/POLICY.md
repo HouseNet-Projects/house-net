@@ -1,4 +1,4 @@
-# HouseNet policy · 1.1.0
+# HouseNet policy · 1.2.0 <!-- housenet-version: policy_version -->
 
 ## English
 
@@ -788,6 +788,25 @@ MANDATORY · repository · Classes A, B, C
 
 Approval: explicit_owner. Enforcement: workflow_validator. Source sections: 14.
 
+### HN-VERSION-SINGLE-SOURCE · repository.version_single_source
+
+MANDATORY · repository · Classes A, B, C
+
+```json
+{
+  "when": "versioned=true",
+  "canonical_source": "one_registered_machine_readable_source",
+  "preferred_path": "release/manifest.json",
+  "version_scheme": "MAJOR.MINOR.PATCH",
+  "surface_registry": "required",
+  "derived_surfaces": "generated_or_validated",
+  "drift": "ci_failure",
+  "consumer_versions": "explicit_and_distinct_from_own_version"
+}
+```
+
+Approval: explicit_owner. Enforcement: repository_validator_and_ci. Source sections: .
+
 ### HN-VERSIONING · repository.versioning
 
 RECOMMENDED · repository · Classes A, B, C
@@ -806,7 +825,7 @@ Approval: explicit_owner. Enforcement: owner_review. Source sections: 22.
 
 ## Հայերեն
 
-# HouseNet-ի քաղաքականություն · 1.1.0
+# HouseNet-ի քաղաքականություն · 1.2.0
 
 Մեքենայական հեղինակությունից ստեղծված ներկայացում է։ Խմբագրել միայն մեքենայական կանոնները։ Սկզբնական հաստատված քաղաքականությունը պահպանված է [աղբյուրում](source/HouseNet-GitHub-Policy-v1.0.md)։
 
@@ -1594,6 +1613,25 @@ Approval: explicit_owner. Enforcement: owner_review. Source sections: 22.
 
 Հաստատում՝ explicit_owner։ Կիրարկում՝ workflow_validator։ Աղբյուրի բաժիններ՝ 14։
 
+### HN-VERSION-SINGLE-SOURCE · repository.version_single_source
+
+Մակարդակ՝ MANDATORY · Տիրույթ՝ repository · Դասեր՝ A, B, C
+
+```json
+{
+  "when": "versioned=true",
+  "canonical_source": "one_registered_machine_readable_source",
+  "preferred_path": "release/manifest.json",
+  "version_scheme": "MAJOR.MINOR.PATCH",
+  "surface_registry": "required",
+  "derived_surfaces": "generated_or_validated",
+  "drift": "ci_failure",
+  "consumer_versions": "explicit_and_distinct_from_own_version"
+}
+```
+
+Հաստատում՝ explicit_owner։ Կիրարկում՝ repository_validator_and_ci։ Աղբյուրի բաժիններ՝ ։
+
 ### HN-VERSIONING · repository.versioning
 
 Մակարդակ՝ RECOMMENDED · Տիրույթ՝ repository · Դասեր՝ A, B, C
@@ -1607,3 +1645,4 @@ Approval: explicit_owner. Enforcement: owner_review. Source sections: 22.
 ```
 
 Հաստատում՝ explicit_owner։ Կիրարկում՝ owner_review։ Աղբյուրի բաժիններ՝ 22։
+

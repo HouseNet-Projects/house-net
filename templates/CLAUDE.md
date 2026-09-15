@@ -7,3 +7,4 @@ Read current `policy/manifest.json`, `policy/authority.json`, `policy/repository
 Validate this repository with `bin/validate-repository <repository-path> --expected-repository <owner/name>` from the control-plane.
 Owner approval is required for configuration, repository creation, reclassification and exact destructive actions. A template or registry entry does not independently prove owner consent.
 Human-facing HouseNet documents must contain complete English and Armenian sections; machine, code and agent files may remain English-only.
+Never manually invent or synchronize HouseNet versions. Read the repository canonical version authority and use the approved version/release tooling; keep own and consumed versions distinct.
