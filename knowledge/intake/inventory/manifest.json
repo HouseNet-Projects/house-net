@@ -2,7 +2,7 @@
   "schema": "housenet.knowledge.intake-inventory.v1",
   "generated_at": "2026-09-16",
   "source_repository": "HouseNet-Projects/house-net-command-center",
-  "source_commit": "9e15dd1c00f8c9a5c4a531fa45e7b4c99fce6b8f",
+  "source_commit": "9078f6a0467275350231615931d25d52c466d730",
   "records": [
     {
       "source_location": ".claude/docs/Activation-inputs.md",
@@ -19,10 +19,10 @@
       "source_type": "repository_file",
       "size_bytes": 24943,
       "sha256": "6c40ad24a4fc0075a01f55815ca4ab827032c0729f2148ce51a15de51ed67cc8",
-      "candidate_status": "reject",
+      "candidate_status": "supporting_view",
       "sensitivity": "INTERNAL",
       "language": "unknown",
-      "notes": "binary/LFS pointer or source content requires owner review"
+      "notes": "Human-facing supporting view; machine identity authority remains workspace_policy.json"
     },
     {
       "source_location": ".claude/docs/Migration-log-2026-09-10.md",
@@ -49,10 +49,10 @@
       "source_type": "repository_file",
       "size_bytes": 5361,
       "sha256": "024fb34d2d93eee257c98f97230b2cfa885423e389f133ef95b39b473f9e698e",
-      "candidate_status": "reject",
+      "candidate_status": "supporting_view",
       "sensitivity": "INTERNAL",
       "language": "en+hy",
-      "notes": "binary/LFS pointer or source content requires owner review"
+      "notes": "Human-facing supporting view; machine identity authority remains workspace_policy.json"
     },
     {
       "source_location": ".claude/docs/legacy/CLAUDE-command-center-original.md",
@@ -959,20 +959,20 @@
       "source_type": "repository_file",
       "size_bytes": 2541,
       "sha256": "99dc1de795169173acf4e8edcd9f78bc6e6b3232b28280cb121d43450f629262",
-      "candidate_status": "intake",
-      "sensitivity": "UNKNOWN",
+      "candidate_status": "keep_live_operational_state",
+      "sensitivity": "INTERNAL",
       "language": "en+hy",
-      "notes": "metadata-only intake candidate"
+      "notes": "Command Center / Deputy live operational state; not Knowledge authority"
     },
     {
       "source_location": "WORKSPACE/Journal.md",
       "source_type": "repository_file",
-      "size_bytes": 50094,
-      "sha256": "77c77e6fa4abc06435b7cf70af794b7622a79cb37fc0b6aa5d79540ac2cc1f2e",
-      "candidate_status": "intake",
+      "size_bytes": 50104,
+      "sha256": "93ffb77259e2d3e85793dd4230057f96a58067840b57616c0cc769f4be31d5bb",
+      "candidate_status": "historical",
       "sensitivity": "CONFIDENTIAL",
       "language": "en+hy",
-      "notes": "metadata-only intake candidate"
+      "notes": "Historical operational record; current tree credential redacted; reachable history retained pending destructive owner approval"
     },
     {
       "source_location": "WORKSPACE/Tasks.xlsx",
@@ -996,10 +996,7 @@
     }
   ],
   "selected_intake_ids": [
-    "HN-KNOW-CMD-ACTIONS",
-    "HN-KNOW-CMD-JOURNAL",
-    "HN-KNOW-DEPUTY-ROLE",
-    "HN-KNOW-DEPUTY-CHARTER"
+    "HN-KNOW-DEPUTY-IDENTITY"
   ],
   "excluded_secret_boundary": [
     ".secure/credentials.gpg",
@@ -1121,5 +1118,12 @@
       "topic": "source_conflicts",
       "items": []
     }
-  ]
+  ],
+  "owner_decisions_applied": {
+    "actions": "operational_live_state",
+    "journal": "historical_reference_current_tree_redacted",
+    "deputy_identity": "single_thin_canonical_reference",
+    "history_redaction": "current_tree_only_reachable_history_unchanged",
+    "secrets": "no_live_credentials_added"
+  }
 }
