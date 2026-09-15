@@ -1,0 +1,26 @@
+#!/usr/bin/env python3
+import json,re,sys
+from pathlib import Path
+root=Path(__file__).resolve().parents[1]
+def fail(msg): print('FAIL — '+msg); raise SystemExit(1)
+def main():
+ schema=json.loads((root/'schemas/vault-reference.schema.json').read_text()); idx=json.loads((root/'vault/index.json').read_text())
+ if idx.get('generated') is not True: fail('vault index must be generated')
+ ids=[]
+ for p in sorted((root/'vault/references').glob('*.json')):
+  x=json.loads(p.read_text())
+  if any(k not in x for k in schema['required']): fail(f'metadata incomplete: {p}')
+  if x['storage']['encrypted'] is not True: fail(f'plaintext backend: {p}')
+  if x['storage']['reference'].startswith(('secret://','value://')): fail(f'inline secret reference: {p}')
+  if x['recovery']['available'] and not x['recovery']['requirements']: fail(f'recovery requirements missing: {p}')
+  ids.append(x['id'])
+ if len(ids)!=len(set(ids)): fail('duplicate vault reference id')
+ if sorted(ids)!=sorted(x['id'] for x in idx.get('references',[])): fail('vault index is stale')
+ tracked=__import__('subprocess').check_output(['git','ls-files','-z'],cwd=root).split(b'\0')
+ bad=re.compile(rb'(-----BEGIN .*PRIVATE KEY-----|(?:password|passwd|secret|token|api[_-]?key)\s*[:=]\s*[^\s<>{}]{8,})',re.I)
+ for raw in tracked:
+  if not raw: continue
+  p=root/raw.decode(); data=p.read_bytes()
+  if bad.search(data) and p.name not in {'validate-vault'}: fail(f'possible plaintext secret pattern: {raw.decode()}')
+ print(f'PASS — vault validation ({len(ids)} references; no plaintext secrets)')
+if __name__=='__main__': main()
