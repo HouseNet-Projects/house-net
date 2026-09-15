@@ -90,7 +90,7 @@
       "owner": "HouseNet-Projects",
       "visibility": "private",
       "control_plane_version": "1.1.0",
-      "control_plane_commit": "e9d4ad149d151969bd9ac2868cf5b1247c979faa",
+      "control_plane_commit": "28a12bb7657c335eaf0ddaa82e4149016dbdb7cc",
       "applicable_rules": [
         "HN-AUTHOR-EMAIL",
         "HN-AUTHOR-NAME",
