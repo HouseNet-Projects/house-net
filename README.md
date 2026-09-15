@@ -25,7 +25,7 @@
 | **POLICY** | `1.4.2` · machine authority under [`policy/`](policy/) |
 | **CLASSIFICATION** | **CLASS A — CRITICAL** |
 | **AUTHORITY** | `HouseNet-Projects` · explicit owner approval |
-| **CANONICAL REPOSITORIES** | `3` registered · visibility **PUBLIC** |
+| **CANONICAL REPOSITORIES** | `5` registered · visibility **PUBLIC** |
 | **EXECUTION BOOTSTRAP** | **ENFORCED** · global map + deterministic preflight |
 | **LOCAL EXECUTION ENFORCEMENT** | **PENDING** · No secondary local execution client is installed in this WSL |
 | **GITHUB BRANCH PROTECTION** | **ENFORCED** · protected `main`, required CI checks |
@@ -128,7 +128,7 @@ HouseNet-Projects owns this public control plane. The goal is the minimum correc
 | Քաղաքականություն | `1.4.2` |
 | Դասակարգում | **CLASS A — CRITICAL** |
 | Իրավասու սեփականատեր | `HouseNet-Projects` |
-| Կանոնական պահոցներ | `3` գրանցված · տեսանելիությունը՝ **PUBLIC** |
+| Կանոնական պահոցներ | `5` գրանցված · տեսանելիությունը՝ **PUBLIC** |
 | Execution bootstrap | **ԿԻՐԱՐԿՎԱԾ** |
 | Local execution enforcement | **ՍՊԱՍՄԱՆ ՄԵՋ** — երկրորդ local execution client տեղադրված չէ |
 | GitHub branch protection | **ԿԻՐԱՐԿՎԱԾ** · `main`-ը պաշտպանված է, CI ստուգումները պարտադիր են |

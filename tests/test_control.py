@@ -37,7 +37,7 @@ class PolicyTests(unittest.TestCase):
     def test_complete_control_plane(self):
         result=c.validate_control_plane(self.root)
         self.assertEqual(result['coverage_sections'],30)
-        self.assertEqual(result['registered_repositories'],3)
+        self.assertEqual(result['registered_repositories'],5)
 
     def test_immutable_source(self):
         p=self.root/'docs/source/HouseNet-GitHub-Policy-v1.0.md'
@@ -179,7 +179,7 @@ class PolicyTests(unittest.TestCase):
 
     def test_public_visibility_is_registered(self):
         self.edit('registry/repositories.json',lambda d:d['repositories'][0].update(visibility='public'))
-        self.assertEqual(c.validate_control_plane(self.root)['registered_repositories'],3)
+        self.assertEqual(c.validate_control_plane(self.root)['registered_repositories'],5)
 
     def test_caller_action_distribution_without_git(self):
         self.assertFalse((self.root/'.git').exists())
