@@ -34,7 +34,7 @@
       "minLength": 1
     },
     "control_plane_version": {
-      "const": "1.4.1"
+      "const": "1.4.2"
     },
     "design_system_version": {
       "const": "1.1.0"

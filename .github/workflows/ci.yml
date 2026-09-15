@@ -9,7 +9,7 @@ permissions:
   contents: read
 jobs:
   policy:
-    uses: HouseNet-Projects/house-net-control-plane/.github/workflows/reusable-policy-gate.yml@834407f5868d2d11988b4f2fcc6ba713e9015434
+    uses: HouseNet-Projects/house-net-control-plane/.github/workflows/reusable-policy-gate.yml@3b869e370681c84befa718c1f5bf5c86e2adfd37
   design-system:
     name: Design system integrity
     runs-on: ubuntu-24.04
