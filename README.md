@@ -26,7 +26,7 @@
 | **AUTHORITY** | `HouseNet-Projects` · explicit owner approval |
 | **CODEX BOOTSTRAP** | **ENFORCED** · global map + deterministic preflight |
 | **CLAUDE LOCAL ENFORCEMENT** | **PENDING** · Claude Code is not installed in this WSL |
-| **GITHUB BRANCH PROTECTION** | **UNAVAILABLE ON CURRENT PLAN** for this private personal repository |
+| **GITHUB BRANCH PROTECTION** | **UNAVAILABLE ON CURRENT PLAN** for this personal-account plan |
 
 This repository is the engineering command center: it records the current rules, registers approved repositories, supplies agent maps, and runs the checks that can be made deterministic. It does not pretend that CI or guidance can replace owner approval or unavailable GitHub server controls.
 
@@ -107,7 +107,7 @@ Meaningful changes use `branch → change → test → PR → green CI → merge
 
 ## Maintainer note
 
-HouseNet-Projects owns this private control plane. The goal is the minimum correct configuration for the actual risk: simple, private, secure, auditable, reproducible and intentional.
+HouseNet-Projects owns this public control plane. The goal is the minimum correct configuration for the actual risk: simple, secure, auditable, reproducible and intentional.
 
 ---
 
