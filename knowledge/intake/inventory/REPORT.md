@@ -8,3 +8,8 @@ The inventory records 99 document-like source files. Four safe metadata-only rec
 ## Հայերեն
 
 Աղբյուր՝ `HouseNet-Projects/house-net-command-center`՝ merge արված `9e15dd1c00f8c9a5c4a531fa45e7b4c99fce6b8f` commit-ում։ Գույքագրումը ներառում է փաստաթղթային բնույթի 99 աղբյուրային ֆայլ։ Չորս անվտանգ metadata-only գրառում մտել է `knowledge/intake/`, և բոլորը մնացել են `draft` ու `unverified`։ Ոչ մի բիզնես փաստ canonical knowledge չի դարձել։ Արխիվը մնացել է historical, policy-ին պատկանող նյութը դուրս է Knowledge-ից, իսկ կոդավորված recovery artifact-ը չի ներմուծվել Knowledge։
+
+## Dedupe and contradiction pass / Կրկնությունների և հակասությունների փուլ
+
+- English: Deterministic hash grouping found **0** duplicate source files across **0** repeated groups. No semantic contradiction was inferred from filenames or hashes; owner review remains required before canonicalization.
+- Հայերեն․ Hash-երի դետերմինիստական խմբավորումը գտել է **0** կրկնվող աղբյուրային ֆայլ՝ **0** խմբում։ Միայն անուններից կամ hash-երից semantic հակասություն չի եզրակացվել․ canonicalization-ից առաջ owner review-ը պարտադիր է։
