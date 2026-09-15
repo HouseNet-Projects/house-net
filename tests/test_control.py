@@ -320,3 +320,10 @@ class FinalHardeningTests(unittest.TestCase):
         data['repositories'][1]['certified_release']['status']='pending'; p.write_text(json.dumps(data,indent=2))
         with self.assertRaisesRegex(c.Invalid,'not certified'):
             c.validate_control_plane(self.root)
+
+class ProviderScopeTests(unittest.TestCase):
+    def test_registered_adapter_document_is_excluded(self):
+        with tempfile.TemporaryDirectory(prefix='housenet-adapter-') as td:
+            root=Path(td); (root/'.claude/docs').mkdir(parents=True)
+            (root/'.claude/docs/adapter.md').write_text('Claude adapter implementation notes')
+            c.validate_provider_neutral_surfaces(root)
