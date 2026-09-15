@@ -1,7 +1,18 @@
 {
   "template": "dashboard",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "bilingual": true,
-  "conventions": {"freeze": "header row and first label column", "input": "border + label, never color alone", "formula": "protected and documented", "dates": "ISO 8601 display", "currency": "explicit currency code", "totals": "strong top border", "print": "A4 landscape, fit to width"},
-  "kpi": {"label": "source + period + unit + comparison", "status": "use token status plus text"}
+  "conventions": {
+    "freeze": "header row and first label column",
+    "input": "border + label, never color alone",
+    "formula": "protected and documented",
+    "dates": "ISO 8601 display",
+    "currency": "explicit currency code",
+    "totals": "strong top border",
+    "print": "A4 landscape, fit to width"
+  },
+  "kpi": {
+    "label": "source + period + unit + comparison",
+    "status": "use token status plus text"
+  }
 }

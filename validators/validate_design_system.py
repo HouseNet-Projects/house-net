@@ -37,7 +37,7 @@ def human_docs(root):
 def validate(root=ROOT):
     release = read_version_manifest(root)
     require(release['repository'] == 'HouseNet-Projects/house-net-design-system', 'Release manifest repository mismatch')
-    require(release['control_plane_version'] == '1.3.0', 'Release manifest control-plane version mismatch')
+    require(release['control_plane_version'] == '1.4.0', 'Release manifest control-plane version mismatch')
     require(not check_versions(root), 'VERSION DRIFT')
     brand = load(root/'tokens/brand-tokens.json')
     document = load(root/'tokens/document-tokens.json')
@@ -68,6 +68,10 @@ def validate(root=ROOT):
         if path.is_file() and path.suffix in {'.md','.json','.html','.css','.svg'}:
             text = path.read_text(errors='ignore')
             require('http://' not in text and 'https://' not in text or 'github.com/HouseNet-Projects' in text or 'www.housenet.am' in text or 'json-schema.org' in text or 'www.w3.org' in text, f'Unexpected external dependency: {path.relative_to(root)}')
+    # Static visual assets must remain timeless; volatile release values belong to generated status regions.
+    semver = re.compile(r'\b\d+\.\d+\.\d+\b')
+    for path in (root/'assets/brand/derived').glob('*.svg'):
+        require(not semver.search(path.read_text(errors='ignore')), f'Volatile version embedded in static visual: {path.relative_to(root)}')
     for path in [root/'tokens/brand-tokens.json', root/'tokens/document-tokens.json']:
         data = path.read_text()
         for group, name in REF.findall(data): require(f'{group}.{name}' in all_tokens, f'Unknown token reference: {group}.{name}')
