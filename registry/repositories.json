@@ -1,5 +1,5 @@
 {
-  "version": "1.4.1",
+  "version": "1.4.2",
   "repositories": [
     {
       "repository": "HouseNet-Projects/house-net-control-plane",
@@ -7,14 +7,14 @@
       "purpose": "Canonical engineering policy, approval, classification and agent control plane.",
       "owner": "HouseNet-Projects",
       "visibility": "public",
-      "control_plane_version": "1.4.1",
-      "control_plane_commit": "5642bc01e92a8f0d76eea56defcb6247a97f47b1",
+      "control_plane_version": "1.4.2",
+      "control_plane_commit": "8f8d04bb950a13cefb964ef545768cbd7366712e",
       "versioned": true,
       "canonical_version_source": {
         "path": "release/manifest.json",
         "field": "version"
       },
-      "current_version": "1.4.1",
+      "current_version": "1.4.2",
       "version_scheme": "semver",
       "release_state": "active",
       "version_surfaces": [
@@ -107,7 +107,8 @@
           "docs/AGENT-BOOTSTRAP.md",
           "docs/REPOSITORY-LIFECYCLE.md"
         ],
-        "exceptions": []
+        "exceptions": [],
+        "compatibility_adapters": []
       },
       "data_classification": "INTERNAL",
       "migration": {
@@ -132,7 +133,7 @@
           "applied": false,
           "manual_action_required": true
         },
-        "control_plane_compatibility": "1.4.1"
+        "control_plane_compatibility": "1.4.2"
       }
     },
     {
@@ -141,8 +142,8 @@
       "purpose": "Canonical HouseNet brand, UI and bilingual document design system for products and operational documents.",
       "owner": "HouseNet-Projects",
       "visibility": "public",
-      "control_plane_version": "1.4.1",
-      "control_plane_commit": "5642bc01e92a8f0d76eea56defcb6247a97f47b1",
+      "control_plane_version": "1.4.2",
+      "control_plane_commit": "8f8d04bb950a13cefb964ef545768cbd7366712e",
       "versioned": true,
       "canonical_version_source": {
         "path": "release/manifest.json",
@@ -165,8 +166,8 @@
       ],
       "certified_release": {
         "version": "1.1.0",
-        "commit": "8d1c06c9a02489ed10ba52b459c3a9bcc21a40d8",
-        "control_plane_compatibility": "1.4.1",
+        "commit": "3c00c71df09de3c7185669d4940e4bae9f0cac71",
+        "control_plane_compatibility": "1.4.2",
         "status": "certified"
       },
       "applicable_rules": [
@@ -244,7 +245,8 @@
           ".editorconfig",
           ".gitattributes"
         ],
-        "exceptions": []
+        "exceptions": [],
+        "compatibility_adapters": []
       },
       "data_classification": "INTERNAL",
       "migration": {
@@ -269,7 +271,7 @@
           "applied": false,
           "manual_action_required": true
         },
-        "control_plane_compatibility": "1.4.1"
+        "control_plane_compatibility": "1.4.2"
       }
     },
     {
@@ -278,8 +280,8 @@
       "purpose": "Canonical HouseNet repository for the Command-center operational workspace and Deputy agent runtime.",
       "owner": "HouseNet-Projects",
       "visibility": "public",
-      "control_plane_version": "1.4.1",
-      "control_plane_commit": "5642bc01e92a8f0d76eea56defcb6247a97f47b1",
+      "control_plane_version": "1.4.2",
+      "control_plane_commit": "8f8d04bb950a13cefb964ef545768cbd7366712e",
       "versioned": false,
       "release_state": "active",
       "applicable_rules": [
@@ -358,7 +360,14 @@
           "CLAUDE.md",
           "bootstrap.py"
         ],
-        "exceptions": []
+        "exceptions": [],
+        "compatibility_adapters": [
+          {
+            "path": "CLAUDE.md",
+            "required": true,
+            "kind": "provider_compatibility"
+          }
+        ]
       },
       "data_classification": "CONFIDENTIAL",
       "migration": {
@@ -440,7 +449,7 @@
           "applied": false,
           "manual_action_required": true
         },
-        "control_plane_compatibility": "1.4.1"
+        "control_plane_compatibility": "1.4.2"
       }
     }
   ]

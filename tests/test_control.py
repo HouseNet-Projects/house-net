@@ -214,7 +214,7 @@ class PolicyTests(unittest.TestCase):
 
     def test_machine_files_are_english_only_allowed(self):
         self.assertIsNone(c.validate_bilingual_documents(self.root))
-        self.assertEqual(json.loads((self.root/'policy/manifest.json').read_text())['version'],'1.4.1')
+        self.assertEqual(json.loads((self.root/'policy/manifest.json').read_text())['version'],'1.4.2')
 
     def test_preflight_wrong_identity_blocks(self):
         with patch.object(c,'command',return_value='WrongIdentity'):
@@ -266,8 +266,8 @@ class VersionSurfaceTests(unittest.TestCase):
         readme = root/'README.md'
         text = readme.read_text()
         start = '<!-- housenet-generated: control-plane-status:start -->'
-        pos = text.index('| **POLICY** | `1.4.1`')
-        readme.write_text(text[:pos] + '| **POLICY** | `1.0.0`' + text[pos + len('| **POLICY** | `1.4.1`'):])
+        pos = text.index('| **POLICY** | `1.4.2`')
+        readme.write_text(text[:pos] + '| **POLICY** | `1.0.0`' + text[pos + len('| **POLICY** | `1.4.2`'):])
         result = subprocess.run([str(root/'bin/check-version-consistency'), str(root)], capture_output=True, text=True)
         self.assertNotEqual(result.returncode, 0)
         self.assertIn('VERSION DRIFT', result.stdout)
@@ -276,6 +276,47 @@ class VersionSurfaceTests(unittest.TestCase):
         root = Path(tempfile.mkdtemp(prefix='housenet-generate-'))
         self.addCleanup(shutil.rmtree, root, ignore_errors=True)
         shutil.copytree(c.ROOT, root, dirs_exist_ok=True, ignore=shutil.ignore_patterns('.git','.venv','__pycache__'))
-        p=root/'README.md'; p.write_text(p.read_text().replace('`1.4.1` · machine authority','`1.0.0` · machine authority'))
+        p=root/'README.md'; p.write_text(p.read_text().replace('`1.4.2` · machine authority','`1.0.0` · machine authority'))
         subprocess.check_call([str(root/'bin/generate-control-plane-status'),str(root)])
         self.assertEqual(subprocess.run([str(root/'bin/check-version-consistency'),str(root)]).returncode,0)
+
+class FinalHardeningTests(unittest.TestCase):
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory(prefix='housenet-final-')
+        self.root = Path(self.tmp.name) / 'control'
+        shutil.copytree(c.ROOT, self.root, ignore=shutil.ignore_patterns('.git','.venv','__pycache__'))
+        self.addCleanup(self.tmp.cleanup)
+
+    def test_claude_is_not_universal_requirement(self):
+        (self.root / 'CLAUDE.md').unlink()
+        self.assertEqual(c.validate_repository(self.root, self.root, c.CANONICAL)['repository'], c.CANONICAL)
+
+    def test_required_provider_adapter_is_enforced_only_when_registered(self):
+        p = self.root / 'registry/repositories.json'; data=json.loads(p.read_text())
+        data['repositories'][0]['profile']['compatibility_adapters']=[{'path':'missing-adapter.md','required':True,'kind':'provider_compatibility'}]
+        p.write_text(json.dumps(data,indent=2))
+        with self.assertRaisesRegex(c.Invalid,'Required file'):
+            c.validate_repository(self.root, self.root, c.CANONICAL)
+
+    def test_new_human_surface_provider_name_fails(self):
+        p=self.root/'docs/new-human-surface.md'; p.write_text('## English\n\nClaude\n\n## Հայերեն\n\nԿլոդ\n')
+        with self.assertRaisesRegex(c.Invalid,'Provider product name'):
+            c.validate_provider_neutral_surfaces(self.root)
+
+    def test_design_system_version_must_match_certified_release(self):
+        p=self.root/'registry/repositories.json'; data=json.loads(p.read_text())
+        data['repositories'][1]['design_system']['version']='1.0.0'; p.write_text(json.dumps(data,indent=2))
+        with self.assertRaisesRegex(c.Invalid,'not the certified release'):
+            c.validate_control_plane(self.root)
+
+    def test_design_system_compatibility_must_match_policy(self):
+        p=self.root/'registry/repositories.json'; data=json.loads(p.read_text())
+        data['repositories'][1]['design_system']['control_plane_compatibility']='9.9.9'; p.write_text(json.dumps(data,indent=2))
+        with self.assertRaisesRegex(c.Invalid,'compatibility mismatch'):
+            c.validate_control_plane(self.root)
+
+    def test_non_certified_design_release_fails(self):
+        p=self.root/'registry/repositories.json'; data=json.loads(p.read_text())
+        data['repositories'][1]['certified_release']['status']='pending'; p.write_text(json.dumps(data,indent=2))
+        with self.assertRaisesRegex(c.Invalid,'not certified'):
+            c.validate_control_plane(self.root)

@@ -27,7 +27,7 @@
       ]
     },
     "control_plane_version": {
-      "const": "1.4.1"
+      "const": "1.4.2"
     },
     "control_plane_commit": {
       "type": "string",
@@ -365,6 +365,32 @@
             ],
             "additionalProperties": false
           }
+        },
+        "compatibility_adapters": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "path": {
+                "type": "string",
+                "minLength": 1
+              },
+              "required": {
+                "type": "boolean"
+              },
+              "kind": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "path",
+              "required",
+              "kind"
+            ],
+            "additionalProperties": false
+          },
+          "uniqueItems": true
         }
       },
       "required": [
@@ -375,7 +401,8 @@
         "deployment",
         "data_sensitivity",
         "required_files",
-        "exceptions"
+        "exceptions",
+        "compatibility_adapters"
       ],
       "additionalProperties": false
     },
