@@ -14,6 +14,20 @@
       "resolved_tag": "v5",
       "justification": "Reproducible Python 3.12 runtime on GitHub-hosted Ubuntu.",
       "review": "Official namespace, immutable Git ref and action.yml inspected; node20 runtime."
+    },
+    "actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1": {
+      "reviewed": true,
+      "publisher": "actions",
+      "resolved_tag": "v7",
+      "justification": "Read-only checkout of the caller or this control plane; credentials are not persisted.",
+      "review": "Official namespace, immutable Git ref and action.yml inspected; no arbitrary third-party actions."
+    },
+    "actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97": {
+      "reviewed": true,
+      "publisher": "actions",
+      "resolved_tag": "v7",
+      "justification": "Reproducible Python runtime on GitHub-hosted Ubuntu.",
+      "review": "Official namespace, immutable Git ref and action.yml inspected; no arbitrary third-party actions."
     }
   }
 }
