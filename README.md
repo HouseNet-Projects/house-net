@@ -4,7 +4,7 @@
 
 <p align="center"><strong>HOUSE NET · DESIGN SYSTEM</strong><br>Canonical visual language for HouseNet products, interfaces and documents.</p>
 
-<p align="center"><a href="https://github.com/HouseNet-Projects/house-net-design-system/actions/workflows/ci.yml"><img alt="Design system CI" src="https://github.com/HouseNet-Projects/house-net-design-system/actions/workflows/ci.yml/badge.svg?branch=main"></a> <a href="house-net-control.json">Class B · Private</a> <a href="docs/VERSION.md">v1.0.0</a></p>
+<p align="center"><a href="https://github.com/HouseNet-Projects/house-net-design-system/actions/workflows/ci.yml"><img alt="Design system CI" src="https://github.com/HouseNet-Projects/house-net-design-system/actions/workflows/ci.yml/badge.svg?branch=main"></a> <a href="house-net-control.json">Class B · Public</a> <a href="docs/VERSION.md">v1.0.0</a></p>
 
 | STATUS | VERSION | CLASS | CONTROL PLANE | LANGUAGE |
 | :--- | :--- | :--- | :--- | :--- |
