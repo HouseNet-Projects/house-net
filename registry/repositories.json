@@ -8,7 +8,7 @@
       "owner": "HouseNet-Projects",
       "visibility": "private",
       "control_plane_version": "1.3.0",
-      "control_plane_commit": "65b7c80fcab7113aac5cd8d0f984e1ea2ea23f14",
+      "control_plane_commit": "f2f50d1bcedaba167832c5b37d53e7e73c9359c9",
       "versioned": true,
       "canonical_version_source": {
         "path": "release/manifest.json",
@@ -125,7 +125,7 @@
       "owner": "HouseNet-Projects",
       "visibility": "private",
       "control_plane_version": "1.3.0",
-      "control_plane_commit": "65b7c80fcab7113aac5cd8d0f984e1ea2ea23f14",
+      "control_plane_commit": "f2f50d1bcedaba167832c5b37d53e7e73c9359c9",
       "versioned": true,
       "canonical_version_source": {
         "path": "release/manifest.json",
@@ -146,6 +146,12 @@
           "kind": "generated"
         }
       ],
+      "certified_release": {
+        "version": "1.0.0",
+        "commit": "43e10da1e165c3633d798c9b915cb82ae5651ad4",
+        "control_plane_compatibility": "1.3.0",
+        "status": "certified"
+      },
       "applicable_rules": [
         "HN-ARCH-AI-PROVIDER-INDEPENDENCE",
         "HN-AUTHOR-EMAIL",

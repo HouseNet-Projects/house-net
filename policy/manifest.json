@@ -323,7 +323,7 @@
     "schemas/registry.schema.json": "32d410aa62363b4fb2757c7d8d6f77d99087ddcab1207b31d07899f4e79e753c",
     "schemas/repository-class.schema.json": "f3309da9a401b352f46da4c050f6c80a454a00ad8fb407b7590de8ab4236782e",
     "schemas/repository-lock.schema.json": "64b36d9e24ae392d6d593ca7266cb29699c9451b8732533d0bac9bae5ba54520",
-    "schemas/repository-registration.schema.json": "95ca09654990f44748d14ad907f4bd8b21df656135d57c29730c7a848a130a89",
+    "schemas/repository-registration.schema.json": "7b94c371e1b11b7a583a49394bc8666455228ac5548a0b00ef6938d015d00bbc",
     "schemas/release-manifest.schema.json": "38cc4c0e03ca0fccb54da9751e346b15a9befef7387024ff5afb1c0b83f61802"
   }
 }

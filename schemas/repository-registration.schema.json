@@ -77,6 +77,17 @@
         "additionalProperties": false
       }
     },
+    "certified_release": {
+      "type": "object",
+      "properties": {
+        "version": {"type": "string", "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"},
+        "commit": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+        "control_plane_compatibility": {"type": "string", "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"},
+        "status": {"enum": ["certified", "pending", "deprecated"]}
+      },
+      "required": ["version", "commit", "control_plane_compatibility", "status"],
+      "additionalProperties": false
+    },
     "version_surfaces": {
       "type": "array",
       "items": {

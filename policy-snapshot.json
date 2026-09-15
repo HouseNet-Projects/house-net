@@ -1,7 +1,7 @@
 {
-  "commit": "65b7c80fcab7113aac5cd8d0f984e1ea2ea23f14",
+  "commit": "f2f50d1bcedaba167832c5b37d53e7e73c9359c9",
   "files_sha256": {
-    "policy/manifest.json": "5c6b5ecf438e2c58ec9c1ab0bfe7ef8f031c7cc1efb84f80eaacc9b075778053",
+    "policy/manifest.json": "f249264465ffab01f9d3ba46994dc677feb2a993a5fd474f2d9bf78835704769",
     "policy/actions.json": "12c41306eb2cf3328a3288dff4fdfacad94da22a33b667773b2b33452368b741",
     "policy/authority.json": "e5c2f4d02ee580e36f1715393d8926a28f7111ed51264eb289a6b3ac8337c04d",
     "policy/git.json": "ea7a8bf724fde74f9a0d112bd09a48df74e0bb55112bb94ac8bbdcf8ab50dfc7",
@@ -17,6 +17,6 @@
     "schemas/release-manifest.schema.json": "38cc4c0e03ca0fccb54da9751e346b15a9befef7387024ff5afb1c0b83f61802",
     "schemas/repository-class.schema.json": "f3309da9a401b352f46da4c050f6c80a454a00ad8fb407b7590de8ab4236782e",
     "schemas/repository-lock.schema.json": "64b36d9e24ae392d6d593ca7266cb29699c9451b8732533d0bac9bae5ba54520",
-    "schemas/repository-registration.schema.json": "95ca09654990f44748d14ad907f4bd8b21df656135d57c29730c7a848a130a89"
+    "schemas/repository-registration.schema.json": "7b94c371e1b11b7a583a49394bc8666455228ac5548a0b00ef6938d015d00bbc"
   }
 }
