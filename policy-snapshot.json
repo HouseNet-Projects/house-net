@@ -1,0 +1,21 @@
+{
+  "commit": "72bb4b4bded5ffda7bf6f99a4a7f4fbccb07a871",
+  "files_sha256": {
+    "policy/manifest.json": "17ff02a211458a6f586f943c41ebb158e3fc45f916b0fe1bd12800d2314aadb5",
+    "policy/actions.json": "1cf6982ee45ff24ec14ecb988546888c4d8d63072faa808fa4377e43a4644644",
+    "policy/authority.json": "0309f9c070f6cf0601030f918089b0b538c157368fa01f6c3922aa41f88d57e5",
+    "policy/git.json": "5affc169e18230897db724cc3dee3060a953915225c08c81b493428843f85014",
+    "policy/merge.json": "bbd1762422d8bb238da89db634983a70a21a6c096b78bc5be7a4cea3545cf3e0",
+    "policy/notifications.json": "a6e2573a51a47b6ea3dd57073fa09c799ecd218d286090d3b24b7a2bbc1a2d12",
+    "policy/repository-baseline.json": "78e9c492569a3f4cd16ba2c6432b59be03cc7927286fe0b661b5a6e294b9b2b7",
+    "policy/repository-classes.json": "c485f70fbb36d95f153f976e73b068fecb95f6bdbc568ccd54838cedf4206ef4",
+    "policy/security.json": "2d0551703084e3173543f87b3de4c00d47ef0b07ee160bbd4481754d4d7bb1f7",
+    "schemas/authority.schema.json": "5b19327dffbbfc8492935520fef45a8e6a86a703e7a41c0004d4ee6f5dcd2a6d",
+    "schemas/manifest.schema.json": "bbd8fa97f4daa5d6c04934003f0ecbe9d78f38defae45b72e83173b63aff6469",
+    "schemas/policy.schema.json": "3bb4d562dac3fab99241feeb00794be2c27b2f06e8b795c2df2ed5a95c696148",
+    "schemas/registry.schema.json": "f7be1074c90fc39a6704f836b8361ac72a842ba95418da9b625f675018cdabfb",
+    "schemas/repository-class.schema.json": "f3309da9a401b352f46da4c050f6c80a454a00ad8fb407b7590de8ab4236782e",
+    "schemas/repository-lock.schema.json": "6d8a390a7b901393c9bd4576f166d6f9f2f688c1a8234dde0cc8853751cad2ff",
+    "schemas/repository-registration.schema.json": "360ffdc2a5f871742ed1306dca5c90b9a524c08f04a81d8615cea4c100cdc845"
+  }
+}

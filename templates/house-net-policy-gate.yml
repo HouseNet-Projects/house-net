@@ -1,0 +1,12 @@
+# PROPOSAL TEMPLATE: replace SHA with the approved executable workflow revision.
+# A policy lock alone does not register a repository or authorize its creation.
+name: HouseNet policy gate
+on:
+  pull_request:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  policy:
+    uses: HouseNet-Projects/house-net-control-plane/.github/workflows/reusable-policy-gate.yml@REPLACE_WITH_APPROVED_40_CHARACTER_COMMIT

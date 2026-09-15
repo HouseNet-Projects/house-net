@@ -1,0 +1,8 @@
+{
+  "repository": "HouseNet-Projects/house-net-control-plane",
+  "classification": "A",
+  "control_plane": "HouseNet-Projects/house-net-control-plane",
+  "policy_version": "1.0.0",
+  "policy_commit": "72bb4b4bded5ffda7bf6f99a4a7f4fbccb07a871",
+  "approval_reference": "OWNER-MISSION-CONTROL-PLANE-1.0-2026-09-15"
+}

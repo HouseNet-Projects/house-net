@@ -1,0 +1,86 @@
+{
+  "version": "1.0.0",
+  "repositories": [
+    {
+      "repository": "HouseNet-Projects/house-net-control-plane",
+      "classification": "A",
+      "purpose": "Canonical engineering policy, approval, classification and agent control plane.",
+      "owner": "HouseNet-Projects",
+      "visibility": "private",
+      "control_plane_version": "1.0.0",
+      "control_plane_commit": "72bb4b4bded5ffda7bf6f99a4a7f4fbccb07a871",
+      "applicable_rules": [
+        "HN-AUTHOR-EMAIL",
+        "HN-AUTHOR-NAME",
+        "HN-BRANCH",
+        "HN-BRANCH-NAMES",
+        "HN-CI",
+        "HN-CLASS-A",
+        "HN-CLASSIFICATION",
+        "HN-COMMITS",
+        "HN-CONFIGURATION",
+        "HN-CREATE",
+        "HN-CREATION",
+        "HN-DEPENDENCIES",
+        "HN-DEPLOYMENT",
+        "HN-DEPRECATION",
+        "HN-DESTRUCTIVE",
+        "HN-DEVELOPMENT",
+        "HN-EXPLICIT-IDENTITY",
+        "HN-FILES",
+        "HN-GOVERNANCE",
+        "HN-IDENTITY",
+        "HN-INIT-BRANCH",
+        "HN-LEVELS",
+        "HN-LICENSE",
+        "HN-METHODS",
+        "HN-NAMESPACE",
+        "HN-NAMING",
+        "HN-OPERATING-FLOW",
+        "HN-OUT-OF-SCOPE",
+        "HN-PERMISSIONS",
+        "HN-PROPORTIONALITY",
+        "HN-PROTECTION",
+        "HN-PRS",
+        "HN-PULL",
+        "HN-PURPOSE",
+        "HN-RECLASSIFY",
+        "HN-REVIEW",
+        "HN-SCOPE",
+        "HN-SECRETS",
+        "HN-SIGNAL",
+        "HN-SOURCES",
+        "HN-VERSIONING"
+      ],
+      "approval": {
+        "state": "approved",
+        "reference": "OWNER-MISSION-CONTROL-PLANE-1.0-2026-09-15",
+        "approved_by": "HouseNet-Projects"
+      },
+      "profile": {
+        "kind": "code",
+        "technology": [
+          "Python 3.12+",
+          "JSON Schema 2020-12",
+          "GitHub Actions",
+          "SVG"
+        ],
+        "dependencies": true,
+        "meaningful_ci": true,
+        "deployment": "none",
+        "data_sensitivity": "critical_governance_no_secrets",
+        "required_files": [
+          "README.md",
+          ".gitignore",
+          ".editorconfig",
+          ".gitattributes",
+          "docs/ENFORCEMENT.md",
+          "docs/ARCHITECTURE.md",
+          "docs/AGENT-BOOTSTRAP.md",
+          "docs/REPOSITORY-LIFECYCLE.md"
+        ],
+        "exceptions": []
+      }
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+name: HouseNet repository policy gate
+description: Validate a caller against an immutable, owner-approved HouseNet policy snapshot and registry.
+runs:
+  using: composite
+  steps:
+    - name: Validate caller from trusted action source
+      shell: bash
+      env:
+        CONTROL_ROOT: ${{ github.action_path }}
+        TARGET_ROOT: ${{ github.workspace }}
+        EXPECTED_REPOSITORY: ${{ github.repository }}
+        PYTHONDONTWRITEBYTECODE: '1'
+      run: |
+        set -euo pipefail
+        case "$EXPECTED_REPOSITORY" in HouseNet-Projects/*) ;; *) exit 1 ;; esac
+        gate_venv=$(mktemp -d "$RUNNER_TEMP/housenet-gate.XXXXXX")
+        python -m venv "$gate_venv"
+        "$gate_venv/bin/python" -m pip install --require-hashes --no-deps -r "$CONTROL_ROOT/requirements.txt"
+        "$gate_venv/bin/python" "$CONTROL_ROOT/bin/validate-repository" "$TARGET_ROOT" --expected-repository "$EXPECTED_REPOSITORY" --json
