@@ -176,6 +176,25 @@ class PolicyTests(unittest.TestCase):
         self.assertEqual(v['classification.C']['required_files'],['README.md'])
         self.assertEqual(v['classification.C']['ci'],'none_unless_justified')
 
+    def test_bilingual_valid_document(self):
+        self.assertIsNone(c.validate_bilingual_documents(self.root))
+
+    def test_english_only_human_document_fails(self):
+        (self.root/'README.md').write_text('# English only\n')
+        self.reject(lambda:c.validate_bilingual_documents(self.root),'English section')
+
+    def test_armenian_only_human_document_fails(self):
+        (self.root/'README.md').write_text('# Միայն հայերեն\n\n## Հայերեն\n\nԲովանդակություն\n')
+        self.reject(lambda:c.validate_bilingual_documents(self.root),'English section')
+
+    def test_empty_armenian_section_fails(self):
+        (self.root/'README.md').write_text('# Test\n\n## English\n\nContent\n\n## Հայերեն\n')
+        self.reject(lambda:c.validate_bilingual_documents(self.root),'Armenian section')
+
+    def test_machine_files_are_english_only_allowed(self):
+        self.assertIsNone(c.validate_bilingual_documents(self.root))
+        self.assertEqual(json.loads((self.root/'policy/manifest.json').read_text())['version'],'1.1.0')
+
     def test_preflight_wrong_identity_blocks(self):
         with patch.object(c,'command',return_value='WrongIdentity'):
             self.reject(lambda:c.preflight(self.root,gh='gh'),'identity mismatch')

@@ -24,7 +24,7 @@
       "const": "private"
     },
     "control_plane_version": {
-      "const": "1.0.0"
+      "const": "1.1.0"
     },
     "control_plane_commit": {
       "type": "string",

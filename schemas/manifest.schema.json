@@ -3,7 +3,7 @@
   "type": "object",
   "properties": {
     "version": {
-      "const": "1.0.0"
+      "const": "1.1.0"
     },
     "effective_date": {
       "type": "string",
@@ -119,6 +119,19 @@
           "authority",
           "decision"
         ],
+        "additionalProperties": false
+      }
+    },
+    "supplemental_rules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string", "minLength": 1},
+          "authority": {"type": "string", "minLength": 1},
+          "decision": {"type": "string", "minLength": 1}
+        },
+        "required": ["id", "authority", "decision"],
         "additionalProperties": false
       }
     }

@@ -17,6 +17,7 @@ from referencing import Registry, Resource
 OWNER = 'HouseNet-Projects'
 CANONICAL = OWNER + '/house-net-control-plane'
 SOURCE_SHA = 'a15b6b22aeecc7beaaf2f13e9de20e45b1a49be24c6ba280a5b3ac364f034491'
+POLICY_VERSION = '1.1.0'
 ROOT = Path(__file__).resolve().parents[1]
 
 class Invalid(ValueError):
@@ -100,8 +101,33 @@ def applicable(items, classification):
     return sorted(r['id'] for r in items if classification in r['applicability']['classes'])
 
 def human_view(items):
-    return '# HouseNet policy · 1.0.0\n\nGenerated from machine authority. Do not edit by hand. Original approved text is preserved in [source](source/HouseNet-GitHub-Policy-v1.0.md).\n\n' + ''.join(
-        '## ' + r['id'] + ' · ' + r['primitive'] + '\n\n' + r['level'] + ' · ' + r['scope'] + ' · Classes ' + ', '.join(r['applicability']['classes']) + '\n\n```json\n' + json.dumps(r['expected'], indent=2, ensure_ascii=False) + '\n```\n\nApproval: ' + r['approval_requirement'] + '. Enforcement: ' + r['enforcement']['mechanism'] + '. Source sections: ' + ', '.join(map(str, r['source_sections'])) + '.\n\n' for r in sorted(items, key=lambda x: x['id']))
+    english = '# HouseNet policy · ' + POLICY_VERSION + '\n\n## English\n\nGenerated from machine authority. Do not edit by hand. Original approved text is preserved in [source](source/HouseNet-GitHub-Policy-v1.0.md).\n\n' + ''.join(
+        '### ' + r['id'] + ' · ' + r['primitive'] + '\n\n' + r['level'] + ' · ' + r['scope'] + ' · Classes ' + ', '.join(r['applicability']['classes']) + '\n\n```json\n' + json.dumps(r['expected'], indent=2, ensure_ascii=False) + '\n```\n\nApproval: ' + r['approval_requirement'] + '. Enforcement: ' + r['enforcement']['mechanism'] + '. Source sections: ' + ', '.join(map(str, r['source_sections'])) + '.\n\n' for r in sorted(items, key=lambda x: x['id']))
+    armenian = '# HouseNet-ի քաղաքականություն · ' + POLICY_VERSION + '\n\nՄեքենայական հեղինակությունից ստեղծված ներկայացում է։ Խմբագրել միայն մեքենայական կանոնները։ Սկզբնական հաստատված քաղաքականությունը պահպանված է [աղբյուրում](source/HouseNet-GitHub-Policy-v1.0.md)։\n\n' + ''.join(
+        '### ' + r['id'] + ' · ' + r['primitive'] + '\n\nՄակարդակ՝ ' + r['level'] + ' · Տիրույթ՝ ' + r['scope'] + ' · Դասեր՝ ' + ', '.join(r['applicability']['classes']) + '\n\n```json\n' + json.dumps(r['expected'], indent=2, ensure_ascii=False) + '\n```\n\nՀաստատում՝ ' + r['approval_requirement'] + '։ Կիրարկում՝ ' + r['enforcement']['mechanism'] + '։ Աղբյուրի բաժիններ՝ ' + ', '.join(map(str, r['source_sections'])) + '։\n\n' for r in sorted(items, key=lambda x: x['id']))
+    return english + '---\n\n## Հայերեն\n\n' + armenian
+
+HUMAN_FACING_EXCLUDES = {'docs/source/HouseNet-GitHub-Policy-v1.0.md', 'AGENTS.md', 'CLAUDE.md'}
+
+def human_facing_paths(root):
+    paths = []
+    for p in root.rglob('*'):
+        if not p.is_file() or p.suffix.lower() != '.md' or '.git' in p.parts:
+            continue
+        rel = str(p.relative_to(root))
+        if rel in HUMAN_FACING_EXCLUDES or p.name in {'AGENTS.md', 'CLAUDE.md'}:
+            continue
+        if rel.startswith(('README', 'CHANGELOG', 'docs/', 'audit/', 'assets/brand/')):
+            paths.append(p)
+    return sorted(paths)
+
+def validate_bilingual_documents(root):
+    for path in human_facing_paths(root):
+        text = path.read_text()
+        en = re.search(r'^## English\s*$([\s\S]*?)(?=^## |\Z)', text, re.M)
+        hy = re.search(r'^## Հայերեն\s*$([\s\S]*?)(?=^## |\Z)', text, re.M)
+        require(en and en.group(1).strip(), 'English section missing or empty: ' + str(path.relative_to(root)))
+        require(hy and hy.group(1).strip(), 'Armenian section missing or empty: ' + str(path.relative_to(root)))
 
 def validate_policy(root):
     validators = schemas(root)
@@ -145,8 +171,10 @@ def validate_policy(root):
         expected = sorted(r['id'] for r in items if section in r['source_sections'])
         require(bool(expected) and sorted(entry['rule_ids']) == expected, 'Rule/source coverage drift')
         covered.update(entry['rule_ids'])
-    require(covered == set(index), 'Unmapped rule')
-    require((root / 'docs/POLICY.md').read_text() == human_view(items), 'Generated human policy drift')
+    supplemental = {x['id'] for x in manifest.get('supplemental_rules', [])}
+    require(supplemental <= set(index), 'Unknown supplemental rule')
+    require(covered | supplemental == set(index), 'Unmapped rule')
+    require((root / 'docs/POLICY.md').read_text().rstrip() == human_view(items).rstrip(), 'Generated human policy drift')
     return validators, manifest, items
 
 def registry(root, validators, items):
@@ -289,6 +317,7 @@ def validate_repository(root, target, expected_repository=None):
     reviews = load(root / 'policy-dependencies.json')['actions']
     scan_workflows(target, r, values, reviews)
     check_content(target)
+    validate_bilingual_documents(target)
     return {'repository':r['repository'],'classification':r['classification'],'policy_version':manifest['version'],'policy_commit':r['control_plane_commit'],'rules':len(r['applicable_rules'])}
 
 def internal_links(root):
@@ -309,6 +338,7 @@ def validate_control_plane(root):
         body = (root / 'templates' / name).read_text()
         require(len(body.encode()) < 4096 and all(x in body for x in ['house-net-control.json','housenet-preflight','house-net-control-plane']), 'Template integrity failure')
     internal_links(root)
+    validate_bilingual_documents(root)
     validate_repository(root, root, CANONICAL)
     return {'policy_version':manifest['version'],'source_sha256':SOURCE_SHA,'coverage_sections':len(manifest['coverage']),'unique_rules':len(items),'registered_repositories':len(records),'schemas':len(validators)}
 

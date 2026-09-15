@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "domain": "repository-baseline",
   "rules": [
     {
@@ -304,6 +304,22 @@
       "source_sections": [
         26
       ]
+    },
+    {
+      "id": "HN-DOC-HUMAN-VISIBLE-BILINGUAL",
+      "primitive": "documentation.human_visible_bilingual",
+      "scope": "repository",
+      "level": "MANDATORY",
+      "applicability": {"classes": ["A", "B", "C"]},
+      "expected": {
+        "human_facing": true,
+        "required_languages": ["en", "hy"],
+        "contract": "English and Հայերեն sections are both non-empty",
+        "classification": "deterministic_path_and_marker_convention"
+      },
+      "approval_requirement": "explicit_owner",
+      "enforcement": {"mechanism": "bilingual_document_validator"},
+      "source_sections": []
     }
   ]
 }

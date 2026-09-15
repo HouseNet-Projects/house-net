@@ -1,6 +1,8 @@
 # Agent bootstrap
 
-## Codex in this WSL
+## English
+
+### Codex in this WSL
 
 Detected installation: `/usr/local/bin/codex`, CLI `0.154.0`. `CODEX_HOME` was unset; the installed CLI and its existing configuration resolve the default home to `/home/gevorg/.codex`. No global or override instruction file existed before installation. Existing `config.toml` contained `projects` and `tui` configuration and is preserved.
 
@@ -10,7 +12,7 @@ Idempotent installation logic lives in `bin/install-codex-bootstrap`. The resolv
 
 Verification uses the installed CLI's `codex debug prompt-input` in a fresh process outside the repository to inspect the actual model-visible instruction chain, plus a clean read-only `codex exec` probe where possible. Results belong in the audit record. No claim is made that instructions are an unbypassable deterministic hook.
 
-## Claude Code
+### Claude Code
 
 `command -v claude` found no Claude Code in this WSL. No installation or managed `/etc/claude-code` changes are made.
 
@@ -18,11 +20,21 @@ Verification uses the installed CLI's `codex debug prompt-input` in a fresh proc
 
 Repository `CLAUDE.md` and `templates/CLAUDE.md` are ready. If the owner later installs Claude Code, a separately reviewed installation should use the then-supported Linux managed instruction/settings mechanism, a SessionStart context hook and a fail-closed UserPromptSubmit gate. SessionStart must not be described as a hard block. Verify both passing and failing prompts before claiming enforcement.
 
-## Future repositories
+### Future repositories
 
 Read `house-net-control.json`, resolve the trusted control plane, run its current preflight, then inspect classification and applicable rules. Validate the target's lock against the trusted registry. Never copy the full policy into AGENTS.md or CLAUDE.md. Repository templates contain placeholders and confer no creation approval.
 
-## References
+### References
 
 - [Official Codex instruction discovery](https://learn.chatgpt.com/docs/agent-configuration/agents-md)
 - [Official Codex configuration reference](https://learn.chatgpt.com/docs/config-file/config-reference)
+
+---
+
+## Հայերեն
+
+# Գործակալի bootstrap
+
+Codex-ի global քարտեզը և repository instructions-ը յուրաքանչյուր նոր session ուղղորդում են դեպի `/home/gevorg/house-net-control-plane`, ընթացիկ manifest-ը և `bin/housenet-preflight --json`։ Policy-ի ամբողջ տեքստը չի պատճենվում AGENTS.md-ում։ Եթե mandatory preflight-ը ձախողվի, գործակալը պետք է կանգ առնի և հաղորդի պատճառը։
+
+Մարդկանց համար նախատեսված փաստաթղթերը պետք է լինեն English + Հայերեն։ Machine, code և agent bootstrap ֆայլերը կարող են մնալ English-only։ Claude Code-ը այս WSL-ում չկա, ուստի managed hook-երը սպասման մեջ են։

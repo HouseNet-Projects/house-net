@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "repositories": [
     {
       "repository": "HouseNet-Projects/house-net-control-plane",
@@ -7,8 +7,8 @@
       "purpose": "Canonical engineering policy, approval, classification and agent control plane.",
       "owner": "HouseNet-Projects",
       "visibility": "private",
-      "control_plane_version": "1.0.0",
-      "control_plane_commit": "72bb4b4bded5ffda7bf6f99a4a7f4fbccb07a871",
+      "control_plane_version": "1.1.0",
+      "control_plane_commit": "4820854196fe782e19ab9cd082dc8dc34609bd1a",
       "applicable_rules": [
         "HN-AUTHOR-EMAIL",
         "HN-AUTHOR-NAME",
@@ -26,6 +26,7 @@
         "HN-DEPRECATION",
         "HN-DESTRUCTIVE",
         "HN-DEVELOPMENT",
+        "HN-DOC-HUMAN-VISIBLE-BILINGUAL",
         "HN-EXPLICIT-IDENTITY",
         "HN-FILES",
         "HN-GOVERNANCE",
