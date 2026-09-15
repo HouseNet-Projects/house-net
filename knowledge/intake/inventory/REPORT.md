@@ -13,3 +13,10 @@ The inventory records 99 document-like source files. Owner decisions retired the
 
 - English: Deterministic hash grouping found **0** duplicate source files across **0** repeated groups. No semantic contradiction was inferred from filenames or hashes; owner review remains required before any further canonicalization.
 - Հայերեն․ Hash-երի դետերմինիստական խմբավորումը գտել է **0** կրկնվող աղբյուրային ֆայլ՝ **0** խմբում։ Միայն անուններից կամ hash-երից semantic հակասություն չի եզրակացվել․ հետագա canonicalization-ից առաջ owner review-ը շարունակում է պարտադիր մնալ։
+
+## Migration ledger / Միգրացիայի ledger
+
+- English: The 99-source ledger is conservative and concept-oriented. No additional source was promoted to canonical Knowledge. Live Actions remains Command Center state; Journal remains historical; policy/technical files remain with their owners; encrypted/recovery material remains behind the Vault boundary; binary Office pointers remain blocked source snapshots; active and reference material remains intake pending semantic, sensitivity and ownership review.
+- Հայերեն․ 99 աղբյուրների ledger-ը պահպանողական է և concept-oriented։ Լրացուցիչ աղբյուր canonical Knowledge չի դարձել։ Live Actions-ը մնում է Command Center-ի state-ը, Journal-ը՝ historical, policy/technical ֆայլերը՝ իրենց սեփականատերերի մոտ, կոդավորված/recovery նյութը՝ Vault boundary-ի հետևում, Office pointer-ները՝ blocked source snapshots, իսկ active/reference նյութը՝ intake՝ semantic, sensitivity և ownership review-ի սպասումով։
+
+Machine ledger: `knowledge/intake/inventory/ledger.json`.

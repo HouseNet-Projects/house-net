@@ -1,0 +1,1703 @@
+{
+  "schema": "housenet.knowledge.migration-ledger.v1",
+  "generated_at": "2026-09-16",
+  "source_repository": "HouseNet-Projects/house-net-command-center",
+  "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+  "count": 99,
+  "counts": {
+    "BLOCKED_SOURCE_SNAPSHOT": 16,
+    "GENERATED_DERIVED": 1,
+    "HISTORICAL": 65,
+    "INTAKE_NEEDS_REVIEW": 7,
+    "KEEP_AS_LIVE_OPERATIONAL_STATE": 1,
+    "OWNER_DECISION_REQUIRED": 3,
+    "POLICY_AUTHORITY_OWNED_ELSEWHERE": 2,
+    "TECHNICAL_IMPLEMENTATION": 3,
+    "VAULT_SECURITY_BOUNDARY": 1
+  },
+  "entries": [
+    {
+      "source": ".claude/docs/Activation-inputs.md",
+      "canonical_owner": "OWNER_REVIEW_REQUIRED",
+      "candidate_lifecycle": "OWNER_DECISION_REQUIRED",
+      "sensitivity": "INTERNAL",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "c26624b6ad9331adbd946cce637ad72842b7173f76b6f9d20940d0bfb5f36377",
+        "source_type": "repository_file"
+      },
+      "currentness": "reject",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Review pipeline",
+      "migration_decision": "REVIEW",
+      "reason": "binary/LFS pointer or source content requires owner review"
+    },
+    {
+      "source": ".claude/docs/Job-description.md",
+      "canonical_owner": "HouseNet-Projects/house-net-command-center",
+      "candidate_lifecycle": "POLICY_AUTHORITY_OWNED_ELSEWHERE",
+      "sensitivity": "INTERNAL",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "6c40ad24a4fc0075a01f55815ca4ab827032c0729f2148ce51a15de51ed67cc8",
+        "source_type": "repository_file"
+      },
+      "currentness": "supporting_view",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Supporting view of workspace_policy.json",
+      "migration_decision": "SUPPORTING_VIEW_ONLY",
+      "reason": "Human-facing supporting view; machine identity authority remains workspace_policy.json"
+    },
+    {
+      "source": ".claude/docs/Migration-log-2026-09-10.md",
+      "canonical_owner": "OWNER_REVIEW_REQUIRED",
+      "candidate_lifecycle": "OWNER_DECISION_REQUIRED",
+      "sensitivity": "INTERNAL",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "0c496fd9d0573fcda7524b1cfb3274550a6474a73adf3699461cfece83dacdf1",
+        "source_type": "repository_file"
+      },
+      "currentness": "reject",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Review pipeline",
+      "migration_decision": "REVIEW",
+      "reason": "binary/LFS pointer or source content requires owner review"
+    },
+    {
+      "source": ".claude/docs/Registry-audit-2026-09-10.md",
+      "canonical_owner": "OWNER_REVIEW_REQUIRED",
+      "candidate_lifecycle": "OWNER_DECISION_REQUIRED",
+      "sensitivity": "INTERNAL",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "787e6583fca46bbfb5eab31755cbcdfc45c267b6ad698e4c3c90d99bf518cc6f",
+        "source_type": "repository_file"
+      },
+      "currentness": "reject",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Review pipeline",
+      "migration_decision": "REVIEW",
+      "reason": "binary/LFS pointer or source content requires owner review"
+    },
+    {
+      "source": ".claude/docs/Role.md",
+      "canonical_owner": "HouseNet-Projects/house-net-command-center",
+      "candidate_lifecycle": "POLICY_AUTHORITY_OWNED_ELSEWHERE",
+      "sensitivity": "INTERNAL",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "024fb34d2d93eee257c98f97230b2cfa885423e389f133ef95b39b473f9e698e",
+        "source_type": "repository_file"
+      },
+      "currentness": "supporting_view",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Supporting view of workspace_policy.json",
+      "migration_decision": "SUPPORTING_VIEW_ONLY",
+      "reason": "Human-facing supporting view; machine identity authority remains workspace_policy.json"
+    },
+    {
+      "source": ".claude/docs/legacy/CLAUDE-command-center-original.md",
+      "canonical_owner": "HouseNet-Projects/house-net-command-center",
+      "candidate_lifecycle": "HISTORICAL",
+      "sensitivity": "INTERNAL",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "f23b1c61134cf61fed932e976e36d75623f8983b340e13095b97e5f3f03d3814",
+        "source_type": "repository_file"
+      },
+      "currentness": "historical",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Archive/reference",
+      "migration_decision": "RETAIN_AS_HISTORICAL",
+      "reason": "metadata-only intake candidate"
+    },
+    {
+      "source": ".claude/docs/legacy/README-command-center-original.md",
+      "canonical_owner": "HouseNet-Projects/house-net-command-center",
+      "candidate_lifecycle": "HISTORICAL",
+      "sensitivity": "INTERNAL",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "7c1794aa10654a5a9a71a39f4d0d66fe7d840a85d62d557afeedaea3294957b5",
+        "source_type": "repository_file"
+      },
+      "currentness": "historical",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Archive/reference",
+      "migration_decision": "RETAIN_AS_HISTORICAL",
+      "reason": "metadata-only intake candidate"
+    },
+    {
+      "source": ".claude/runtime/requirements.txt",
+      "canonical_owner": "OWNER_REVIEW_REQUIRED",
+      "candidate_lifecycle": "INTAKE_NEEDS_REVIEW",
+      "sensitivity": "INTERNAL",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "a419e693c0540785089591514330326ea450bcb20a5f5d5e08a97538d2fc3275",
+        "source_type": "repository_file"
+      },
+      "currentness": "reject",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Derived/Review",
+      "migration_decision": "DO_NOT_CANONICALIZE_YET",
+      "reason": "binary/LFS pointer or source content requires owner review"
+    },
+    {
+      "source": ".secure/README.md",
+      "canonical_owner": "HouseNet-Projects/house-net-vault",
+      "candidate_lifecycle": "VAULT_SECURITY_BOUNDARY",
+      "sensitivity": "INTERNAL",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "ac53e0c9140a536a3bd67e59df9614f3a4d8a0bcc00b62dae044ea49eba47c91",
+        "source_type": "repository_file"
+      },
+      "currentness": "reject",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Vault boundary",
+      "migration_decision": "REJECT_FROM_KNOWLEDGE",
+      "reason": "binary/LFS pointer or source content requires owner review"
+    },
+    {
+      "source": "AGENTS.md",
+      "canonical_owner": "HouseNet-Projects/house-net-control-plane or command-center",
+      "candidate_lifecycle": "TECHNICAL_IMPLEMENTATION",
+      "sensitivity": "INTERNAL",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "ef699b1994778633e55ec01aa9247414eadc558ee73ecc0e138453c96859ca11",
+        "source_type": "repository_file"
+      },
+      "currentness": "reject",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Outside Knowledge",
+      "migration_decision": "REJECT_FROM_KNOWLEDGE",
+      "reason": "binary/LFS pointer or source content requires owner review"
+    },
+    {
+      "source": "CLAUDE.md",
+      "canonical_owner": "HouseNet-Projects/house-net-control-plane or command-center",
+      "candidate_lifecycle": "TECHNICAL_IMPLEMENTATION",
+      "sensitivity": "INTERNAL",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "1cece1e682cb4def6babb93141b583bd692561f8f8dbdcdbf6a22973a16d33ca",
+        "source_type": "repository_file"
+      },
+      "currentness": "reject",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Outside Knowledge",
+      "migration_decision": "REJECT_FROM_KNOWLEDGE",
+      "reason": "binary/LFS pointer or source content requires owner review"
+    },
+    {
+      "source": "README.md",
+      "canonical_owner": "HouseNet-Projects/house-net-control-plane or command-center",
+      "candidate_lifecycle": "TECHNICAL_IMPLEMENTATION",
+      "sensitivity": "INTERNAL",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "1ac7124a976a1830c7feb8e0fbd0cdff5a6a3739c41156422b4df46b0230abb2",
+        "source_type": "repository_file"
+      },
+      "currentness": "reject",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Outside Knowledge",
+      "migration_decision": "REJECT_FROM_KNOWLEDGE",
+      "reason": "binary/LFS pointer or source content requires owner review"
+    },
+    {
+      "source": "WORKSPACE/00_Inbox/Input.md",
+      "canonical_owner": "OWNER_REVIEW_REQUIRED",
+      "candidate_lifecycle": "INTAKE_NEEDS_REVIEW",
+      "sensitivity": "UNKNOWN",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "42d42c5b60ce454598f5b1481d8b3359972e2c18283edb3989eae2e884f2b2d5",
+        "source_type": "repository_file"
+      },
+      "currentness": "intake",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Knowledge intake",
+      "migration_decision": "REVIEW_CONCEPT_AND_CURRENTNESS",
+      "reason": "metadata-only intake candidate"
+    },
+    {
+      "source": "WORKSPACE/01_Active/Operations/Activation-suspension-reconnection-2026-09-07.docx",
+      "canonical_owner": "OWNER_REVIEW_REQUIRED",
+      "candidate_lifecycle": "BLOCKED_SOURCE_SNAPSHOT",
+      "sensitivity": "UNKNOWN",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "4b69987588150b4ea86c11499b7923e63ec0774812a8402ffe7f92a38732939b",
+        "source_type": "repository_file"
+      },
+      "currentness": "blocked_source_snapshot",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Review pipeline",
+      "migration_decision": "DO_NOT_INFER_CONTENT",
+      "reason": "binary/LFS pointer or source content requires owner review"
+    },
+    {
+      "source": "WORKSPACE/01_Active/Operations/Inspector-list-2026-09-10.docx",
+      "canonical_owner": "OWNER_REVIEW_REQUIRED",
+      "candidate_lifecycle": "BLOCKED_SOURCE_SNAPSHOT",
+      "sensitivity": "UNKNOWN",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "b4298f20a35167ef4f00228144c99dbc54682079b6acf0dedeb9e42b7c2e802d",
+        "source_type": "repository_file"
+      },
+      "currentness": "blocked_source_snapshot",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Review pipeline",
+      "migration_decision": "DO_NOT_INFER_CONTENT",
+      "reason": "binary/LFS pointer or source content requires owner review"
+    },
+    {
+      "source": "WORKSPACE/01_Active/Operations/Open-questions.md",
+      "canonical_owner": "OWNER_REVIEW_REQUIRED",
+      "candidate_lifecycle": "INTAKE_NEEDS_REVIEW",
+      "sensitivity": "UNKNOWN",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "9a8998906789d44d338968e5da99217630af0ff2c1a900a8ab76ef8822d9b861",
+        "source_type": "repository_file"
+      },
+      "currentness": "intake",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Knowledge intake",
+      "migration_decision": "REVIEW_CONCEPT_AND_CURRENTNESS",
+      "reason": "metadata-only intake candidate"
+    },
+    {
+      "source": "WORKSPACE/01_Active/People/Job-descriptions-v1.1-2026-09-05.docx",
+      "canonical_owner": "OWNER_REVIEW_REQUIRED",
+      "candidate_lifecycle": "BLOCKED_SOURCE_SNAPSHOT",
+      "sensitivity": "UNKNOWN",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "661c204c5c0895b00c002886cd1a2654123c12f6bcd7b939675ec5977bb7d485",
+        "source_type": "repository_file"
+      },
+      "currentness": "blocked_source_snapshot",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Review pipeline",
+      "migration_decision": "DO_NOT_INFER_CONTENT",
+      "reason": "binary/LFS pointer or source content requires owner review"
+    },
+    {
+      "source": "WORKSPACE/01_Active/Sales/Churn-save-list-2026-09-09.xlsx",
+      "canonical_owner": "OWNER_REVIEW_REQUIRED",
+      "candidate_lifecycle": "BLOCKED_SOURCE_SNAPSHOT",
+      "sensitivity": "UNKNOWN",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "5d5db9a27d93b4061a040cf3baa133409b9b1d511dea22d497fdfcc22d815128",
+        "source_type": "repository_file"
+      },
+      "currentness": "blocked_source_snapshot",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Review pipeline",
+      "migration_decision": "DO_NOT_INFER_CONTENT",
+      "reason": "binary/LFS pointer or source content requires owner review"
+    },
+    {
+      "source": "WORKSPACE/01_Active/Sales/June-sales-bonus-2026-09-09.xlsx",
+      "canonical_owner": "OWNER_REVIEW_REQUIRED",
+      "candidate_lifecycle": "BLOCKED_SOURCE_SNAPSHOT",
+      "sensitivity": "UNKNOWN",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "a3cc54ec0ea11f7fac52213f07e705ac94ecbaf1954a89e1dbaa32e2535e1c86",
+        "source_type": "repository_file"
+      },
+      "currentness": "blocked_source_snapshot",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Review pipeline",
+      "migration_decision": "DO_NOT_INFER_CONTENT",
+      "reason": "binary/LFS pointer or source content requires owner review"
+    },
+    {
+      "source": "WORKSPACE/01_Active/Sales/Sales-strategy-2026-09-09.docx",
+      "canonical_owner": "OWNER_REVIEW_REQUIRED",
+      "candidate_lifecycle": "BLOCKED_SOURCE_SNAPSHOT",
+      "sensitivity": "UNKNOWN",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "a1f9fae2c045d2e7c36d052019da6cfbbb8538d4450f54aa7414edb4474e6337",
+        "source_type": "repository_file"
+      },
+      "currentness": "blocked_source_snapshot",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Review pipeline",
+      "migration_decision": "DO_NOT_INFER_CONTENT",
+      "reason": "binary/LFS pointer or source content requires owner review"
+    },
+    {
+      "source": "WORKSPACE/01_Active/Sales/Sales-strategy-hy-2026-09-10.pptx",
+      "canonical_owner": "OWNER_REVIEW_REQUIRED",
+      "candidate_lifecycle": "BLOCKED_SOURCE_SNAPSHOT",
+      "sensitivity": "UNKNOWN",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "a5b720b6f6d9ba319bc0d874f5a601044d1515a25d04f599ea12354a69c0236f",
+        "source_type": "repository_file"
+      },
+      "currentness": "blocked_source_snapshot",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Review pipeline",
+      "migration_decision": "DO_NOT_INFER_CONTENT",
+      "reason": "binary/LFS pointer or source content requires owner review"
+    },
+    {
+      "source": "WORKSPACE/01_Active/Sales/Sales-strategy-qa-script-2026-09-10.docx",
+      "canonical_owner": "OWNER_REVIEW_REQUIRED",
+      "candidate_lifecycle": "BLOCKED_SOURCE_SNAPSHOT",
+      "sensitivity": "UNKNOWN",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "63a66b9cbb62be7a2d0bf67665db807701883fd657cbb2eb38a321c95ace19a3",
+        "source_type": "repository_file"
+      },
+      "currentness": "blocked_source_snapshot",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Review pipeline",
+      "migration_decision": "DO_NOT_INFER_CONTENT",
+      "reason": "binary/LFS pointer or source content requires owner review"
+    },
+    {
+      "source": "WORKSPACE/01_Active/Systems/Billing-analysis-may-august-2026-09-10.xlsx",
+      "canonical_owner": "OWNER_REVIEW_REQUIRED",
+      "candidate_lifecycle": "BLOCKED_SOURCE_SNAPSHOT",
+      "sensitivity": "UNKNOWN",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "b0a7c07f4386739bea044ebdae423d51c1edf21080514466cbc0c674bdc67bc3",
+        "source_type": "repository_file"
+      },
+      "currentness": "blocked_source_snapshot",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Review pipeline",
+      "migration_decision": "DO_NOT_INFER_CONTENT",
+      "reason": "binary/LFS pointer or source content requires owner review"
+    },
+    {
+      "source": "WORKSPACE/01_Active/Systems/Billing-roadmap-v2-2026-09-07.docx",
+      "canonical_owner": "OWNER_REVIEW_REQUIRED",
+      "candidate_lifecycle": "BLOCKED_SOURCE_SNAPSHOT",
+      "sensitivity": "UNKNOWN",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "abc084a9216eba1d5f52fa8ccf6877e215ea2ee1daac24cb76a495bd0250839c",
+        "source_type": "repository_file"
+      },
+      "currentness": "blocked_source_snapshot",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Review pipeline",
+      "migration_decision": "DO_NOT_INFER_CONTENT",
+      "reason": "binary/LFS pointer or source content requires owner review"
+    },
+    {
+      "source": "WORKSPACE/02_Reference/Operations/Call-center-kpi-2026-08-31.xlsx",
+      "canonical_owner": "OWNER_REVIEW_REQUIRED",
+      "candidate_lifecycle": "BLOCKED_SOURCE_SNAPSHOT",
+      "sensitivity": "UNKNOWN",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "58e94304c4df9ec50a07e535867da04a4b2a1f3a68b445dbc81e6073026a4d6d",
+        "source_type": "repository_file"
+      },
+      "currentness": "blocked_source_snapshot",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Review pipeline",
+      "migration_decision": "DO_NOT_INFER_CONTENT",
+      "reason": "binary/LFS pointer or source content requires owner review"
+    },
+    {
+      "source": "WORKSPACE/02_Reference/People/Job-descriptions-qualifications-2026-09-05.docx",
+      "canonical_owner": "OWNER_REVIEW_REQUIRED",
+      "candidate_lifecycle": "BLOCKED_SOURCE_SNAPSHOT",
+      "sensitivity": "UNKNOWN",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "10a1496163ad409ebd87df09d4eef1405ba1b455a9c3693747907afdb1e35971",
+        "source_type": "repository_file"
+      },
+      "currentness": "blocked_source_snapshot",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Review pipeline",
+      "migration_decision": "DO_NOT_INFER_CONTENT",
+      "reason": "binary/LFS pointer or source content requires owner review"
+    },
+    {
+      "source": "WORKSPACE/02_Reference/People/Staffing-plan-2026-09-07.xlsx",
+      "canonical_owner": "OWNER_REVIEW_REQUIRED",
+      "candidate_lifecycle": "BLOCKED_SOURCE_SNAPSHOT",
+      "sensitivity": "UNKNOWN",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "5d33d0cc9f191942f5869c0a7bdb1a3b93a3c9958fe3537b696a6bc5898c0de7",
+        "source_type": "repository_file"
+      },
+      "currentness": "blocked_source_snapshot",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Review pipeline",
+      "migration_decision": "DO_NOT_INFER_CONTENT",
+      "reason": "binary/LFS pointer or source content requires owner review"
+    },
+    {
+      "source": "WORKSPACE/02_Reference/Systems/Mikrobill-help-en-2026-09-08.docx",
+      "canonical_owner": "OWNER_REVIEW_REQUIRED",
+      "candidate_lifecycle": "BLOCKED_SOURCE_SNAPSHOT",
+      "sensitivity": "UNKNOWN",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "fcf8abecb8c27ef8105a4f062185c0745e2471382366d544325347d0ddc06d74",
+        "source_type": "repository_file"
+      },
+      "currentness": "blocked_source_snapshot",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Review pipeline",
+      "migration_decision": "DO_NOT_INFER_CONTENT",
+      "reason": "binary/LFS pointer or source content requires owner review"
+    },
+    {
+      "source": "WORKSPACE/02_Reference/Systems/Mikrobill-help-hy-2026-09-08.docx",
+      "canonical_owner": "OWNER_REVIEW_REQUIRED",
+      "candidate_lifecycle": "BLOCKED_SOURCE_SNAPSHOT",
+      "sensitivity": "UNKNOWN",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "a348c6e455f42632c1a8f9478e140a0d84e9c380244d01268c64192db6b4fe51",
+        "source_type": "repository_file"
+      },
+      "currentness": "blocked_source_snapshot",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Review pipeline",
+      "migration_decision": "DO_NOT_INFER_CONTENT",
+      "reason": "binary/LFS pointer or source content requires owner review"
+    },
+    {
+      "source": "WORKSPACE/03_Completed/Day-off-request-2026-08-11.docx",
+      "canonical_owner": "HouseNet-Projects/house-net-command-center",
+      "candidate_lifecycle": "HISTORICAL",
+      "sensitivity": "UNKNOWN",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "e3973a8859d906627281bb952bc0c70804011bc807ca92724fd6afea2d3bda27",
+        "source_type": "repository_file"
+      },
+      "currentness": "blocked_source_snapshot",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Archive/reference",
+      "migration_decision": "RETAIN_AS_HISTORICAL",
+      "reason": "binary/LFS pointer or source content requires owner review"
+    },
+    {
+      "source": "WORKSPACE/03_Completed/Day-off-request-v2-2026-08-13.docx",
+      "canonical_owner": "HouseNet-Projects/house-net-command-center",
+      "candidate_lifecycle": "HISTORICAL",
+      "sensitivity": "UNKNOWN",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "213f95433ebc580ad2dc8c4c363ea68791703e016c7af71898b093d1bc657855",
+        "source_type": "repository_file"
+      },
+      "currentness": "blocked_source_snapshot",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Archive/reference",
+      "migration_decision": "RETAIN_AS_HISTORICAL",
+      "reason": "binary/LFS pointer or source content requires owner review"
+    },
+    {
+      "source": "WORKSPACE/03_Completed/Delivery-schedule-2026-09-09.xlsx",
+      "canonical_owner": "HouseNet-Projects/house-net-command-center",
+      "candidate_lifecycle": "HISTORICAL",
+      "sensitivity": "UNKNOWN",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "6bcd6b84c91e81ee1324eb1cc7fa355eebff1826a4545db885278822a689657c",
+        "source_type": "repository_file"
+      },
+      "currentness": "blocked_source_snapshot",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Archive/reference",
+      "migration_decision": "RETAIN_AS_HISTORICAL",
+      "reason": "binary/LFS pointer or source content requires owner review"
+    },
+    {
+      "source": "WORKSPACE/03_Completed/Delivery-schedule-whatsapp-2026-09-09.txt",
+      "canonical_owner": "HouseNet-Projects/house-net-command-center",
+      "candidate_lifecycle": "HISTORICAL",
+      "sensitivity": "UNKNOWN",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "15a2c83453b45b3cd53f46435410cff386405455c83e1363d305c3bfe288d2d5",
+        "source_type": "repository_file"
+      },
+      "currentness": "intake",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Archive/reference",
+      "migration_decision": "RETAIN_AS_HISTORICAL",
+      "reason": "metadata-only intake candidate"
+    },
+    {
+      "source": "WORKSPACE/03_Completed/Leave-request-2026-08-11.docx",
+      "canonical_owner": "HouseNet-Projects/house-net-command-center",
+      "candidate_lifecycle": "HISTORICAL",
+      "sensitivity": "UNKNOWN",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "ce9ebc76070e030be718227fa4d901dc7d7ab5212cb27fe2fe153cabfab7a3d6",
+        "source_type": "repository_file"
+      },
+      "currentness": "blocked_source_snapshot",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Archive/reference",
+      "migration_decision": "RETAIN_AS_HISTORICAL",
+      "reason": "binary/LFS pointer or source content requires owner review"
+    },
+    {
+      "source": "WORKSPACE/03_Completed/Leave-request-v2-2026-09-08.docx",
+      "canonical_owner": "HouseNet-Projects/house-net-command-center",
+      "candidate_lifecycle": "HISTORICAL",
+      "sensitivity": "UNKNOWN",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "5fc8d91277b7e9b70b086faab5b15522252d103203894c86756a79ba246306f4",
+        "source_type": "repository_file"
+      },
+      "currentness": "blocked_source_snapshot",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Archive/reference",
+      "migration_decision": "RETAIN_AS_HISTORICAL",
+      "reason": "binary/LFS pointer or source content requires owner review"
+    },
+    {
+      "source": "WORKSPACE/04_Sources/Whatsapp/Principal-2026-09-09/chat.md",
+      "canonical_owner": "OWNER_REVIEW_REQUIRED",
+      "candidate_lifecycle": "INTAKE_NEEDS_REVIEW",
+      "sensitivity": "UNKNOWN",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "481f631bb03a2971cdba353f964ad7bcde6ccbc22306874ac6b9d3896b0411ea",
+        "source_type": "repository_file"
+      },
+      "currentness": "intake",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Knowledge intake",
+      "migration_decision": "REVIEW_PROVENANCE_SENSITIVITY",
+      "reason": "metadata-only intake candidate"
+    },
+    {
+      "source": "WORKSPACE/04_Sources/Whatsapp/Principal-2026-09-09/chat.txt",
+      "canonical_owner": "OWNER_REVIEW_REQUIRED",
+      "candidate_lifecycle": "INTAKE_NEEDS_REVIEW",
+      "sensitivity": "UNKNOWN",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "26f23d790bdb0435c92f51da0208c90cda02adb357ecc07b8091949cdb39146a",
+        "source_type": "repository_file"
+      },
+      "currentness": "intake",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Knowledge intake",
+      "migration_decision": "REVIEW_PROVENANCE_SENSITIVITY",
+      "reason": "metadata-only intake candidate"
+    },
+    {
+      "source": "WORKSPACE/04_Sources/Whatsapp/Principal-2026-09-09-afternoon/chat.md",
+      "canonical_owner": "OWNER_REVIEW_REQUIRED",
+      "candidate_lifecycle": "INTAKE_NEEDS_REVIEW",
+      "sensitivity": "UNKNOWN",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "a27e6e62117a49bd4dc597c285246e2281be70b4dbc1bfcd933040db13d7c25c",
+        "source_type": "repository_file"
+      },
+      "currentness": "intake",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Knowledge intake",
+      "migration_decision": "REVIEW_PROVENANCE_SENSITIVITY",
+      "reason": "metadata-only intake candidate"
+    },
+    {
+      "source": "WORKSPACE/04_Sources/Whatsapp/Principal-2026-09-09-afternoon/chat.txt",
+      "canonical_owner": "OWNER_REVIEW_REQUIRED",
+      "candidate_lifecycle": "INTAKE_NEEDS_REVIEW",
+      "sensitivity": "UNKNOWN",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "1b2d42cea5b3cdbb8a52ba2ea7369e954b12a232376183176f4ab3c5ea13c6c6",
+        "source_type": "repository_file"
+      },
+      "currentness": "intake",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Knowledge intake",
+      "migration_decision": "REVIEW_PROVENANCE_SENSITIVITY",
+      "reason": "metadata-only intake candidate"
+    },
+    {
+      "source": "WORKSPACE/05_Archive/Billing-2026-07-09/Billing-reports-v2-2026-07-09.xlsx",
+      "canonical_owner": "HouseNet-Projects/house-net-command-center",
+      "candidate_lifecycle": "HISTORICAL",
+      "sensitivity": "UNKNOWN",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "236f3a42b69c1d996f66a09ac20fa051534cdc51bf9fe999e722ee811e5f5b71",
+        "source_type": "repository_file"
+      },
+      "currentness": "blocked_source_snapshot",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Archive/reference",
+      "migration_decision": "RETAIN_AS_HISTORICAL",
+      "reason": "binary/LFS pointer or source content requires owner review"
+    },
+    {
+      "source": "WORKSPACE/05_Archive/Billing-2026-07-09/Paid-services-2026-07-09.docx",
+      "canonical_owner": "HouseNet-Projects/house-net-command-center",
+      "candidate_lifecycle": "HISTORICAL",
+      "sensitivity": "UNKNOWN",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "b3ab58894a69f5efe3f958f0036bec0e7e4896e877da78ac44b6ad661159ab40",
+        "source_type": "repository_file"
+      },
+      "currentness": "blocked_source_snapshot",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Archive/reference",
+      "migration_decision": "RETAIN_AS_HISTORICAL",
+      "reason": "binary/LFS pointer or source content requires owner review"
+    },
+    {
+      "source": "WORKSPACE/05_Archive/Deputy-charter-2026-09-10/Deputy-charter-draft-2026-09-10.md",
+      "canonical_owner": "HouseNet-Projects/house-net-command-center",
+      "candidate_lifecycle": "HISTORICAL",
+      "sensitivity": "UNKNOWN",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "3b436ea662079ec9297f6df6487ecda25060cd696e54e3229451ceda3c3a0c03",
+        "source_type": "repository_file"
+      },
+      "currentness": "historical",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Archive/reference",
+      "migration_decision": "RETAIN_AS_HISTORICAL",
+      "reason": "metadata-only intake candidate"
+    },
+    {
+      "source": "WORKSPACE/05_Archive/Deputy-handoff-2026-09-14/Deputy-project-handoff-2026-09-12.md",
+      "canonical_owner": "HouseNet-Projects/house-net-command-center",
+      "candidate_lifecycle": "HISTORICAL",
+      "sensitivity": "UNKNOWN",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "40e809d2192c59f6ef9010ce51adcf05f1383d9dd0d12dbc77628efb6a31d2ec",
+        "source_type": "repository_file"
+      },
+      "currentness": "historical",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Archive/reference",
+      "migration_decision": "RETAIN_AS_HISTORICAL",
+      "reason": "metadata-only intake candidate"
+    },
+    {
+      "source": "WORKSPACE/05_Archive/Deputy-handoff-2026-09-14/Deputy-session-handoff-2026-09-14.md",
+      "canonical_owner": "HouseNet-Projects/house-net-command-center",
+      "candidate_lifecycle": "HISTORICAL",
+      "sensitivity": "UNKNOWN",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "5d61c73d0890867ff59083e911e36508302c593fceef9afbb47c14907e28935c",
+        "source_type": "repository_file"
+      },
+      "currentness": "historical",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Archive/reference",
+      "migration_decision": "RETAIN_AS_HISTORICAL",
+      "reason": "metadata-only intake candidate"
+    },
+    {
+      "source": "WORKSPACE/05_Archive/Drafts-2026-09-09/Principal-requirements-2026-09-09.md",
+      "canonical_owner": "HouseNet-Projects/house-net-command-center",
+      "candidate_lifecycle": "HISTORICAL",
+      "sensitivity": "UNKNOWN",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "e4e3aa7335135dbf4f26c8a5a2fa1e7a79023cef53a53e14e1499ea722cbb2ad",
+        "source_type": "repository_file"
+      },
+      "currentness": "historical",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Archive/reference",
+      "migration_decision": "RETAIN_AS_HISTORICAL",
+      "reason": "metadata-only intake candidate"
+    },
+    {
+      "source": "WORKSPACE/05_Archive/Drafts-2026-09-09/Principal-requirements-annotated-2026-09-09.xlsx",
+      "canonical_owner": "HouseNet-Projects/house-net-command-center",
+      "candidate_lifecycle": "HISTORICAL",
+      "sensitivity": "UNKNOWN",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "d666348a81635c4a881c5198d4a3a81ae84d671c7689ac4849f1032c2451b840",
+        "source_type": "repository_file"
+      },
+      "currentness": "blocked_source_snapshot",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Archive/reference",
+      "migration_decision": "RETAIN_AS_HISTORICAL",
+      "reason": "binary/LFS pointer or source content requires owner review"
+    },
+    {
+      "source": "WORKSPACE/05_Archive/Drafts-2026-09-09/Schedule-questions-2026-09-09.md",
+      "canonical_owner": "HouseNet-Projects/house-net-command-center",
+      "candidate_lifecycle": "HISTORICAL",
+      "sensitivity": "UNKNOWN",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "5f9cef37aee0f2f35fbc748246e744942b36ef2aff7e257e521e158053352ede",
+        "source_type": "repository_file"
+      },
+      "currentness": "historical",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Archive/reference",
+      "migration_decision": "RETAIN_AS_HISTORICAL",
+      "reason": "metadata-only intake candidate"
+    },
+    {
+      "source": "WORKSPACE/05_Archive/Drafts-2026-09-09/Task-workbook-8-sheet-2026-09-09.xlsx",
+      "canonical_owner": "HouseNet-Projects/house-net-command-center",
+      "candidate_lifecycle": "HISTORICAL",
+      "sensitivity": "UNKNOWN",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "75824702d95e978786b2f02f94e96968b96e0d41c9eabf453be3389abdecd822",
+        "source_type": "repository_file"
+      },
+      "currentness": "blocked_source_snapshot",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Archive/reference",
+      "migration_decision": "RETAIN_AS_HISTORICAL",
+      "reason": "binary/LFS pointer or source content requires owner review"
+    },
+    {
+      "source": "WORKSPACE/05_Archive/Isp-sales-ops-2026-08-24/Isp-sales-ops-model-2026-08-24.xlsx",
+      "canonical_owner": "HouseNet-Projects/house-net-command-center",
+      "candidate_lifecycle": "HISTORICAL",
+      "sensitivity": "UNKNOWN",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "be2a0029d3048b003176362aceb3c079ca37ea696a1d2a8549133dc639c8729d",
+        "source_type": "repository_file"
+      },
+      "currentness": "blocked_source_snapshot",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Archive/reference",
+      "migration_decision": "RETAIN_AS_HISTORICAL",
+      "reason": "binary/LFS pointer or source content requires owner review"
+    },
+    {
+      "source": "WORKSPACE/05_Archive/Isp-sales-ops-2026-08-24/Isp-sales-ops-packages-2026-08-24.docx",
+      "canonical_owner": "HouseNet-Projects/house-net-command-center",
+      "candidate_lifecycle": "HISTORICAL",
+      "sensitivity": "UNKNOWN",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "deaa3757dfbd26bdd1f4cf499cf04cc1527b90380e599ba853a2e2631aeb9d0a",
+        "source_type": "repository_file"
+      },
+      "currentness": "blocked_source_snapshot",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Archive/reference",
+      "migration_decision": "RETAIN_AS_HISTORICAL",
+      "reason": "binary/LFS pointer or source content requires owner review"
+    },
+    {
+      "source": "WORKSPACE/05_Archive/Job-description-drafts-2026-09-05/Billing-collections-specialist-2026-09-05.docx",
+      "canonical_owner": "HouseNet-Projects/house-net-command-center",
+      "candidate_lifecycle": "HISTORICAL",
+      "sensitivity": "UNKNOWN",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "3d10860a593a4218dfb0a3705fc463d70621ec4f0c1fb8b97401a82b43885c83",
+        "source_type": "repository_file"
+      },
+      "currentness": "blocked_source_snapshot",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Archive/reference",
+      "migration_decision": "RETAIN_AS_HISTORICAL",
+      "reason": "binary/LFS pointer or source content requires owner review"
+    },
+    {
+      "source": "WORKSPACE/05_Archive/Job-description-drafts-2026-09-05/Billing-revenue-head-2026-09-05.docx",
+      "canonical_owner": "HouseNet-Projects/house-net-command-center",
+      "candidate_lifecycle": "HISTORICAL",
+      "sensitivity": "UNKNOWN",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "6b38106399da65ecc876423720f40a3305c760f89c170d4d8952c973838a05e9",
+        "source_type": "repository_file"
+      },
+      "currentness": "blocked_source_snapshot",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Archive/reference",
+      "migration_decision": "RETAIN_AS_HISTORICAL",
+      "reason": "binary/LFS pointer or source content requires owner review"
+    },
+    {
+      "source": "WORKSPACE/05_Archive/Job-description-drafts-2026-09-05/Call-center-job-descriptions-2026-09-05.docx",
+      "canonical_owner": "HouseNet-Projects/house-net-command-center",
+      "candidate_lifecycle": "HISTORICAL",
+      "sensitivity": "UNKNOWN",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "a796b64412022609fd83bc5193edefd3e3fc8ef621d9ac9abdeceace154c64b0",
+        "source_type": "repository_file"
+      },
+      "currentness": "blocked_source_snapshot",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Archive/reference",
+      "migration_decision": "RETAIN_AS_HISTORICAL",
+      "reason": "binary/LFS pointer or source content requires owner review"
+    },
+    {
+      "source": "WORKSPACE/05_Archive/Job-description-drafts-2026-09-05/Housenet-job-description-2026-09-05.docx",
+      "canonical_owner": "HouseNet-Projects/house-net-command-center",
+      "candidate_lifecycle": "HISTORICAL",
+      "sensitivity": "UNKNOWN",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "61ee14f6d1b8897a44149850b2ca16c8dfbc2623648d9b5eeffc99b8bd1d3093",
+        "source_type": "repository_file"
+      },
+      "currentness": "blocked_source_snapshot",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Archive/reference",
+      "migration_decision": "RETAIN_AS_HISTORICAL",
+      "reason": "binary/LFS pointer or source content requires owner review"
+    },
+    {
+      "source": "WORKSPACE/05_Archive/Job-description-drafts-2026-09-05/Job-descriptions-2026-08-31.docx",
+      "canonical_owner": "HouseNet-Projects/house-net-command-center",
+      "candidate_lifecycle": "HISTORICAL",
+      "sensitivity": "UNKNOWN",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "70cf048e92817e989f4d9a6e7d397c224529078f4fdc631c072d07042b3f9378",
+        "source_type": "repository_file"
+      },
+      "currentness": "blocked_source_snapshot",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Archive/reference",
+      "migration_decision": "RETAIN_AS_HISTORICAL",
+      "reason": "binary/LFS pointer or source content requires owner review"
+    },
+    {
+      "source": "WORKSPACE/05_Archive/Job-description-drafts-2026-09-05/Job-descriptions-book-2026-09-02.docx",
+      "canonical_owner": "HouseNet-Projects/house-net-command-center",
+      "candidate_lifecycle": "HISTORICAL",
+      "sensitivity": "UNKNOWN",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "eeb368d1bb89381c89573665f2115e920984deb4507cd956494766c08518a571",
+        "source_type": "repository_file"
+      },
+      "currentness": "blocked_source_snapshot",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Archive/reference",
+      "migration_decision": "RETAIN_AS_HISTORICAL",
+      "reason": "binary/LFS pointer or source content requires owner review"
+    },
+    {
+      "source": "WORKSPACE/05_Archive/Job-description-drafts-2026-09-05/Job-descriptions-chapter1-technical-2026-09-02.docx",
+      "canonical_owner": "HouseNet-Projects/house-net-command-center",
+      "candidate_lifecycle": "HISTORICAL",
+      "sensitivity": "UNKNOWN",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "fd0e01860057be4d4eb06e80459aec90f325b8367d737c2dd73d0695a17f6f05",
+        "source_type": "repository_file"
+      },
+      "currentness": "blocked_source_snapshot",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Archive/reference",
+      "migration_decision": "RETAIN_AS_HISTORICAL",
+      "reason": "binary/LFS pointer or source content requires owner review"
+    },
+    {
+      "source": "WORKSPACE/05_Archive/Job-description-drafts-2026-09-05/Marketing-job-descriptions-2026-09-05.docx",
+      "canonical_owner": "HouseNet-Projects/house-net-command-center",
+      "candidate_lifecycle": "HISTORICAL",
+      "sensitivity": "UNKNOWN",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "0b939486662ee7b38ee3df22396f23c6390ac422fafa85bedc225fbe24cf3631",
+        "source_type": "repository_file"
+      },
+      "currentness": "blocked_source_snapshot",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Archive/reference",
+      "migration_decision": "RETAIN_AS_HISTORICAL",
+      "reason": "binary/LFS pointer or source content requires owner review"
+    },
+    {
+      "source": "WORKSPACE/05_Archive/Job-description-drafts-2026-09-05/Profile-2026-09-01.docx",
+      "canonical_owner": "HouseNet-Projects/house-net-command-center",
+      "candidate_lifecycle": "HISTORICAL",
+      "sensitivity": "UNKNOWN",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "9f444866f4753aa1f30eb40c862e6a4fe20d401a0d79273218b6ebc9ad85e84f",
+        "source_type": "repository_file"
+      },
+      "currentness": "blocked_source_snapshot",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Archive/reference",
+      "migration_decision": "RETAIN_AS_HISTORICAL",
+      "reason": "binary/LFS pointer or source content requires owner review"
+    },
+    {
+      "source": "WORKSPACE/05_Archive/Job-description-drafts-2026-09-05/Technical-department-job-descriptions-2026-09-02.docx",
+      "canonical_owner": "HouseNet-Projects/house-net-command-center",
+      "candidate_lifecycle": "HISTORICAL",
+      "sensitivity": "UNKNOWN",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "dbc40d3d6b7f5d94676ba87d8a77c5d2ae2bb4c60cc4d4161eb6b006cd585f89",
+        "source_type": "repository_file"
+      },
+      "currentness": "blocked_source_snapshot",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Archive/reference",
+      "migration_decision": "RETAIN_AS_HISTORICAL",
+      "reason": "binary/LFS pointer or source content requires owner review"
+    },
+    {
+      "source": "WORKSPACE/05_Archive/Job-description-drafts-2026-09-05/Technical-profile-2026-08-31.docx",
+      "canonical_owner": "HouseNet-Projects/house-net-command-center",
+      "candidate_lifecycle": "HISTORICAL",
+      "sensitivity": "UNKNOWN",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "daee708ae49222bab7bfc4afa3f6ac2d4cce78d821865b0ca2ed527c70470dd4",
+        "source_type": "repository_file"
+      },
+      "currentness": "blocked_source_snapshot",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Archive/reference",
+      "migration_decision": "RETAIN_AS_HISTORICAL",
+      "reason": "binary/LFS pointer or source content requires owner review"
+    },
+    {
+      "source": "WORKSPACE/05_Archive/Legacy-whatsapp-2026-09-09/Whatsapp-readme-2026-09-09.md",
+      "canonical_owner": "HouseNet-Projects/house-net-command-center",
+      "candidate_lifecycle": "HISTORICAL",
+      "sensitivity": "UNKNOWN",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "f39ffc80d56ea27c236ecefa27194a2c164cde6fdd6fab5ff3d089d67d912db5",
+        "source_type": "repository_file"
+      },
+      "currentness": "historical",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Archive/reference",
+      "migration_decision": "RETAIN_AS_HISTORICAL",
+      "reason": "metadata-only intake candidate"
+    },
+    {
+      "source": "WORKSPACE/05_Archive/Migration-2026-09-14/Migration-manifest-2026-09-14.md",
+      "canonical_owner": "HouseNet-Projects/house-net-command-center",
+      "candidate_lifecycle": "HISTORICAL",
+      "sensitivity": "UNKNOWN",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "a1e3477c6e7f36039058c10c601f81a49a6f415591eda431445f7a324aded73f",
+        "source_type": "repository_file"
+      },
+      "currentness": "historical",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Archive/reference",
+      "migration_decision": "RETAIN_AS_HISTORICAL",
+      "reason": "metadata-only intake candidate"
+    },
+    {
+      "source": "WORKSPACE/05_Archive/Migration-2026-09-14/Staging-inventory-2026-09-11.md",
+      "canonical_owner": "HouseNet-Projects/house-net-command-center",
+      "candidate_lifecycle": "HISTORICAL",
+      "sensitivity": "UNKNOWN",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "1295e66dd52a985942d4d3ee4e85254ddc8cc48f27de5b5c6c9e33e0dcfa767d",
+        "source_type": "repository_file"
+      },
+      "currentness": "historical",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Archive/reference",
+      "migration_decision": "RETAIN_AS_HISTORICAL",
+      "reason": "metadata-only intake candidate"
+    },
+    {
+      "source": "WORKSPACE/05_Archive/Previous-projects/BroPS-OS-handoff-2026-07/MASTER_EXECUTION_ROADMAP.md",
+      "canonical_owner": "HouseNet-Projects/house-net-command-center",
+      "candidate_lifecycle": "HISTORICAL",
+      "sensitivity": "UNKNOWN",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "6132e90cb2ea62fc9167874600f2687976a1c9552506e2303ba7f8b2fb145fd9",
+        "source_type": "repository_file"
+      },
+      "currentness": "historical",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Archive/reference",
+      "migration_decision": "RETAIN_AS_HISTORICAL",
+      "reason": "metadata-only intake candidate"
+    },
+    {
+      "source": "WORKSPACE/05_Archive/Previous-projects/BroPS-OS-handoff-2026-07/PARTIAL_HANDOFF.md",
+      "canonical_owner": "HouseNet-Projects/house-net-command-center",
+      "candidate_lifecycle": "HISTORICAL",
+      "sensitivity": "UNKNOWN",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "655e938d26d4662f4ad6e5403b47759a07baddff07f1a7a261ae557d2fe7ec3c",
+        "source_type": "repository_file"
+      },
+      "currentness": "historical",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Archive/reference",
+      "migration_decision": "RETAIN_AS_HISTORICAL",
+      "reason": "metadata-only intake candidate"
+    },
+    {
+      "source": "WORKSPACE/05_Archive/Previous-projects/GAAhex-archives/GAAHEX_CHECKPOINT_14_TEST_REMEDIATION_STATUS_2026-09-09.md",
+      "canonical_owner": "HouseNet-Projects/house-net-command-center",
+      "candidate_lifecycle": "HISTORICAL",
+      "sensitivity": "UNKNOWN",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "46102db34432ce5f25e6f37fef54c748cb9ecb4b30e0051a114bdf984ba323ee",
+        "source_type": "repository_file"
+      },
+      "currentness": "historical",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Archive/reference",
+      "migration_decision": "RETAIN_AS_HISTORICAL",
+      "reason": "metadata-only intake candidate"
+    },
+    {
+      "source": "WORKSPACE/05_Archive/Previous-projects/GAAhex-archives/GAAHEX_CHECKPOINT_15_ZERO_FAIL_STATUS_2026-09-09.md",
+      "canonical_owner": "HouseNet-Projects/house-net-command-center",
+      "candidate_lifecycle": "HISTORICAL",
+      "sensitivity": "UNKNOWN",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "1d299ddbc31a4a3efbc697aee87ccd1f14a0889ee19b250b0980174693962491",
+        "source_type": "repository_file"
+      },
+      "currentness": "historical",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Archive/reference",
+      "migration_decision": "RETAIN_AS_HISTORICAL",
+      "reason": "metadata-only intake candidate"
+    },
+    {
+      "source": "WORKSPACE/05_Archive/Previous-projects/GAAhex-archives/GAAHEX_MASTER_CLEANUP_HISTORY_THROUGH_CHECKPOINT_14_2026-09-09.md",
+      "canonical_owner": "HouseNet-Projects/house-net-command-center",
+      "candidate_lifecycle": "HISTORICAL",
+      "sensitivity": "UNKNOWN",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "701dc675208e37f71df67070992d0c1ff0c3923feab173e50b0ecc29743f70ad",
+        "source_type": "repository_file"
+      },
+      "currentness": "historical",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Archive/reference",
+      "migration_decision": "RETAIN_AS_HISTORICAL",
+      "reason": "metadata-only intake candidate"
+    },
+    {
+      "source": "WORKSPACE/05_Archive/Previous-projects/GAAhex-archives/GAAHEX_MASTER_CLEANUP_HISTORY_THROUGH_CHECKPOINT_15_2026-09-09.md",
+      "canonical_owner": "HouseNet-Projects/house-net-command-center",
+      "candidate_lifecycle": "HISTORICAL",
+      "sensitivity": "UNKNOWN",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "20da05c8d888c144423bbc22936b4294fd4251233cebf15c52d5f0b658d4970d",
+        "source_type": "repository_file"
+      },
+      "currentness": "historical",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Archive/reference",
+      "migration_decision": "RETAIN_AS_HISTORICAL",
+      "reason": "metadata-only intake candidate"
+    },
+    {
+      "source": "WORKSPACE/05_Archive/Previous-projects/Housenet_OS/README.md",
+      "canonical_owner": "HouseNet-Projects/house-net-command-center",
+      "candidate_lifecycle": "HISTORICAL",
+      "sensitivity": "UNKNOWN",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "115a1808afdad57930c30502396196c50f7154ce8a48f1abcc687e3680681263",
+        "source_type": "repository_file"
+      },
+      "currentness": "historical",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Archive/reference",
+      "migration_decision": "RETAIN_AS_HISTORICAL",
+      "reason": "metadata-only intake candidate"
+    },
+    {
+      "source": "WORKSPACE/05_Archive/Previous-projects/Housenet_OS/out/brief-2026-08-24-care.md",
+      "canonical_owner": "HouseNet-Projects/house-net-command-center",
+      "candidate_lifecycle": "HISTORICAL",
+      "sensitivity": "UNKNOWN",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "a12cf5e6e40217365b7b0d066de0bed78df7a0c88155780d3a4a0ac7c781eee3",
+        "source_type": "repository_file"
+      },
+      "currentness": "historical",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Archive/reference",
+      "migration_decision": "RETAIN_AS_HISTORICAL",
+      "reason": "metadata-only intake candidate"
+    },
+    {
+      "source": "WORKSPACE/05_Archive/Previous-projects/Housenet_OS/out/brief-2026-08-24-exec.md",
+      "canonical_owner": "HouseNet-Projects/house-net-command-center",
+      "candidate_lifecycle": "HISTORICAL",
+      "sensitivity": "UNKNOWN",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "27e051bb0c0b03dd30ef0f139328143cb278f245e29baa8e0eb84abc0212d36a",
+        "source_type": "repository_file"
+      },
+      "currentness": "historical",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Archive/reference",
+      "migration_decision": "RETAIN_AS_HISTORICAL",
+      "reason": "metadata-only intake candidate"
+    },
+    {
+      "source": "WORKSPACE/05_Archive/Previous-projects/Housenet_OS/out/brief-2026-08-24-field.md",
+      "canonical_owner": "HouseNet-Projects/house-net-command-center",
+      "candidate_lifecycle": "HISTORICAL",
+      "sensitivity": "UNKNOWN",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "d205e842e25f029b70ea761674438a7fe79c346fb420ec5a88546468a8458028",
+        "source_type": "repository_file"
+      },
+      "currentness": "historical",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Archive/reference",
+      "migration_decision": "RETAIN_AS_HISTORICAL",
+      "reason": "metadata-only intake candidate"
+    },
+    {
+      "source": "WORKSPACE/05_Archive/Previous-projects/Housenet_OS/out/brief-2026-08-24-finance.md",
+      "canonical_owner": "HouseNet-Projects/house-net-command-center",
+      "candidate_lifecycle": "HISTORICAL",
+      "sensitivity": "UNKNOWN",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "9d3456f451bd48cccfa6be0c2f0c20dc1d7f35897078081d65cf0e6b1fd715d8",
+        "source_type": "repository_file"
+      },
+      "currentness": "historical",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Archive/reference",
+      "migration_decision": "RETAIN_AS_HISTORICAL",
+      "reason": "metadata-only intake candidate"
+    },
+    {
+      "source": "WORKSPACE/05_Archive/Previous-projects/Housenet_OS/out/brief-2026-08-24-hr.md",
+      "canonical_owner": "HouseNet-Projects/house-net-command-center",
+      "candidate_lifecycle": "HISTORICAL",
+      "sensitivity": "UNKNOWN",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "ee328a8e5ee5bbf8cee4878f6034262fa94234f77d6bfb542c1ffc698d0fae9a",
+        "source_type": "repository_file"
+      },
+      "currentness": "historical",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Archive/reference",
+      "migration_decision": "RETAIN_AS_HISTORICAL",
+      "reason": "metadata-only intake candidate"
+    },
+    {
+      "source": "WORKSPACE/05_Archive/Previous-projects/Housenet_OS/out/brief-2026-08-24-it.md",
+      "canonical_owner": "HouseNet-Projects/house-net-command-center",
+      "candidate_lifecycle": "HISTORICAL",
+      "sensitivity": "UNKNOWN",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "7894ea0f6731bd887573a2d80d49f5f74f4c13b22b099981d1d164d8e09138bf",
+        "source_type": "repository_file"
+      },
+      "currentness": "historical",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Archive/reference",
+      "migration_decision": "RETAIN_AS_HISTORICAL",
+      "reason": "metadata-only intake candidate"
+    },
+    {
+      "source": "WORKSPACE/05_Archive/Previous-projects/Housenet_OS/out/brief-2026-08-24-legal.md",
+      "canonical_owner": "HouseNet-Projects/house-net-command-center",
+      "candidate_lifecycle": "HISTORICAL",
+      "sensitivity": "UNKNOWN",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "8aa6d42b6afb02723b904faaf34b103c3d6c1ea63a0a3a0898e6edd1eb86668b",
+        "source_type": "repository_file"
+      },
+      "currentness": "historical",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Archive/reference",
+      "migration_decision": "RETAIN_AS_HISTORICAL",
+      "reason": "metadata-only intake candidate"
+    },
+    {
+      "source": "WORKSPACE/05_Archive/Previous-projects/Housenet_OS/out/brief-2026-08-24-marketing.md",
+      "canonical_owner": "HouseNet-Projects/house-net-command-center",
+      "candidate_lifecycle": "HISTORICAL",
+      "sensitivity": "UNKNOWN",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "1c7ef350f134a61c050c72e1271520fe8131a50b5e5fa953264eec5eaace3b25",
+        "source_type": "repository_file"
+      },
+      "currentness": "historical",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Archive/reference",
+      "migration_decision": "RETAIN_AS_HISTORICAL",
+      "reason": "metadata-only intake candidate"
+    },
+    {
+      "source": "WORKSPACE/05_Archive/Previous-projects/Housenet_OS/out/brief-2026-08-24-network.md",
+      "canonical_owner": "HouseNet-Projects/house-net-command-center",
+      "candidate_lifecycle": "HISTORICAL",
+      "sensitivity": "UNKNOWN",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "c51bf40db937bd047c7a10f55be39c8920a99c4064ea5ec3b5eb5ee04487ef46",
+        "source_type": "repository_file"
+      },
+      "currentness": "historical",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Archive/reference",
+      "migration_decision": "RETAIN_AS_HISTORICAL",
+      "reason": "metadata-only intake candidate"
+    },
+    {
+      "source": "WORKSPACE/05_Archive/Previous-projects/Housenet_OS/out/brief-2026-08-24-sales.md",
+      "canonical_owner": "HouseNet-Projects/house-net-command-center",
+      "candidate_lifecycle": "HISTORICAL",
+      "sensitivity": "UNKNOWN",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "76d3de72dc2b742b7e54147e3da44e59d4a20ce1b5dc3c340b0a2bab06f133a6",
+        "source_type": "repository_file"
+      },
+      "currentness": "historical",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Archive/reference",
+      "migration_decision": "RETAIN_AS_HISTORICAL",
+      "reason": "metadata-only intake candidate"
+    },
+    {
+      "source": "WORKSPACE/05_Archive/Previous-projects/Housenet_OS/out/brief-2026-08-24-telesales.md",
+      "canonical_owner": "HouseNet-Projects/house-net-command-center",
+      "candidate_lifecycle": "HISTORICAL",
+      "sensitivity": "UNKNOWN",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "ea257a4b9a9368139249a4ad16bebdd2cb92c75e2affcd8e1abc77489114696d",
+        "source_type": "repository_file"
+      },
+      "currentness": "historical",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Archive/reference",
+      "migration_decision": "RETAIN_AS_HISTORICAL",
+      "reason": "metadata-only intake candidate"
+    },
+    {
+      "source": "WORKSPACE/05_Archive/Previous-projects/Housenet_OS/out/brief-2026-08-24-warehouse.md",
+      "canonical_owner": "HouseNet-Projects/house-net-command-center",
+      "candidate_lifecycle": "HISTORICAL",
+      "sensitivity": "UNKNOWN",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "a5e947274ba8336e0d2fce9955043689be7e0678a225bd8ae858fdf9d4a68a60",
+        "source_type": "repository_file"
+      },
+      "currentness": "historical",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Archive/reference",
+      "migration_decision": "RETAIN_AS_HISTORICAL",
+      "reason": "metadata-only intake candidate"
+    },
+    {
+      "source": "WORKSPACE/05_Archive/Previous-projects/Housenet_OS/out/brief-2026-08-24.md",
+      "canonical_owner": "HouseNet-Projects/house-net-command-center",
+      "candidate_lifecycle": "HISTORICAL",
+      "sensitivity": "UNKNOWN",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "c736ec565c81ae3800d527984cb09e185b0d40fecf92167d28da99c146e2d54b",
+        "source_type": "repository_file"
+      },
+      "currentness": "historical",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Archive/reference",
+      "migration_decision": "RETAIN_AS_HISTORICAL",
+      "reason": "metadata-only intake candidate"
+    },
+    {
+      "source": "WORKSPACE/05_Archive/Sales-strategy-2026-09-10/Sales-strategy-branded-2026-09-10.pptx",
+      "canonical_owner": "HouseNet-Projects/house-net-command-center",
+      "candidate_lifecycle": "HISTORICAL",
+      "sensitivity": "UNKNOWN",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "cac4eac56c99f9e9a20e4a8338151f429dd1f9f0692ae6ab17a9817b6d21efc9",
+        "source_type": "repository_file"
+      },
+      "currentness": "blocked_source_snapshot",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Archive/reference",
+      "migration_decision": "RETAIN_AS_HISTORICAL",
+      "reason": "binary/LFS pointer or source content requires owner review"
+    },
+    {
+      "source": "WORKSPACE/05_Archive/Sales-strategy-2026-09-10/Sales-strategy-branded-repaired-2026-09-10.pptx",
+      "canonical_owner": "HouseNet-Projects/house-net-command-center",
+      "candidate_lifecycle": "HISTORICAL",
+      "sensitivity": "UNKNOWN",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "b4eeeed654922d30ae90394dfb17ea65fa7d72cf45c1c1a53ca6c061f3e1fc85",
+        "source_type": "repository_file"
+      },
+      "currentness": "blocked_source_snapshot",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Archive/reference",
+      "migration_decision": "RETAIN_AS_HISTORICAL",
+      "reason": "binary/LFS pointer or source content requires owner review"
+    },
+    {
+      "source": "WORKSPACE/05_Archive/Sales-strategy-2026-09-10/Sales-strategy-phase1-2026-09-08.docx",
+      "canonical_owner": "HouseNet-Projects/house-net-command-center",
+      "candidate_lifecycle": "HISTORICAL",
+      "sensitivity": "UNKNOWN",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "0af3af4dbdf107541deb80d66b3e2f5e90906f6e1b06e50a2424322b6fc095b9",
+        "source_type": "repository_file"
+      },
+      "currentness": "blocked_source_snapshot",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Archive/reference",
+      "migration_decision": "RETAIN_AS_HISTORICAL",
+      "reason": "binary/LFS pointer or source content requires owner review"
+    },
+    {
+      "source": "WORKSPACE/05_Archive/Staff-planning-2026-08-28/Staff-planning-salary-bonus-a-2026-08-28.xlsx",
+      "canonical_owner": "HouseNet-Projects/house-net-command-center",
+      "candidate_lifecycle": "HISTORICAL",
+      "sensitivity": "UNKNOWN",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "a59580dd0fe9ed67a221b698b3afbbffe0042e5ca4eb4d48a262cbd69b212692",
+        "source_type": "repository_file"
+      },
+      "currentness": "blocked_source_snapshot",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Archive/reference",
+      "migration_decision": "RETAIN_AS_HISTORICAL",
+      "reason": "binary/LFS pointer or source content requires owner review"
+    },
+    {
+      "source": "WORKSPACE/05_Archive/Staff-planning-2026-08-28/Staff-planning-salary-bonus-b-2026-08-28.xlsx",
+      "canonical_owner": "HouseNet-Projects/house-net-command-center",
+      "candidate_lifecycle": "HISTORICAL",
+      "sensitivity": "UNKNOWN",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "5fb6beb4d2d5dce0fbe77de076177617372c0665e6c9fa799ec1f8c1db7af5ac",
+        "source_type": "repository_file"
+      },
+      "currentness": "blocked_source_snapshot",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Archive/reference",
+      "migration_decision": "RETAIN_AS_HISTORICAL",
+      "reason": "binary/LFS pointer or source content requires owner review"
+    },
+    {
+      "source": "WORKSPACE/05_Archive/Staff-planning-2026-08-28/Staff-planning-salary-bonus-c-2026-08-28.xlsx",
+      "canonical_owner": "HouseNet-Projects/house-net-command-center",
+      "candidate_lifecycle": "HISTORICAL",
+      "sensitivity": "UNKNOWN",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "6b899dcddd37a716cf11427a682d930a4f5eefeb2a4aa7fbf7e8a1bce0c30850",
+        "source_type": "repository_file"
+      },
+      "currentness": "blocked_source_snapshot",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Archive/reference",
+      "migration_decision": "RETAIN_AS_HISTORICAL",
+      "reason": "binary/LFS pointer or source content requires owner review"
+    },
+    {
+      "source": "WORKSPACE/05_Archive/Staff-planning-2026-08-28/Staff-planning-salary-bonus-d-2026-08-28.xlsx",
+      "canonical_owner": "HouseNet-Projects/house-net-command-center",
+      "candidate_lifecycle": "HISTORICAL",
+      "sensitivity": "UNKNOWN",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "96118646429d927fe6c08f99156882665340409eaa837967c31acf6efee46db5",
+        "source_type": "repository_file"
+      },
+      "currentness": "blocked_source_snapshot",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Archive/reference",
+      "migration_decision": "RETAIN_AS_HISTORICAL",
+      "reason": "binary/LFS pointer or source content requires owner review"
+    },
+    {
+      "source": "WORKSPACE/05_Archive/Staffing-plan-2026-09-05/Staffing-plan-corrected-2026-09-07.xlsx",
+      "canonical_owner": "HouseNet-Projects/house-net-command-center",
+      "candidate_lifecycle": "HISTORICAL",
+      "sensitivity": "UNKNOWN",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "57d5da964a5958590453a050ec2e8ade39238a548f88e572fa094ae183927e82",
+        "source_type": "repository_file"
+      },
+      "currentness": "blocked_source_snapshot",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Archive/reference",
+      "migration_decision": "RETAIN_AS_HISTORICAL",
+      "reason": "binary/LFS pointer or source content requires owner review"
+    },
+    {
+      "source": "WORKSPACE/05_Archive/Staffing-plan-2026-09-05/Staffing-plan-v2-2026-08-28.xlsx",
+      "canonical_owner": "HouseNet-Projects/house-net-command-center",
+      "candidate_lifecycle": "HISTORICAL",
+      "sensitivity": "UNKNOWN",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "094064b39a070cde245f76aaec2689354c57b9d3f47f2c2d881b3492a42857f7",
+        "source_type": "repository_file"
+      },
+      "currentness": "blocked_source_snapshot",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Archive/reference",
+      "migration_decision": "RETAIN_AS_HISTORICAL",
+      "reason": "binary/LFS pointer or source content requires owner review"
+    },
+    {
+      "source": "WORKSPACE/05_Archive/Staffing-plan-2026-09-05/Staffing-plan-v2-desktop-2026-08-28.xlsx",
+      "canonical_owner": "HouseNet-Projects/house-net-command-center",
+      "candidate_lifecycle": "HISTORICAL",
+      "sensitivity": "UNKNOWN",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "9631070eadf2e159fb2edc7663c5e6c43fc2de19ce256a142b6bd1b5ddd154bc",
+        "source_type": "repository_file"
+      },
+      "currentness": "blocked_source_snapshot",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Archive/reference",
+      "migration_decision": "RETAIN_AS_HISTORICAL",
+      "reason": "binary/LFS pointer or source content requires owner review"
+    },
+    {
+      "source": "WORKSPACE/05_Archive/Staffing-plan-2026-09-05/Staffing-plan-v3-2026-09-05.xlsx",
+      "canonical_owner": "HouseNet-Projects/house-net-command-center",
+      "candidate_lifecycle": "HISTORICAL",
+      "sensitivity": "UNKNOWN",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "416760b9ae4fbad6847533db1b242fe9986e2dcc3ff5eddcfef5fcc733ae4377",
+        "source_type": "repository_file"
+      },
+      "currentness": "blocked_source_snapshot",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Archive/reference",
+      "migration_decision": "RETAIN_AS_HISTORICAL",
+      "reason": "binary/LFS pointer or source content requires owner review"
+    },
+    {
+      "source": "WORKSPACE/Actions.md",
+      "canonical_owner": "HouseNet-Projects/house-net-command-center",
+      "candidate_lifecycle": "KEEP_AS_LIVE_OPERATIONAL_STATE",
+      "sensitivity": "INTERNAL",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "99dc1de795169173acf4e8edcd9f78bc6e6b3232b28280cb121d43450f629262",
+        "source_type": "repository_file"
+      },
+      "currentness": "keep_live_operational_state",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Command Center operational state",
+      "migration_decision": "REJECT_FROM_KNOWLEDGE",
+      "reason": "Command Center / Deputy live operational state; not Knowledge authority"
+    },
+    {
+      "source": "WORKSPACE/Journal.md",
+      "canonical_owner": "HouseNet-Projects/house-net-command-center",
+      "candidate_lifecycle": "HISTORICAL",
+      "sensitivity": "CONFIDENTIAL",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "93ffb77259e2d3e85793dd4230057f96a58067840b57616c0cc769f4be31d5bb",
+        "source_type": "repository_file"
+      },
+      "currentness": "historical",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Command Center historical reference",
+      "migration_decision": "RETAIN_OUTSIDE_KNOWLEDGE",
+      "reason": "Historical operational record; current tree credential redacted; reachable history retained pending destructive owner approval"
+    },
+    {
+      "source": "WORKSPACE/Tasks.xlsx",
+      "canonical_owner": "OWNER_REVIEW_REQUIRED",
+      "candidate_lifecycle": "BLOCKED_SOURCE_SNAPSHOT",
+      "sensitivity": "UNKNOWN",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "1141331675c36edcc3b10007c871b6328b213e0c79bd448da8ee649a4175c2cc",
+        "source_type": "repository_file"
+      },
+      "currentness": "blocked_source_snapshot",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Review pipeline",
+      "migration_decision": "DO_NOT_INFER_CONTENT",
+      "reason": "binary/LFS pointer or source content requires owner review"
+    },
+    {
+      "source": "assets/brand/README.md",
+      "canonical_owner": "HouseNet-Projects/house-net-command-center",
+      "candidate_lifecycle": "GENERATED_DERIVED",
+      "sensitivity": "INTERNAL",
+      "provenance": {
+        "source_commit": "9078f6a0467275350231615931d25d52c466d730",
+        "sha256": "c41780aa8a4a1203ca314df19ad762cc6b83e4407efd07da96bc73c50a6ee203",
+        "source_type": "repository_file"
+      },
+      "currentness": "reject",
+      "duplication": "none_in_hash_pass",
+      "contradiction": "not_inferred_from_filename_or_hash",
+      "intended_destination": "Derived/Review",
+      "migration_decision": "DO_NOT_CANONICALIZE_YET",
+      "reason": "binary/LFS pointer or source content requires owner review"
+    }
+  ]
+}
