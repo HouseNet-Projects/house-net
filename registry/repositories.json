@@ -8,7 +8,7 @@
       "owner": "HouseNet-Projects",
       "visibility": "private",
       "control_plane_version": "1.3.0",
-      "control_plane_commit": "9d107f083d963a9bcbe952de88be4c6b20d17ce7",
+      "control_plane_commit": "65b7c80fcab7113aac5cd8d0f984e1ea2ea23f14",
       "versioned": true,
       "canonical_version_source": {
         "path": "release/manifest.json",
@@ -125,7 +125,7 @@
       "owner": "HouseNet-Projects",
       "visibility": "private",
       "control_plane_version": "1.3.0",
-      "control_plane_commit": "9d107f083d963a9bcbe952de88be4c6b20d17ce7",
+      "control_plane_commit": "65b7c80fcab7113aac5cd8d0f984e1ea2ea23f14",
       "versioned": true,
       "canonical_version_source": {
         "path": "release/manifest.json",
