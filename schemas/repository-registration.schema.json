@@ -1,0 +1,163 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "repository": {
+      "type": "string",
+      "pattern": "^HouseNet-Projects/[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "classification": {
+      "enum": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    "purpose": {
+      "type": "string",
+      "minLength": 1
+    },
+    "owner": {
+      "const": "HouseNet-Projects"
+    },
+    "visibility": {
+      "const": "private"
+    },
+    "control_plane_version": {
+      "const": "1.0.0"
+    },
+    "control_plane_commit": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "applicable_rules": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "approval": {
+      "type": "object",
+      "properties": {
+        "state": {
+          "enum": [
+            "proposed",
+            "approved",
+            "rejected"
+          ]
+        },
+        "reference": {
+          "type": "string",
+          "minLength": 1
+        },
+        "approved_by": {
+          "const": "HouseNet-Projects"
+        }
+      },
+      "required": [
+        "state",
+        "reference",
+        "approved_by"
+      ],
+      "additionalProperties": false
+    },
+    "profile": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "enum": [
+            "code",
+            "documentation",
+            "reference",
+            "experiment"
+          ]
+        },
+        "technology": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "dependencies": {
+          "type": "boolean"
+        },
+        "meaningful_ci": {
+          "type": "boolean"
+        },
+        "deployment": {
+          "enum": [
+            "none",
+            "nonproduction",
+            "production"
+          ]
+        },
+        "data_sensitivity": {
+          "type": "string",
+          "minLength": 1
+        },
+        "required_files": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "exceptions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "rule_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "reason": {
+                "type": "string",
+                "minLength": 1
+              },
+              "approval_reference": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "rule_id",
+              "reason",
+              "approval_reference"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "kind",
+        "technology",
+        "dependencies",
+        "meaningful_ci",
+        "deployment",
+        "data_sensitivity",
+        "required_files",
+        "exceptions"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "repository",
+    "classification",
+    "purpose",
+    "owner",
+    "visibility",
+    "control_plane_version",
+    "control_plane_commit",
+    "applicable_rules",
+    "approval",
+    "profile"
+  ],
+  "additionalProperties": false
+}

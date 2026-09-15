@@ -1,0 +1,94 @@
+{
+  "version": "1.0.0",
+  "domain": "merge",
+  "rules": [
+    {
+      "id": "HN-PROTECTION",
+      "primitive": "merge.protection",
+      "scope": "repository",
+      "level": "MANDATORY",
+      "applicability": {
+        "classes": [
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      "expected": {
+        "A": "strongest_practical_supported",
+        "B": "important_repositories_where_supported",
+        "C": "optional_proportional",
+        "main": [
+          "pull_request",
+          "stable_required_checks",
+          "block_force_push",
+          "block_deletion",
+          "resolve_conversations",
+          "linear_history_where_appropriate",
+          "no_permanent_bypass"
+        ],
+        "invent_checks": false
+      },
+      "approval_requirement": "explicit_owner",
+      "enforcement": {
+        "mechanism": "repository_settings_audit"
+      },
+      "source_sections": [
+        9
+      ]
+    },
+    {
+      "id": "HN-REVIEW",
+      "primitive": "merge.review",
+      "scope": "repository",
+      "level": "MANDATORY",
+      "applicability": {
+        "classes": [
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      "expected": {
+        "single_identity_required_approvals": 0,
+        "independent_approval_requires_additional_human": "recommend_when_introduced",
+        "impossible_requirements": false
+      },
+      "approval_requirement": "explicit_owner",
+      "enforcement": {
+        "mechanism": "owner_review"
+      },
+      "source_sections": [
+        10
+      ]
+    },
+    {
+      "id": "HN-METHODS",
+      "primitive": "merge.methods",
+      "scope": "repository",
+      "level": "RECOMMENDED",
+      "applicability": {
+        "classes": [
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      "expected": {
+        "squash": true,
+        "merge_commit": false,
+        "rebase": false,
+        "auto_merge": false,
+        "delete_merged_working_branches": true,
+        "exception": "owner_approved_architectural_reason"
+      },
+      "approval_requirement": "explicit_owner",
+      "enforcement": {
+        "mechanism": "repository_settings_audit"
+      },
+      "source_sections": [
+        11
+      ]
+    }
+  ]
+}

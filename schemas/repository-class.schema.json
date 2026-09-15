@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "allOf": [
+    {
+      "$ref": "policy.schema.json"
+    },
+    {
+      "properties": {
+        "domain": {
+          "const": "repository-classes"
+        },
+        "rules": {
+          "minItems": 3,
+          "maxItems": 3,
+          "items": {
+            "properties": {
+              "expected": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "enum": [
+                      "CRITICAL",
+                      "STANDARD",
+                      "LIGHTWEIGHT"
+                    ]
+                  },
+                  "triggers": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "uniqueItems": true
+                  },
+                  "required_files": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "uniqueItems": true
+                  },
+                  "ci": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "protection": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "conditional_files": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  },
+                  "deployment": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "rollback": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "releases": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "required": [
+                  "name",
+                  "triggers",
+                  "required_files",
+                  "ci",
+                  "protection",
+                  "conditional_files",
+                  "deployment",
+                  "rollback",
+                  "releases"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

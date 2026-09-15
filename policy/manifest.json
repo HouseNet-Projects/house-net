@@ -1,0 +1,280 @@
+{
+  "version": "1.0.0",
+  "effective_date": "2026-09-15",
+  "owner": "HouseNet-Projects",
+  "github_identity": "HouseNet-Projects",
+  "namespace": "HouseNet-Projects",
+  "classification": "A",
+  "source": {
+    "path": "docs/source/HouseNet-GitHub-Policy-v1.0.md",
+    "sha256": "a15b6b22aeecc7beaaf2f13e9de20e45b1a49be24c6ba280a5b3ac364f034491",
+    "external_original_path": "/home/gevorg/HouseNet-GitHub-Policy.md",
+    "semantics": "Immutable historical provenance; runtime authority is policy/*.json. Implementation instruction was fulfilled before migration."
+  },
+  "canonical_files": [
+    "policy/actions.json",
+    "policy/authority.json",
+    "policy/git.json",
+    "policy/merge.json",
+    "policy/notifications.json",
+    "policy/repository-baseline.json",
+    "policy/repository-classes.json",
+    "policy/security.json",
+    "schemas/authority.schema.json",
+    "schemas/manifest.schema.json",
+    "schemas/policy.schema.json",
+    "schemas/registry.schema.json",
+    "schemas/repository-class.schema.json",
+    "schemas/repository-lock.schema.json",
+    "schemas/repository-registration.schema.json"
+  ],
+  "coverage": [
+    {
+      "section": 1,
+      "source_sha256": "bc973945f1af7673310d1624922179f58172d0ca5454529c3be496d5bc01d8aa",
+      "rule_ids": [
+        "HN-PURPOSE"
+      ]
+    },
+    {
+      "section": 2,
+      "source_sha256": "7402abc55c1be7c66feca46167cc4f49512a31247080fc14131aa8c13aca4592",
+      "rule_ids": [
+        "HN-IDENTITY",
+        "HN-NAMESPACE",
+        "HN-CREATION",
+        "HN-CONFIGURATION"
+      ]
+    },
+    {
+      "section": 3,
+      "source_sha256": "bc35fa29f241591b91e6fdea4af530a60e0f2a9594f35318932eee02625e4118",
+      "rule_ids": [
+        "HN-DESTRUCTIVE"
+      ]
+    },
+    {
+      "section": 4,
+      "source_sha256": "83719d5684370862212016954aa4a2be58a099327aeb867b3a1c6757539b488a",
+      "rule_ids": [
+        "HN-CREATE"
+      ]
+    },
+    {
+      "section": 5,
+      "source_sha256": "0cffacb037f8249a11a64cb706bd42c6ed8e11f812d4541e01099d924d1377cb",
+      "rule_ids": [
+        "HN-CLASSIFICATION",
+        "HN-CLASS-A",
+        "HN-CLASS-B",
+        "HN-CLASS-C"
+      ]
+    },
+    {
+      "section": 6,
+      "source_sha256": "160db4cf0d589830c7fb2f0190e56d5b88e322a235bea4f7d5c07c368c393763",
+      "rule_ids": [
+        "HN-RECLASSIFY"
+      ]
+    },
+    {
+      "section": 7,
+      "source_sha256": "3428eadb3d78c270559778aca7240df12ac365f1441e51175e8f2cca2cd8917d",
+      "rule_ids": [
+        "HN-NAMING"
+      ]
+    },
+    {
+      "section": 8,
+      "source_sha256": "40f24940d1fea0678b2120b44022ccc2dd1ad68842d2d3870e8ae37d495c16b0",
+      "rule_ids": [
+        "HN-BRANCH",
+        "HN-DEVELOPMENT",
+        "HN-BRANCH-NAMES"
+      ]
+    },
+    {
+      "section": 9,
+      "source_sha256": "538c23209e48160b756122abd423967610facf63a990a91190732f137b72effe",
+      "rule_ids": [
+        "HN-PROTECTION"
+      ]
+    },
+    {
+      "section": 10,
+      "source_sha256": "7b663cece57b3d7befdcee8dc496ec8bef079103cf2be5b0db595ef45b6208df",
+      "rule_ids": [
+        "HN-REVIEW"
+      ]
+    },
+    {
+      "section": 11,
+      "source_sha256": "a97ccf39f43324f19977d3e3dcd35f6480c385174459fa790a8861ebdf1e21d8",
+      "rule_ids": [
+        "HN-METHODS"
+      ]
+    },
+    {
+      "section": 12,
+      "source_sha256": "9c8460cf2e3584cbd0ba46cd46cd80f00f6a59e3254dc74cbc743037368a6105",
+      "rule_ids": [
+        "HN-AUTHOR-NAME",
+        "HN-AUTHOR-EMAIL",
+        "HN-INIT-BRANCH",
+        "HN-EXPLICIT-IDENTITY",
+        "HN-PULL"
+      ]
+    },
+    {
+      "section": 13,
+      "source_sha256": "5112e4cac06e6bf7b94b3efe705314fafe4d6f262487043244fe547e770f3182",
+      "rule_ids": [
+        "HN-PERMISSIONS"
+      ]
+    },
+    {
+      "section": 14,
+      "source_sha256": "34bdab3fd7a1922586c3f653385fc231965ee5cbbc9abfd783b5b0f4542f8f32",
+      "rule_ids": [
+        "HN-SOURCES"
+      ]
+    },
+    {
+      "section": 15,
+      "source_sha256": "97b14220fa9ca6fc1959ec41b09b9b4749914334f86f570526afa07472671cb7",
+      "rule_ids": [
+        "HN-CI"
+      ]
+    },
+    {
+      "section": 16,
+      "source_sha256": "f8a9c4f218e79cd2b5fc6295b44bf4d22845cf12442b2af2711e446e9f54fe3f",
+      "rule_ids": [
+        "HN-DEPLOYMENT"
+      ]
+    },
+    {
+      "section": 17,
+      "source_sha256": "55b957660366a010ffd792412ca667e492f0db37889a059cf822971c6b3db7e1",
+      "rule_ids": [
+        "HN-DEPENDENCIES"
+      ]
+    },
+    {
+      "section": 18,
+      "source_sha256": "85471ce671ff1d4dccf703367d8e1ac833f978bda6c1d0ce350e82940bcceb9e",
+      "rule_ids": [
+        "HN-SECRETS"
+      ]
+    },
+    {
+      "section": 19,
+      "source_sha256": "e249cc21619ada80f07ca647cdac7867746dd3cc46674119578f3c872c021c66",
+      "rule_ids": [
+        "HN-FILES"
+      ]
+    },
+    {
+      "section": 20,
+      "source_sha256": "423366f796b86468c01831575d76ca1d7a452cbe1e4251a6a1387cc6d1cd5f07",
+      "rule_ids": [
+        "HN-GOVERNANCE"
+      ]
+    },
+    {
+      "section": 21,
+      "source_sha256": "ef8d46df8a07f90a0b3ef57f6bd066a013e3ca7818fc00e413f1f52bdda4ccb7",
+      "rule_ids": [
+        "HN-LICENSE"
+      ]
+    },
+    {
+      "section": 22,
+      "source_sha256": "dfdfd63e5ad68b91bbda3a6b36e39ca98e0ae2e63f5148d1f53bbd31930d8bbc",
+      "rule_ids": [
+        "HN-VERSIONING"
+      ]
+    },
+    {
+      "section": 23,
+      "source_sha256": "f0e0b69c64f0244c25562dfb10c3169678623797892ced742975a806eca39cbe",
+      "rule_ids": [
+        "HN-COMMITS"
+      ]
+    },
+    {
+      "section": 24,
+      "source_sha256": "460bbc2fecc591bd52149ba9df098762c643b09fcfbeb557a6b830a7ef324aea",
+      "rule_ids": [
+        "HN-PRS"
+      ]
+    },
+    {
+      "section": 25,
+      "source_sha256": "ab3f3df0f4df49acc8b3bba0d0fa5513722eb00134f7446f25095cb21d281178",
+      "rule_ids": [
+        "HN-SCOPE"
+      ]
+    },
+    {
+      "section": 26,
+      "source_sha256": "16f9277e9247fc8a316f323d7d1ef547e4c972ad2be9162af15e193c099992a1",
+      "rule_ids": [
+        "HN-DEPRECATION"
+      ]
+    },
+    {
+      "section": 27,
+      "source_sha256": "f6b96a5bfd393601035be806b6958b61bb70a664d71c7c21d2cfaa9931a3997f",
+      "rule_ids": [
+        "HN-SIGNAL"
+      ]
+    },
+    {
+      "section": 28,
+      "source_sha256": "26ad4aef8eb4babea6a13f737f342f503b7b796510c0a4f19c50bd866df9b1f8",
+      "rule_ids": [
+        "HN-LEVELS"
+      ]
+    },
+    {
+      "section": 29,
+      "source_sha256": "8364dc7a694d5c242318ea6afafc034d2ddf3b71a16c6b025981500ebdf90c4c",
+      "rule_ids": [
+        "HN-OPERATING-FLOW",
+        "HN-OUT-OF-SCOPE"
+      ]
+    },
+    {
+      "section": 30,
+      "source_sha256": "64a393e5613f2f95d739765a290397a12d5e27cb7169b2da9cda7fae489ef3dd",
+      "rule_ids": [
+        "HN-PROPORTIONALITY"
+      ]
+    }
+  ],
+  "amendments": [
+    {
+      "id": "MISSION-1.0-ACTIONS",
+      "authority": "Owner mission section 1",
+      "decision": "Read-only access to official/trusted external action repositories and documentation is allowed only for necessary dependency resolution and security due diligence; external mutations remain prohibited."
+    }
+  ],
+  "file_sha256": {
+    "policy/actions.json": "1cf6982ee45ff24ec14ecb988546888c4d8d63072faa808fa4377e43a4644644",
+    "policy/authority.json": "0309f9c070f6cf0601030f918089b0b538c157368fa01f6c3922aa41f88d57e5",
+    "policy/git.json": "5affc169e18230897db724cc3dee3060a953915225c08c81b493428843f85014",
+    "policy/merge.json": "bbd1762422d8bb238da89db634983a70a21a6c096b78bc5be7a4cea3545cf3e0",
+    "policy/notifications.json": "a6e2573a51a47b6ea3dd57073fa09c799ecd218d286090d3b24b7a2bbc1a2d12",
+    "policy/repository-baseline.json": "78e9c492569a3f4cd16ba2c6432b59be03cc7927286fe0b661b5a6e294b9b2b7",
+    "policy/repository-classes.json": "c485f70fbb36d95f153f976e73b068fecb95f6bdbc568ccd54838cedf4206ef4",
+    "policy/security.json": "2d0551703084e3173543f87b3de4c00d47ef0b07ee160bbd4481754d4d7bb1f7",
+    "schemas/authority.schema.json": "5b19327dffbbfc8492935520fef45a8e6a86a703e7a41c0004d4ee6f5dcd2a6d",
+    "schemas/manifest.schema.json": "bbd8fa97f4daa5d6c04934003f0ecbe9d78f38defae45b72e83173b63aff6469",
+    "schemas/policy.schema.json": "3bb4d562dac3fab99241feeb00794be2c27b2f06e8b795c2df2ed5a95c696148",
+    "schemas/registry.schema.json": "f7be1074c90fc39a6704f836b8361ac72a842ba95418da9b625f675018cdabfb",
+    "schemas/repository-class.schema.json": "f3309da9a401b352f46da4c050f6c80a454a00ad8fb407b7590de8ab4236782e",
+    "schemas/repository-lock.schema.json": "6d8a390a7b901393c9bd4576f166d6f9f2f688c1a8234dde0cc8853751cad2ff",
+    "schemas/repository-registration.schema.json": "360ffdc2a5f871742ed1306dca5c90b9a524c08f04a81d8615cea4c100cdc845"
+  }
+}

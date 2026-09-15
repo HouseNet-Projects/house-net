@@ -1,0 +1,309 @@
+{
+  "version": "1.0.0",
+  "domain": "repository-baseline",
+  "rules": [
+    {
+      "id": "HN-CREATE",
+      "primitive": "repository.creation_baseline",
+      "scope": "repository",
+      "level": "MANDATORY",
+      "applicability": {
+        "classes": [
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      "expected": {
+        "owner": "HouseNet-Projects",
+        "visibility": "private",
+        "default_branch": "main",
+        "automatic_import": false,
+        "automatic_framework": false,
+        "automatic_license": false,
+        "proposal_fields": [
+          "name",
+          "purpose",
+          "separate_repository_justification",
+          "classification",
+          "technology",
+          "ci_requirement",
+          "deployment_model",
+          "data_sensitivity",
+          "baseline"
+        ],
+        "then": "wait_for_owner"
+      },
+      "approval_requirement": "explicit_owner",
+      "enforcement": {
+        "mechanism": "owner_review"
+      },
+      "source_sections": [
+        4
+      ]
+    },
+    {
+      "id": "HN-CLASSIFICATION",
+      "primitive": "repository.classification",
+      "scope": "repository",
+      "level": "MANDATORY",
+      "applicability": {
+        "classes": [
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      "expected": {
+        "required_before_creation": true,
+        "allowed": [
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      "approval_requirement": "explicit_owner",
+      "enforcement": {
+        "mechanism": "repository_validator"
+      },
+      "source_sections": [
+        5
+      ]
+    },
+    {
+      "id": "HN-RECLASSIFY",
+      "primitive": "repository.reclassification",
+      "scope": "repository",
+      "level": "MANDATORY",
+      "applicability": {
+        "classes": [
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      "expected": {
+        "requires": "explicit_owner_approval",
+        "automatic_governance_change": false
+      },
+      "approval_requirement": "explicit_owner",
+      "enforcement": {
+        "mechanism": "owner_review"
+      },
+      "source_sections": [
+        6
+      ]
+    },
+    {
+      "id": "HN-NAMING",
+      "primitive": "repository.naming",
+      "scope": "repository",
+      "level": "RECOMMENDED",
+      "applicability": {
+        "classes": [
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      "expected": {
+        "format": "lowercase-kebab-case",
+        "avoid": [
+          "final",
+          "final-v2",
+          "test123",
+          "new-project",
+          "stuff"
+        ],
+        "exception": "justified_product_convention"
+      },
+      "approval_requirement": "explicit_owner",
+      "enforcement": {
+        "mechanism": "repository_validator"
+      },
+      "source_sections": [
+        7
+      ]
+    },
+    {
+      "id": "HN-FILES",
+      "primitive": "repository.files",
+      "scope": "repository",
+      "level": "RECOMMENDED",
+      "applicability": {
+        "classes": [
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      "expected": {
+        "normal_code": [
+          "README.md",
+          ".gitignore",
+          ".editorconfig",
+          ".gitattributes"
+        ],
+        "readme": [
+          "purpose",
+          "setup",
+          "run",
+          "tests",
+          "ownership"
+        ]
+      },
+      "approval_requirement": "explicit_owner",
+      "enforcement": {
+        "mechanism": "repository_validator"
+      },
+      "source_sections": [
+        19
+      ]
+    },
+    {
+      "id": "HN-GOVERNANCE",
+      "primitive": "repository.governance_files",
+      "scope": "repository",
+      "level": "REPO_SPECIFIC",
+      "applicability": {
+        "classes": [
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      "expected": {
+        "only_when_justified": [
+          "SECURITY.md",
+          "CONTRIBUTING.md",
+          "CODEOWNERS",
+          "issue_templates",
+          "PR_template",
+          "dependabot.yml",
+          ".github/workflows",
+          "architecture_docs",
+          "release_docs"
+        ],
+        "mechanical_scaffolding": false
+      },
+      "approval_requirement": "explicit_owner",
+      "enforcement": {
+        "mechanism": "registration_and_owner_review"
+      },
+      "source_sections": [
+        20
+      ]
+    },
+    {
+      "id": "HN-LICENSE",
+      "primitive": "repository.license",
+      "scope": "repository",
+      "level": "MANDATORY",
+      "applicability": {
+        "classes": [
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      "expected": {
+        "automatic_open_source": false,
+        "public_transition": "separate_license_review"
+      },
+      "approval_requirement": "explicit_owner",
+      "enforcement": {
+        "mechanism": "repository_validator"
+      },
+      "source_sections": [
+        21
+      ]
+    },
+    {
+      "id": "HN-VERSIONING",
+      "primitive": "repository.versioning",
+      "scope": "repository",
+      "level": "RECOMMENDED",
+      "applicability": {
+        "classes": [
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      "expected": {
+        "when": "real_release_lifecycle",
+        "preferred": "SemVer vX.Y.Z",
+        "mandatory_for_notes_or_experiments": false
+      },
+      "approval_requirement": "explicit_owner",
+      "enforcement": {
+        "mechanism": "owner_review"
+      },
+      "source_sections": [
+        22
+      ]
+    },
+    {
+      "id": "HN-PRS",
+      "primitive": "repository.pull_requests",
+      "scope": "repository",
+      "level": "RECOMMENDED",
+      "applicability": {
+        "classes": [
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      "expected": {
+        "answer": [
+          "what",
+          "why",
+          "verification"
+        ],
+        "risky_add": [
+          "risk",
+          "rollback"
+        ],
+        "excessive_paperwork": false
+      },
+      "approval_requirement": "explicit_owner",
+      "enforcement": {
+        "mechanism": "owner_review"
+      },
+      "source_sections": [
+        24
+      ]
+    },
+    {
+      "id": "HN-DEPRECATION",
+      "primitive": "repository.deprecation",
+      "scope": "repository",
+      "level": "MANDATORY",
+      "applicability": {
+        "classes": [
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      "expected": {
+        "approval": "explicit_owner",
+        "document_when_applicable": [
+          "status",
+          "replacement",
+          "migration_path",
+          "last_supported_version"
+        ],
+        "preserve_history": true
+      },
+      "approval_requirement": "explicit_owner",
+      "enforcement": {
+        "mechanism": "owner_review"
+      },
+      "source_sections": [
+        26
+      ]
+    }
+  ]
+}

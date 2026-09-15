@@ -1,0 +1,41 @@
+{
+  "version": "1.0.0",
+  "domain": "notifications",
+  "rules": [
+    {
+      "id": "HN-SIGNAL",
+      "primitive": "notifications.delivery",
+      "scope": "account",
+      "level": "MANDATORY",
+      "applicability": {
+        "classes": [
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      "expected": {
+        "wanted": [
+          "security_alerts",
+          "failed_actions",
+          "direct_mentions",
+          "participating_conversations"
+        ],
+        "avoid": [
+          "all_activity",
+          "every_push",
+          "unnecessary_watching",
+          "noisy_digests",
+          "spam"
+        ]
+      },
+      "approval_requirement": "explicit_owner",
+      "enforcement": {
+        "mechanism": "owner_review"
+      },
+      "source_sections": [
+        27
+      ]
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "repository": {
+      "type": "string",
+      "pattern": "^HouseNet-Projects/[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "classification": {
+      "enum": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    "control_plane": {
+      "const": "HouseNet-Projects/house-net-control-plane"
+    },
+    "policy_version": {
+      "const": "1.0.0"
+    },
+    "policy_commit": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "approval_reference": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "required": [
+    "repository",
+    "classification",
+    "control_plane",
+    "policy_version",
+    "policy_commit",
+    "approval_reference"
+  ],
+  "additionalProperties": false
+}
