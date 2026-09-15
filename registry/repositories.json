@@ -239,7 +239,7 @@
       "external_dependencies": []
     },
     {
-      "repository": "HouseNet-Projects/command-center",
+      "repository": "HouseNet-Projects/house-net-command-center",
       "classification": "A",
       "purpose": "Canonical HouseNet repository for the Command-center operational workspace and Deputy agent runtime.",
       "owner": "HouseNet-Projects",
