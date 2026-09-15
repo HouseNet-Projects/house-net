@@ -245,7 +245,7 @@
       "owner": "HouseNet-Projects",
       "visibility": "private",
       "control_plane_version": "1.3.0",
-      "control_plane_commit": "f233adae4286171cc0f4c1bf7fc0218db64abba8",
+      "control_plane_commit": "540a995a9e14d8ad3bcb2e31a60a651ba0702be3",
       "versioned": false,
       "release_state": "active",
       "applicable_rules": [
