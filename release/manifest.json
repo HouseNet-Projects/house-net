@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "release_state": "active",
   "version_scheme": "semver",
-  "control_plane_version": "1.2.0",
+  "control_plane_version": "1.3.0",
   "schema_version": "1.0.0",
   "version_surfaces": [
     {"path": "README.md", "kind": "text"},

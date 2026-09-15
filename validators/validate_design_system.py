@@ -37,7 +37,7 @@ def human_docs(root):
 def validate(root=ROOT):
     release = read_version_manifest(root)
     require(release['repository'] == 'HouseNet-Projects/house-net-design-system', 'Release manifest repository mismatch')
-    require(release['control_plane_version'] == '1.2.0', 'Release manifest control-plane version mismatch')
+    require(release['control_plane_version'] == '1.3.0', 'Release manifest control-plane version mismatch')
     require(not check_versions(root), 'VERSION DRIFT')
     brand = load(root/'tokens/brand-tokens.json')
     document = load(root/'tokens/document-tokens.json')

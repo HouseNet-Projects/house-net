@@ -8,7 +8,7 @@
 
 | STATUS | VERSION | CLASS | CONTROL PLANE | LANGUAGE |
 | :--- | :--- | :--- | :--- | :--- |
-| **ACTIVE** | **1.0.0** | **B — STANDARD** | **Policy 1.2.0** | **EN + HY** |
+| **ACTIVE** | **1.0.0** | **B — STANDARD** | **Policy 1.3.0** | **EN + HY** |
 
 The design system is the reusable HouseNet source for three connected systems:
 
@@ -47,7 +47,7 @@ flowchart LR
 
 | ԿԱՐԳԱՎԻՃԱԿ | ՏԱՐԲԵՐԱԿ | ԴԱՍ | CONTROL PLANE | ԼԵԶՈՒ |
 | :--- | :--- | :--- | :--- | :--- |
-| **ԱԿՏԻՎ** | **1.0.0** | **B — STANDARD** | **Policy 1.2.0** | **EN + HY** |
+| **ԱԿՏԻՎ** | **1.0.0** | **B — STANDARD** | **Policy 1.3.0** | **EN + HY** |
 
 Դիզայնի համակարգը HouseNet-ի երեք կապակցված համակարգերի վերօգտագործվող աղբյուրն է՝ Brand System՝ պաշտոնական լոգոյի աղբյուր, գունային համակարգ և clear-space կանոններ, UI System՝ layout, components, states, accessibility և responsive կանոններ, Document System՝ Word, PowerPoint, Excel և PDF ստանդարտներ, source-ներ և validators։
 
