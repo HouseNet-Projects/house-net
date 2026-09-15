@@ -4,9 +4,9 @@
 
 | Layer | What it does | What it cannot claim |
 | --- | --- | --- |
-| Codex global and repository instructions | Maps each fresh session to current policy and preflight | Behavioral guidance is not an unbypassable hook |
+| Execution-client global and repository instructions | Maps each fresh session to current policy and preflight | Behavioral guidance is not an unbypassable hook |
 | Local preflight | Nonzero exit on wrong identity, integrity/registration failure, wrong remote, Git baseline drift, dirty or stale checkout | Does not automatically intercept every direct tool invocation |
-| Claude repository maps | Provides the canonical lookup procedure | Claude Code is not installed in this WSL; no local managed hooks installed |
+| Optional provider-adapter maps | Provides the canonical lookup procedure | provider-specific local client is not installed in this WSL; no local managed hooks installed |
 | GitHub CI | Runs schema, policy, coverage, content/workflow validation, tests and syntax checks | A green check is not owner approval; CI alone cannot prevent merges |
 | Reusable gate | Executes pinned trusted validator and registry against caller content | Must be explicitly installed in a future approved repository; not globally automatic |
 | GitHub server protection | Plan-dependent main-branch merge restrictions | Unsupported private-plan features must remain identified as gaps |
@@ -35,7 +35,7 @@ The installation's observed settings, server capability response and session evi
 
 # Enforcement
 
-Codex-ի և պահոցի instruction-ները ուղղորդում են ընթացիկ policy-ին, բայց չեն հանդիսանում շրջանցման ենթակա hard hook։ Local preflight-ը non-zero է վերադարձնում սխալ identity-ի, remote-ի, integrity-ի, registry-ի, Git baseline-ի կամ հնացած checkout-ի դեպքում։ Claude Code-ը այս WSL-ում տեղադրված չէ։
+Execution client-ի և պահոցի instruction-ները ուղղորդում են ընթացիկ policy-ին, բայց չեն հանդիսանում շրջանցման ենթակա hard hook։ Local preflight-ը non-zero է վերադարձնում սխալ identity-ի, remote-ի, integrity-ի, registry-ի, Git baseline-ի կամ հնացած checkout-ի դեպքում։ provider-specific local client-ը այս WSL-ում տեղադրված չէ։
 
 GitHub CI-ն ստուգում է schema-ները, policy coverage-ը, content-ը, workflow-ները, syntax-ը և tests-ը։ Reusable gate-ը կիրառելի է միայն ապագայում հաստատված պահոցներում և պահանջում է pinned trusted revision։ GitHub server protection-ը սահմանափակված է ընթացիկ personal private plan-ով, ուստի անհասանելի հնարավորությունները չեն ներկայացվում որպես enforced։
 

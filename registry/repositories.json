@@ -1,5 +1,5 @@
 {
-  "version": "1.4.0",
+  "version": "1.4.1",
   "repositories": [
     {
       "repository": "HouseNet-Projects/house-net-control-plane",
@@ -7,14 +7,14 @@
       "purpose": "Canonical engineering policy, approval, classification and agent control plane.",
       "owner": "HouseNet-Projects",
       "visibility": "public",
-      "control_plane_version": "1.4.0",
-      "control_plane_commit": "664239478695ac3c13e77dfe998f01edd47ed825",
+      "control_plane_version": "1.4.1",
+      "control_plane_commit": "0e6afa84db77263ad724d362e3fd75576587b4cd",
       "versioned": true,
       "canonical_version_source": {
         "path": "release/manifest.json",
         "field": "version"
       },
-      "current_version": "1.4.0",
+      "current_version": "1.4.1",
       "version_scheme": "semver",
       "release_state": "active",
       "version_surfaces": [
@@ -120,13 +120,19 @@
       },
       "external_dependencies": [],
       "design_system": {
-        "version": "1.0.0",
+        "version": "1.1.0",
         "category": "CONTROL",
         "asset_source": "HouseNet-Projects/house-net-design-system",
         "readme_contract": "bilingual_status_navigation",
         "human_docs_policy": "en_hy_required",
-        "social_preview": "present",
-        "control_plane_compatibility": "1.4.0"
+        "social_preview": {
+          "status": "manual_required",
+          "candidate_path": "HouseNet-Projects/house-net-design-system:assets/social/control-plane.svg",
+          "validated": true,
+          "applied": false,
+          "manual_action_required": true
+        },
+        "control_plane_compatibility": "1.4.1"
       }
     },
     {
@@ -135,8 +141,8 @@
       "purpose": "Canonical HouseNet brand, UI and bilingual document design system for products and operational documents.",
       "owner": "HouseNet-Projects",
       "visibility": "public",
-      "control_plane_version": "1.4.0",
-      "control_plane_commit": "664239478695ac3c13e77dfe998f01edd47ed825",
+      "control_plane_version": "1.4.1",
+      "control_plane_commit": "0e6afa84db77263ad724d362e3fd75576587b4cd",
       "versioned": true,
       "canonical_version_source": {
         "path": "release/manifest.json",
@@ -158,8 +164,8 @@
         }
       ],
       "certified_release": {
-        "version": "1.0.0",
-        "commit": "8c873a08b9f0b63ea58867388b44b521a8b334a4",
+        "version": "1.1.0",
+        "commit": "8d1c06c9a02489ed10ba52b459c3a9bcc21a40d8",
         "control_plane_compatibility": "1.4.0",
         "status": "certified"
       },
@@ -256,8 +262,14 @@
         "asset_source": "HouseNet-Projects/house-net-design-system",
         "readme_contract": "bilingual_status_navigation",
         "human_docs_policy": "en_hy_required",
-        "social_preview": "present",
-        "control_plane_compatibility": "1.4.0"
+        "social_preview": {
+          "status": "manual_required",
+          "candidate_path": "HouseNet-Projects/house-net-design-system:assets/social/design-system.svg",
+          "validated": true,
+          "applied": false,
+          "manual_action_required": true
+        },
+        "control_plane_compatibility": "1.4.1"
       }
     },
     {
@@ -266,8 +278,8 @@
       "purpose": "Canonical HouseNet repository for the Command-center operational workspace and Deputy agent runtime.",
       "owner": "HouseNet-Projects",
       "visibility": "public",
-      "control_plane_version": "1.4.0",
-      "control_plane_commit": "664239478695ac3c13e77dfe998f01edd47ed825",
+      "control_plane_version": "1.4.1",
+      "control_plane_commit": "0e6afa84db77263ad724d362e3fd75576587b4cd",
       "versioned": false,
       "release_state": "active",
       "applicable_rules": [
@@ -416,13 +428,19 @@
         }
       ],
       "design_system": {
-        "version": "1.0.0",
+        "version": "1.1.0",
         "category": "PRODUCT",
         "asset_source": "HouseNet-Projects/house-net-design-system",
         "readme_contract": "bilingual_status_navigation",
         "human_docs_policy": "en_hy_required",
-        "social_preview": "exempt",
-        "control_plane_compatibility": "1.4.0"
+        "social_preview": {
+          "status": "manual_required",
+          "candidate_path": "HouseNet-Projects/house-net-design-system:assets/social/command-center.svg",
+          "validated": true,
+          "applied": false,
+          "manual_action_required": true
+        },
+        "control_plane_compatibility": "1.4.1"
       }
     }
   ]

@@ -27,7 +27,7 @@
       ]
     },
     "control_plane_version": {
-      "const": "1.4.0"
+      "const": "1.4.1"
     },
     "control_plane_commit": {
       "type": "string",
@@ -407,10 +407,37 @@
           "const": "en_hy_required"
         },
         "social_preview": {
-          "enum": [
-            "present",
-            "exempt"
-          ]
+          "type": "object",
+          "properties": {
+            "status": {
+              "enum": [
+                "candidate",
+                "validated",
+                "applied",
+                "manual_required",
+                "exempt"
+              ]
+            },
+            "candidate_path": {
+              "type": "string"
+            },
+            "validated": {
+              "type": "boolean"
+            },
+            "applied": {
+              "type": "boolean"
+            },
+            "manual_action_required": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "status",
+            "validated",
+            "applied",
+            "manual_action_required"
+          ],
+          "additionalProperties": false
         },
         "control_plane_compatibility": {
           "type": "string",

@@ -1,4 +1,4 @@
-# HouseNet policy · 1.4.0 <!-- housenet-version: policy_version -->
+# HouseNet policy · 1.4.1 <!-- housenet-version: policy_version -->
 
 ## English
 
@@ -942,7 +942,7 @@ Approval: explicit_owner. Enforcement: owner_review. Source sections: 22.
 
 ## Հայերեն
 
-# HouseNet-ի քաղաքականություն · 1.4.0
+# HouseNet-ի քաղաքականություն · 1.4.1
 
 Մեքենայական հեղինակությունից ստեղծված ներկայացում է։ Խմբագրել միայն մեքենայական կանոնները։ Սկզբնական հաստատված քաղաքականությունը պահպանված է [աղբյուրում](source/HouseNet-GitHub-Policy-v1.0.md)։
 
@@ -1879,4 +1879,5 @@ Approval: explicit_owner. Enforcement: owner_review. Source sections: 22.
 ```
 
 Հաստատում՝ explicit_owner։ Կիրարկում՝ owner_review։ Աղբյուրի բաժիններ՝ 22։
+
 

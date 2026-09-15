@@ -20,8 +20,8 @@ english = f'''<!-- housenet-generated: control-plane-status:start -->
 | **CLASSIFICATION** | **CLASS A — CRITICAL** |
 | **AUTHORITY** | `HouseNet-Projects` · explicit owner approval |
 | **CANONICAL REPOSITORIES** | `{count}` registered · visibility **{visibility}** |
-| **CODEX BOOTSTRAP** | **ENFORCED** · global map + deterministic preflight |
-| **CLAUDE LOCAL ENFORCEMENT** | **PENDING** · Claude Code is not installed in this WSL |
+| **EXECUTION BOOTSTRAP** | **ENFORCED** · global map + deterministic preflight |
+| **LOCAL EXECUTION ENFORCEMENT** | **PENDING** · No secondary local execution client is installed in this WSL |
 | **GITHUB BRANCH PROTECTION** | **ENFORCED** · protected `main`, required CI checks |
 <!-- housenet-generated: control-plane-status:end -->'''
 armenian = f'''<!-- housenet-generated: control-plane-status-hy:start -->
@@ -32,8 +32,8 @@ armenian = f'''<!-- housenet-generated: control-plane-status-hy:start -->
 | Դասակարգում | **CLASS A — CRITICAL** |
 | Իրավասու սեփականատեր | `HouseNet-Projects` |
 | Կանոնական պահոցներ | `{count}` գրանցված · տեսանելիությունը՝ **{visibility}** |
-| Codex bootstrap | **ԿԻՐԱՐԿՎԱԾ** |
-| Claude տեղային enforcement | **ՍՊԱՍՄԱՆ ՄԵՋ** — Claude Code-ը WSL-ում տեղադրված չէ |
+| Execution bootstrap | **ԿԻՐԱՐԿՎԱԾ** |
+| Local execution enforcement | **ՍՊԱՍՄԱՆ ՄԵՋ** — երկրորդ local execution client տեղադրված չէ |
 | GitHub branch protection | **ԿԻՐԱՐԿՎԱԾ** · `main`-ը պաշտպանված է, CI ստուգումները պարտադիր են |
 <!-- housenet-generated: control-plane-status-hy:end -->'''
 

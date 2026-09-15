@@ -17,7 +17,7 @@ from referencing import Registry, Resource
 OWNER = 'HouseNet-Projects'
 CANONICAL = OWNER + '/house-net-control-plane'
 SOURCE_SHA = 'a15b6b22aeecc7beaaf2f13e9de20e45b1a49be24c6ba280a5b3ac364f034491'
-POLICY_VERSION = '1.4.0'
+POLICY_VERSION = '1.4.1'
 ROOT = Path(__file__).resolve().parents[1]
 SEMVER_RE = re.compile(r'^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$')
 
@@ -74,6 +74,23 @@ def version_contract(target, record):
         require(surface_path.is_file(), 'Registered version surface missing: ' + surface['path'])
         text = surface_path.read_text()
         require(actual in text, 'VERSION DRIFT: ' + surface['path'] + ' expected ' + actual)
+
+
+PROVIDER_NAMES = re.compile(r"\b(?:Codex|Claude|OpenAI|Anthropic|ChatGPT|GPT-[0-9A-Za-z.-]+)\b", re.I)
+
+def validate_provider_neutral_surfaces(root):
+    """Reject provider product names in active canonical presentation surfaces.
+
+    Compatibility filenames, adapter code, and immutable historical provenance are
+    intentionally outside this surface contract.
+    """
+    allowed = {"AGENTS.md", "CLAUDE.md"}
+    for rel in ["README.md"] + [str(p.relative_to(root)) for p in (root / "docs").rglob("*.md") if "source" not in p.parts] + [str(p.relative_to(root)) for p in (root / "assets").rglob("*.svg")]:
+        path = root / rel
+        if not path.is_file() or path.name in allowed: continue
+        text = path.read_text(errors="ignore")
+        hits = [m.group(0) for m in PROVIDER_NAMES.finditer(text)]
+        require(not hits, "Provider product name in active presentation: " + rel + " (" + ", ".join(sorted(set(hits), key=str.lower)) + ")")
 
 def command(args, cwd=None, timeout=20):
     try:
@@ -326,6 +343,7 @@ def check_content(root):
         require(not any(p.search(data) for p in patterns), 'Potential credential in tracked file: ' + relative + '; value withheld')
 
 def validate_repository(root, target, expected_repository=None):
+    validate_provider_neutral_surfaces(target)
     validators, manifest, items = validate_policy(root)
     records = registry(root, validators, items)
     lock = load(safe_path(target, 'house-net-control.json'))
@@ -378,6 +396,7 @@ def internal_links(root):
             require((path.parent / relative).exists(), 'Broken internal link in ' + str(path.relative_to(root)) + ': ' + relative)
 
 def validate_control_plane(root):
+    validate_provider_neutral_surfaces(root)
     validators, manifest, items = validate_policy(root)
     records = registry(root, validators, items)
     for path in (root / 'templates').glob('*.json'):

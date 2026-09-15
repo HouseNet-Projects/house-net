@@ -3,7 +3,7 @@
   "type": "object",
   "properties": {
     "version": {
-      "const": "1.4.0"
+      "const": "1.4.1"
     },
     "domain": {
       "type": "string",

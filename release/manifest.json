@@ -1,10 +1,10 @@
 {
   "repository": "HouseNet-Projects/house-net-control-plane",
   "product": "HouseNet Control Plane",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "release_state": "active",
   "version_scheme": "semver",
-  "control_plane_version": "1.4.0",
+  "control_plane_version": "1.4.1",
   "schema_version": "1.0.0",
   "version_surfaces": [
     {

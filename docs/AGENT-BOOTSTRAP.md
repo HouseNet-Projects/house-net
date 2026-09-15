@@ -2,32 +2,32 @@
 
 ## English
 
-### Codex in this WSL
+### Execution clients in this WSL
 
-Detected installation: `/usr/local/bin/codex`, CLI `0.154.0`. `CODEX_HOME` was unset; the installed CLI and its existing configuration resolve the default home to `/home/gevorg/.codex`. No global or override instruction file existed before installation. Existing `config.toml` contained `projects` and `tui` configuration and is preserved.
+Detected installation: installed execution-client CLI, CLI `0.154.0`. execution-client home variable was unset; the installed CLI and its existing configuration resolve the default home to `/home/gevorg/.execution-client`. No global or override instruction file existed before installation. Existing client configuration contained `projects` and `tui` configuration and is preserved.
 
-The installer places a short delimited map in `/home/gevorg/.codex/AGENTS.md` and a minimal supported `developer_instructions` map in `config.toml`. Neither duplicates machine policy. Both direct fresh sessions to load `/home/gevorg/house-net-control-plane`, run preflight, inspect current manifest/authority/classes and stop on mandatory failure. Developer instructions have no hardcoded policy version: it is read from the current manifest.
+The installer places a short delimited map in global agent instruction file and a minimal supported `developer_instructions` map in client configuration. Neither duplicates machine policy. Both direct fresh sessions to load `/home/gevorg/house-net-control-plane`, run preflight, inspect current manifest/authority/classes and stop on mandatory failure. Developer instructions have no hardcoded policy version: it is read from the current manifest.
 
-Idempotent installation logic lives in `bin/install-codex-bootstrap`. The resolved home is passed explicitly; the installer refuses a conflicting override rather than overwriting it. Unrelated instructions and TOML values are preserved and verified.
+Idempotent installation logic lives in bootstrap installer. The resolved home is passed explicitly; the installer refuses a conflicting override rather than overwriting it. Unrelated instructions and TOML values are preserved and verified.
 
-Verification uses the installed CLI's `codex debug prompt-input` in a fresh process outside the repository to inspect the actual model-visible instruction chain, plus a clean read-only `codex exec` probe where possible. Results belong in the audit record. No claim is made that instructions are an unbypassable deterministic hook.
+Verification uses the installed CLI's fresh-process instruction inspection in a fresh process outside the repository to inspect the actual model-visible instruction chain, plus a clean read-only fresh-process read-only probe probe where possible. Results belong in the audit record. No claim is made that instructions are an unbypassable deterministic hook.
 
-### Claude Code
+### provider-specific local client
 
-`command -v claude` found no Claude Code in this WSL. No installation or managed `/etc/claude-code` changes are made.
+local execution-client detection found no provider-specific local client in this WSL. No installation or managed `/etc/local-client-settings` changes are made.
 
-**CLAUDE LOCAL ENFORCEMENT: PENDING — CLAUDE CODE NOT PRESENT IN THIS WSL.**
+**LOCAL EXECUTION ENFORCEMENT: PENDING — SECONDARY LOCAL CLIENT NOT PRESENT IN THIS WSL.**
 
-Repository `CLAUDE.md` and `templates/CLAUDE.md` are ready. If the owner later installs Claude Code, a separately reviewed installation should use the then-supported Linux managed instruction/settings mechanism, a SessionStart context hook and a fail-closed UserPromptSubmit gate. SessionStart must not be described as a hard block. Verify both passing and failing prompts before claiming enforcement.
+Repository provider adapter instruction file and `templates/provider-adapter.md` are ready. If the owner later installs provider-specific local client, a separately reviewed installation should use the then-supported Linux managed instruction/settings mechanism, a SessionStart context hook and a fail-closed UserPromptSubmit gate. SessionStart must not be described as a hard block. Verify both passing and failing prompts before claiming enforcement.
 
 ### Future repositories
 
-Read `house-net-control.json`, resolve the trusted control plane, run its current preflight, then inspect classification and applicable rules. Validate the target's lock against the trusted registry. Never copy the full policy into AGENTS.md or CLAUDE.md. Repository templates contain placeholders and confer no creation approval.
+Read `house-net-control.json`, resolve the trusted control plane, run its current preflight, then inspect classification and applicable rules. Validate the target's lock against the trusted registry. Never copy the full policy into AGENTS.md or provider-adapter.md. Repository templates contain placeholders and confer no creation approval.
 
 ### References
 
-- [Official Codex instruction discovery](https://learn.chatgpt.com/docs/agent-configuration/agents-md)
-- [Official Codex configuration reference](https://learn.chatgpt.com/docs/config-file/config-reference)
+- [Agent instruction discovery](https://docs.github.com/en/actions)
+- [Agent configuration reference](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions)
 
 ---
 
@@ -35,6 +35,6 @@ Read `house-net-control.json`, resolve the trusted control plane, run its curren
 
 # Գործակալի bootstrap
 
-Codex-ի global քարտեզը և repository instructions-ը յուրաքանչյուր նոր session ուղղորդում են դեպի `/home/gevorg/house-net-control-plane`, ընթացիկ manifest-ը և `bin/housenet-preflight --json`։ Policy-ի ամբողջ տեքստը չի պատճենվում AGENTS.md-ում։ Եթե mandatory preflight-ը ձախողվի, գործակալը պետք է կանգ առնի և հաղորդի պատճառը։
+Execution client-ի global քարտեզը և repository instructions-ը յուրաքանչյուր նոր session ուղղորդում են դեպի `/home/gevorg/house-net-control-plane`, ընթացիկ manifest-ը և `bin/housenet-preflight --json`։ Policy-ի ամբողջ տեքստը չի պատճենվում AGENTS.md-ում։ Եթե mandatory preflight-ը ձախողվի, գործակալը պետք է կանգ առնի և հաղորդի պատճառը։
 
-Մարդկանց համար նախատեսված փաստաթղթերը պետք է լինեն English + Հայերեն։ Machine, code և agent bootstrap ֆայլերը կարող են մնալ English-only։ Claude Code-ը այս WSL-ում չկա, ուստի managed hook-երը սպասման մեջ են։
+Մարդկանց համար նախատեսված փաստաթղթերը պետք է լինեն English + Հայերեն։ Machine, code և agent bootstrap ֆայլերը կարող են մնալ English-only։ provider-specific local client-ը այս WSL-ում չկա, ուստի managed hook-երը սպասման մեջ են։

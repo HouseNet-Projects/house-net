@@ -22,12 +22,12 @@
 | Surface | Current state |
 | :--- | :--- |
 | **CONTROL PLANE** | **ACTIVE** · CI **GREEN** |
-| **POLICY** | `1.4.0` · machine authority under [`policy/`](policy/) |
+| **POLICY** | `1.4.1` · machine authority under [`policy/`](policy/) |
 | **CLASSIFICATION** | **CLASS A — CRITICAL** |
 | **AUTHORITY** | `HouseNet-Projects` · explicit owner approval |
 | **CANONICAL REPOSITORIES** | `3` registered · visibility **PUBLIC** |
-| **CODEX BOOTSTRAP** | **ENFORCED** · global map + deterministic preflight |
-| **CLAUDE LOCAL ENFORCEMENT** | **PENDING** · Claude Code is not installed in this WSL |
+| **EXECUTION BOOTSTRAP** | **ENFORCED** · global map + deterministic preflight |
+| **LOCAL EXECUTION ENFORCEMENT** | **PENDING** · No secondary local execution client is installed in this WSL |
 | **GITHUB BRANCH PROTECTION** | **ENFORCED** · protected `main`, required CI checks |
 <!-- housenet-generated: control-plane-status:end -->
 
@@ -47,17 +47,17 @@ flowchart LR
     I --> M[MERGE<br/>Verified change]
 ```
 
-Codex loads a short global map, resolves this control plane, reads the current manifest and authority rules, then runs `bin/housenet-preflight --json`. Future repositories receive only a small `AGENTS.md`, `CLAUDE.md`, and `house-net-control.json`; the full policy remains here.
+The execution client loads a short global map, resolves this control plane, reads the current manifest and authority rules, then runs `bin/housenet-preflight --json`. Future repositories receive only a small agent instruction adapters, and `house-net-control.json`; the full policy remains here.
 
 ## Enforcement matrix
 
 | Layer | State | What it means |
 | :--- | :---: | :--- |
-| Codex instruction map | **ENFORCED** | Fresh sessions are directed to current control-plane truth |
+| Execution-client instruction map | **ENFORCED** | Fresh sessions are directed to current control-plane truth |
 | Local preflight | **ENFORCED** | Identity, remote, policy integrity, registry, Git baseline and remote freshness |
 | Control-plane CI | **ENFORCED** | Schemas, rule ownership, source coverage, templates, syntax and tests |
 | Reusable policy gate | **ENFORCED** | Future approved callers can pin the trusted composite gate by commit SHA |
-| Claude local hooks | **PENDING** | No Claude Code installation exists in this WSL |
+| Local execution hooks | **PENDING** | No provider-specific local client installation exists in this WSL |
 | GitHub branch protection | **ENFORCED** | Public canonical repositories use protected `main` branches and required CI checks |
 
 Read the precise boundaries in [`docs/ENFORCEMENT.md`](docs/ENFORCEMENT.md).
@@ -125,18 +125,18 @@ HouseNet-Projects owns this public control plane. The goal is the minimum correc
 | Մակերես | Ընթացիկ վիճակ |
 | :--- | :--- |
 | Կառավարման հարթակ | **ԱԿՏԻՎ** · CI **ԿԱՆԱՉ** |
-| Քաղաքականություն | `1.4.0` |
+| Քաղաքականություն | `1.4.1` |
 | Դասակարգում | **CLASS A — CRITICAL** |
 | Իրավասու սեփականատեր | `HouseNet-Projects` |
 | Կանոնական պահոցներ | `3` գրանցված · տեսանելիությունը՝ **PUBLIC** |
-| Codex bootstrap | **ԿԻՐԱՐԿՎԱԾ** |
-| Claude տեղային enforcement | **ՍՊԱՍՄԱՆ ՄԵՋ** — Claude Code-ը WSL-ում տեղադրված չէ |
+| Execution bootstrap | **ԿԻՐԱՐԿՎԱԾ** |
+| Local execution enforcement | **ՍՊԱՍՄԱՆ ՄԵՋ** — երկրորդ local execution client տեղադրված չէ |
 | GitHub branch protection | **ԿԻՐԱՐԿՎԱԾ** · `main`-ը պաշտպանված է, CI ստուգումները պարտադիր են |
 <!-- housenet-generated: control-plane-status-hy:end -->
 
 ### Իշխանություն, գործակալներ և enforcement
 
-Միայն `HouseNet-Projects`-ն է իրավասու։ Codex-ը նախ ստուգում է ինքնությունը, կարդում է ընթացիկ control plane-ը և գործարկում է preflight-ը։ Claude-ի տեղային enforcement-ը սպասման մեջ է, քանի որ այս WSL-ում Claude Code չկա։ CI-ն ստուգում է սխեմաները, կանոնների ծածկույթը, դասակարգումը, բովանդակությունը, workflow-ները և երկլեզու պայմանագիրը։
+Միայն `HouseNet-Projects`-ն է իրավասու։ Execution client-ը նախ ստուգում է ինքնությունը, կարդում է ընթացիկ control plane-ը և գործարկում է preflight-ը։ local execution client-ի enforcement-ը սպասման մեջ է, քանի որ այս WSL-ում երկրորդ local execution client չկա։ CI-ն ստուգում է սխեմաները, կանոնների ծածկույթը, դասակարգումը, բովանդակությունը, workflow-ները և երկլեզու պայմանագիրը։
 
 ### Դասակարգում և մեքենայական հեղինակություն
 
