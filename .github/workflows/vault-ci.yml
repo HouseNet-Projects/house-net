@@ -10,7 +10,7 @@ permissions:
 jobs:
   policy-gate:
     name: HouseNet policy gate
-    uses: HouseNet-Projects/house-net-control-plane/.github/workflows/reusable-policy-gate.yml@7da87427df33a04cdc1576c535b42b4e27fa6e8e
+    uses: HouseNet-Projects/house-net-control-plane/.github/workflows/reusable-policy-gate.yml@15ffa9b1cc672a1c4fddcacfb823439942801c2c
   vault:
     name: Vault boundary checks
     runs-on: ubuntu-24.04
