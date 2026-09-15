@@ -11,7 +11,7 @@ from housenet.control import load_yaml
 count=0
 for folder in ['housenet','tests','bin']:
     for p in (root/folder).rglob('*'):
-        if p.is_file() and (p.suffix=='.py' or (folder=='bin' and p.read_text().startswith('#!/usr/bin/env python3'))):
+        if p.is_file() and (p.suffix=='.py' or (folder=='bin' and p.read_bytes().startswith(b'#!/usr/bin/env python3'))):
             ast.parse(p.read_text(),filename=str(p));count+=1
 for p in list((root/'.github/workflows').glob('*.yml'))+[root/'action.yml']:
     d=load_yaml(p)
