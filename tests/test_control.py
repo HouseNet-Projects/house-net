@@ -249,3 +249,25 @@ class PolicyTests(unittest.TestCase):
         self.assertFalse(json.loads(p.stdout)['ok'])
 
 if __name__=='__main__':unittest.main()
+
+class VersionSurfaceTests(unittest.TestCase):
+    def test_active_generated_region_rejects_conflicting_claim(self):
+        root = Path(tempfile.mkdtemp(prefix='housenet-version-'))
+        self.addCleanup(shutil.rmtree, root, ignore_errors=True)
+        shutil.copytree(c.ROOT, root, dirs_exist_ok=True, ignore=shutil.ignore_patterns('.git','.venv','__pycache__'))
+        readme = root/'README.md'
+        text = readme.read_text()
+        start = '<!-- housenet-generated: control-plane-status:start -->'
+        pos = text.index('| **POLICY** | `1.4.0`')
+        readme.write_text(text[:pos] + '| **POLICY** | `1.0.0`' + text[pos + len('| **POLICY** | `1.4.0`'):])
+        result = subprocess.run([str(root/'bin/check-version-consistency'), str(root)], capture_output=True, text=True)
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn('VERSION DRIFT', result.stdout)
+
+    def test_generation_restores_all_active_regions(self):
+        root = Path(tempfile.mkdtemp(prefix='housenet-generate-'))
+        self.addCleanup(shutil.rmtree, root, ignore_errors=True)
+        shutil.copytree(c.ROOT, root, dirs_exist_ok=True, ignore=shutil.ignore_patterns('.git','.venv','__pycache__'))
+        p=root/'README.md'; p.write_text(p.read_text().replace('`1.4.0` · machine authority','`1.0.0` · machine authority'))
+        subprocess.check_call([str(root/'bin/generate-control-plane-status'),str(root)])
+        self.assertEqual(subprocess.run([str(root/'bin/check-version-consistency'),str(root)]).returncode,0)

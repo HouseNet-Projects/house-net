@@ -2,6 +2,7 @@
 from __future__ import annotations
 import json
 import re
+import subprocess
 from pathlib import Path
 
 SEMVER_RE = re.compile(r'^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$')
@@ -53,4 +54,8 @@ def sync_surfaces(root: Path, new_version: str) -> list[str]:
                 raise ValueError('Version surface marker did not update: ' + surface['path'])
             path.write_text(updated)
         changed.append(surface['path'])
+    generator = root / 'bin/generate-control-plane-status'
+    if generator.is_file():
+        subprocess.check_call([str(generator), str(root)])
+        if 'README.md' not in changed: changed.append('README.md')
     return changed

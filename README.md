@@ -12,23 +12,27 @@
 
 <p align="center">
   <a href="https://github.com/HouseNet-Projects/house-net-control-plane/actions/workflows/control-plane-ci.yml"><img alt="Control plane CI" src="https://github.com/HouseNet-Projects/house-net-control-plane/actions/workflows/control-plane-ci.yml/badge.svg?branch=main"></a>
-  <a href="https://github.com/HouseNet-Projects/house-net-control-plane/blob/main/docs/POLICY.md">Policy 1.4.0</a> <!-- housenet-version: policy_version -->
+  <a href="https://github.com/HouseNet-Projects/house-net-control-plane/blob/main/docs/POLICY.md">Policy authority</a>
   <a href="https://github.com/HouseNet-Projects/house-net-control-plane/blob/main/docs/ENFORCEMENT.md">Enforcement map</a>
 </p>
 
 ## Control plane status
 
+<!-- housenet-generated: control-plane-status:start -->
 | Surface | Current state |
 | :--- | :--- |
 | **CONTROL PLANE** | **ACTIVE** · CI **GREEN** |
-| **POLICY** | `1.0.0` · machine authority under [`policy/`](policy/) |
+| **POLICY** | `1.4.0` · machine authority under [`policy/`](policy/) |
 | **CLASSIFICATION** | **CLASS A — CRITICAL** |
 | **AUTHORITY** | `HouseNet-Projects` · explicit owner approval |
+| **CANONICAL REPOSITORIES** | `3` registered · visibility **PUBLIC** |
 | **CODEX BOOTSTRAP** | **ENFORCED** · global map + deterministic preflight |
 | **CLAUDE LOCAL ENFORCEMENT** | **PENDING** · Claude Code is not installed in this WSL |
-| **GITHUB BRANCH PROTECTION** | **UNAVAILABLE ON CURRENT PLAN** for this personal-account plan |
+| **GITHUB BRANCH PROTECTION** | **ENFORCED** · protected `main`, required CI checks |
+<!-- housenet-generated: control-plane-status:end -->
 
-This repository is the engineering command center: it records the current rules, registers approved repositories, supplies agent maps, and runs the checks that can be made deterministic. It does not pretend that CI or guidance can replace owner approval or unavailable GitHub server controls.
+
+This repository is the engineering command center: it records the current rules, registers approved repositories, supplies agent maps, and runs the checks that can be made deterministic. It keeps owner approval explicit while enforcing the controls available on the public canonical repositories.
 
 ## Authority and agent bootstrap
 
@@ -54,7 +58,7 @@ Codex loads a short global map, resolves this control plane, reads the current m
 | Control-plane CI | **ENFORCED** | Schemas, rule ownership, source coverage, templates, syntax and tests |
 | Reusable policy gate | **ENFORCED** | Future approved callers can pin the trusted composite gate by commit SHA |
 | Claude local hooks | **PENDING** | No Claude Code installation exists in this WSL |
-| GitHub branch protection | **UNAVAILABLE** | GitHub rejected private personal-account protection on the current plan |
+| GitHub branch protection | **ENFORCED** | Public canonical repositories use protected `main` branches and required CI checks |
 
 Read the precise boundaries in [`docs/ENFORCEMENT.md`](docs/ENFORCEMENT.md).
 
@@ -66,7 +70,7 @@ Read the precise boundaries in [`docs/ENFORCEMENT.md`](docs/ENFORCEMENT.md).
 | **B** | Maintained software, services, APIs, integrations and automation | <span style="color:#A9143D"><strong>STANDARD</strong></span> | Useful tests, clean PR flow, proportional protection |
 | **C** | Documentation, prototypes, low-risk utilities and approved reference material | <span style="color:#78AD57"><strong>LIGHTWEIGHT</strong></span> | Clear purpose, clean history, no decorative governance |
 
-Every future repository must be proposed and classified before creation. The registry currently contains only this control plane.
+Every future repository must be proposed and classified before creation. The registry lists every certified HouseNet repository and its applicable controls.
 
 ## Machine authority
 
@@ -117,16 +121,18 @@ HouseNet-Projects owns this public control plane. The goal is the minimum correc
 
 ### Կառավարման հարթակի կարգավիճակ
 
+<!-- housenet-generated: control-plane-status-hy:start -->
 | Մակերես | Ընթացիկ վիճակ |
 | :--- | :--- |
-| Կառավարման հարթակ | ԱԿՏԻՎ |
-| CI | ԿԱՆԱՉ |
-| Քաղաքականություն | 1.4.0 | <!-- housenet-version: policy_version -->
-| Դասակարգում | CLASS A — CRITICAL |
-| Իրավասու սեփականատեր | HouseNet-Projects |
-| Codex bootstrap | ԿԻՐԱՐԿՎԱԾ |
-| Claude տեղային enforcement | ՍՊԱՍՄԱՆ ՄԵՋ — Claude Code-ը WSL-ում տեղադրված չէ |
-| GitHub branch protection | ԱՆՀԱՍԱՆԵԼԻ՝ ընթացիկ պլանով |
+| Կառավարման հարթակ | **ԱԿՏԻՎ** · CI **ԿԱՆԱՉ** |
+| Քաղաքականություն | `1.4.0` |
+| Դասակարգում | **CLASS A — CRITICAL** |
+| Իրավասու սեփականատեր | `HouseNet-Projects` |
+| Կանոնական պահոցներ | `3` գրանցված · տեսանելիությունը՝ **PUBLIC** |
+| Codex bootstrap | **ԿԻՐԱՐԿՎԱԾ** |
+| Claude տեղային enforcement | **ՍՊԱՍՄԱՆ ՄԵՋ** — Claude Code-ը WSL-ում տեղադրված չէ |
+| GitHub branch protection | **ԿԻՐԱՐԿՎԱԾ** · `main`-ը պաշտպանված է, CI ստուգումները պարտադիր են |
+<!-- housenet-generated: control-plane-status-hy:end -->
 
 ### Իշխանություն, գործակալներ և enforcement
 

@@ -3,7 +3,6 @@ from pathlib import Path
 import json, re, sys
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from housenet.versioning import read_manifest, valid_semver
-
 root = Path(sys.argv[1]).resolve() if len(sys.argv) > 1 else Path.cwd()
 try:
     manifest = read_manifest(root)
@@ -13,19 +12,27 @@ try:
     for surface in manifest.get('version_surfaces', []):
         path = root / surface['path']
         if not path.is_file():
-            errors.append(f'file={surface["path"]} expected={expected} actual=missing')
-            continue
+            errors.append(f'file={surface["path"]} expected={expected} actual=missing'); continue
         text = path.read_text()
+        start_marker, end_marker = surface.get('region_start'), surface.get('region_end')
+        if start_marker and end_marker:
+            start = text.find(start_marker)
+            end = text.find(end_marker, start + len(start_marker)) if start >= 0 else -1
+            if start < 0 or end < 0:
+                errors.append(f'file={surface["path"]} region={start_marker} expected={expected} actual=missing'); continue
+            region = text[start:end + len(end_marker)]
+            versions = re.findall(r'\b\d+\.\d+\.\d+\b', region)
+            bad = [v for v in versions if v != expected]
+            if bad or expected not in versions:
+                errors.append(f'file={surface["path"]} region={start_marker} expected={expected} actual={bad or versions or ["missing"]}')
+            continue
         marker = surface.get('marker', '')
         marked = [line for line in text.splitlines() if marker in line] if marker else [text]
         if not marked or not any(expected in line for line in marked):
             actual = next((re.search(r'\b\d+\.\d+\.\d+\b', line).group(0) for line in marked if re.search(r'\b\d+\.\d+\.\d+\b', line)), 'missing')
             errors.append(f'file={surface["path"]} field={marker} expected={expected} actual={actual}')
     if errors:
-        print('FAIL — VERSION DRIFT')
-        print('\n'.join(errors))
-        raise SystemExit(1)
+        print('FAIL — VERSION DRIFT'); print('\n'.join(errors)); raise SystemExit(1)
     print('PASS — version surfaces synchronized (' + expected + ')')
 except (OSError, ValueError, KeyError, json.JSONDecodeError) as exc:
-    print('FAIL — ' + str(exc))
-    raise SystemExit(1)
+    print('FAIL — ' + str(exc)); raise SystemExit(1)

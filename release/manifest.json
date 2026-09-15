@@ -9,8 +9,17 @@
   "version_surfaces": [
     {
       "path": "README.md",
-      "kind": "text",
-      "marker": "housenet-version: policy_version"
+      "kind": "generated",
+      "region_start": "<!-- housenet-generated: control-plane-status:start -->",
+      "region_end": "<!-- housenet-generated: control-plane-status:end -->",
+      "authority": "release/manifest.json:version + registry/repositories.json"
+    },
+    {
+      "path": "README.md",
+      "kind": "generated",
+      "region_start": "<!-- housenet-generated: control-plane-status-hy:start -->",
+      "region_end": "<!-- housenet-generated: control-plane-status-hy:end -->",
+      "authority": "release/manifest.json:version + registry/repositories.json"
     },
     {
       "path": "docs/POLICY.md",

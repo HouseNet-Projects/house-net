@@ -28,6 +28,8 @@ jobs:
       - name: Validate policy and self-registration
         run: |
           bin/validate-control-plane --json
+          bin/generate-control-plane-status .
+          git diff --exit-code -- README.md
           bin/check-version-consistency .
       - name: Test real failure modes
         env:
