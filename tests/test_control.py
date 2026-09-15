@@ -36,7 +36,7 @@ class PolicyTests(unittest.TestCase):
     def test_complete_control_plane(self):
         result=c.validate_control_plane(self.root)
         self.assertEqual(result['coverage_sections'],30)
-        self.assertEqual(result['registered_repositories'],1)
+        self.assertEqual(result['registered_repositories'],2)
 
     def test_immutable_source(self):
         p=self.root/'docs/source/HouseNet-GitHub-Policy-v1.0.md'
