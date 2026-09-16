@@ -9,7 +9,7 @@
 <!-- housenet-generated: design-status:start -->
 | STATUS | VERSION | CLASS | CONTROL PLANE | LANGUAGE |
 | :--- | :--- | :--- | :--- | :--- |
-| **ACTIVE** | **1.1.0** | **B — STANDARD** | **Policy 1.4.2** | **EN + HY** |
+| **ACTIVE** | **1.1.0** | **B — STANDARD** | **Policy 1.4.3** | **EN + HY** |
 <!-- housenet-generated: design-status:end -->
 
 The Design System is the reusable visual authority for the HouseNet ecosystem. It gives products, interfaces, documents and generated artifacts a shared language while leaving each surface room for its own purpose.
@@ -53,7 +53,7 @@ flowchart LR
 <!-- housenet-generated: design-status-hy:start -->
 | ԿԱՐԳԱՎԻՃԱԿ | ՏԱՐԲԵՐԱԿ | ԴԱՍ | CONTROL PLANE | ԼԵԶՈՒ |
 | :--- | :--- | :--- | :--- | :--- |
-| **ԱԿՏԻՎ** | **1.1.0** | **B — STANDARD** | **Policy 1.4.2** | **EN + HY** |
+| **ԱԿՏԻՎ** | **1.1.0** | **B — STANDARD** | **Policy 1.4.3** | **EN + HY** |
 <!-- housenet-generated: design-status-hy:end -->
 
 Design System-ը HouseNet-ի էկոհամակարգի վերօգտագործվող տեսողական իրավասությունն է։ Այն միավորում է արտադրանքների, միջերեսների, փաստաթղթերի և գեներացվող նյութերի լեզուն՝ յուրաքանչյուր մակերեսի նպատակին համապատասխան ազատություն պահպանելով։
