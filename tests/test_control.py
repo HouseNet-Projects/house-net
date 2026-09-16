@@ -216,7 +216,7 @@ class PolicyTests(unittest.TestCase):
 
     def test_machine_files_are_english_only_allowed(self):
         self.assertIsNone(c.validate_bilingual_documents(self.root))
-        self.assertEqual(json.loads((self.root/'policy/manifest.json').read_text())['version'],'1.4.2')
+        self.assertEqual(json.loads((self.root/'policy/manifest.json').read_text())['version'],'1.4.3')
 
     def test_preflight_wrong_identity_blocks(self):
         with patch.object(c,'command',return_value='WrongIdentity'):
@@ -268,8 +268,8 @@ class VersionSurfaceTests(unittest.TestCase):
         readme = root/'README.md'
         text = readme.read_text()
         start = '<!-- housenet-generated: control-plane-status:start -->'
-        pos = text.index('| **POLICY** | `1.4.2`')
-        readme.write_text(text[:pos] + '| **POLICY** | `1.0.0`' + text[pos + len('| **POLICY** | `1.4.2`'):])
+        pos = text.index('| **POLICY** | `1.4.3`')
+        readme.write_text(text[:pos] + '| **POLICY** | `1.0.0`' + text[pos + len('| **POLICY** | `1.4.3`'):])
         result = subprocess.run([str(root/'bin/check-version-consistency'), str(root)], capture_output=True, text=True)
         self.assertNotEqual(result.returncode, 0)
         self.assertIn('VERSION DRIFT', result.stdout)
@@ -278,7 +278,7 @@ class VersionSurfaceTests(unittest.TestCase):
         root = Path(tempfile.mkdtemp(prefix='housenet-generate-'))
         self.addCleanup(shutil.rmtree, root, ignore_errors=True)
         shutil.copytree(c.ROOT, root, dirs_exist_ok=True, ignore=shutil.ignore_patterns('.git','.venv','__pycache__'))
-        p=root/'README.md'; p.write_text(p.read_text().replace('`1.4.2` · machine authority','`1.0.0` · machine authority'))
+        p=root/'README.md'; p.write_text(p.read_text().replace('`1.4.3` · machine authority','`1.0.0` · machine authority'))
         subprocess.check_call([str(root/'bin/generate-control-plane-status'),str(root)])
         self.assertEqual(subprocess.run([str(root/'bin/check-version-consistency'),str(root)]).returncode,0)
 

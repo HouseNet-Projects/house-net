@@ -1,5 +1,5 @@
 {
-  "version": "1.4.2",
+  "version": "1.4.3",
   "repositories": [
     {
       "repository": "HouseNet-Projects/house-net-control-plane",
@@ -7,14 +7,14 @@
       "purpose": "Canonical engineering policy, approval, classification and agent control plane.",
       "owner": "HouseNet-Projects",
       "visibility": "public",
-      "control_plane_version": "1.4.2",
-      "control_plane_commit": "4673d4bf692b8ac2c55a82306a22fc0fa263c259",
+      "control_plane_version": "1.4.3",
+      "control_plane_commit": "5f1b9ebc5ebf2971cc1feb249a8f0b43d1daee96",
       "versioned": true,
       "canonical_version_source": {
         "path": "release/manifest.json",
         "field": "version"
       },
-      "current_version": "1.4.2",
+      "current_version": "1.4.3",
       "version_scheme": "semver",
       "release_state": "active",
       "version_surfaces": [
@@ -133,7 +133,7 @@
           "applied": false,
           "manual_action_required": true
         },
-        "control_plane_compatibility": "1.4.2"
+        "control_plane_compatibility": "1.4.3"
       }
     },
     {
@@ -142,8 +142,8 @@
       "purpose": "Canonical HouseNet brand, UI and bilingual document design system for products and operational documents.",
       "owner": "HouseNet-Projects",
       "visibility": "public",
-      "control_plane_version": "1.4.2",
-      "control_plane_commit": "4673d4bf692b8ac2c55a82306a22fc0fa263c259",
+      "control_plane_version": "1.4.3",
+      "control_plane_commit": "5f1b9ebc5ebf2971cc1feb249a8f0b43d1daee96",
       "versioned": true,
       "canonical_version_source": {
         "path": "release/manifest.json",
@@ -167,7 +167,7 @@
       "certified_release": {
         "version": "1.1.0",
         "commit": "df7b6f8d86f1c10675bed8629fa8385758a5c9e4",
-        "control_plane_compatibility": "1.4.2",
+        "control_plane_compatibility": "1.4.3",
         "status": "certified"
       },
       "applicable_rules": [
@@ -271,8 +271,24 @@
           "applied": false,
           "manual_action_required": true
         },
-        "control_plane_compatibility": "1.4.2"
-      }
+        "control_plane_compatibility": "1.4.3"
+      },
+      "capabilities": [
+        {
+          "capability_id": "design.templates",
+          "purpose": "Certified HouseNet document and visual templates",
+          "type": "design",
+          "mode": "READ",
+          "path": "templates",
+          "schema_version": "1.1.0",
+          "sensitivity": "PUBLIC",
+          "authority_requirement": "NONE",
+          "certification": "certified",
+          "health": "healthy",
+          "validator": "design-system-ci",
+          "semantics": "authoritative"
+        }
+      ]
     },
     {
       "repository": "HouseNet-Projects/house-net-command-center",
@@ -280,8 +296,8 @@
       "purpose": "Canonical HouseNet repository for the Command-center operational workspace and Deputy agent runtime.",
       "owner": "HouseNet-Projects",
       "visibility": "public",
-      "control_plane_version": "1.4.2",
-      "control_plane_commit": "4673d4bf692b8ac2c55a82306a22fc0fa263c259",
+      "control_plane_version": "1.4.3",
+      "control_plane_commit": "5f1b9ebc5ebf2971cc1feb249a8f0b43d1daee96",
       "versioned": false,
       "release_state": "active",
       "applicable_rules": [
@@ -449,8 +465,24 @@
           "applied": false,
           "manual_action_required": true
         },
-        "control_plane_compatibility": "1.4.2"
-      }
+        "control_plane_compatibility": "1.4.3"
+      },
+      "capabilities": [
+        {
+          "capability_id": "command.state",
+          "purpose": "Deputy operational state and open-loop Store",
+          "type": "state",
+          "mode": "READ_WRITE",
+          "path": ".claude/skills/store.py",
+          "schema_version": "1.0.0",
+          "sensitivity": "CONFIDENTIAL",
+          "authority_requirement": "ACTION_RUNTIME",
+          "certification": "certified",
+          "health": "healthy",
+          "validator": "command-center-ci",
+          "semantics": "authoritative"
+        }
+      ]
     },
     {
       "repository": "HouseNet-Projects/house-net-knowledge",
@@ -458,8 +490,8 @@
       "purpose": "Canonical HouseNet organizational knowledge, provenance and governed intake.",
       "owner": "HouseNet-Projects",
       "visibility": "public",
-      "control_plane_version": "1.4.2",
-      "control_plane_commit": "4673d4bf692b8ac2c55a82306a22fc0fa263c259",
+      "control_plane_version": "1.4.3",
+      "control_plane_commit": "5f1b9ebc5ebf2971cc1feb249a8f0b43d1daee96",
       "versioned": false,
       "release_state": "active",
       "applicable_rules": [
@@ -561,8 +593,24 @@
           "applied": false,
           "manual_action_required": true
         },
-        "control_plane_compatibility": "1.4.2"
-      }
+        "control_plane_compatibility": "1.4.3"
+      },
+      "capabilities": [
+        {
+          "capability_id": "knowledge.search",
+          "purpose": "Canonical provenance-bearing Knowledge search",
+          "type": "knowledge",
+          "mode": "READ",
+          "path": "knowledge/index/catalog.json",
+          "schema_version": "1.0.0",
+          "sensitivity": "INTERNAL",
+          "authority_requirement": "NONE",
+          "certification": "certified",
+          "health": "healthy",
+          "validator": "validate-knowledge",
+          "semantics": "authoritative"
+        }
+      ]
     },
     {
       "repository": "HouseNet-Projects/house-net-vault",
@@ -570,8 +618,8 @@
       "purpose": "HouseNet secure reference and recovery metadata foundation; never stores plaintext secrets.",
       "owner": "HouseNet-Projects",
       "visibility": "public",
-      "control_plane_version": "1.4.2",
-      "control_plane_commit": "4673d4bf692b8ac2c55a82306a22fc0fa263c259",
+      "control_plane_version": "1.4.3",
+      "control_plane_commit": "5f1b9ebc5ebf2971cc1feb249a8f0b43d1daee96",
       "versioned": false,
       "release_state": "active",
       "applicable_rules": [
@@ -672,8 +720,24 @@
           "applied": false,
           "manual_action_required": true
         },
-        "control_plane_compatibility": "1.4.2"
-      }
+        "control_plane_compatibility": "1.4.3"
+      },
+      "capabilities": [
+        {
+          "capability_id": "vault.reference",
+          "purpose": "Redacted secret-reference and recovery metadata lookup",
+          "type": "vault",
+          "mode": "READ",
+          "path": "vault/index.json",
+          "schema_version": "1.0.0",
+          "sensitivity": "RESTRICTED",
+          "authority_requirement": "OWNER_APPROVAL",
+          "certification": "certified",
+          "health": "healthy",
+          "validator": "validate-vault",
+          "semantics": "authoritative"
+        }
+      ]
     }
   ]
 }

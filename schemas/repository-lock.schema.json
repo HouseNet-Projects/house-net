@@ -17,7 +17,7 @@
       "const": "HouseNet-Projects/house-net-control-plane"
     },
     "policy_version": {
-      "const": "1.4.2"
+      "const": "1.4.3"
     },
     "policy_commit": {
       "type": "string",

@@ -22,7 +22,7 @@
 | Surface | Current state |
 | :--- | :--- |
 | **CONTROL PLANE** | **ACTIVE** · CI **GREEN** |
-| **POLICY** | `1.4.2` · machine authority under [`policy/`](policy/) |
+| **POLICY** | `1.4.3` · machine authority under [`policy/`](policy/) |
 | **CLASSIFICATION** | **CLASS A — CRITICAL** |
 | **AUTHORITY** | `HouseNet-Projects` · explicit owner approval |
 | **CANONICAL REPOSITORIES** | `5` registered · visibility **PUBLIC** |
@@ -125,7 +125,7 @@ HouseNet-Projects owns this public control plane. The goal is the minimum correc
 | Մակերես | Ընթացիկ վիճակ |
 | :--- | :--- |
 | Կառավարման հարթակ | **ԱԿՏԻՎ** · CI **ԿԱՆԱՉ** |
-| Քաղաքականություն | `1.4.2` |
+| Քաղաքականություն | `1.4.3` |
 | Դասակարգում | **CLASS A — CRITICAL** |
 | Իրավասու սեփականատեր | `HouseNet-Projects` |
 | Կանոնական պահոցներ | `5` գրանցված · տեսանելիությունը՝ **PUBLIC** |

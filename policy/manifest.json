@@ -1,5 +1,5 @@
 {
-  "version": "1.4.2",
+  "version": "1.4.3",
   "effective_date": "2026-09-15",
   "owner": "HouseNet-Projects",
   "github_identity": "HouseNet-Projects",
@@ -319,21 +319,21 @@
     }
   ],
   "file_sha256": {
-    "policy/actions.json": "9e3e5ec0e51b935ed993caf957c53ad2092a473ec5467c697605e7ae6a27a3c8",
-    "policy/authority.json": "71326c35a4620cf067732aa1c92057d897347264edb25fd26d4220fa1c17bd25",
-    "policy/git.json": "89f74a91ea5647dc16129e99be8c6056c241fe506cefaab85d4d96cb6b9720d0",
-    "policy/merge.json": "5041c46a4160f1629c6ccd5f2b2c4c17b0eb6edd566402275a4c83787bc75411",
-    "policy/notifications.json": "eef084b701c374767f749497fdd08d1cdcebfc2dd68db38fbf0312b9ce28160a",
-    "policy/repository-baseline.json": "ed769b73e3c6cd9fb3f5838f08a68dffc2d6690f65e21efe9e7f977043504339",
-    "policy/repository-classes.json": "d4d46e697d30ee24fb6e676375567921b11533a8805cdc336e2b25e47aef4ee0",
-    "policy/security.json": "234354ee291c18f72481678550bfbafa556aab6acc36153f54c447174a20d1ca",
+    "policy/actions.json": "ce83c60181191ae989e3f5734ce61418ac607f480aa4606fcb71073fcadf720e",
+    "policy/authority.json": "6d36e77f5deee4edc7faff0dc54c92e83ef207265b2a93d4797dedc7e5bbde0f",
+    "policy/git.json": "71120ba71f7745bdbf9c3820e593bf7f4d3460bee8e33d74835a44e296fcaa06",
+    "policy/merge.json": "264139e81c84e9df49834191e1f1b831bd83e0524e9f948087bb673dc021dbce",
+    "policy/notifications.json": "67c758d48cfa842985585981083da0f1b9f3fea5ab553cc53f823385b4245231",
+    "policy/repository-baseline.json": "bfc79f8aa2eaabcdbba86b1f1e787a092b5693dd72145209252146fca8bf76de",
+    "policy/repository-classes.json": "bd631a1605635d9f7ecf6c66470bbf1f4ff8d93a4ef517ba0580ee8d8e1ca863",
+    "policy/security.json": "c8d016831037c45fb062e47d7b01cc85e833933879726667c98b4d2aead525cb",
     "schemas/authority.schema.json": "5b19327dffbbfc8492935520fef45a8e6a86a703e7a41c0004d4ee6f5dcd2a6d",
-    "schemas/manifest.schema.json": "33bb7356e3ab8350dd5c3e890048ee692e9ee450c2265ed3dd70c123fb4a5faa",
-    "schemas/policy.schema.json": "44989e618d95227acb4af058a2f5b22115b60a1f012e575741a9ea3dda89d3c4",
-    "schemas/registry.schema.json": "6f5f95cceceb5f870e2ec5183634c7c184e9ec5e3df40c5dcb462702e30e8cde",
+    "schemas/manifest.schema.json": "f9f19b593d3b9aa4701e38dc3a2d5fb3f466333708c2ee6c9fe0ac2e79d2798a",
+    "schemas/policy.schema.json": "963c96616a5da685d8d31e4bf42291baa053cc9be0197182c731d62d58bdabbf",
+    "schemas/registry.schema.json": "54f2821edb660c334f6ad4f2dd7abfef89dc6d8a29165990e1f4b419c0911dd1",
     "schemas/release-manifest.schema.json": "c5c65c44cab3f40ca7fa59bc47cd299f1814d39162c83bf32d374573e7845d09",
     "schemas/repository-class.schema.json": "f3309da9a401b352f46da4c050f6c80a454a00ad8fb407b7590de8ab4236782e",
-    "schemas/repository-lock.schema.json": "2851cf42fb0d2550183b910eeaf2afd9c0190ed6fd5781734bc6a50400f10f60",
-    "schemas/repository-registration.schema.json": "73d1fd55ea42782296c4b69e12414d512d9abe6b09c42e3a7200bb94190b735e"
+    "schemas/repository-lock.schema.json": "6f706c3786f823a4d172b33bedc569a624abb91afc8b83a00c892931b1e4fce6",
+    "schemas/repository-registration.schema.json": "8f1248dd6171c2a336cb06a5f9f249e4fb53ec2b4057e4fafd87401af153133d"
   }
 }

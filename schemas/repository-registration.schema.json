@@ -27,7 +27,7 @@
       ]
     },
     "control_plane_version": {
-      "const": "1.4.2"
+      "const": "1.4.3"
     },
     "control_plane_commit": {
       "type": "string",
@@ -200,6 +200,104 @@
         ],
         "additionalProperties": false
       }
+    },
+    "capabilities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "capability_id": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
+          },
+          "purpose": {
+            "type": "string",
+            "minLength": 1
+          },
+          "type": {
+            "enum": [
+              "knowledge",
+              "vault",
+              "design",
+              "runtime",
+              "integration",
+              "state",
+              "output"
+            ]
+          },
+          "mode": {
+            "enum": [
+              "READ",
+              "WRITE",
+              "READ_WRITE"
+            ]
+          },
+          "path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "schema_version": {
+            "type": "string",
+            "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+          },
+          "sensitivity": {
+            "enum": [
+              "PUBLIC",
+              "INTERNAL",
+              "CONFIDENTIAL",
+              "RESTRICTED"
+            ]
+          },
+          "authority_requirement": {
+            "enum": [
+              "NONE",
+              "OWNER_APPROVAL",
+              "ACTION_RUNTIME"
+            ]
+          },
+          "certification": {
+            "enum": [
+              "certified",
+              "pending",
+              "deprecated"
+            ]
+          },
+          "health": {
+            "enum": [
+              "healthy",
+              "degraded",
+              "unavailable"
+            ]
+          },
+          "validator": {
+            "type": "string",
+            "minLength": 1
+          },
+          "semantics": {
+            "enum": [
+              "authoritative",
+              "derived",
+              "cache"
+            ]
+          }
+        },
+        "required": [
+          "capability_id",
+          "purpose",
+          "type",
+          "mode",
+          "path",
+          "schema_version",
+          "sensitivity",
+          "authority_requirement",
+          "certification",
+          "health",
+          "validator",
+          "semantics"
+        ],
+        "additionalProperties": false
+      },
+      "uniqueItems": true
     },
     "certified_release": {
       "type": "object",
