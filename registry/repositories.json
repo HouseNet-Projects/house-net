@@ -279,7 +279,7 @@
           "purpose": "Certified HouseNet document and visual templates",
           "type": "design",
           "mode": "READ",
-          "path": "templates",
+          "path": "documents/templates",
           "schema_version": "1.1.0",
           "sensitivity": "PUBLIC",
           "authority_requirement": "NONE",
