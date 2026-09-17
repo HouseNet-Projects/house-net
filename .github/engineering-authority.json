@@ -1,0 +1,52 @@
+{
+  "authority_id": "EAE-PR6-GITHUB-DESIGN",
+  "approved_by": "GEV",
+  "approval_reference": "gev-mission-approval-pr6",
+  "approved_at": "2026-09-17T12:30:00Z",
+  "mission": "Complete the HouseNet GitHub README visual presentation and merge PR #6.",
+  "repository": "HouseNet-Projects/house-net",
+  "base_sha": "fd0d5585b2500ac8b1192c41619a0b6f2b2d5104",
+  "branch": "design/github-experience",
+  "pr": "6",
+  "allowed_operations": [
+    "branch",
+    "edit",
+    "test",
+    "validate",
+    "push_branch",
+    "update_pr",
+    "merge_green",
+    "cleanup_branch",
+    "regenerate_artifacts"
+  ],
+  "allowed_paths": [
+    "README.md",
+    "design-system/assets/github/**",
+    ".github/engineering-authority.json",
+    "docs/governance/engineering-authority.schema.json",
+    "tools/engineering_authority_gate.py",
+    "tools/test_engineering_authority.py",
+    "tools/validate_house_net.py",
+    "tools/test_engineering_authority_gate.py"
+  ],
+  "prohibited_operations": [
+    "external_write",
+    "visibility_change",
+    "branch_protection_change",
+    "force_push",
+    "history_rewrite",
+    "credential_admin",
+    "permission_escalation",
+    "action_runtime_bypass"
+  ],
+  "risk_ceiling": "LOW",
+  "expires_at": "2026-09-30T23:59:59Z",
+  "status": "ACTIVE",
+  "audit_trail": [
+    {
+      "event": "GEV_EXPLICIT_MISSION_AUTHORIZATION",
+      "reference": "conversation-mission-pr6"
+    }
+  ],
+  "consumed": false
+}

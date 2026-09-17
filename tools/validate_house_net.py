@@ -25,7 +25,7 @@ def main():
     for x in docs:
         if '/legacy/' in x['path'] and x.get('current') is True: return fail(f"legacy document marked current: {x['path']}")
         if x['path'].endswith('runtime/requirements.txt') and (x.get('category')!='BUILD_INPUT' or not x.get('machine_consumed')): return fail('runtime requirements semantic classification invalid')
-    required_schema={'authority_id','approved_by','owner_proof','approved_at','mission','repository','base_sha','allowed_operations','allowed_paths','prohibited_operations','risk_ceiling','expires_at','status','audit_trail','consumed','branch','pr'}
+    required_schema={'authority_id','approved_by','approval_reference','approved_at','mission','repository','base_sha','allowed_operations','allowed_paths','prohibited_operations','risk_ceiling','expires_at','status','audit_trail','consumed','branch','pr'}
     if set(envelope_schema.get('required',[])) != required_schema: return fail('engineering authority schema incomplete')
     if envelope_schema.get('properties',{}).get('repository',{}).get('const') != control.get('repository'): return fail('engineering authority repository drift')
     if not (ROOT/'tools/engineering_authority.py').is_file() or not (ROOT/'tools/test_engineering_authority.py').is_file(): return fail('engineering authority enforcement missing')

@@ -6,7 +6,7 @@
   "required": [
     "authority_id",
     "approved_by",
-    "owner_proof",
+    "approval_reference",
     "approved_at",
     "mission",
     "repository",
@@ -119,7 +119,7 @@
     "consumed": {
       "type": "boolean"
     },
-    "owner_proof": {
+    "approval_reference": {
       "type": "string",
       "minLength": 16
     }

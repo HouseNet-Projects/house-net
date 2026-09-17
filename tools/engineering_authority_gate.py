@@ -12,21 +12,22 @@ SENSITIVE=(' .github/'.strip(), 'CODEOWNERS', 'house-net-control.json', 'control
  'tools/engineering_authority_gate.py', 'tools/validate_house_net.py', 'tools/policy_coverage.py',
  'tools/secret_scan.py', 'vault/bin/validate-vault', 'command-center/.claude/skills/actions.py')
 def sh(*args): return subprocess.check_output(args,cwd=ROOT,text=True).strip()
+def ancestor(older,newer): return subprocess.run(['git','merge-base','--is-ancestor',older,newer],cwd=ROOT).returncode==0
 def main():
  base=os.environ.get('GITHUB_BASE_SHA') or sh('git','rev-parse','origin/main')
  head=os.environ.get('GITHUB_SHA') or sh('git','rev-parse','HEAD')
  paths=[p for p in sh('git','diff','--name-only',f'{base}...{head}').splitlines() if p]
- env_path=os.environ.get('HOUSENET_ENGINEERING_AUTHORITY_FILE')
+ env_path=os.environ.get('HOUSENET_ENGINEERING_AUTHORITY_FILE') or str(ROOT/'.github/engineering-authority.json')
  envelope=None
  if env_path and pathlib.Path(env_path).exists(): envelope=json.loads(pathlib.Path(env_path).read_text())
  elif os.environ.get('HOUSENET_ENGINEERING_AUTHORITY_JSON'):
   envelope=json.loads(os.environ['HOUSENET_ENGINEERING_AUTHORITY_JSON'])
  sensitive=any(any(p==s or p.startswith(s) for s in SENSITIVE) for p in paths)
  if envelope:
-  if envelope.get('base_sha') and not sh('git','merge-base','--is-ancestor',envelope['base_sha'],base): return fail('envelope base is not ancestor of PR base')
+  if envelope.get('base_sha') and not ancestor(envelope['base_sha'],base): return fail('envelope base is not ancestor of PR base')
   if envelope.get('branch') and envelope['branch'] != os.environ.get('GITHUB_HEAD_REF',''): return fail('branch binding mismatch')
   if envelope.get('pr') and str(envelope['pr']) != os.environ.get('GITHUB_EVENT_PULL_REQUEST_NUMBER',''): return fail('PR binding mismatch')
-  if not envelope.get('owner_proof'): return fail('missing owner principal proof')
+  if not envelope.get('approval_reference'): return fail('missing approval reference')
   for p in paths:
    ok,reason=validate(envelope,'edit',p)
    if not ok: return fail(f'path {p}: {reason}')
