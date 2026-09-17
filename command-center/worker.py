@@ -49,6 +49,8 @@ def run_once():
 
 def status():
     s=_status(proactive._st().get('checkpoints','worker:status')); last=proactive._st().get('checkpoints','worker:last_run');
+    # A supervised daemon remains running between cycles; expose process liveness, not only cycle activity.
+    if s.get('pid') and _pid_alive(s.get('pid')): s['running']=True
     return {'installed':True,**s,'last_run':last or s.get('last_run'),'last_success':s.get('last_success'),'last_failure':s.get('last_failure')}
 
 def serve(interval=None):

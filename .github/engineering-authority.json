@@ -1,13 +1,13 @@
 {
-  "authority_id": "EAE-FINAL-PRODUCT-HARDENING-UI",
+  "authority_id": "EAE-LOCALHOST-CERTIFICATION-FIX",
   "approved_by": "GEV",
   "approval_reference": "gev-mission-product-completion-hardening",
   "approved_at": "2026-09-17T20:00:00Z",
-  "mission": "Complete the operator approval inbox presentation without changing runtime semantics.",
+  "mission": "Fix truthful supervised worker process status discovered during localhost certification.",
   "repository": "HouseNet-Projects/house-net",
-  "base_sha": "4f133cfdff16427359e2eb380e076dfcbaf48c4f",
-  "branch": "product/final-product-hardening-ui",
-  "pr": "15",
+  "base_sha": "aba5cb6af933f1f008230d8c7acd79cede67b1ac",
+  "branch": "product/local-cert-status-fix",
+  "pr": "16",
   "allowed_operations": [
     "branch",
     "edit",
