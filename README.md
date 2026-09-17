@@ -17,7 +17,7 @@
 
 ## The product
 
-<p align="center"><img src="design-system/assets/github/product.svg" alt="HouseNet product foundation" width="100%"></p>
+<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="design-system/assets/github/product-dark.svg"><source media="(prefers-color-scheme: light)" srcset="design-system/assets/github/product.svg"><img src="design-system/assets/github/product.svg" alt="HouseNet product foundation" width="100%"></picture></p>
 
 HouseNet brings governance, operating work, durable knowledge, brand standards and secret references into one canonical repository. Deputy reads the current state, reasons across professional domains, prepares work and keeps the loop visible. Material external changes stay behind explicit approval and independent verification.
 
@@ -37,7 +37,7 @@ HouseNet brings governance, operating work, durable knowledge, brand standards a
 
 ## What Deputy does
 
-<p align="center"><img src="design-system/assets/github/what-deputy.svg" alt="What Deputy does" width="100%"></p>
+<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="design-system/assets/github/what-deputy-dark.svg"><source media="(prefers-color-scheme: light)" srcset="design-system/assets/github/what-deputy.svg"><img src="design-system/assets/github/what-deputy.svg" alt="What Deputy does" width="100%"></picture></p>
 
 - understands natural-language requests and routes them to relevant professional brains;
 - uses the canonical Skill System, Store and operational state;
@@ -85,7 +85,7 @@ docs/            navigation, audit and provenance
 
 ## Validate locally
 
-<p align="center"><img src="design-system/assets/github/validate-docs.svg" alt="Validate and navigate HouseNet" width="100%"></p>
+<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="design-system/assets/github/validate-docs-dark.svg"><source media="(prefers-color-scheme: light)" srcset="design-system/assets/github/validate-docs.svg"><img src="design-system/assets/github/validate-docs.svg" alt="Validate and navigate HouseNet" width="100%"></picture></p>
 
 ```bash
 python tools/validate_house_net.py
@@ -96,6 +96,8 @@ python design-system/validators/validate_design_system.py design-system
 For the full operating contract, start with [`docs/README.md`](docs/README.md), then [`docs/governance/PUBLIC_AUDIT.md`](docs/governance/PUBLIC_AUDIT.md). For contribution and enforcement details, read [`AGENTS.md`](AGENTS.md) and the component guidance nearest to the files you change.
 
 ## Canonical identity
+
+<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="design-system/assets/github/canonical-dark.svg"><source media="(prefers-color-scheme: light)" srcset="design-system/assets/github/canonical-light.svg"><img src="design-system/assets/github/canonical-light.svg" alt="Canonical HouseNet source tree" width="100%"></picture></p>
 
 `HouseNet-Projects/house-net` is the canonical HouseNet source tree. The root control contract is [`house-net-control.json`](house-net-control.json). Runtime truth, policy and approvals are machine-enforced by the component owners and required CI checks.
 
