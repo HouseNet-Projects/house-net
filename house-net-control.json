@@ -1,0 +1,14 @@
+{
+  "repository": "HouseNet-Projects/house-net",
+  "classification": "A",
+  "control_plane": "HouseNet-Projects/house-net",
+  "policy_version": "1.4.3",
+  "policy_commit": "cfde3fb2533f03bb36364bb0db784e53016e4e4e",
+  "components": {
+    "control-plane": "governance",
+    "design-system": "brand_and_document_standards",
+    "command-center": "deputy_runtime_and_operational_state",
+    "knowledge": "curated_durable_knowledge",
+    "vault": "secret_reference_and_recovery_metadata"
+  }
+}

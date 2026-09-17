@@ -1,0 +1,71 @@
+name: HouseNet monorepo CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  control-plane:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with: {fetch-depth: 0, lfs: true}
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with: {python-version: '3.12'}
+      - run: python control-plane/bin/validate-control-plane --json
+      - run: python -m unittest discover -s control-plane/tests -v
+  design-system:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with: {lfs: true}
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with: {python-version: '3.12'}
+      - run: python design-system/validators/validate_design_system.py design-system
+      - run: python -m unittest discover -s design-system/tests -q
+  knowledge:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with: {lfs: true}
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with: {python-version: '3.12'}
+      - run: python knowledge/bin/validate-knowledge
+      - run: python -m unittest discover -s knowledge/tests -v
+  vault:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with: {lfs: true}
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with: {python-version: '3.12'}
+      - run: python vault/bin/validate-vault
+      - run: python -m unittest discover -s vault/tests -v
+  command-center:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with: {fetch-depth: 0, lfs: true}
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with: {python-version: '3.13'}
+      - run: python -m unittest discover -s command-center/.claude/tests -v
+        env:
+          PYTHONDONTWRITEBYTECODE: '1'
+          COMMAND_CENTER_TEST_MODE: '1'
+  full-system:
+    runs-on: ubuntu-24.04
+    needs: [control-plane, design-system, knowledge, vault, command-center]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with: {fetch-depth: 0, lfs: true}
+      - run: git lfs fsck
+      - run: |
+          python3 - <<'PY'
+          import json
+          with open('house-net-control.json') as f: d=json.load(f)
+          assert d['repository']=='HouseNet-Projects/house-net'
+          assert d['policy_version']=='1.4.3'
+          PY
