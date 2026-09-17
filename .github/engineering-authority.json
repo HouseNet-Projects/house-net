@@ -1,13 +1,13 @@
 {
-  "authority_id": "EAE-LIVE-COMPANY-COCKPIT",
+  "authority_id": "EAE-CONTROLLED-EXECUTION",
   "approved_by": "GEV",
-  "approval_reference": "gev-mission-live-company-cockpit",
-  "approved_at": "2026-09-17T15:00:00Z",
-  "mission": "Implement the Live Company Cockpit on the existing Deputy operating loop.",
+  "approval_reference": "gev-mission-controlled-execution",
+  "approved_at": "2026-09-17T16:00:00Z",
+  "mission": "Implement controlled execution surface over the canonical Action Runtime.",
   "repository": "HouseNet-Projects/house-net",
-  "base_sha": "e2e1f071cc4f4627c1463f9d817e0b22110809ae",
-  "branch": "product/live-company-cockpit",
-  "pr": "9",
+  "base_sha": "a712fdc1b8d5e3677c3a0ea0b7c66a32c3d83031",
+  "branch": "product/controlled-execution",
+  "pr": "10",
   "allowed_operations": [
     "branch",
     "edit",
@@ -21,7 +21,6 @@
   ],
   "allowed_paths": [
     "command-center/**",
-    "README.md",
     ".github/engineering-authority.json"
   ],
   "prohibited_operations": [
