@@ -19,11 +19,14 @@ def main():
  env_path=os.environ.get('HOUSENET_ENGINEERING_AUTHORITY_FILE')
  envelope=None
  if env_path and pathlib.Path(env_path).exists(): envelope=json.loads(pathlib.Path(env_path).read_text())
+ elif os.environ.get('HOUSENET_ENGINEERING_AUTHORITY_JSON'):
+  envelope=json.loads(os.environ['HOUSENET_ENGINEERING_AUTHORITY_JSON'])
  sensitive=any(any(p==s or p.startswith(s) for s in SENSITIVE) for p in paths)
  if envelope:
   if envelope.get('base_sha') and not sh('git','merge-base','--is-ancestor',envelope['base_sha'],base): return fail('envelope base is not ancestor of PR base')
   if envelope.get('branch') and envelope['branch'] != os.environ.get('GITHUB_HEAD_REF',''): return fail('branch binding mismatch')
-  if envelope.get('pr_number') and str(envelope['pr_number']) != os.environ.get('GITHUB_EVENT_PULL_REQUEST_NUMBER',''): return fail('PR binding mismatch')
+  if envelope.get('pr') and str(envelope['pr']) != os.environ.get('GITHUB_EVENT_PULL_REQUEST_NUMBER',''): return fail('PR binding mismatch')
+  if not envelope.get('owner_proof'): return fail('missing owner principal proof')
   for p in paths:
    ok,reason=validate(envelope,'edit',p)
    if not ok: return fail(f'path {p}: {reason}')

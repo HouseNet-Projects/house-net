@@ -5,6 +5,7 @@ ROOT = pathlib.Path(__file__).resolve().parents[1]
 OLD = tuple(f"HouseNet-Projects/house-net-{x}" for x in ("control-plane","design-system","command-center","knowledge","vault"))
 def fail(msg): print(f"FAIL — {msg}"); return 2
 def main():
+    workflow=(ROOT/'.github/workflows/house-net-ci.yml').read_text()
     try:
         control=json.loads((ROOT/'house-net-control.json').read_text())
         matrix=json.loads((ROOT/'docs/governance/enforcement-matrix.json').read_text())
@@ -24,7 +25,7 @@ def main():
     for x in docs:
         if '/legacy/' in x['path'] and x.get('current') is True: return fail(f"legacy document marked current: {x['path']}")
         if x['path'].endswith('runtime/requirements.txt') and (x.get('category')!='BUILD_INPUT' or not x.get('machine_consumed')): return fail('runtime requirements semantic classification invalid')
-    required_schema={'authority_id','approved_by','approved_at','mission','repository','base_sha','allowed_operations','allowed_paths','prohibited_operations','risk_ceiling','expires_at','status','audit_trail','consumed'}
+    required_schema={'authority_id','approved_by','owner_proof','approved_at','mission','repository','base_sha','allowed_operations','allowed_paths','prohibited_operations','risk_ceiling','expires_at','status','audit_trail','consumed','branch','pr'}
     if set(envelope_schema.get('required',[])) != required_schema: return fail('engineering authority schema incomplete')
     if envelope_schema.get('properties',{}).get('repository',{}).get('const') != control.get('repository'): return fail('engineering authority repository drift')
     if not (ROOT/'tools/engineering_authority.py').is_file() or not (ROOT/'tools/test_engineering_authority.py').is_file(): return fail('engineering authority enforcement missing')
@@ -39,8 +40,10 @@ def main():
     try:
         cov=json.loads((ROOT/'docs/governance/policy-coverage.json').read_text())
         if cov.get('total_rules') != len(cov.get('rules',[])) or cov.get('unmapped_rules'): return fail('policy coverage incomplete')
+        for c in cov['rules']:
+            if not c.get('source_policy') or not c.get('rule_id') or not c.get('rationale'): return fail('policy coverage evidence incomplete')
+            if c.get('classification')=='MACHINE_ENFORCED' and (not c.get('artifacts') or not all((ROOT/a).exists() for a in c['artifacts']) or not c.get('tests') or c.get('ci_check') not in workflow or c.get('fail_closed') is not True): return fail('policy coverage technical evidence incomplete')
     except Exception: return fail('policy coverage unreadable')
-    workflow=(ROOT/'.github/workflows/house-net-ci.yml').read_text()
     for item in critical:
         target=ROOT/item['enforcement_location']
         if not target.exists(): return fail(f"missing enforcement target: {item['requirement_id']}")

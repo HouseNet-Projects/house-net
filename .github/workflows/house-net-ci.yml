@@ -15,6 +15,7 @@ jobs:
       GITHUB_SHA: ${{ github.sha }}
       GITHUB_HEAD_REF: ${{ github.head_ref }}
       GITHUB_EVENT_PULL_REQUEST_NUMBER: ${{ github.event.pull_request.number }}
+      HOUSENET_ENGINEERING_AUTHORITY_JSON: ${{ secrets.HOUSENET_ENGINEERING_AUTHORITY_JSON }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with: {fetch-depth: 0, lfs: true}
