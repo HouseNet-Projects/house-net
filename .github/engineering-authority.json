@@ -1,13 +1,13 @@
 {
-  "authority_id": "EAE-LOCALHOST-CERTIFICATION-FIX",
+  "authority_id": "EAE-OCI-DEPUTY-HOST-SETUP",
   "approved_by": "GEV",
-  "approval_reference": "gev-mission-product-completion-hardening",
-  "approved_at": "2026-09-17T20:00:00Z",
-  "mission": "Fix truthful supervised worker process status discovered during localhost certification.",
+  "approval_reference": "gev-explicit-oci-free-tier-deputy-setup",
+  "approved_at": "2026-09-17T21:00:00Z",
+  "mission": "Create and prepare the dedicated Always Free Oracle Cloud Deputy host, isolated network, localhost-only deployment, and operational certification.",
   "repository": "HouseNet-Projects/house-net",
-  "base_sha": "aba5cb6af933f1f008230d8c7acd79cede67b1ac",
-  "branch": "product/local-cert-status-fix",
-  "pr": "16",
+  "base_sha": "72f10c7e10fff6aaffd745183007eec4b07d9cee",
+  "branch": "fix/deploy-backup-ownership",
+  "pr": "17",
   "allowed_operations": [
     "branch",
     "edit",
@@ -20,10 +20,7 @@
     "regenerate_artifacts"
   ],
   "allowed_paths": [
-    "command-center/**",
-    "deploy/**",
-    "docs/**",
-    ".github/workflows/house-net-ci.yml",
+    "deploy/install.sh",
     ".github/engineering-authority.json"
   ],
   "prohibited_operations": [
