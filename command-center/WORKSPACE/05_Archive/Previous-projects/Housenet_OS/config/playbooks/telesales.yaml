@@ -1,0 +1,149 @@
+department: telesales
+title: "Telesales"
+
+kpis:
+  - { id: calls_per_agent_avg, title: "Զանգեր օպերատորին",  unit: "հատ", direction: up }
+  - { id: contact_rate,        title: "Կոնտակտի տոկոս",     unit: "%",   direction: up }
+  - { id: conversion_rate,     title: "Կոնվերսիա",          unit: "%",   direction: up }
+  - { id: qa_score_avg,        title: "QA միջին գնահատական", unit: "բալ", direction: up }
+
+rituals:
+  - id: telesales.morning_brief
+    title: "Առավոտյան brief և օրվա ցուցակների բաշխում"
+    cadence: workdays
+    time: "09:00"
+    duration_min: 15
+    owner_role: telesales_lead
+    inputs:
+      - "Օրվա զանգերի ցուցակ՝ սեգմենտավորված"
+      - "Երեկվա չավարտված callback-երը"
+      - "Ակտիվ ակցիան և script-ի փոփոխությունը"
+    outputs: ["Ամեն օպերատոր ունի իր ցուցակը և օրվա թիրախը"]
+    severity: high
+
+  - id: telesales.midday_check
+    title: "Կեսօրյա կատարողականի ստուգում"
+    cadence: workdays
+    time: "14:00"
+    duration_min: 10
+    owner_role: telesales_lead
+    inputs: ["Զանգերի քանակ և կոնտակտի տոկոս ըստ օպերատորի"]
+    outputs: ["Հետ մնացողների հետ անհատական միջամտություն"]
+
+  - id: telesales.qa_session
+    title: "QA լսում և հետադարձ կապ"
+    cadence: weekly
+    weekday: wed
+    duration_min: 90
+    owner_role: telesales_qa
+    participants: [telesales_lead]
+    inputs: ["Պատահական 5% զանգերի ընտրանք", "Բոլոր վիճելի դեպքերը"]
+    outputs: ["Գնահատականներ և անհատական հետադարձ կապ"]
+
+  - id: telesales.script_review
+    title: "Script-երի և առարկությունների վերանայում"
+    cadence: biweekly
+    weekday: mon
+    duration_min: 60
+    owner_role: telesales_lead
+    participants: [marketing_lead, ops_head]
+    inputs: ["Ամենահաճախ առարկությունները", "Կոնվերսիան ըստ script տարբերակի"]
+    outputs: ["Թարմացված script և առարկությունների պատասխաններ"]
+
+  - id: telesales.list_planning
+    title: "Զանգերի բազաների պլանավորում"
+    cadence: weekly
+    weekday: fri
+    duration_min: 45
+    owner_role: telesales_lead
+    participants: [ops_head, marketing_lead]
+    inputs: ["Բազայի սպառվածություն", "Serviceability-ով ֆիլտրված նոր հասցեներ"]
+    outputs: ["Հաջորդ շաբաթվա բազաներ՝ սեգմենտներով"]
+    severity: high
+
+deliverables:
+  - id: telesales.daily_lists
+    title: "Օրվա զանգերի ցուցակների պատրաստում"
+    cadence: workdays
+    owner_role: analyst
+    approver_role: telesales_lead
+    asset_type: report
+    lead_days: 0
+    time: "08:30"
+    brief: "CRM-ից քաշված, serviceability-ով ֆիլտրված, do-not-call-ից մաքրված ցուցակներ."
+    checklist:
+      - "Serviceability ֆիլտր՝ միայն SERVICEABLE հասցեներ"
+      - "Do-not-call ցուցակի հանում"
+      - "Դուբլիկատների հեռացում"
+      - "Սեգմենտավորում ըստ շենքի և պատմության"
+
+  - id: telesales.weekly_report
+    title: "Telesales շաբաթական հաշվետվություն"
+    cadence: weekly
+    weekday: mon
+    owner_role: analyst
+    approver_role: telesales_lead
+    asset_type: report
+    lead_days: 1
+    brief: "Զանգեր, կոնտակտ, կոնվերսիա, 90d գոյատևում ըստ օպերատորի."
+
+controls:
+  - id: telesales.ctl_volume
+    title: "Զանգերի ծավալը շեմից ցածր է"
+    metric: calls_per_agent_avg
+    op: "<"
+    threshold: 90
+    severity: medium
+    owner_role: telesales_lead
+    due_in_days: 1
+    action: "Ստուգել բազայի որակը, dialer-ի աշխատանքը և բացակայությունները"
+
+  - id: telesales.ctl_contact
+    title: "Կոնտակտի տոկոսը ընկել է"
+    metric: contact_rate
+    op: "<"
+    threshold: 35.0
+    severity: high
+    owner_role: telesales_lead
+    due_in_days: 2
+    action: "Բազան հավանաբար հնացած է — փոխարինել և ստուգել զանգի ժամերը"
+
+  - id: telesales.ctl_conversion
+    title: "Կոնվերսիան շեմից ցածր է"
+    metric: conversion_rate
+    op: "<"
+    threshold: 6.0
+    severity: high
+    owner_role: telesales_lead
+    due_in_days: 3
+    action: "Script-ի վերանայում և ամենացածր արդյունք ցույց տվողների հետ աշխատանք"
+
+  - id: telesales.ctl_list_exhausted
+    title: "Զանգերի բազան սպառվում է"
+    metric: list_exhaustion_pct
+    op: ">"
+    threshold: 80.0
+    severity: high
+    owner_role: telesales_lead
+    due_in_days: 1
+    action: "Նոր բազա պատրաստել — հակառակ դեպքում վաղը թիմը կանգնում է"
+
+  - id: telesales.ctl_qa
+    title: "QA գնահատականը ընկել է"
+    metric: qa_score_avg
+    op: "<"
+    threshold: 4.0
+    severity: medium
+    owner_role: telesales_qa
+    due_in_days: 5
+    action: "Նպատակային ուսուցում ցածր գնահատական ունեցողների համար"
+
+  - id: telesales.ctl_callbacks
+    title: "Չկատարված callback-եր"
+    metric: missed_callbacks
+    op: ">"
+    threshold: 0
+    severity: high
+    owner_role: telesales_lead
+    due_in_days: 1
+    action: "Բոլոր խոստացված հետ-զանգերը կատարել նույն օրը"

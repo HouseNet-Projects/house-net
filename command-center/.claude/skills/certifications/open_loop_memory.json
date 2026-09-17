@@ -1,0 +1,94 @@
+{
+ "skill_id": "open_loop_memory",
+ "skill_version": "1.2.0",
+ "maturity_level": "L3",
+ "declared_maturity": "L3",
+ "computed_maturity": "L4",
+ "tests": [
+  "test_integrations.A01_ConfidentialCache.test_mail_payload_never_written_to_disk_and_expired_entries_are_unrecoverable",
+  "test_integrations.I09_MeetingPrepAndOpenLoops.test_open_loops_extract_candidates_not_facts",
+  "test_integrations.I10_Reconciliation.test_message_classification_and_candidates",
+  "test_intelligence.Q03_ChangeDetectionDurable.test_open_loops_persist_survive_restart_and_close_on_evidence_only",
+  "test_intelligence.Q05_MailCalendar.test_calendar_kinds_conflicts_and_preparation",
+  "test_intelligence.Q05_MailCalendar.test_mail_meaningful_items_only_and_evidence_linkage",
+  "test_intelligence.Q07_Governance.test_brief_eod_weekly_and_open_loops_carry_the_management_block",
+  "test_outlook_write.O01_TruthAndIdentity.test_unavailable_mail_and_calendar_are_honest",
+  "test_outlook_write.O03_ReadOnlyIntelligence.test_mail_calendar_intelligence_never_touches_the_writer",
+  "test_skills.T05_Execution.test_open_loops"
+ ],
+ "failure_tests": [
+  "test_integrations.I04_FailureMatrix.test_every_failure_code_maps_to_a_structured_envelope_and_health",
+  "test_intelligence.Q05_MailCalendar.test_mail_meaningful_items_only_and_evidence_linkage",
+  "test_outlook_write.O01_TruthAndIdentity.test_unavailable_mail_and_calendar_are_honest",
+  "test_skills.T05_Execution.test_open_loops"
+ ],
+ "hardening_cases": [
+  "test_hardening.H01_RegistryFailureInjection.test_self_awarded_maturity_rejected_without_fresh_certification",
+  "test_hardening.H02_SourceFailureInjection.test_source_missing_blocks_not_fabricates",
+  "test_hardening.H02_SourceFailureInjection.test_stale_source_blocks_unless_acknowledged",
+  "test_hardening.H04_AdversarialInputs.test_material_and_external_blocked_on_every_skill",
+  "test_integrations.A01_ConfidentialCache.test_mail_payload_never_written_to_disk_and_expired_entries_are_unrecoverable",
+  "test_integrations.I04_FailureMatrix.test_every_failure_code_maps_to_a_structured_envelope_and_health",
+  "test_intelligence.Q03_ChangeDetectionDurable.test_open_loops_persist_survive_restart_and_close_on_evidence_only",
+  "test_outlook_write.O01_TruthAndIdentity.test_unavailable_mail_and_calendar_are_honest"
+ ],
+ "adversarial": [
+  "test_hardening.H01_RegistryFailureInjection.test_self_awarded_maturity_rejected_without_fresh_certification",
+  "test_hardening.H04_AdversarialInputs.test_material_and_external_blocked_on_every_skill",
+  "test_integrations.A01_ConfidentialCache.test_mail_payload_never_written_to_disk_and_expired_entries_are_unrecoverable"
+ ],
+ "failure_injection": [
+  "test_hardening.H02_SourceFailureInjection.test_source_missing_blocks_not_fabricates",
+  "test_hardening.H02_SourceFailureInjection.test_stale_source_blocks_unless_acknowledged",
+  "test_integrations.A01_ConfidentialCache.test_mail_payload_never_written_to_disk_and_expired_entries_are_unrecoverable",
+  "test_integrations.I04_FailureMatrix.test_every_failure_code_maps_to_a_structured_envelope_and_health",
+  "test_intelligence.Q03_ChangeDetectionDurable.test_open_loops_persist_survive_restart_and_close_on_evidence_only",
+  "test_outlook_write.O01_TruthAndIdentity.test_unavailable_mail_and_calendar_are_honest"
+ ],
+ "authority_tests": [
+  "test_hardening.H04_AdversarialInputs.test_material_and_external_blocked_on_every_skill",
+  "test_outlook_write.O03_ReadOnlyIntelligence.test_mail_calendar_intelligence_never_touches_the_writer"
+ ],
+ "completion_verification": [
+  "test_integrations.I09_MeetingPrepAndOpenLoops.test_open_loops_extract_candidates_not_facts",
+  "test_intelligence.Q03_ChangeDetectionDurable.test_open_loops_persist_survive_restart_and_close_on_evidence_only",
+  "test_intelligence.Q05_MailCalendar.test_calendar_kinds_conflicts_and_preparation",
+  "test_intelligence.Q07_Governance.test_brief_eod_weekly_and_open_loops_carry_the_management_block",
+  "test_outlook_write.O03_ReadOnlyIntelligence.test_mail_calendar_intelligence_never_touches_the_writer",
+  "test_skills.T05_Execution.test_open_loops"
+ ],
+ "concurrency_tests": [],
+ "enforcement_tests": [],
+ "evals": [
+  "eval:f_email_no_permanent_fact",
+  "eval:h_mail_attention",
+  "eval:open_loops"
+ ],
+ "routing_evals": [],
+ "failed_tests": [],
+ "certified_at": "2026-09-14T20:14:36",
+ "fingerprint": "3c9e3da24520130fe4952983",
+ "core_fingerprint": "0af15296acbfd2ed",
+ "result": "PASS",
+ "suites": [
+  "test_skills",
+  "test_store",
+  "test_failclosed",
+  "test_hardening",
+  "test_enforcement",
+  "test_workspace",
+  "test_scope",
+  "test_runtime",
+  "test_business",
+  "test_boundary",
+  "test_integrations",
+  "test_portability",
+  "test_actions",
+  "test_live_data",
+  "test_intelligence",
+  "test_outlook_write",
+  "test_channels",
+  "test_operating_layer"
+ ],
+ "audit_infrastructure": false
+}

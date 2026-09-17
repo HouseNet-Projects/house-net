@@ -1,0 +1,133 @@
+department: hr
+title: "HR"
+
+kpis:
+  - { id: attrition_rate_monthly, title: "Հոսունություն",        unit: "%",   direction: down }
+  - { id: open_vacancies_gt_30d,  title: "Բաց հաստիք > 30 օր",   unit: "հատ", direction: down }
+  - { id: onboarding_overdue,     title: "Ուշացած onboarding",   unit: "հատ", direction: down }
+  - { id: training_overdue,       title: "Ուշացած ուսուցում",    unit: "հատ", direction: down }
+
+rituals:
+  - id: hr.recruiting_sync
+    title: "Ռեկրուտինգի շաբաթական sync"
+    cadence: weekly
+    weekday: tue
+    duration_min: 45
+    owner_role: recruiter
+    participants: [hr_lead]
+    inputs: ["Բաց հաստիքներ և փուլերը", "Հարցազրույցների ժամանակացույց"]
+    outputs: ["Ամեն հաստիք ունի հաջորդ քայլ և ամսաթիվ"]
+
+  - id: hr.onboarding_check
+    title: "Նոր աշխատակիցների onboarding-ի ստուգում"
+    cadence: weekly
+    weekday: mon
+    duration_min: 30
+    owner_role: hr_lead
+    inputs: ["Վերջին 30 օրում ընդունվածները", "Onboarding-ի ստուգաթերթի կարգավիճակ"]
+    outputs: ["Ամեն նոր աշխատակից ունի մենթոր և ուսուցման պլան"]
+    severity: high
+
+  - id: hr.shift_planning
+    title: "Հերթափոխերի պլանավորում"
+    cadence: weekly
+    weekday: thu
+    duration_min: 60
+    owner_role: hr_lead
+    participants: [care_lead, telesales_lead, noc_lead, field_lead]
+    inputs: ["Հաջորդ շաբաթվա ծանրաբեռնվածության կանխատեսում", "Արձակուրդներ"]
+    outputs: ["Հաստատված հերթափոխեր բոլոր բաժինների համար"]
+    severity: high
+
+  - id: hr.performance_review
+    title: "Կատարողականի եռամսյակային վերանայում"
+    cadence: quarterly
+    months: [1, 4, 7, 10]
+    day: 15
+    duration_min: 180
+    owner_role: hr_lead
+    participants: [coo]
+    inputs: ["KPI-երի կատարում ըստ մարդու", "Ղեկավարների գնահատականներ"]
+    outputs: ["Զարգացման պլաններ, առաջխաղացումներ, բաժանում"]
+
+  - id: hr.attrition_review
+    title: "Հոսունության վերլուծություն"
+    cadence: monthly
+    day: 10
+    duration_min: 60
+    owner_role: hr_lead
+    participants: [coo]
+    inputs: ["Հեռացածների exit interview-ները", "Հոսունությունը ըստ բաժնի"]
+    outputs: ["Կրկնվող պատճառների ցուցակ և շտկող քայլեր"]
+
+deliverables:
+  - id: hr.training_program
+    title: "Ամսական ուսուցման ծրագիր"
+    cadence: monthly
+    day: 25
+    owner_role: trainer
+    approver_role: hr_lead
+    asset_type: report
+    lead_days: 5
+    brief: "Հաջորդ ամսվա ուսուցումները ըստ բաժնի՝ վաճառք, script, տեխնիկա, անվտանգություն."
+
+  - id: hr.headcount_report
+    title: "Անձնակազմի ամսական հաշվետվություն"
+    cadence: month_start
+    offset: 3
+    owner_role: hr_lead
+    approver_role: coo
+    asset_type: report
+    lead_days: 1
+    brief: "Հաստիքներ, ընդունում, հեռացում, հոսունություն, բաց հաստիքներ."
+
+controls:
+  - id: hr.ctl_attrition
+    title: "Հոսունությունը շեմից բարձր է"
+    metric: attrition_rate_monthly
+    op: ">"
+    threshold: 4.0
+    severity: high
+    owner_role: hr_lead
+    due_in_days: 5
+    action: "Բաժին առ բաժին վերլուծել և ներկայացնել պահպանման քայլեր"
+
+  - id: hr.ctl_vacancies
+    title: "Բաց հաստիքներ 30 օրից ավել"
+    metric: open_vacancies_gt_30d
+    op: ">"
+    threshold: 2
+    severity: medium
+    owner_role: recruiter
+    due_in_days: 3
+    action: "Վերանայել աշխատավարձի միջակայքը և որոնման ալիքները"
+
+  - id: hr.ctl_onboarding
+    title: "Ուշացած onboarding"
+    metric: onboarding_overdue
+    op: ">"
+    threshold: 0
+    severity: high
+    owner_role: hr_lead
+    due_in_days: 2
+    action: "Ամեն ուշացած դեպք՝ մենթորով և ժամկետով"
+
+  - id: hr.ctl_training
+    title: "Ուշացած պարտադիր ուսուցում"
+    metric: training_overdue
+    op: ">"
+    threshold: 0
+    severity: medium
+    owner_role: trainer
+    due_in_days: 5
+    action: "Նշանակել ամսաթվեր, անվտանգության ուսուցումը՝ առաջնահերթ"
+
+  - id: hr.ctl_timesheets
+    title: "Բացակայող հաշվետվություններ ժամերի մասին"
+    metric: timesheet_missing
+    op: ">"
+    threshold: 0
+    severity: medium
+    owner_role: payroll
+    due_in_days: 2
+    action: "Հավաքել մինչև աշխատավարձի հաշվարկը"

@@ -1,0 +1,8 @@
+{
+  "repository": "HouseNet-Projects/house-net-command-center",
+  "classification": "A",
+  "control_plane": "HouseNet-Projects/house-net-control-plane",
+  "policy_version": "1.4.3",
+  "policy_commit": "40ed525b280ab43d59ae69bb27fca73bbe55aa04",
+  "approval_reference": "OWNER-APPROVAL-DEPUTY-MIGRATION-2026-09-15"
+}

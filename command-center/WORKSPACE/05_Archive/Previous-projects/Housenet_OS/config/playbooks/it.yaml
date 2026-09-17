@@ -1,0 +1,128 @@
+department: it
+title: "IT և տեղեկատվական անվտանգություն"
+
+kpis:
+  - { id: backup_failures,        title: "Ձախողված backup-եր",   unit: "հատ", direction: down }
+  - { id: critical_vulns_open,    title: "Կրիտիկական խոցելիություն", unit: "հատ", direction: down }
+  - { id: systems_down,           title: "Անհասանելի համակարգեր", unit: "հատ", direction: down }
+  - { id: access_reviews_overdue, title: "Ուշացած մուտքի վերանայում", unit: "հատ", direction: down }
+
+rituals:
+  - id: it.daily_health
+    title: "Համակարգերի առողջության ստուգում"
+    cadence: workdays
+    time: "08:45"
+    duration_min: 15
+    owner_role: it_lead
+    inputs: ["CRM, billing, dialer, dispatch-ի հասանելիություն", "Գիշերվա backup-երի կարգավիճակ"]
+    outputs: ["Ամեն ձախողում ունի հայտ և տեր"]
+    severity: high
+
+  - id: it.integration_check
+    title: "Ինտեգրացիաների ստուգում"
+    cadence: workdays
+    time: "09:15"
+    duration_min: 15
+    owner_role: it_lead
+    inputs: ["CRM ↔ billing ↔ dispatch սինխրոնիզացիա", "Ձախողված փոխանակումներ"]
+    outputs: ["Տվյալի հոսքը վերականգնված է"]
+    severity: high
+
+  - id: it.security_review
+    title: "Անվտանգության շաբաթական վերանայում"
+    cadence: weekly
+    weekday: wed
+    duration_min: 60
+    owner_role: security_lead
+    participants: [it_lead]
+    inputs: ["Խոցելիությունների սկան", "Կասկածելի մուտքեր", "Չթարմացված համակարգեր"]
+    outputs: ["Կրիտիկականները՝ ժամկետով, մնացածը՝ հերթում"]
+
+  - id: it.access_review
+    title: "Մուտքի իրավունքների վերանայում"
+    cadence: monthly
+    day: 5
+    duration_min: 90
+    owner_role: security_lead
+    participants: [hr_lead]
+    inputs: ["Հեռացած աշխատակիցներ", "Դերերի փոփոխություններ"]
+    outputs: ["Ավելորդ իրավունքները հանված են"]
+    severity: high
+
+  - id: it.dr_test
+    title: "Վերականգնման փորձարկում"
+    cadence: quarterly
+    months: [3, 6, 9, 12]
+    day: 18
+    duration_min: 180
+    owner_role: it_lead
+    participants: [technical_director, security_lead]
+    inputs: ["Backup-երից վերականգնման ընթացակարգ"]
+    outputs: ["Փաստագրված արդյունք՝ ի՞նչ ժամանակում է վերականգնվում"]
+    severity: high
+
+deliverables:
+  - id: it.metrics_pipeline
+    title: "Օպերացիոն մետրիկների արտահանում"
+    cadence: workdays
+    owner_role: it_lead
+    approver_role: analyst
+    asset_type: report
+    lead_days: 0
+    time: "07:30"
+    brief: "CRM/billing/dispatch → data/metrics.json. Սա սնուցում է բոլոր հսկիչները."
+    checklist:
+      - "Բոլոր աղբյուրները հասանելի են"
+      - "Դաշտերի քարտեզագրումը վավեր է"
+      - "Ամսաթվերի գոտին ճիշտ է"
+
+  - id: it.security_report
+    title: "Անվտանգության ամսական հաշվետվություն"
+    cadence: month_start
+    offset: 4
+    owner_role: security_lead
+    approver_role: technical_director
+    asset_type: report
+    lead_days: 2
+    brief: "Միջադեպեր, խոցելիություններ, մուտքի փոփոխություններ, backup-երի վիճակ."
+
+controls:
+  - id: it.ctl_backup
+    title: "Backup-ը ձախողվել է"
+    metric: backup_failures
+    op: ">"
+    threshold: 0
+    severity: critical
+    owner_role: it_lead
+    due_in_days: 1
+    action: "Վերականգնել նույն օրը և ստուգել վերջին վավեր պատճենը"
+
+  - id: it.ctl_vulns
+    title: "Բաց կրիտիկական խոցելիություններ"
+    metric: critical_vulns_open
+    op: ">"
+    threshold: 0
+    severity: critical
+    owner_role: security_lead
+    due_in_days: 3
+    action: "Փակել կամ ներկայացնել ժամանակավոր մեղմացում"
+
+  - id: it.ctl_systems_down
+    title: "Անհասանելի համակարգեր"
+    metric: systems_down
+    op: ">"
+    threshold: 0
+    severity: critical
+    owner_role: it_lead
+    due_in_days: 1
+    action: "Վերականգնել և տեղեկացնել ազդակիր բաժիններին"
+
+  - id: it.ctl_access
+    title: "Ուշացած մուտքի վերանայում"
+    metric: access_reviews_overdue
+    op: ">"
+    threshold: 0
+    severity: high
+    owner_role: security_lead
+    due_in_days: 5
+    action: "Հեռացած աշխատակիցների իրավունքները՝ առաջնահերթ"

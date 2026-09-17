@@ -1,0 +1,103 @@
+department: warehouse
+title: "Պահեստ և լոգիստիկա"
+
+kpis:
+  - { id: cpe_stock_days,        title: "CPE պաշար օրերով",        unit: "օր",  direction: up }
+  - { id: stock_below_min_items, title: "Նվազագույնից ցածր դիրքեր", unit: "հատ", direction: down }
+  - { id: unreconciled_items,    title: "Չհամադրված միավորներ",     unit: "հատ", direction: down }
+
+rituals:
+  - id: warehouse.morning_issue
+    title: "Առավոտյան սարքերի տրամադրում բրիգադներին"
+    cadence: workdays
+    time: "08:15"
+    duration_min: 30
+    owner_role: warehouse_lead
+    participants: [dispatch_lead]
+    inputs: ["Օրվա montage-ների ցուցակ", "Պահանջվող սարքերի տեսակները"]
+    outputs: ["Ամեն բրիգադ ստացել է սարքերը՝ սերիական համարների գրանցմամբ"]
+    severity: high
+
+  - id: warehouse.evening_return
+    title: "Երեկոյան վերադարձ և համադրում"
+    cadence: workdays
+    time: "18:45"
+    duration_min: 30
+    owner_role: warehouse_lead
+    inputs: ["Չօգտագործված սարքեր", "Ապամոնտաժված սարքեր"]
+    outputs: ["Օրվա շարժը համադրված է, տարբերությունները՝ բացատրված"]
+    severity: high
+
+  - id: warehouse.stock_review
+    title: "Պաշարների շաբաթական վերանայում"
+    cadence: weekly
+    weekday: tue
+    duration_min: 45
+    owner_role: warehouse_lead
+    participants: [procurement_lead, field_lead]
+    inputs: ["Պաշարը օրերով ըստ դիրքի", "Առաջիկա 4 շաբաթվա պլանավորված ծավալ"]
+    outputs: ["Գնման հայտեր, եթե պաշարը 3 շաբաթից քիչ է"]
+    severity: high
+
+  - id: warehouse.inventory_count
+    title: "Ամսական գույքագրում"
+    cadence: month_end
+    offset: 1
+    duration_min: 180
+    owner_role: warehouse_lead
+    participants: [finance_lead]
+    inputs: ["Համակարգային մնացորդ", "Ֆիզիկական հաշվարկ"]
+    outputs: ["Ստորագրված ակտ, տարբերությունների բացատրություն"]
+    severity: high
+
+deliverables:
+  - id: warehouse.stock_report
+    title: "Պաշարների շաբաթական հաշվետվություն"
+    cadence: weekly
+    weekday: mon
+    owner_role: warehouse_lead
+    approver_role: coo
+    asset_type: report
+    lead_days: 0
+    brief: "Պաշար օրերով, ցածր դիրքեր, բրիգադների մոտ գտնվող սարքեր."
+
+controls:
+  - id: warehouse.ctl_stock_days
+    title: "CPE պաշարը սպառվում է"
+    metric: cpe_stock_days
+    op: "<"
+    threshold: 21
+    severity: critical
+    owner_role: procurement_lead
+    due_in_days: 1
+    action: "Շտապ գնման հայտ — առանց սարքի montage-ը կանգնում է"
+
+  - id: warehouse.ctl_below_min
+    title: "Դիրքեր նվազագույնից ցածր"
+    metric: stock_below_min_items
+    op: ">"
+    threshold: 0
+    severity: high
+    owner_role: warehouse_lead
+    due_in_days: 2
+    action: "Համալրման հայտ ամեն դիրքի համար"
+
+  - id: warehouse.ctl_unreconciled
+    title: "Չհամադրված միավորներ"
+    metric: unreconciled_items
+    op: ">"
+    threshold: 0
+    severity: high
+    owner_role: warehouse_lead
+    due_in_days: 2
+    action: "Սերիական համարներով հետագծել և բացատրել տարբերությունը"
+
+  - id: warehouse.ctl_devices_with_techs
+    title: "Սարքեր բրիգադների մոտ 14 օրից ավել"
+    metric: devices_with_techs_gt_14d
+    op: ">"
+    threshold: 0
+    severity: medium
+    owner_role: warehouse_lead
+    due_in_days: 3
+    action: "Վերադարձ պահանջել կամ գրանցել տեղադրված որպես"

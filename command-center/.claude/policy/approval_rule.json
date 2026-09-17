@@ -1,0 +1,23 @@
+{
+  "rule": "MANDATORY GEV APPROVAL",
+  "version": "1.0",
+  "declared_by": "Gev",
+  "declared_on": "2026-09-12",
+  "scope": "Mission 4.2 and everything after; overrides every other autonomy, authority, risk-class, integration or execution rule",
+  "autonomous_external_write_authority": "NONE",
+  "allowed_without_approval": ["read authorized information", "search", "analyze", "diagnose", "plan", "recommend", "prepare drafts", "prepare action plans", "prepare task/calendar/email changes", "calculate expected impact", "non-mutating verification",
+                               "purely local technical operations for Deputy itself: reading files, calculations, validation, tests, temporary computation, rebuilding generated models, non-mutating health checks"],
+  "forbidden_without_approval": ["create task", "assign/reassign task", "change deadline", "change task status", "close/reopen task", "create/change calendar event", "invite/remove participants", "cancel meeting",
+                                 "provider-side email draft", "send email", "reply/forward email", "create/update CRM data", "create/update Bitrix24 objects", "change MikroBILL/billing data", "customer-impacting actions",
+                                 "employee-impacting actions", "external communications", "delete anything", "any other write/mutation in an external or authoritative system"],
+  "canonical_flow": ["PREPARE", "SHOW GEV EXACT ACTION", "WAIT FOR EXPLICIT APPROVAL", "EXECUTE", "VERIFY", "REPORT"],
+  "no_approval_means": "DO NOT EXECUTE",
+  "not_approval": ["silence", "a recommendation", "a previous approval for another action", "general conversation such as 'looks good' unless it clearly refers to the exact proposed action"],
+  "valid_approval_examples": ["OK", "GO", "Արա", "Հաստատում եմ", "another unmistakable affirmative instruction from Gev referring to the presented action"],
+  "presentation_before_approval": ["WHAT will be done", "WHERE", "TO WHOM / WHAT OBJECT", "IMPORTANT PARAMETERS", "EXPECTED EFFECT", "statement: nothing has been changed yet", "question: Approve?"],
+  "approval_binding": {"bound_to": "the exact proposed action", "invalidated_by_change_of": ["recipient", "owner", "target", "deadline", "date/time", "content", "operation", "amount", "scope", "attachment", "participants", "customer", "system"]},
+  "multi_step": "Gev may approve a clearly enumerated batch; only those exact steps may run; any additional mutation discovered during execution needs a new approval",
+  "retries": {"rule": "approval never authorizes blind duplicate execution", "after_timeout_or_uncertain_response": "RECONCILE FIRST", "if_outcome_unknown": "stop and report RESULT_UNKNOWN; no duplicate write until reconciled"},
+  "future_autonomy": "only through a separate explicit owner decision and policy change",
+  "enforcement_note": "The Skill System authority ladder already blocks EXECUTE_EXTERNAL/EXECUTE_MATERIAL without an approval token; the Mission 4.2 action runtime must bind that token to the exact presented action (this file is the canonical statement of the rule)."
+}

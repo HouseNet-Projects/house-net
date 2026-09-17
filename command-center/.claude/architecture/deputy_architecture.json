@@ -1,0 +1,22 @@
+{
+  "schema": "housenet.deputy.architecture.v1",
+  "identity": "DEPUTY",
+  "identity_owner": ".claude/policy/workspace_policy.json#identity",
+  "canonical_runtime": ".claude/skills/engine.py",
+  "canonical_action_runtime": ".claude/skills/actions.py",
+  "canonical_state": ".claude/skills/store.py",
+  "canonical_memory_boundary": ".claude/runtime/digital_memory.py",
+  "authority": "OWNER_APPROVAL_REQUIRED_FOR_MATERIAL_MUTATION",
+  "professional_brains": "architecture/professional_brains.json",
+  "router": "architecture/brain_router.py",
+  "work_orchestrator": "architecture/work_orchestrator.py",
+  "ownership": {
+    "governance": "HouseNet-Projects/house-net-control-plane",
+    "design": "HouseNet-Projects/house-net-design-system",
+    "knowledge": "HouseNet-Projects/house-net-knowledge",
+    "vault": "HouseNet-Projects/house-net-vault",
+    "runtime": "HouseNet-Projects/house-net-command-center"
+  },
+  "forbidden_duplicates": ["DEPUTY_IDENTITY", "ACTION_RUNTIME", "SKILL_SYSTEM", "STORE", "APPROVAL_SYSTEM", "MEMORY_SYSTEM"],
+  "pipeline": ["UNDERSTAND", "ROUTE_BRAINS", "SYNTHESIZE", "ORCHESTRATE", "RESOLVE_SKILLS", "PRECONDITIONS", "AUTHORITY", "EXECUTE", "VALIDATE", "VERIFY", "AUDIT", "MEMORY", "FOLLOW_THROUGH"]
+}

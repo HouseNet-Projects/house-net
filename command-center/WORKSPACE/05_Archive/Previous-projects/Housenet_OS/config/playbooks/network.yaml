@@ -1,0 +1,136 @@
+department: network
+title: "Ցանց և NOC"
+
+kpis:
+  - { id: uptime_pct,          title: "Հասանելիություն",        unit: "%",   direction: up }
+  - { id: mttr_hours,          title: "MTTR",                    unit: "ժամ", direction: down }
+  - { id: incidents_open,      title: "Բաց միջադեպեր",           unit: "հատ", direction: down }
+  - { id: port_utilization_pct, title: "Port-երի լցվածություն",  unit: "%",   direction: down }
+
+rituals:
+  - id: network.noc_handover
+    title: "NOC հերթափոխի հանձնում"
+    cadence: daily
+    time: "08:00"
+    duration_min: 15
+    owner_role: noc_lead
+    inputs: ["Գիշերվա ահազանգեր", "Բաց միջադեպեր", "Պլանային աշխատանքներ"]
+    outputs: ["Հաջորդ հերթափոխը գիտի ամեն բաց միջադեպի վիճակը"]
+    severity: high
+
+  - id: network.capacity_review
+    title: "Հզորության և port-երի վերանայում"
+    cadence: weekly
+    weekday: wed
+    duration_min: 60
+    owner_role: planning_engineer
+    participants: [network_lead, ops_head]
+    inputs: ["Port-երի լցվածություն ըստ հանգույցի", "WAITLIST_PORT ցուցակ վաճառքից"]
+    outputs: ["Ընդլայնման առաջնահերթ ցուցակ և ժամկետներ"]
+    severity: high
+
+  - id: network.incident_review
+    title: "Միջադեպերի վերլուծություն"
+    cadence: weekly
+    weekday: fri
+    duration_min: 45
+    owner_role: network_lead
+    participants: [noc_lead, care_lead, it_lead]
+    inputs: ["Շաբաթվա միջադեպերը", "Կրկնվող պատճառներ"]
+    outputs: ["Արմատական պատճառի վերլուծություն կրիտիկականների համար"]
+
+  - id: network.maintenance_window
+    title: "Պլանային սպասարկման պատուհան"
+    cadence: monthly
+    day: 20
+    time: "02:00"
+    duration_min: 240
+    owner_role: network_lead
+    participants: [noc_lead, care_lead]
+    inputs: ["Պլանավորված աշխատանքների ցուցակ", "Ազդակիր բաժանորդների ցուցակ"]
+    outputs: ["Աշխատանքները կատարված, բաժանորդները նախապես տեղեկացված"]
+    severity: high
+
+  - id: network.expansion_planning
+    title: "Ցանցի ընդլայնման եռամսյակային պլան"
+    cadence: quarterly
+    months: [1, 4, 7, 10]
+    day: 8
+    duration_min: 120
+    owner_role: planning_engineer
+    participants: [technical_director, ops_head, cfo]
+    inputs: ["Պահանջարկի քարտեզ NOT_SERVICEABLE հասցեներից", "Նոր կառուցապատում"]
+    outputs: ["Հաստատված ընդլայնման ցուցակ բյուջեով"]
+
+deliverables:
+  - id: network.uptime_report
+    title: "Ցանցի ամսական հաշվետվություն"
+    cadence: month_start
+    offset: 2
+    owner_role: noc_lead
+    approver_role: network_lead
+    asset_type: report
+    lead_days: 1
+    brief: "Uptime, միջադեպեր, MTTR, ամենախնդրահարույց հանգույցներ."
+
+  - id: network.maintenance_notice
+    title: "Սպասարկման մասին ծանուցում բաժանորդներին"
+    cadence: monthly
+    day: 17
+    channels: [sms, telegram, website]
+    owner_role: network_lead
+    approver_role: care_lead
+    asset_type: post
+    lead_days: 2
+    brief: "Ո՞ր հասցեներ, ո՞ր ժամեր, ի՞նչ տևողություն. Ուղարկվում է 72 ժամ առաջ."
+
+controls:
+  - id: network.ctl_uptime
+    title: "Հասանելիությունը շեմից ցածր է"
+    metric: uptime_pct
+    op: "<"
+    threshold: 99.7
+    severity: critical
+    owner_role: network_lead
+    due_in_days: 1
+    action: "Արմատական պատճառի վերլուծություն և ղեկավարությանը զեկույց"
+
+  - id: network.ctl_mttr
+    title: "MTTR-ը շեմից բարձր է"
+    metric: mttr_hours
+    op: ">"
+    threshold: 4.0
+    severity: high
+    owner_role: noc_lead
+    due_in_days: 2
+    action: "Ստուգել հերթապահության ծածկույթը և պահեստային սարքերի հասանելիությունը"
+
+  - id: network.ctl_open_incidents
+    title: "Բաց միջադեպերի կուտակում"
+    metric: incidents_open
+    op: ">"
+    threshold: 5
+    severity: high
+    owner_role: noc_lead
+    due_in_days: 1
+    action: "Ամեն բաց միջադեպ ստանում է տեր և ժամկետ"
+
+  - id: network.ctl_port_util
+    title: "Port-երի լցվածությունը կրիտիկական է"
+    metric: port_utilization_pct
+    op: ">"
+    threshold: 85.0
+    severity: high
+    owner_role: planning_engineer
+    due_in_days: 5
+    action: "Ընդլայնման հայտ — հակառակ դեպքում վաճառքը կկանգնի այդ հանգույցում"
+
+  - id: network.ctl_maintenance_overdue
+    title: "Պլանային սպասարկումը ուշացած է"
+    metric: planned_maintenance_overdue
+    op: ">"
+    threshold: 0
+    severity: medium
+    owner_role: network_lead
+    due_in_days: 3
+    action: "Վերապլանավորել և տեղեկացնել սպասարկմանը"

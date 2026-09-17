@@ -1,0 +1,97 @@
+{
+ "INT-TASKS": {
+  "tasks.create": {
+   "action_id": "ACT-ef5fb6b5d0",
+   "verified_at": "2026-09-12T02:26:28",
+   "evidence": {
+    "comment": "Mission 4.2 live certification · harmless · Gev-approved · cleanup = close/remove this row",
+    "due": "2026-09-12",
+    "id": 16,
+    "owner": "Գև",
+    "row": 28,
+    "status": "Չսկսված",
+    "title": "TEST — Deputy live write certification (delete after)",
+    "approval_token": "APR-1e833fce2ef9",
+    "approved_by": "Gev",
+    "approved_at": "2026-09-12T02:06:06",
+    "ticket_id": "8297f25baf"
+   }
+  }
+ },
+ "INT-OL-MAIL": {
+  "mail.draft": {
+   "action_id": "ACT-2a34741598",
+   "verified_at": "2026-09-12T04:49:44",
+   "evidence": {
+    "folder": "Drafts",
+    "id": "00000000798228EC5B7EB94D84CD7A75BC3AC9D9070034AD76187591974DBF6C4F76951C873A01000000000000003C56836AF6C22C4F9E7BDFE96B0FAE51000000000C050000",
+    "last_modified": "2026-09-12T04:34:03",
+    "subject": "TEST — Deputy Outlook write certification",
+    "submitted": false,
+    "to": "g.ohanyan@housenet.am",
+    "unread": true,
+    "approved_by": "Gev",
+    "approval_token": "APR-611586cc391c",
+    "approved_at": "2026-09-12T04:34:03",
+    "fingerprint": "0265051b2cfb997a64a821369a911998",
+    "ticket_id": "02bd88fb17",
+    "read_back": "read-back matches (Drafts, unsent)",
+    "migrated_from": "2026-09-12T04:34:04"
+   }
+  },
+  "mail.send": {
+   "action_id": "ACT-9c1792bad7",
+   "verified_at": "2026-09-12T04:49:44",
+   "evidence": {
+    "attachments": 0,
+    "cc": "",
+    "conversation_id": "5DA74DCCA8B04E3390E9D9AA25DE9F77",
+    "conversation_topic": "TEST — Deputy Outlook write certification",
+    "flagged": false,
+    "folder": "Sent",
+    "id": "00000000798228EC5B7EB94D84CD7A75BC3AC9D90700C3B68E10F77511CEB4CD00AA00BBB6E600000000000E00003C56836AF6C22C4F9E7BDFE96B0FAE510000000010020000",
+    "importance": 1,
+    "preview": "Harmless Command-center / Deputy Outlook write certification test. No reply required. ",
+    "received": "2026-09-12T04:39:00",
+    "record_id": "INT-OL-MAIL:4c830a9dfc41",
+    "sender": "g.ohanyan@housenet.am",
+    "sender_name": "g.ohanyan@housenet.am",
+    "sent": "2026-09-12T04:39:28",
+    "source_record_id": "00000000798228EC5B7EB94D84CD7A75BC3AC9D90700C3B68E10F77511CEB4CD00AA00BBB6E600000000000E00003C56836AF6C22C4F9E7BDFE96B0FAE510000000010020000",
+    "source_updated_at": "2026-09-12T04:39:32",
+    "subject": "TEST — Deputy Outlook write certification",
+    "to": "'g.ohanyan@housenet.am'",
+    "unread": false,
+    "approved_by": "Gev",
+    "approval_token": "APR-f809453d1250",
+    "approved_at": "2026-09-12T04:39:28",
+    "fingerprint": "91be32315e3961a536e2c8ff7009e364",
+    "ticket_id": "8128077927",
+    "read_back": "Sent Items evidence found",
+    "migrated_from": "2026-09-12T04:39:55"
+   }
+  }
+ },
+ "INT-TG": {
+  "chat.send": {
+   "action_id": "ACT-ec73ff5b12",
+   "verified_at": "2026-09-14T12:44:04",
+   "evidence": {
+    "at": "2026-09-14T12:34:11",
+    "chat_id": "786018459",
+    "provider_message_id": "4",
+    "second_source": {
+     "confirmed_by": "Gev",
+     "confirmed_at": "2026-09-14T12:44:04",
+     "method": "human out-of-band observation in the target chat",
+     "observed": "Gev confirmed in Telegram that the message 'TEST — Deputy Telegram live write certification' is visible in his private chat 786018459"
+    },
+    "approved_by": "Gev",
+    "approval_token": "APR-f5ba34e296a3",
+    "approved_at": "2026-09-14T12:34:11",
+    "fingerprint": "421ba2979bb2d1d47e0b9b4e20488f12",
+    "ticket_id": "88f3cc450b"
+   }
+  }
+ }
+}

@@ -1,0 +1,1436 @@
+{
+ "policy_version": "1.8.0",
+ "workspace_name": "Command-center",
+ "business_root": "WORKSPACE",
+ "business_root_note": "GEV'S WORKING SURFACE IS ONE FOLDER: WORKSPACE/. The repository root is Deputy's technical shell (.claude engine, .secure encrypted recovery, .venv regenerated runtime, bootstrap.py, CLAUDE.md, README.md, .gitignore, .gitattributes) and Gev never has to open any of it. Every business path in this policy, in the tree manifest, in the code and in the tests is resolved through .claude/policy/paths.py, which reads this field — one definition, so the two roots can never blur into each other again.",
+ "identity": {
+  "name": "Deputy",
+  "role": "AI Chief of Staff for Sales & Operations",
+  "title": "Deputy — AI Chief of Staff for Sales & Operations",
+  "workspace": "Command-center",
+  "owner": "Gev",
+  "owner_native": "Գև",
+  "purpose": "Command-center is Gev's operational workspace for Sales & Operations, managed with Deputy — AI Chief of Staff for Sales & Operations.",
+  "note": "SINGLE SOURCE OF TRUTH for the agent/workspace identity. engine.identity(), hooks, brief, docs and tests read or mirror this block; nothing else may define a different canonical name. Identity does not change authority: the authority ladder in the skill registry is unaffected."
+ },
+ "identity_enforcement": {
+  "active_files": [
+   "CLAUDE.md",
+   "README.md",
+   ".claude/docs/Role.md",
+   ".claude/docs/Job-description.md",
+   ".claude/hooks/brief.py",
+   ".claude/hooks/gate.py",
+   ".claude/hooks/workspace_guard.py",
+   ".claude/settings.json",
+   ".claude/skills/engine.py",
+   ".claude/skills/skill.py",
+   ".claude/skills/build_registry.py",
+   ".claude/skills/executors.py",
+   ".claude/policy/validate_workspace.py",
+   "WORKSPACE/00_Inbox/Input.md",
+   "WORKSPACE/Actions.md"
+  ],
+  "must_mention": {
+   "CLAUDE.md": [
+    "Deputy",
+    "Command-center"
+   ],
+   "README.md": [
+    "Deputy",
+    "Command-center"
+   ],
+   ".claude/docs/Role.md": [
+    "Deputy"
+   ],
+   ".claude/docs/Job-description.md": [
+    "Deputy"
+   ]
+  },
+  "stale_patterns": [
+   "Sales-operations-control",
+   "Daily check",
+   "Գործադիր օգնական",
+   "գործադիր օգնական",
+   "Գործառնական օգնական",
+   "AI Executive Assistant",
+   "AI EXECUTIVE ASSISTANT",
+   "AI assistant",
+   "canonical agent = Assistant",
+   "ՕԳՆԱԿԱՆ_",
+   "04_WhatsApp",
+   "01_Ընթացիկ",
+   "02_Արխիվ",
+   "03_Ավարտված",
+   "00_ԳՑԻՐ_ԱՅՍՏԵՂ",
+   "Առաջադրանքներ.xlsx",
+   "ՕՐԱԳԻՐ.md",
+   "ԱՆԵԼԻՔՆԵՐ.md"
+  ],
+  "historical_line_markers": [
+   "formerly",
+   "historical",
+   "legacy",
+   "previously",
+   "migrated from",
+   "before →",
+   "նախկին",
+   "պատմական",
+   "հին անուն",
+   "was:"
+  ],
+  "exempt_paths": [
+   "WORKSPACE/05_Archive",
+   "WORKSPACE/04_Sources",
+   "WORKSPACE/03_Completed",
+   "WORKSPACE/Journal.md",
+   ".claude/docs/Migration-log-2026-09-10.md",
+   ".claude/docs/Registry-audit-2026-09-10.md",
+   ".claude/audit",
+   ".claude/state",
+   ".claude/skills/registry.json",
+   ".claude/skills/certifications",
+   ".claude/tools"
+  ],
+  "note": "Any active file declaring another canonical workspace/agent name fails validation. Lines carrying a historical marker are exempt (history must stay readable). Archive/Sources/Journal/audit are history and exempt."
+ },
+ "physical_root_note": "The canonical workspace name is Command-center. If the host prevented a live rename of the open root directory, the remaining step is a manual folder rename with Claude Code closed; nothing inside the workspace depends on the physical parent path.",
+ "authority": "This file is the machine-readable structural contract. README.md must agree with it; validate_workspace.py enforces it; workspace_guard.py consumes it.",
+ "naming": {
+  "business_filename_regex": "^[A-Z][a-z0-9]*(?:-[a-z0-9]+)*(?:-v\\d+(?:\\.\\d+)?)?(?:-\\d{4}-\\d{2}-\\d{2})?\\.[a-z0-9]+$",
+  "business_folder_regex": "^[A-Z][a-z0-9]*(?:-[a-z0-9]+)*(?:-v\\d+(?:\\.\\d+)?)?(?:-\\d{4}-\\d{2}-\\d{2})?$",
+  "ordered_top_level_regex": "^\\d{2}_[A-Z][a-z]+$",
+  "python_module_regex": "^[a-z][a-z0-9_]*\\.py$",
+  "technical_filename_regex": "^[A-Za-z0-9][A-Za-z0-9._-]*$",
+  "date_regex": "\\d{4}-\\d{2}-\\d{2}",
+  "version_regex": "-v\\d+(?:\\.\\d+)?(?=-|\\.)",
+  "forbidden_words": [
+   "final",
+   "final2",
+   "new",
+   "newest",
+   "copy",
+   "fixed",
+   "latest",
+   "old",
+   "backup",
+   "temp",
+   "tmp",
+   "draft2",
+   "v1.1-final"
+  ],
+  "forbidden_patterns": [
+   "\\s",
+   "\\(\\d+\\)",
+   "[()]",
+   "[А-Яа-яԱ-Ֆա-ֆ]",
+   "\\.[A-Z]+$",
+   "__",
+   "\\d{2}\\.\\d{2}\\.\\d{4}",
+   "\\d{4}_\\d{2}_\\d{2}",
+   "-v\\d+\\.\\d+\\.\\d+",
+   "--"
+  ],
+  "rules": [
+   "first alphabetic character uppercase, remaining ordinary letters lowercase",
+   "hyphens between words; no spaces; no parentheses; no duplicate suffix like (2)",
+   "no final/new/copy/fixed style words",
+   "date only YYYY-MM-DD; version only vN or vN.N; version before date; extension lowercase"
+  ]
+ },
+ "reserved_technical_names": {
+  "root_files": [
+   ".gitattributes",
+   ".gitignore",
+   "CLAUDE.md",
+   "README.md",
+   "bootstrap.py",
+   "desktop.ini"
+  ],
+  "root_dirs": [
+   ".claude",
+   ".git",
+   ".secure",
+   ".venv"
+  ],
+  "anywhere_files": [
+   ".gitkeep"
+  ],
+  "note": "desktop.ini is a Windows-generated system file; .git/.gitignore/.gitattributes are version-control files."
+ },
+ "root": {
+  "allowed_files": [
+   "CLAUDE.md",
+   "README.md",
+   ".gitignore",
+   ".gitattributes",
+   "desktop.ini",
+   "bootstrap.py"
+  ],
+  "required_files": [
+   "CLAUDE.md",
+   "README.md",
+   "bootstrap.py"
+  ],
+  "allowed_dirs": [
+   "WORKSPACE",
+   ".claude",
+   ".git",
+   ".venv",
+   ".secure"
+  ],
+  "required_dirs": [
+   "WORKSPACE",
+   ".claude",
+   ".secure"
+  ],
+  "unknown_entries": "fail"
+ },
+ "canonical_files": {
+  "WORKSPACE/Tasks.xlsx": {
+   "kind": "task-register",
+   "purpose": "The single live task register (hand-edited by the Head; read by skills).",
+   "single_canonical": true,
+   "duplicates_forbidden_globs": [
+    "**/*[Tt]ask*.xlsx",
+    "**/Առաջադրանքներ*.xlsx",
+    "**/ԱՌԱՋԱԴՐԱՆՔՆԵՐ*.xlsx"
+   ],
+   "duplicates_allowed_under": [
+    "WORKSPACE/05_Archive"
+   ]
+  },
+  "WORKSPACE/Journal.md": {
+   "kind": "journal",
+   "purpose": "Daily log, newest day on top.",
+   "single_canonical": true
+  },
+  "WORKSPACE/Actions.md": {
+   "kind": "internal-todo",
+   "purpose": "Internal document/system to-dos.",
+   "single_canonical": true
+  },
+  "CLAUDE.md": {
+   "kind": "agent-instructions",
+   "purpose": "Behavioral guidance for Deputy (not enforcement)."
+  },
+  "README.md": {
+   "kind": "human-guide",
+   "purpose": "Human-readable guide; must agree with this policy."
+  },
+  "WORKSPACE/00_Inbox/Input.md": {
+   "kind": "text-drop",
+   "purpose": "Controlled manual text drop; processed content is cleared.",
+   "single_canonical": true
+  }
+ },
+ "directories": {
+  "WORKSPACE": {
+   "kind": "business-workspace-root",
+   "purpose": "GEV'S WORKING SURFACE. The only folder Gev opens day to day: the six ordered areas plus the three live registers. Nothing technical lives here - no code, no runtime state, no configuration, no agent files.",
+   "canonical": true,
+   "required": true,
+   "subdirs": "fixed",
+   "fixed_subdirs": [
+    "00_Inbox",
+    "01_Active",
+    "02_Reference",
+    "03_Completed",
+    "04_Sources",
+    "05_Archive"
+   ],
+   "allowed_files": [
+    "Tasks.xlsx",
+    "Journal.md",
+    "Actions.md"
+   ],
+   "forbidden_content": [
+    "python code",
+    "agent runtime",
+    "runtime state",
+    "configuration",
+    "hidden technical files"
+   ],
+   "naming_rule": "business",
+   "note": "The repository-relative name of this folder is workspace_policy.json -> business_root; .claude/policy/paths.py resolves it for every other component."
+  },
+  "WORKSPACE/00_Inbox": {
+   "kind": "inbox",
+   "purpose": "Temporary unclassified input only; steady state empty except Input.md.",
+   "canonical": true,
+   "required": true,
+   "allowed_content": [
+    "any file dropped by the Head, pending classification"
+   ],
+   "forbidden_content": [
+    "subdirectories",
+    "agent runtime",
+    "processed deliverables"
+   ],
+   "allowed_extensions": "*",
+   "naming_rule": "none (transient)",
+   "subdirs": "forbidden",
+   "retention_rule": "must be emptied at every session start; only Input.md persists",
+   "invariants": [
+    "Input.md exists",
+    "no subdirectories",
+    "non-Input files are violations older than one session"
+   ]
+  },
+  "WORKSPACE/01_Active": {
+   "kind": "active-work",
+   "purpose": "Work currently being developed, reviewed, investigated or executed.",
+   "canonical": true,
+   "required": true,
+   "subdirs": "fixed",
+   "fixed_subdirs": [
+    "Sales",
+    "Operations",
+    "People",
+    "Systems"
+   ],
+   "allowed_content": [
+    "business documents in progress"
+   ],
+   "forbidden_content": [
+    "raw WhatsApp exports",
+    "screenshots",
+    "python code",
+    "runtime state",
+    "approved source-of-truth artifacts"
+   ],
+   "allowed_extensions": [
+    "docx",
+    "xlsx",
+    "md",
+    "pdf",
+    "pptx",
+    "csv",
+    "txt"
+   ],
+   "naming_rule": "business",
+   "retention_rule": "move to 02_Reference when approved and authoritative; to 03_Completed when finished; to 05_Archive when superseded"
+  },
+  "WORKSPACE/02_Reference": {
+   "kind": "reference",
+   "purpose": "Approved CURRENT source-of-truth artifacts still used to operate the business.",
+   "canonical": true,
+   "required": true,
+   "subdirs": "fixed",
+   "fixed_subdirs": [
+    "Sales",
+    "Operations",
+    "People",
+    "Systems"
+   ],
+   "allowed_content": [
+    "approved authoritative documents"
+   ],
+   "forbidden_content": [
+    "drafts",
+    "raw sources",
+    "python code",
+    "runtime state",
+    "files whose name signals draft/copy"
+   ],
+   "allowed_extensions": [
+    "docx",
+    "xlsx",
+    "md",
+    "pdf",
+    "pptx",
+    "csv"
+   ],
+   "naming_rule": "business",
+   "retention_rule": "superseded version → 05_Archive the day the replacement is approved"
+  },
+  "WORKSPACE/03_Completed": {
+   "kind": "completed",
+   "purpose": "Finished deliverables no longer active and not the current operational source of truth.",
+   "canonical": true,
+   "required": true,
+   "subdirs": "controlled",
+   "allowed_content": [
+    "finished deliverables"
+   ],
+   "forbidden_content": [
+    "raw sources",
+    "python code",
+    "runtime state",
+    "active work"
+   ],
+   "allowed_extensions": [
+    "docx",
+    "xlsx",
+    "md",
+    "pdf",
+    "pptx",
+    "csv",
+    "txt"
+   ],
+   "naming_rule": "business",
+   "retention_rule": "kept; never edited"
+  },
+  "WORKSPACE/04_Sources": {
+   "kind": "sources",
+   "purpose": "Raw evidence and original external inputs only.",
+   "canonical": true,
+   "required": true,
+   "subdirs": "fixed",
+   "fixed_subdirs": [
+    "Whatsapp",
+    "Screenshots",
+    "Imports"
+   ],
+   "allowed_content": [
+    "original exports, chats, media, screenshots, raw imports"
+   ],
+   "forbidden_content": [
+    "agent runtime",
+    "python code",
+    "processed deliverables",
+    "job descriptions",
+    "helper code"
+   ],
+   "allowed_extensions": [
+    "csv",
+    "html",
+    "jpeg",
+    "jpg",
+    "json",
+    "md",
+    "mp3",
+    "mp4",
+    "opus",
+    "pdf",
+    "png",
+    "svg",
+    "txt",
+    "vcf",
+    "webp",
+    "xlsx",
+    "zip"
+   ],
+   "naming_rule": "source",
+   "retention_rule": "kept as evidence; never edited",
+   "source_naming": {
+    "folder_regex": "^[A-Z][a-z0-9]*(?:-[a-z0-9]+)*-\\d{4}-\\d{2}-\\d{2}(?:-[a-z0-9]+)*$",
+    "file_rule": "original export names are kept when they already satisfy the technical filename regex; otherwise renamed to business form"
+   }
+  },
+  "WORKSPACE/05_Archive": {
+   "kind": "archive",
+   "purpose": "Superseded documents, obsolete drafts and old implementation artifacts retained for history. Not current truth.",
+   "canonical": true,
+   "required": true,
+   "subdirs": "controlled",
+   "allowed_content": [
+    "anything superseded, kept for history"
+   ],
+   "forbidden_content": [
+    "the live task register",
+    "runtime state"
+   ],
+   "allowed_extensions": "*",
+   "naming_rule": "business-or-technical",
+   "retention_rule": "never deleted; never edited",
+   "verbatim_subdirs": [
+    "Previous-projects"
+   ],
+   "verbatim_note": "Sealed historical packages from earlier projects. Inside a verbatim subdirectory the ORIGINAL file and folder names are preserved exactly as received, because an archive is evidence and is never edited or renamed. Naming rules are therefore not applied there; every other rule (classification, boundary scan, no credentials) still is."
+  },
+  ".claude": {
+   "kind": "agent-runtime-root",
+   "purpose": "Deputy runtime: settings, hooks, docs, policy, skills, tools, tests, state, audit, runtime, business (operating model), integrations (read-only live-data layer).",
+   "canonical": true,
+   "required": true,
+   "subdirs": "fixed",
+   "fixed_subdirs": [
+    "hooks",
+    "docs",
+    "policy",
+    "skills",
+    "tools",
+    "tests",
+    "state",
+    "audit",
+    "runtime"
+   ],
+   "optional_subdirs": [
+    "business",
+    "integrations"
+   ],
+   "allowed_files": [
+    "settings.json",
+    "settings.local.json"
+   ],
+   "naming_rule": "technical"
+  },
+  ".claude/hooks": {
+   "kind": "hooks",
+   "purpose": "Lifecycle and enforcement hooks (brief, skill gate, workspace guard).",
+   "required": true,
+   "allowed_extensions": [
+    "py"
+   ],
+   "naming_rule": "python_module",
+   "required_files": [
+    "brief.py",
+    "gate.py",
+    "workspace_guard.py"
+   ],
+   "subdirs": "forbidden",
+   "generated_ok": [
+    "__pycache__"
+   ]
+  },
+  ".claude/docs": {
+   "kind": "docs",
+   "purpose": "Durable agent documentation (role, job description, audits).",
+   "required": true,
+   "allowed_extensions": [
+    "md"
+   ],
+   "naming_rule": "business",
+   "required_files": [
+    "Role.md",
+    "Job-description.md"
+   ],
+   "subdirs": "forbidden"
+  },
+  ".claude/policy": {
+   "kind": "policy",
+   "purpose": "Machine-readable workspace governance + validator.",
+   "required": true,
+   "allowed_extensions": [
+    "json",
+    "py"
+   ],
+   "naming_rule": "technical",
+   "required_files": [
+    "workspace_policy.json",
+    "validate_workspace.py"
+   ],
+   "subdirs": "forbidden",
+   "generated_ok": [
+    "__pycache__"
+   ]
+  },
+  ".claude/skills": {
+   "kind": "skill-runtime",
+   "purpose": "Production Skill System only.",
+   "required": true,
+   "allowed_extensions": [
+    "py",
+    "json",
+    "md"
+   ],
+   "naming_rule": "technical",
+   "required_files": [
+    "registry.json",
+    "build_registry.py",
+    "engine.py",
+    "executors.py",
+    "skill.py",
+    "certify.py",
+    "store.py"
+   ],
+   "allowed_subdirs": [
+    "certifications",
+    "__pycache__"
+   ],
+   "forbidden_content": [
+    "test_*.py",
+    "evals.py",
+    "state",
+    "audit",
+    "*.jsonl",
+    "*.db",
+    "raw sources"
+   ],
+   "forbidden_globs": [
+    "test_*.py",
+    "evals.py",
+    "*.jsonl",
+    "*.db",
+    "state",
+    "audit"
+   ]
+  },
+  ".claude/tools": {
+   "kind": "tools",
+   "purpose": "Operational helper programs that are tools rather than skills.",
+   "required": true,
+   "allowed_extensions": [
+    "py",
+    "md"
+   ],
+   "naming_rule": "python_module",
+   "subdirs": "forbidden",
+   "generated_ok": [
+    "__pycache__"
+   ]
+  },
+  ".claude/tests": {
+   "kind": "tests",
+   "purpose": "Tests and behavioral evaluations.",
+   "required": true,
+   "allowed_extensions": [
+    "py"
+   ],
+   "naming_rule": "python_module",
+   "required_files": [
+    "test_skills.py",
+    "test_hardening.py",
+    "test_workspace.py",
+    "evals.py"
+   ],
+   "subdirs": "forbidden",
+   "generated_ok": [
+    "__pycache__"
+   ]
+  },
+  ".claude/runtime": {
+   "kind": "python-runtime-contract",
+   "purpose": "Deterministic project interpreter: .venv bootstrap + hook launcher (python_runtime.py, hook.sh) and the pinned dependency manifest (requirements.txt) with its lock (requirements.lock). Every hook, CLI, test, eval and release runs under <root>/.venv, never the PATH python.",
+   "required": true,
+   "allowed_extensions": [
+    "py",
+    "sh",
+    "txt",
+    "lock",
+    "md"
+   ],
+   "naming_rule": "technical",
+   "required_files": [
+    "python_runtime.py",
+    "hook.sh",
+    "requirements.txt",
+    "requirements.lock"
+   ],
+   "subdirs": "forbidden",
+   "generated_ok": [
+    "__pycache__"
+   ]
+  },
+  ".claude/business": {
+   "kind": "business-operating-model",
+   "purpose": "Business Operating Model in two layers. CORE (INTERNAL, versionable): authoring bm_*.py, schema, builder, certifier — roles without compensation, processes, ownership by ROLE, KPIs, controlled targets, playbooks, routines, gaps, source metadata; people only as @P tokens. SENSITIVE OVERLAY (CONFIDENTIAL, local only): overlay/ov_*.py → overlay.json (person names, role assignments, compensation, commercial figures, evidence payloads). Generated *.json, Business-model.md and certification.json are local; the boundary is enforced by data_classification.json + sensitive_scan.py (pre-commit/pre-push).",
+   "required": false,
+   "allowed_extensions": [
+    "json",
+    "md",
+    "py"
+   ],
+   "naming_rule": "technical",
+   "required_files": [
+    "build_business_model.py",
+    "certify_business.py",
+    "bm_schema.py",
+    "bm_sources.py",
+    "bm_company.py",
+    "bm_processes.py",
+    "bm_kpis.py",
+    "bm_targets.py",
+    "bm_playbooks.py",
+    "bm_governance.py"
+   ],
+   "subdirs": "fixed",
+   "fixed_subdirs": [
+    "overlay"
+   ],
+   "generated_ok": [
+    "__pycache__"
+   ]
+  },
+  ".claude/business/overlay": {
+   "kind": "sensitive-overlay",
+   "purpose": "CONFIDENTIAL local layer: ov_people.py (person tokens → names, role assignments), ov_compensation.py, ov_commercials.py, ov_evidence.py. Never versioned; scanner blocks it mechanically.",
+   "required": false,
+   "allowed_extensions": [
+    "py",
+    "json",
+    "md"
+   ],
+   "naming_rule": "technical",
+   "subdirs": "forbidden",
+   "generated_ok": [
+    "__pycache__"
+   ]
+  },
+  ".claude/state": {
+   "kind": "runtime-state",
+   "purpose": "Runtime state only (SQLite store, journal, quarantine, migrated legacy).",
+   "required": true,
+   "allowed_extensions": "*",
+   "naming_rule": "generated",
+   "subdirs": "controlled",
+   "durable_subdir": "durable",
+   "note_durability": "runtime store (SQLite + journal + locks + integration cache/health) is MACHINE-LOCAL/EPHEMERAL; the canonical DURABLE export lives in .claude/state/durable (commitments, decisions, audit, observations) and is versioned; bootstrap imports it idempotently"
+  },
+  ".claude/audit": {
+   "kind": "audit",
+   "purpose": "Runtime/audit evidence only.",
+   "required": true,
+   "allowed_extensions": [
+    "jsonl"
+   ],
+   "naming_rule": "generated",
+   "required_files": [
+    "skill_audit.jsonl"
+   ],
+   "subdirs": "forbidden"
+  },
+  ".claude/integrations": {
+   "kind": "integration-layer",
+   "purpose": "READ-ONLY live business information layer: registry (declared integrations, fact authority), contracts (normalized envelopes), adapters (fixed read operations per system), health, reconciliation, certification. No write capability exists here by design.",
+   "canonical": true,
+   "required": false,
+   "subdirs": "forbidden",
+   "naming_rule": "technical",
+   "allowed_files_note": "python modules + the fixed read-only PowerShell reader for Outlook (outlook_read.ps1, integrity-pinned) + generated certification.json (local, INTERNAL, never versioned)",
+   "invariants": [
+    "no adapter exposes a write/send/update/delete operation",
+    "secrets are read from the environment or ~/.command-center/integrations, never from the repository",
+    "generated *.json stay local (.gitignore + sensitive_scan)"
+   ]
+  },
+  ".secure": {
+   "kind": "encrypted-recovery",
+   "purpose": "Encrypted recovery artifacts (active external-system credentials) + plaintext manifest without secret values. Decryptable only with the ONE external recovery key (~/.command-center/recovery.key), which never enters Git.",
+   "canonical": true,
+   "required": true,
+   "subdirs": "forbidden",
+   "naming_rule": "technical",
+   "allowed_files": [
+    "manifest.json",
+    "credentials.gpg",
+    "README.md",
+    ".gitkeep"
+   ],
+   "invariants": [
+    "credentials.gpg is GnuPG symmetric AES-256 (no custom crypto)",
+    "manifest.json lists names/checksums/restore paths only",
+    "no *.plain/*.dec/*.tmp file may persist here"
+   ]
+  },
+  ".claude/state/durable": {
+   "kind": "durable-state-export",
+   "purpose": "Deterministic canonical export of Deputy's durable operating memory (state_snapshot.py export/import).",
+   "canonical": true,
+   "required": true,
+   "subdirs": "forbidden",
+   "naming_rule": "technical"
+  }
+ },
+ "generated_exclusions": {
+  "ignored_dir_names": [
+   "__pycache__",
+   ".git",
+   ".venv"
+  ],
+  "ignored_file_globs": [
+   "*.pyc",
+   "desktop.ini",
+   "Thumbs.db",
+   ".DS_Store",
+   "~$*"
+  ],
+  "pycache_allowed_under": [
+   ".claude/hooks",
+   ".claude/policy",
+   ".claude/skills",
+   ".claude/tools",
+   ".claude/tests",
+   ".claude/runtime",
+   ".claude/business",
+   ".claude/business/overlay",
+   ".claude/integrations"
+  ],
+  "garbage_globs": [
+   "*.tmp",
+   "*.bak",
+   "*~",
+   "*.orig",
+   "*.swp",
+   "nul",
+   "*.log"
+  ]
+ },
+ "semantics": {
+  "source_markers": {
+   "patterns": [
+    "^chat\\.txt$",
+    "^chat\\.md$",
+    "WhatsApp",
+    "\\.zip$",
+    "^Screenshot",
+    "^IMG[-_]",
+    "\\.jpe?g$",
+    "\\.png$"
+   ],
+   "must_live_under": "WORKSPACE/04_Sources",
+   "note": "raw evidence classified by name/kind may only live in WORKSPACE/04_Sources (or WORKSPACE/05_Archive)"
+  },
+  "code_markers": {
+   "patterns": [
+    "\\.py$",
+    "\\.bat$",
+    "\\.ps1$",
+    "\\.sh$",
+    "\\.js$"
+   ],
+   "must_live_under": [
+    ".claude/hooks",
+    ".claude/policy",
+    ".claude/skills",
+    ".claude/tools",
+    ".claude/tests",
+    ".claude/runtime",
+    ".claude/business",
+    ".claude/business/overlay",
+    "WORKSPACE/05_Archive",
+    ".claude/integrations"
+   ],
+   "root_exceptions": [
+    "bootstrap.py"
+   ]
+  },
+  "runtime_markers": {
+   "patterns": [
+    "\\.db$",
+    "\\.jsonl$",
+    "-wal$",
+    "-shm$"
+   ],
+   "must_live_under": [
+    ".claude/state",
+    ".claude/audit",
+    "WORKSPACE/05_Archive",
+    ".claude/state/durable"
+   ]
+  },
+  "test_markers": {
+   "patterns": [
+    "^test_.*\\.py$",
+    "^evals\\.py$"
+   ],
+   "must_live_under": [
+    ".claude/tests"
+   ]
+  },
+  "reference_vs_completed": "WORKSPACE/02_Reference holds artifacts that are still authoritative; WORKSPACE/03_Completed holds finished deliverables that are no longer truth. Mechanically checkable part: names signalling draft/copy are forbidden in both; the same base document may not exist in both.",
+  "single_canonical_location": [
+   "WORKSPACE/Tasks.xlsx",
+   "WORKSPACE/Journal.md",
+   "WORKSPACE/Actions.md",
+   "WORKSPACE/00_Inbox/Input.md",
+   ".claude/docs/Role.md",
+   ".claude/docs/Job-description.md",
+   ".claude/skills/registry.json"
+  ]
+ },
+ "links": {
+  "check_markdown_links_in": [
+   "README.md",
+   "CLAUDE.md",
+   "WORKSPACE/Journal.md",
+   "WORKSPACE/Actions.md",
+   "WORKSPACE/00_Inbox/Input.md",
+   ".claude/docs/Role.md",
+   ".claude/docs/Job-description.md"
+  ],
+  "note": "relative links must resolve; anchors and URLs are ignored"
+ },
+ "durability": {
+  "law": "No important local-only durable truth. Everything Deputy or Gev needs tomorrow is (1) versioned directly, (2) versioned as an encrypted recovery artifact, or (3) deterministically reproducible from versioned content. Only ephemeral or machine-specific data stays local.",
+  "canonical_repository": "HouseNet-Projects/house-net-command-center (branch main)",
+  "bootstrap": "python bootstrap.py",
+  "tree_manifest": ".claude/policy/workspace_tree_manifest.json (generated from this policy by tree_manifest.py; validator checks both)",
+  "checksums": ".claude/policy/durable_checksums.json (sha256 of durable files; refreshed by release/bootstrap)",
+  "recovery_key": {
+   "path": "~/.command-center/recovery.key (or COMMAND_CENTER_RECOVERY_KEY_FILE / $COMMAND_CENTER_HOME/recovery.key)",
+   "rule": "the ONE intentionally external secret: never in Git, never printed, never in audit/state; Gev keeps a copy in a password manager or on an external device"
+  },
+  "classes": {
+   "VERSION_DIRECTLY": [
+    "CLAUDE.md",
+    "README.md",
+    "bootstrap.py",
+    "WORKSPACE/Tasks.xlsx",
+    "WORKSPACE/Journal.md",
+    "WORKSPACE/Actions.md",
+    "WORKSPACE/00_Inbox ... WORKSPACE/05_Archive (all business documents, sources, archives)",
+    ".claude/business/bm_*.py + overlay/ov_*.py",
+    ".claude/state/durable/*",
+    ".claude/docs, hooks, policy, runtime, skills, tools, tests, integrations (code)",
+    ".secure/manifest.json"
+   ],
+   "VERSION_ENCRYPTED": [
+    ".secure/credentials.gpg (active external-system credentials from ~/.command-center/integrations)"
+   ],
+   "REGENERATE": [
+    ".venv",
+    ".claude/business/*.json + Business-model.md + certification.json",
+    ".claude/integrations/certification.json",
+    "__pycache__",
+    ".claude/skills/registry.json is versioned but rebuilt by release"
+   ],
+   "MACHINE_LOCAL": [
+    ".claude/settings.local.json",
+    "desktop.ini",
+    "~/.command-center/* (recovery key, secret configs, overlay backups)",
+    "Outlook desktop session"
+   ],
+   "EPHEMERAL": [
+    ".claude/state/skill_state.db (+wal/shm), journal.jsonl, tickets, integrations_cache/health json, *.lock, .claude/audit/skill_audit.jsonl mirror (the store export is the durable form)"
+   ]
+  },
+  "live_data": {
+   "rule": "LIVE OPERATIONAL DATA (the task register, the journal, the inbox text) and Deputy's durable runtime state change every day. They are versioned directly (durability law) but they are NOT product/model inputs: a change requires only the lightweight LIVE DATA SYNC (skill.py sync) — never a business-model rebuild, a certification or a release. Everything else that is versioned is PRODUCT (code, policy, hooks, skills, tests, business-model authoring bm_*.py/overlay, extraction sources) and changes only through skill.py release.",
+   "live_data_files": [
+    "WORKSPACE/Tasks.xlsx",
+    "WORKSPACE/Journal.md",
+    "WORKSPACE/00_Inbox/Input.md"
+   ],
+   "live_state_dirs": [
+    ".claude/state/durable"
+   ],
+   "integrity_metadata": [
+    ".claude/policy/durable_checksums.json"
+   ],
+   "business_documents": "WORKSPACE/00_Inbox … WORKSPACE/05_Archive documents that are not declared business-model extraction sources are DOCUMENT data (sync); a declared CONTENT-scoped source (bm_sources.py) is a MODEL_SOURCE (release)",
+   "sync": "python .claude/skills/skill.py sync [--dry-run] [--no-push]  (classify drift → export durable state → static model still certified? → refresh checksums → commit only the classified paths → push → verify origin)",
+   "drift_states": {
+    "CLEAN": "nothing to persist, GitHub main is current",
+    "SYNC_REQUIRED": "live data / durable state / integrity metadata changed or commits not pushed — run skill.py sync",
+    "RELEASE_REQUIRED": "product, model-authoring or extraction-source change — run skill.py release",
+    "UNCLASSIFIED": "unknown path changed — fail closed, nothing is synced"
+   }
+  }
+ },
+ "interaction": {
+  "user_language": "hy-AM",
+  "user_language_name": "Eastern Armenian",
+  "rule": "Every user-facing communication with the owner is in Eastern Armenian, regardless of the language the owner writes in (Armenian, English, Russian, mixed or technical).",
+  "applies_to": [
+   "answers",
+   "status updates",
+   "clarifying questions",
+   "approval cards",
+   "error and blocker explanations",
+   "recommendations",
+   "reports",
+   "summaries",
+   "user-visible reasoning summaries",
+   "human presentation of tool and action results"
+  ],
+  "never_switch_because": "the owner wrote in another language",
+  "preserve_verbatim": [
+   "technical identifiers",
+   "code symbols",
+   "API field names",
+   "filenames",
+   "commit SHAs",
+   "error codes",
+   "established English technical terms"
+  ],
+  "preserve_note": "These may keep their original form, but their explanation is in Armenian.",
+  "hidden_reasoning": "Internal hidden model reasoning is not a user-visible interface and is not a checkable contract; any reasoning SUMMARY shown to the owner is Armenian.",
+  "human_readable_identity": {
+   "rule": "Never ask the owner to decode a raw system identifier. Present the best available human-readable label from the evidence and CONTINUE WORKING; ask the owner to confirm WHO someone is only when an operation listed in confirmation_required_only_for actually depends on a confirmed identity.",
+   "order": [
+    "READ AVAILABLE EVIDENCE",
+    "RESOLVE SAFE HUMAN CONTEXT",
+    "ONLY THEN ASK GEV IF STILL AMBIGUOUS"
+   ],
+   "present_fields": [
+    "username",
+    "first_name",
+    "last_name",
+    "confirmed person name",
+    "known role",
+    "display name (explicitly marked as not identity evidence)"
+   ],
+   "raw_id_use": "only as a technical reference shown alongside human-readable context",
+   "absent_field_rule": "If the provider did not supply a field (for example username), say so plainly - never invent it.",
+   "safety": "Presentation rule only. It never confirms identity: display name, username or similarity is NOT confirmed identity, and identity binding stays fail-closed and provenance-based.",
+   "label_rule": "For ordinary read, intelligence and reporting the provider's @username - or the display name / first_name plus last_name when there is no username - IS the human-readable label. Use it and keep going.",
+   "confirmation_required_only_for": {
+    "ROLE_BINDING": "binding a message or fact to a specific employee or role",
+    "OWNERSHIP": "deciding who owns a commitment or a task",
+    "AUTHORITY": "deciding authority or permission",
+    "CROSS_SYSTEM_RECONCILIATION": "reconciling the same person across systems",
+    "AMBIGUOUS_NAME": "a real ambiguity between people with the same or a similar name"
+   },
+   "never_block": "A missing identity mapping is NOT a blocker. Never ask the owner to confirm who someone is merely because no mapping exists, and never stall ordinary reporting on it."
+  },
+  "note": "SINGLE SOURCE OF TRUTH for how Deputy talks to the owner. CLAUDE.md and the docs mirror this block; validate_workspace.check_interaction() enforces it. This is an interaction contract and changes no authority, approval or security boundary.",
+  "enforcement": {
+   "required_keys": [
+    "user_language",
+    "rule",
+    "applies_to",
+    "preserve_verbatim",
+    "human_readable_identity"
+   ],
+   "required_identity_keys": [
+    "rule",
+    "order",
+    "absent_field_rule",
+    "safety",
+    "label_rule",
+    "confirmation_required_only_for",
+    "never_block"
+   ],
+   "mirror_files": {
+    "CLAUDE.md": [
+     "արևելահայերեն"
+    ],
+    ".claude/docs/Role.md": [
+     "արևելահայերեն"
+    ]
+   },
+   "runtime_context_file": ".claude/hooks/gate.py",
+   "note": "validate_workspace.check_interaction() enforces this: the block must exist (fail closed), carry these keys, and the mirror files must state the contract in Armenian."
+  }
+ },
+ "scope_lock": {
+  "law": "HARD SCOPE LOCK. Deputy changes ONLY what Gev's current instruction requires. Cleanup, refactor, optimization, migration, permission change, file move, integration change or a fix noticed along the way are NOT part of a task unless Gev asked for them. Deputy cannot give itself permission to do what Gev did not ask for. This is an execution-authority boundary, not an interaction preference.",
+  "default": "DENY",
+  "owner": "the gate ticket - .claude/skills/engine.py stores the contract on ticket['scope']; there is no second task or policy system",
+  "contract_fields": [
+   "requested_outcome",
+   "allowed_subsystems",
+   "allowed_paths",
+   "allowed_operations",
+   "out_of_scope",
+   "task_id",
+   "provenance"
+  ],
+  "confirmation": "Before acting Deputy states the understood scope to Gev in one Armenian sentence (\"Հասկացա․ անում եմ միայն X-ը։ Y/Z-ին չեմ դիպչում։\") and records it: python .claude/skills/skill.py scope set --ticket <id> --outcome \"<outcome>\" <subsystem> [<subsystem> ...]",
+  "self_extension": "FORBIDDEN. A subsystem may enter a contract only when GEV'S OWN message carries evidence for it. The evidence is computed from the user's prompt when the ticket is opened and is the only thing `scope set` and `scope extend` may draw from; Deputy restating its own wish is not evidence.",
+  "report_only": [
+   "an unrelated bug found on the way",
+   "unrelated security hardening - report it, and stop if it is a real blocker, but never change it alone",
+   "an architecturally better structure",
+   "tidier naming or layout",
+   "anything that would merely be nice to clean up"
+  ],
+  "dependency_rule": "A dependency outside the contract STOPS the work: Deputy asks Gev instead of quietly widening the surface.",
+  "implementation_detail": "Inside an allowed subsystem the files the change necessarily touches need no extra approval - the contract is per subsystem, not per file, so ordinary work does not turn into an approval stream.",
+  "relation_to_approval_rule": "Independent and unchanged: .claude/policy/approval_rule.json still requires Gev's explicit approval for every real mutation. Scope never grants a mutation; it only narrows which ones may even be proposed.",
+  "operations": [
+   "READ",
+   "CREATE",
+   "EDIT",
+   "MOVE",
+   "DELETE",
+   "COMMIT",
+   "PUSH"
+  ],
+  "default_operations": [
+   "READ",
+   "CREATE",
+   "EDIT",
+   "COMMIT",
+   "PUSH"
+  ],
+  "operation_evidence": {
+   "MOVE": [
+    "move",
+    "moved",
+    "moving",
+    "migrat",
+    "relocat",
+    "reorganiz",
+    "reorganis",
+    "rename",
+    "git mv",
+    "separate",
+    "տեղափոխ",
+    "վերանվան",
+    "առանձնացր",
+    "դասավոր"
+   ],
+   "DELETE": [
+    "delete",
+    "remove",
+    "drop",
+    "purge",
+    "clean up",
+    "cleanup",
+    "ջնջ",
+    "հեռացր",
+    "մաքր"
+   ]
+  },
+  "always_allowed": [
+   ".claude/state/**",
+   ".claude/audit/**"
+  ],
+  "always_allowed_note": "Deputy's own runtime state and audit trail are the BYPRODUCT of governed work, never a scope decision. They stay protected by the maintenance grant in the skill gate.",
+  "subsystems": {
+   "business_workspace": {
+    "purpose": "Gev's business documents, sources and archives (the WORKSPACE tree apart from the three registers).",
+    "paths": [
+     "WORKSPACE/00_Inbox/**",
+     "WORKSPACE/01_Active/**",
+     "WORKSPACE/02_Reference/**",
+     "WORKSPACE/03_Completed/**",
+     "WORKSPACE/04_Sources/**",
+     "WORKSPACE/05_Archive/**"
+    ],
+    "systems": [],
+    "evidence": [
+     "workspace",
+     "folder",
+     "folders",
+     "directory",
+     "directories",
+     "file tree",
+     "taxonomy",
+     "inbox",
+     "archive",
+     "reference",
+     "sources",
+     "reorganiz",
+     "reorganis",
+     "restructur",
+     "human workspace",
+     "business root",
+     "separate",
+     "separation",
+     "00_inbox",
+     "01_active",
+     "02_reference",
+     "03_completed",
+     "04_sources",
+     "05_archive",
+     "պանակ",
+     "թղթապանակ",
+     "ֆայլ",
+     "փաստաթուղթ",
+     "փաստաթղթ",
+     "դասավոր",
+     "արխիվ",
+     "աղբյուր",
+     "կառուցվածք",
+     "առանձնացր"
+    ]
+   },
+   "task_register": {
+    "purpose": "The live task register Tasks.xlsx and the task rows inside it.",
+    "paths": [
+     "WORKSPACE/Tasks.xlsx"
+    ],
+    "systems": [
+     "INT-TASKS"
+    ],
+    "evidence": [
+     "task",
+     "tasks.xlsx",
+     "register",
+     "deadline",
+     "due date",
+     "assignee",
+     "առաջադրանք",
+     "թասկ",
+     "ռեեստր",
+     "ժամկետ",
+     "պատասխանատու"
+    ]
+   },
+   "journal_and_actions": {
+    "purpose": "Journal.md (the daily log) and Actions.md (Deputy's internal to-dos).",
+    "paths": [
+     "WORKSPACE/Journal.md",
+     "WORKSPACE/Actions.md"
+    ],
+    "systems": [],
+    "evidence": [
+     "journal",
+     "journal.md",
+     "actions.md",
+     "daily log",
+     "log entry",
+     "օրագիր",
+     "գրանցում",
+     "անելիք"
+    ]
+   },
+   "skill_system": {
+    "purpose": "The Skill System: engine, executors, registry, certifications, the skill CLI and the business/intelligence skills.",
+    "paths": [
+     ".claude/skills/**"
+    ],
+    "systems": [],
+    "evidence": [
+     "skill",
+     "skills",
+     "engine.py",
+     "executor",
+     "registry",
+     "certif",
+     "maturity",
+     "intelligence.py",
+     "action runtime",
+     "actions.py",
+     "հմտություն",
+     "շարժիչ",
+     "վկայագր"
+    ]
+   },
+   "workspace_tools": {
+    "purpose": "Operational helper programs that are tools rather than skills (.claude/tools): the workbook and schedule generators that write documents into Gev's workspace.",
+    "paths": [
+     ".claude/tools/**"
+    ],
+    "systems": [],
+    "evidence": [
+     "tool",
+     "tools",
+     ".claude/tools",
+     "workbook",
+     "generator",
+     "helper program",
+     "գործիք",
+     "գեներատոր"
+    ]
+   },
+   "enforcement_hooks": {
+    "purpose": "The mechanical hooks: session brief, skill gate, workspace guard.",
+    "paths": [
+     ".claude/hooks/**"
+    ],
+    "systems": [],
+    "evidence": [
+     "hook",
+     "hooks",
+     "gate",
+     "gate.py",
+     "pretooluse",
+     "userpromptsubmit",
+     "stop hook",
+     "brief.py",
+     "workspace_guard",
+     "enforcement",
+     "scope lock",
+     "scope contract",
+     "mutation gate",
+     "դարպաս",
+     "հարկադրանք"
+    ]
+   },
+   "workspace_policy": {
+    "purpose": "The machine-readable governance: workspace policy, validator, tree manifest, scope engine, path resolver.",
+    "paths": [
+     ".claude/policy/**"
+    ],
+    "systems": [],
+    "evidence": [
+     "policy",
+     "workspace policy",
+     "validator",
+     "validate_workspace",
+     "tree manifest",
+     "manifest",
+     "contract",
+     "scope",
+     "scope lock",
+     "path resolver",
+     "checksums",
+     "կանոնագիր",
+     "քաղաքականություն",
+     "վալիդ"
+    ]
+   },
+   "tests": {
+    "purpose": "The test and evaluation suites.",
+    "paths": [
+     ".claude/tests/**"
+    ],
+    "systems": [],
+    "evidence": [
+     "test",
+     "tests",
+     "unittest",
+     "eval",
+     "evals",
+     "suite",
+     "թեստ",
+     "ստուգում"
+    ]
+   },
+   "integrations": {
+    "purpose": "The integration layer and its adapters (Outlook, Telegram, WhatsApp, Bitrix24, MikroBILL, task register).",
+    "paths": [
+     ".claude/integrations/**"
+    ],
+    "systems": [
+     "INT-OL-CAL",
+     "INT-OL-MAIL",
+     "INT-TG",
+     "INT-WA",
+     "INT-B24",
+     "INT-MB"
+    ],
+    "evidence": [
+     "integration",
+     "adapter",
+     "outlook",
+     "telegram",
+     "whatsapp",
+     "bitrix",
+     "mikrobill",
+     "webhook",
+     "int-tg",
+     "int-wa",
+     "int-ol",
+     "int-b24",
+     "int-mb",
+     "ինտեգրաց",
+     "ադապտեր",
+     "նամակ",
+     "օրացույց"
+    ]
+   },
+   "business_model": {
+    "purpose": "The Business Operating Model: authoring sources bm_*.py, the overlay ov_*.py, builder and certifier.",
+    "paths": [
+     ".claude/business/**"
+    ],
+    "systems": [],
+    "evidence": [
+     "business model",
+     "operating model",
+     "bm_",
+     "overlay",
+     "housenet model",
+     "kpi definition",
+     "process definition",
+     "playbook",
+     "բիզնես մոդել",
+     "գործընթաց"
+    ]
+   },
+   "runtime": {
+    "purpose": "The deterministic Python runtime, the durability/sync machinery and the bootstrap entry point.",
+    "paths": [
+     ".claude/runtime/**",
+     "bootstrap.py"
+    ],
+    "systems": [],
+    "evidence": [
+     "runtime",
+     "venv",
+     "bootstrap",
+     "requirements",
+     "dependency",
+     "dependencies",
+     "sync",
+     "data_sync",
+     "durability",
+     "portability",
+     "state_snapshot",
+     "recovery",
+     "միջավայր",
+     "վերականգն"
+    ]
+   },
+   "agent_docs": {
+    "purpose": "Deputy's charter and the human-facing guides: CLAUDE.md, README.md, .claude/docs.",
+    "paths": [
+     ".claude/docs/**",
+     "CLAUDE.md",
+     "README.md"
+    ],
+    "systems": [],
+    "evidence": [
+     "claude.md",
+     "readme",
+     "charter",
+     "job description",
+     "role.md",
+     "documentation",
+     "docs",
+     "կանոնագիր",
+     "դերի քարտ",
+     "նկարագիր"
+    ]
+   },
+   "security_boundary": {
+    "purpose": "The credential boundary: encrypted recovery artifacts, the sensitive scanner, the data classification.",
+    "paths": [
+     ".secure/**",
+     ".claude/policy/sensitive_scan.py",
+     ".claude/policy/data_classification.json"
+    ],
+    "systems": [],
+    "evidence": [
+     "credential",
+     "secret",
+     "recovery key",
+     "gpg",
+     "boundary scan",
+     "sensitive",
+     "classification",
+     "security hardening",
+     "գաղտնաբառ",
+     "գաղտնի",
+     "անվտանգ"
+    ]
+   },
+   "git_config": {
+    "purpose": "Version-control configuration: .gitignore and .gitattributes (LFS tracking).",
+    "paths": [
+     ".gitignore",
+     ".gitattributes"
+    ],
+    "systems": [],
+    "evidence": [
+     "gitignore",
+     "gitattributes",
+     "git lfs",
+     "lfs tracking",
+     "git config",
+     "version control"
+    ]
+   },
+   "agent_settings": {
+    "purpose": "Claude Code settings for this workspace: hook wiring and permissions.",
+    "paths": [
+     ".claude/settings.json",
+     ".claude/settings.local.json"
+    ],
+    "systems": [],
+    "evidence": [
+     "settings.json",
+     "settings",
+     "permission",
+     "permissions",
+     "hook wiring",
+     "թույլտվութ"
+    ]
+   }
+  },
+  "enforcement": {
+   "mutation_gate": ".claude/hooks/gate.py (PreToolUse): every Write/Edit/Bash write target is resolved to its subsystem and DENIED when it falls outside the current contract; with no confirmed contract every file mutation is denied (default DENY).",
+   "action_runtime": ".claude/skills/actions.py prepare(): an external action whose target system lies outside a confirmed contract is DENIED with OUT_OF_SCOPE before any approval card is shown.",
+   "git_gate": ".claude/policy/scope.py --staged | --worktree: changed paths versus the contract. One out-of-scope path = HARD FAIL - no commit, no push, no PR until it is rolled back or Gev explicitly extends the scope. Installed as the git pre-commit hook and enforced by the skill gate for git commit/push and gh pr create.",
+   "tests": ".claude/tests/test_scope.py"
+  },
+  "blocked_code": "OUT_OF_SCOPE",
+  "enforcement_files": [
+   ".claude/policy/scope.py",
+   ".claude/tests/test_scope.py"
+  ],
+  "mirror_files": {
+   "CLAUDE.md": [
+    "HARD SCOPE LOCK",
+    "REPORT ONLY",
+    "scope set"
+   ]
+  }
+ }
+}

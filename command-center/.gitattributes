@@ -1,0 +1,27 @@
+# Command-center — binary business documents must never be text-normalized; text files keep their native line endings.
+* -text
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gpg binary
+*.db binary
+
+# ── Git LFS: portable binary business workspace (Office, PDF, archives, git bundles) ──
+# GitHub refuses regular-Git blobs over 100 MiB; these artifacts are the workspace, so they are versioned through LFS.
+# bootstrap.py checks for Git LFS and fails with an actionable message when a new machine lacks it.
+*.docx filter=lfs diff=lfs merge=lfs -text
+*.xlsx filter=lfs diff=lfs merge=lfs -text
+*.xlsm filter=lfs diff=lfs merge=lfs -text
+*.pptx filter=lfs diff=lfs merge=lfs -text
+*.pdf filter=lfs diff=lfs merge=lfs -text
+*.zip filter=lfs diff=lfs merge=lfs -text
+*.7z filter=lfs diff=lfs merge=lfs -text
+*.bundle filter=lfs diff=lfs merge=lfs -text
+
+# Images stay in regular Git: small in total and cheaper than LFS bandwidth on every clone.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.gpg binary
+*.db binary

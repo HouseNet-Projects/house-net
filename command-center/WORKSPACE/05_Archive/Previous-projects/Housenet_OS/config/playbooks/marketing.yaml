@@ -1,0 +1,167 @@
+department: marketing
+title: "Մարքեթինգ"
+
+kpis:
+  - { id: leads_mtd,       title: "Lead-եր ամսվա սկզբից", unit: "հատ", direction: up }
+  - { id: cost_per_lead,   title: "Lead-ի արժեք",          unit: "֏",   direction: down }
+  - { id: posts_published_wtd, title: "Հրապարակված փոստեր", unit: "հատ", direction: up }
+  - { id: content_backlog, title: "Չպատրաստված կոնտենտ",   unit: "հատ", direction: down }
+
+rituals:
+  - id: marketing.standup
+    title: "Կոնտենտի ամենօրյա sync"
+    cadence: workdays
+    time: "09:30"
+    duration_min: 15
+    owner_role: content_manager
+    participants: [smm, designer, video_editor]
+    inputs: ["Այսօրվա հրապարակումների ցուցակ", "Երեկվա արդյունքները"]
+    outputs: ["Ամեն այսօրվա միավոր ունի պատրաստության կարգավիճակ"]
+
+  - id: marketing.weekly_plan
+    title: "Շաբաթվա կոնտենտ պլան"
+    cadence: weekly
+    weekday: fri
+    time: "14:00"
+    duration_min: 60
+    owner_role: marketing_lead
+    participants: [content_manager, smm, designer, video_editor, sales_lead]
+    inputs: ["Վաճառքի առաջնահերթ շենքեր/տարածքներ", "Անցած շաբաթվա արդյունքներ"]
+    outputs: ["Հաջորդ շաբաթվա 5 փոստ + 1 վիդեո՝ հաստատված թեմաներով"]
+    severity: high
+
+  - id: marketing.campaign_review
+    title: "Քարոզարշավների վերանայում"
+    cadence: weekly
+    weekday: tue
+    duration_min: 45
+    owner_role: marketing_lead
+    participants: [analyst, ops_head]
+    inputs: ["Ծախս, lead-եր, CPL ըստ քարոզարշավի", "Lead→activation ըստ աղբյուրի"]
+    outputs: ["Բյուջեի վերաբաշխում կամ քարոզարշավի կանգնեցում"]
+
+  - id: marketing.brand_review
+    title: "Բրենդի և հաղորդակցության եռամսյակային վերանայում"
+    cadence: quarterly
+    months: [1, 4, 7, 10]
+    day: 10
+    duration_min: 120
+    owner_role: marketing_lead
+    participants: [ceo, commercial_director]
+    inputs: ["Բրենդի ընկալում, մրցակիցների ակտիվություն"]
+    outputs: ["Հաջորդ եռամսյակի հաղորդակցության ուղղություն"]
+
+deliverables:
+  - id: marketing.social_post
+    title: "Սոցցանցի փոստ"
+    cadence: weekly
+    weekday: mon
+    channels: [facebook, instagram, telegram]
+    owner_role: smm
+    approver_role: marketing_lead
+    asset_type: post
+    lead_days: 3
+    time: "11:00"
+    brief: "Փաթեթ/ակցիա/տեխ. խորհուրդ. CTA՝ հասցեի ստուգում."
+    checklist:
+      - "Տեքստ՝ հայերեն, մինչև 300 նիշ"
+      - "Վիզուալ՝ բրենդի կաղապարով"
+      - "CTA և հղում՝ հասցեի ստուգման էջին"
+      - "UTM պիտակներ"
+    publish_checklist:
+      - "Հրապարակել ժամանակացույցով"
+      - "Առաջին 2 ժամում պատասխանել մեկնաբանություններին"
+
+  - id: marketing.social_post_mid
+    title: "Սոցցանցի փոստ — շաբաթվա կես"
+    cadence: weekly
+    weekday: wed
+    channels: [facebook, instagram, telegram]
+    owner_role: smm
+    approver_role: marketing_lead
+    asset_type: post
+    lead_days: 2
+    time: "18:00"
+    brief: "Բաժանորդի պատմություն, ծածկույթի նորություն, կամ FAQ."
+
+  - id: marketing.video
+    title: "Վիդեո"
+    cadence: weekly
+    weekday: thu
+    channels: [youtube, instagram, tiktok]
+    owner_role: video_editor
+    approver_role: marketing_lead
+    asset_type: video
+    lead_days: 7
+    brief: "60–90 վրկ. Թեմաներ՝ ինչպես ընտրել փաթեթ, Wi-Fi-ի տեղադրում, միացման պրոցես."
+    checklist:
+      - "Սցենար՝ հաստատված"
+      - "Կադրերի ցուցակ և նկարահանում"
+      - "Մոնտաժ և գունաշտկում"
+      - "Ենթագրեր՝ հայերեն"
+      - "Վերնագիր, նկարագրություն, thumbnail"
+    publish_checklist:
+      - "Հրապարակել բոլոր ալիքներով"
+      - "48 ժամ հետո՝ արդյունքի չափում"
+
+  - id: marketing.newsletter
+    title: "Բաժանորդների նամակ"
+    cadence: monthly
+    day: 5
+    channels: [email]
+    owner_role: content_manager
+    approver_role: marketing_lead
+    asset_type: email
+    lead_days: 4
+    brief: "Նորություններ, ծածկույթի ընդլայնում, խորհուրդներ, ակցիա."
+
+  - id: marketing.monthly_report
+    title: "Մարքեթինգի ամսական հաշվետվություն"
+    cadence: month_start
+    offset: 2
+    owner_role: analyst
+    approver_role: marketing_lead
+    asset_type: report
+    lead_days: 1
+    brief: "Ծախս, lead, CPL, lead→activation ըստ աղբյուրի, ROI."
+
+controls:
+  - id: marketing.ctl_cpl
+    title: "Lead-ի արժեքը շեմից բարձր է"
+    metric: cost_per_lead
+    op: ">"
+    threshold: 1800
+    severity: high
+    owner_role: marketing_lead
+    due_in_days: 3
+    action: "Դադարեցնել ամենաթանկ քարոզարշավը, վերաբաշխել բյուջեն"
+
+  - id: marketing.ctl_plan_gap
+    title: "Հրապարակումների պլանը չի կատարվում"
+    metric: posts_published_wtd
+    op: "<"
+    threshold: 5
+    severity: medium
+    owner_role: content_manager
+    due_in_days: 2
+    action: "Գտնել խցանումը՝ սցենար, դիզայն, թե հաստատում"
+
+  - id: marketing.ctl_backlog
+    title: "Կոնտենտի պաշարը սպառվում է"
+    metric: content_backlog
+    op: "<"
+    threshold: 5
+    severity: medium
+    owner_role: content_manager
+    due_in_days: 3
+    action: "Գեներացնել և հաստատել առնվազն 10 նոր թեմա"
+
+  - id: marketing.ctl_overspend
+    title: "Բյուջեի գերածախս"
+    metric: campaign_overspend_pct
+    op: ">"
+    threshold: 10.0
+    severity: high
+    owner_role: marketing_lead
+    due_in_days: 1
+    action: "Սահմանափակել օրական բյուջեն և տեղեկացնել ֆինանսներին"

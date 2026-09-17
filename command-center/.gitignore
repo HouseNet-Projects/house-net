@@ -1,0 +1,41 @@
+# ═══ Command-center .gitignore — durability model (Mission 4.1): GitHub + recovery key → complete workspace ═══
+# Business documents, registers, sources, archives, the Business Operating Model (core AND overlay) and Deputy's durable
+# state export ARE versioned. Only genuinely non-repository artifacts are ignored. Access credentials never enter Git in
+# plaintext — mechanically enforced by .claude/policy/sensitive_scan.py (RESTRICTED = blocked), not by this file.
+
+# ── regenerated runtime (bootstrap.py rebuilds from .claude/runtime/requirements.lock) ──
+.venv/
+**/__pycache__/
+*.pyc
+
+# ── ephemeral Deputy runtime state (the durable export is .claude/state/durable/, versioned) ──
+.claude/state/*
+!.claude/state/durable/
+!.claude/state/durable/**
+.claude/audit/
+
+# ── regenerated artifacts (deterministic; bootstrap rebuilds and re-certifies) ──
+.claude/business/*.json
+.claude/business/Business-model.md
+.claude/integrations/*.json
+
+# ── plaintext / decrypted credential material (never; recovery goes through .secure/credentials.gpg) ──
+.secure/*.plain*
+.secure/*.dec*
+.secure/*.tmp
+.secure/*.tar
+*.key
+*.pem
+.env
+.env.*
+.claude/settings.local.json
+
+# ── machine garbage, locks, temp ──
+desktop.ini
+Thumbs.db
+~$*
+*.lock
+*.tmp
+*.bak
+*.orig
+*.swp

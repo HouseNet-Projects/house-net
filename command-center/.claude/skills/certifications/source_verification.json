@@ -1,0 +1,101 @@
+{
+ "skill_id": "source_verification",
+ "skill_version": "1.2.0",
+ "maturity_level": "L4",
+ "declared_maturity": "L4",
+ "computed_maturity": "L4",
+ "tests": [
+  "test_business.B01_ProvenanceAndPrecedence.test_every_fact_has_source_and_confidence_and_source_status_answers",
+  "test_business.B08_RealModel.test_extraction_invariants_green_and_tamper_detected",
+  "test_channels.C05_SecretsAndReadiness.test_registry_contract_capabilities_and_certification_scan",
+  "test_intelligence.Q07b_FailClosed.test_intelligence_skills_fail_closed_on_an_invalid_register",
+  "test_live_data.L01_StructureFingerprint.test_schema_changes_change_the_structure_fingerprint",
+  "test_live_data.L02_ModelBinding.test_extracted_model_source_change_still_invalidates",
+  "test_live_data.L02_ModelBinding.test_register_schema_change_still_hits_the_certification_boundary",
+  "test_outlook_write.O01_TruthAndIdentity.test_fixture_mode_is_always_labelled_and_never_production_truth",
+  "test_outlook_write.O01_TruthAndIdentity.test_identity_verification_and_wrong_tenant",
+  "test_skills.T07_VerificationAudit.test_source_verification",
+  "test_workspace.W01_Tree.test_valid_clean_tree_passes"
+ ],
+ "failure_tests": [
+  "test_business.B08_RealModel.test_extraction_invariants_green_and_tamper_detected",
+  "test_failclosed.F01_EveryBlockedCode.test_AUTHORITY_EXCEEDED",
+  "test_failclosed.F01_EveryBlockedCode.test_DISABLED_SKILL",
+  "test_failclosed.F01_EveryBlockedCode.test_INVALID_SOURCE",
+  "test_failclosed.F01_EveryBlockedCode.test_MISSING_SKILL",
+  "test_failclosed.F01_EveryBlockedCode.test_STALE_SOURCE",
+  "test_failclosed.F02_NeverMisrepresented.test_blocked_never_carries_result_data_as_success",
+  "test_intelligence.Q07b_FailClosed.test_intelligence_skills_fail_closed_on_an_invalid_register",
+  "test_live_data.L02_ModelBinding.test_register_schema_change_still_hits_the_certification_boundary",
+  "test_outlook_write.O01_TruthAndIdentity.test_identity_verification_and_wrong_tenant",
+  "test_skills.T07_VerificationAudit.test_source_verification"
+ ],
+ "hardening_cases": [
+  "test_business.B08_RealModel.test_extraction_invariants_green_and_tamper_detected",
+  "test_hardening.H01_RegistryFailureInjection.test_self_awarded_maturity_rejected_without_fresh_certification",
+  "test_hardening.H02_SourceFailureInjection.test_missing_sheet",
+  "test_hardening.H02_SourceFailureInjection.test_schema_drift",
+  "test_hardening.H02_SourceFailureInjection.test_stale_source_blocks_unless_acknowledged",
+  "test_hardening.H04_AdversarialInputs.test_material_and_external_blocked_on_every_skill",
+  "test_hardening.H04_AdversarialInputs.test_path_traversal_does_not_escape_root_silently",
+  "test_live_data.L01_StructureFingerprint.test_schema_changes_change_the_structure_fingerprint",
+  "test_live_data.L02_ModelBinding.test_extracted_model_source_change_still_invalidates",
+  "test_live_data.L02_ModelBinding.test_register_schema_change_still_hits_the_certification_boundary",
+  "test_outlook_write.O01_TruthAndIdentity.test_fixture_mode_is_always_labelled_and_never_production_truth"
+ ],
+ "adversarial": [
+  "test_hardening.H01_RegistryFailureInjection.test_self_awarded_maturity_rejected_without_fresh_certification",
+  "test_hardening.H04_AdversarialInputs.test_material_and_external_blocked_on_every_skill",
+  "test_hardening.H04_AdversarialInputs.test_path_traversal_does_not_escape_root_silently",
+  "test_outlook_write.O01_TruthAndIdentity.test_fixture_mode_is_always_labelled_and_never_production_truth"
+ ],
+ "failure_injection": [
+  "test_business.B08_RealModel.test_extraction_invariants_green_and_tamper_detected",
+  "test_hardening.H02_SourceFailureInjection.test_missing_sheet",
+  "test_hardening.H02_SourceFailureInjection.test_schema_drift",
+  "test_hardening.H02_SourceFailureInjection.test_stale_source_blocks_unless_acknowledged",
+  "test_live_data.L01_StructureFingerprint.test_schema_changes_change_the_structure_fingerprint",
+  "test_live_data.L02_ModelBinding.test_extracted_model_source_change_still_invalidates",
+  "test_live_data.L02_ModelBinding.test_register_schema_change_still_hits_the_certification_boundary",
+  "test_outlook_write.O01_TruthAndIdentity.test_fixture_mode_is_always_labelled_and_never_production_truth"
+ ],
+ "authority_tests": [
+  "test_failclosed.F01_EveryBlockedCode.test_AUTHORITY_EXCEEDED",
+  "test_hardening.H04_AdversarialInputs.test_material_and_external_blocked_on_every_skill"
+ ],
+ "completion_verification": [
+  "test_skills.T07_VerificationAudit.test_source_verification"
+ ],
+ "concurrency_tests": [],
+ "enforcement_tests": [],
+ "evals": [
+  "eval:source_check"
+ ],
+ "routing_evals": [],
+ "failed_tests": [],
+ "certified_at": "2026-09-14T20:14:36",
+ "fingerprint": "4d9b8efbefa76bbded85cbf4",
+ "core_fingerprint": "0af15296acbfd2ed",
+ "result": "PASS",
+ "suites": [
+  "test_skills",
+  "test_store",
+  "test_failclosed",
+  "test_hardening",
+  "test_enforcement",
+  "test_workspace",
+  "test_scope",
+  "test_runtime",
+  "test_business",
+  "test_boundary",
+  "test_integrations",
+  "test_portability",
+  "test_actions",
+  "test_live_data",
+  "test_intelligence",
+  "test_outlook_write",
+  "test_channels",
+  "test_operating_layer"
+ ],
+ "audit_infrastructure": false
+}

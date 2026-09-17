@@ -1,0 +1,50 @@
+{
+ "skill_id": "operational_incident_management",
+ "skill_version": "1.2.0",
+ "maturity_level": "L0",
+ "declared_maturity": "L0",
+ "computed_maturity": "L0",
+ "tests": [],
+ "failure_tests": [],
+ "hardening_cases": [
+  "test_hardening.H04_AdversarialInputs.test_material_and_external_blocked_on_every_skill"
+ ],
+ "adversarial": [
+  "test_hardening.H04_AdversarialInputs.test_material_and_external_blocked_on_every_skill"
+ ],
+ "failure_injection": [],
+ "authority_tests": [
+  "test_hardening.H04_AdversarialInputs.test_material_and_external_blocked_on_every_skill"
+ ],
+ "completion_verification": [],
+ "concurrency_tests": [],
+ "enforcement_tests": [],
+ "evals": [],
+ "routing_evals": [],
+ "failed_tests": [],
+ "certified_at": "2026-09-14T20:14:36",
+ "fingerprint": "ecdaea67fcdab308cbb752cb",
+ "core_fingerprint": "0af15296acbfd2ed",
+ "result": "PASS",
+ "suites": [
+  "test_skills",
+  "test_store",
+  "test_failclosed",
+  "test_hardening",
+  "test_enforcement",
+  "test_workspace",
+  "test_scope",
+  "test_runtime",
+  "test_business",
+  "test_boundary",
+  "test_integrations",
+  "test_portability",
+  "test_actions",
+  "test_live_data",
+  "test_intelligence",
+  "test_outlook_write",
+  "test_channels",
+  "test_operating_layer"
+ ],
+ "audit_infrastructure": true
+}

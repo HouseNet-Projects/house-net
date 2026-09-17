@@ -1,0 +1,136 @@
+{
+ "skill_id": "task_management",
+ "skill_version": "1.2.0",
+ "maturity_level": "L4",
+ "declared_maturity": "L4",
+ "computed_maturity": "L4",
+ "tests": [
+  "test_actions.H04_TasksWriteAdapter.test_create_assign_close_reopen_with_readback",
+  "test_integrations.A01_ConfidentialCache.test_persistent_register_cache_has_hard_expiry_on_startup",
+  "test_integrations.A03_TaskAuthorityScope.test_cross_system_link_keeps_both_statuses_and_flags_divergence",
+  "test_integrations.A03_TaskAuthorityScope.test_scoped_hierarchies",
+  "test_integrations.I07_HealthAndTasks.test_task_register_real_read_records_real_health",
+  "test_intelligence.Q02_TaskIntelligence.test_overdue_due_today_blocked_ownerless_and_provenance",
+  "test_intelligence.Q08_ProductionGuards.test_real_register_read_is_provenanced_and_untouched",
+  "test_live_data.L01_StructureFingerprint.test_row_mutations_keep_the_structure_fingerprint_and_the_loader_happy",
+  "test_live_data.L02_ModelBinding.test_task_row_mutations_never_invalidate_the_certified_core",
+  "test_live_data.L05_LiveDataSync.test_sync_persists_data_only_and_leaves_the_tree_clean",
+  "test_portability.P06_CleanCloneBootstrap.test_recovery_carries_the_latest_synced_live_register_and_the_same_static_model",
+  "test_skills.T05_Execution.test_task_management",
+  "test_skills.T08_MultiSkill.test_multi_skill_execution_daily_brief"
+ ],
+ "failure_tests": [
+  "test_actions.H04_TasksWriteAdapter.test_create_assign_close_reopen_with_readback",
+  "test_actions.H04_TasksWriteAdapter.test_stale_row_and_locked_workbook",
+  "test_failclosed.F01_EveryBlockedCode.test_APPROVAL_REQUIRED",
+  "test_failclosed.F01_EveryBlockedCode.test_AUTHORITY_EXCEEDED",
+  "test_failclosed.F01_EveryBlockedCode.test_DISABLED_SKILL",
+  "test_failclosed.F01_EveryBlockedCode.test_INVALID_SOURCE",
+  "test_failclosed.F01_EveryBlockedCode.test_MISSING_SKILL",
+  "test_failclosed.F01_EveryBlockedCode.test_STALE_SOURCE",
+  "test_failclosed.F01_EveryBlockedCode.test_VERIFICATION_FAILED",
+  "test_failclosed.F02_NeverMisrepresented.test_blocked_never_carries_result_data_as_success",
+  "test_integrations.A02_AuditFailClosed.test_real_read_withheld_when_audit_cannot_be_persisted_or_reread",
+  "test_integrations.A03_TaskAuthorityScope.test_cross_system_link_keeps_both_statuses_and_flags_divergence",
+  "test_integrations.A03_TaskAuthorityScope.test_scoped_hierarchies",
+  "test_integrations.I07_HealthAndTasks.test_schema_drift_and_missing_file_fail_closed",
+  "test_skills.T05_Execution.test_missing_source_blocks_before_execution"
+ ],
+ "hardening_cases": [
+  "test_actions.H04_TasksWriteAdapter.test_stale_row_and_locked_workbook",
+  "test_hardening.H01_RegistryFailureInjection.test_self_awarded_maturity_rejected_without_fresh_certification",
+  "test_hardening.H02_SourceFailureInjection.test_missing_sheet",
+  "test_hardening.H02_SourceFailureInjection.test_schema_drift",
+  "test_hardening.H02_SourceFailureInjection.test_source_missing_blocks_not_fabricates",
+  "test_hardening.H02_SourceFailureInjection.test_stale_source_blocks_unless_acknowledged",
+  "test_hardening.H02_SourceFailureInjection.test_unexpected_row_schema_skipped_not_crashed",
+  "test_hardening.H03_StateHardening.test_repeated_execution_distinct_ids_both_audited",
+  "test_hardening.H04_AdversarialInputs.test_material_and_external_blocked_on_every_skill",
+  "test_hardening.H04_AdversarialInputs.test_oversized_input_truncated_in_audit",
+  "test_hardening.H04_AdversarialInputs.test_secret_in_nested_input_redacted",
+  "test_hardening.H05_ChainFailureInjection.test_completion_verification_failure_is_not_success",
+  "test_hardening.H05_ChainFailureInjection.test_interrupted_chain_preserves_prior_steps_and_audits",
+  "test_hardening.H05_ChainFailureInjection.test_validation_failure_is_not_success",
+  "test_integrations.A01_ConfidentialCache.test_persistent_register_cache_has_hard_expiry_on_startup",
+  "test_integrations.A02_AuditFailClosed.test_real_read_withheld_when_audit_cannot_be_persisted_or_reread",
+  "test_integrations.I07_HealthAndTasks.test_schema_drift_and_missing_file_fail_closed",
+  "test_live_data.L05_LiveDataSync.test_sync_persists_data_only_and_leaves_the_tree_clean"
+ ],
+ "adversarial": [
+  "test_hardening.H01_RegistryFailureInjection.test_self_awarded_maturity_rejected_without_fresh_certification",
+  "test_hardening.H02_SourceFailureInjection.test_unexpected_row_schema_skipped_not_crashed",
+  "test_hardening.H04_AdversarialInputs.test_material_and_external_blocked_on_every_skill",
+  "test_hardening.H04_AdversarialInputs.test_oversized_input_truncated_in_audit",
+  "test_hardening.H04_AdversarialInputs.test_secret_in_nested_input_redacted"
+ ],
+ "failure_injection": [
+  "test_actions.H04_TasksWriteAdapter.test_stale_row_and_locked_workbook",
+  "test_hardening.H02_SourceFailureInjection.test_missing_sheet",
+  "test_hardening.H02_SourceFailureInjection.test_schema_drift",
+  "test_hardening.H02_SourceFailureInjection.test_source_missing_blocks_not_fabricates",
+  "test_hardening.H02_SourceFailureInjection.test_stale_source_blocks_unless_acknowledged",
+  "test_hardening.H03_StateHardening.test_repeated_execution_distinct_ids_both_audited",
+  "test_hardening.H05_ChainFailureInjection.test_completion_verification_failure_is_not_success",
+  "test_hardening.H05_ChainFailureInjection.test_interrupted_chain_preserves_prior_steps_and_audits",
+  "test_hardening.H05_ChainFailureInjection.test_validation_failure_is_not_success",
+  "test_integrations.A01_ConfidentialCache.test_persistent_register_cache_has_hard_expiry_on_startup",
+  "test_integrations.A02_AuditFailClosed.test_real_read_withheld_when_audit_cannot_be_persisted_or_reread",
+  "test_integrations.I07_HealthAndTasks.test_schema_drift_and_missing_file_fail_closed",
+  "test_live_data.L05_LiveDataSync.test_sync_persists_data_only_and_leaves_the_tree_clean"
+ ],
+ "authority_tests": [
+  "test_failclosed.F01_EveryBlockedCode.test_APPROVAL_REQUIRED",
+  "test_failclosed.F01_EveryBlockedCode.test_AUTHORITY_EXCEEDED",
+  "test_hardening.H04_AdversarialInputs.test_material_and_external_blocked_on_every_skill",
+  "test_skills.T04_Authority.test_approval_required_external_then_token"
+ ],
+ "completion_verification": [
+  "test_actions.H04_TasksWriteAdapter.test_create_assign_close_reopen_with_readback",
+  "test_integrations.I07_HealthAndTasks.test_task_register_real_read_records_real_health",
+  "test_intelligence.Q02_TaskIntelligence.test_overdue_due_today_blocked_ownerless_and_provenance",
+  "test_live_data.L02_ModelBinding.test_task_row_mutations_never_invalidate_the_certified_core",
+  "test_live_data.L05_LiveDataSync.test_sync_persists_data_only_and_leaves_the_tree_clean",
+  "test_portability.P06_CleanCloneBootstrap.test_recovery_carries_the_latest_synced_live_register_and_the_same_static_model",
+  "test_skills.T05_Execution.test_task_management",
+  "test_skills.T08_MultiSkill.test_multi_skill_execution_daily_brief"
+ ],
+ "concurrency_tests": [
+  "test_integrations.A05_Concurrency.test_parallel_register_reads_keep_cache_and_health_consistent"
+ ],
+ "enforcement_tests": [
+  "test_enforcement.E04_MultiStepAndNarration.test_plan_runs_full_graph_cannot_skip_intermediate",
+  "test_integrations.A02_AuditFailClosed.test_real_read_withheld_when_audit_cannot_be_persisted_or_reread"
+ ],
+ "evals": [
+  "eval:daily_brief"
+ ],
+ "routing_evals": [
+  "test_skills.T02_Router.test_dependency_order"
+ ],
+ "failed_tests": [],
+ "certified_at": "2026-09-14T20:14:36",
+ "fingerprint": "30fbdb1c91186ec45a0531d5",
+ "core_fingerprint": "0af15296acbfd2ed",
+ "result": "PASS",
+ "suites": [
+  "test_skills",
+  "test_store",
+  "test_failclosed",
+  "test_hardening",
+  "test_enforcement",
+  "test_workspace",
+  "test_scope",
+  "test_runtime",
+  "test_business",
+  "test_boundary",
+  "test_integrations",
+  "test_portability",
+  "test_actions",
+  "test_live_data",
+  "test_intelligence",
+  "test_outlook_write",
+  "test_channels",
+  "test_operating_layer"
+ ],
+ "audit_infrastructure": false
+}

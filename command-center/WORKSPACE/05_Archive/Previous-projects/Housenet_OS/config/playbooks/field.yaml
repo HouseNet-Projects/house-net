@@ -1,0 +1,127 @@
+department: field
+title: "Դաշտային ծառայություն"
+
+kpis:
+  - { id: first_visit_success_rate, title: "Առաջին այցի հաջողություն", unit: "%",  direction: up }
+  - { id: repeat_visits_pct,        title: "Կրկնակի այցեր",            unit: "%",  direction: down }
+  - { id: no_show_rate,             title: "Բաժանորդի բացակայություն", unit: "%",  direction: down }
+  - { id: jobs_unassigned,          title: "Չնշանակված աշխատանքներ",   unit: "հատ", direction: down }
+
+rituals:
+  - id: field.morning_dispatch
+    title: "Առավոտյան ուղերթի բաշխում"
+    cadence: workdays
+    time: "08:30"
+    duration_min: 20
+    owner_role: dispatch_lead
+    participants: [field_lead, warehouse_lead]
+    inputs:
+      - "Օրվա montage-ների ցուցակ ժամային պատուհաններով"
+      - "Բրիգադների հասանելիություն"
+      - "Պահանջվող սարքերի պաշարը"
+    outputs: ["Ամեն բրիգադ ունի օրվա երթուղին և սարքերը"]
+    severity: high
+
+  - id: field.evening_close
+    title: "Օրվա փակում"
+    cadence: workdays
+    time: "18:30"
+    duration_min: 20
+    owner_role: dispatch_lead
+    inputs: ["Չկատարված աշխատանքներ և պատճառները", "Արագության չափման գրանցումներ"]
+    outputs: ["Ամեն չկատարված աշխատանք վերանշանակված է"]
+    severity: high
+
+  - id: field.quality_review
+    title: "Montage-ի որակի վերանայում"
+    cadence: weekly
+    weekday: thu
+    duration_min: 45
+    owner_role: field_lead
+    participants: [care_lead, qa_lead]
+    inputs: ["Կրկնակի այցեր", "24-ժամյա զանգից եկած բողոքներ", "Wi-Fi ծածկույթի խնդիրներ"]
+    outputs: ["Բրիգադների ուսուցման կետեր, ստանդարտի ճշգրտում"]
+
+  - id: field.safety_briefing
+    title: "Անվտանգության կանոնների brief"
+    cadence: monthly
+    day: 3
+    duration_min: 45
+    owner_role: field_lead
+    participants: [hr_lead]
+    inputs: ["Ամսվա միջադեպերը", "Բարձրության և էլեկտրաանվտանգության կանոններ"]
+    outputs: ["Ստորագրված մասնակցության թերթ"]
+    severity: high
+
+deliverables:
+  - id: field.weekly_report
+    title: "Դաշտային ծառայության շաբաթական հաշվետվություն"
+    cadence: weekly
+    weekday: mon
+    owner_role: analyst
+    approver_role: field_lead
+    asset_type: report
+    lead_days: 1
+    brief: "Առաջին այցի հաջողություն, կրկնակի այցեր, no-show, միջին տևողություն ըստ բրիգադի."
+
+  - id: field.standard_update
+    title: "Montage-ի ստանդարտի թարմացում"
+    cadence: quarterly
+    months: [2, 5, 8, 11]
+    day: 10
+    owner_role: field_lead
+    approver_role: technical_director
+    asset_type: report
+    lead_days: 7
+    brief: "Ստուգաթերթ, սարքավորման պահանջներ, Wi-Fi տեղադրման կանոններ."
+
+controls:
+  - id: field.ctl_first_visit
+    title: "Առաջին այցի հաջողությունը շեմից ցածր է"
+    metric: first_visit_success_rate
+    op: "<"
+    threshold: 85.0
+    severity: high
+    owner_role: field_lead
+    due_in_days: 2
+    action: "Պատճառների բաշխում՝ սարք, ռեսուրս, բաժանորդ, բրիգադ"
+
+  - id: field.ctl_repeat
+    title: "Կրկնակի այցերը շատացել են"
+    metric: repeat_visits_pct
+    op: ">"
+    threshold: 12.0
+    severity: medium
+    owner_role: field_lead
+    due_in_days: 3
+    action: "Ստուգել՝ արդյոք առաջին այցին բացակայում է սարքը թե հմտությունը"
+
+  - id: field.ctl_no_show
+    title: "Բաժանորդի բացակայությունների տոկոսը բարձր է"
+    metric: no_show_rate
+    op: ">"
+    threshold: 10.0
+    severity: medium
+    owner_role: dispatch_lead
+    due_in_days: 2
+    action: "Ստուգել հիշեցումների առաքումը՝ 24ժ և 2ժ առաջ"
+
+  - id: field.ctl_unassigned
+    title: "Չնշանակված աշխատանքներ կան"
+    metric: jobs_unassigned
+    op: ">"
+    threshold: 0
+    severity: critical
+    owner_role: dispatch_lead
+    due_in_days: 1
+    action: "Ամեն աշխատանք ստանում է բրիգադ և ամսաթիվ նույն օրը"
+
+  - id: field.ctl_sla
+    title: "SLA-ի խախտումներ"
+    metric: sla_breach_count
+    op: ">"
+    threshold: 0
+    severity: high
+    owner_role: field_lead
+    due_in_days: 1
+    action: "Ամեն խախտում՝ պատճառով, բաժանորդին՝ տեղեկացում"
