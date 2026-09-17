@@ -22,6 +22,7 @@
   "allowed_paths": [
     "command-center/**",
     "deploy/**",
+    "docs/**",
     ".github/workflows/house-net-ci.yml",
     ".github/engineering-authority.json"
   ],
