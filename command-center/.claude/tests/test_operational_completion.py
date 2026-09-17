@@ -31,3 +31,9 @@ class OperationalCompletionTests(unittest.TestCase):
             with self.assertRaises(ValueError): backup_ops.verify(p)
 
 if __name__=='__main__': unittest.main()
+
+class WorkerHardeningTests(unittest.TestCase):
+    def test_status_schema_is_truthful(self):
+        s=worker.status(); self.assertIn('running',s); self.assertIn('last_success',s); self.assertIn('last_failure',s)
+    def test_dead_pid_is_not_alive(self):
+        self.assertFalse(worker._pid_alive(99999999))
