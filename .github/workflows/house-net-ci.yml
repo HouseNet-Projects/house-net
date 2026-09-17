@@ -97,7 +97,7 @@ jobs:
           test_skills test_store test_failclosed test_enforcement test_scope
           test_business test_actions test_live_data test_intelligence
           test_architecture test_runtime_integration test_deputy_e2e
-          test_hardening test_channels
+          test_hardening test_channels test_execution_surface test_operational_completion test_product_api
         working-directory: command-center/.claude/tests
         env:
           PYTHONDONTWRITEBYTECODE: '1'

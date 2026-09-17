@@ -1404,5 +1404,14 @@
     "current": true,
     "machine_consumed": false,
     "purpose": "reference for vault"
+  },
+  {
+    "path": "command-center/OPERATIONS.md",
+    "category": "OPERATING_GUIDE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "operator runbook for Deputy API, proactive worker, supervised services and backup/restore"
   }
 ]
