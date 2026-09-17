@@ -17,13 +17,15 @@
 
 ## The product
 
+<p align="center"><img src="design-system/assets/github/product.svg" alt="HouseNet product foundation" width="100%"></p>
+
 HouseNet brings governance, operating work, durable knowledge, brand standards and secret references into one canonical repository. Deputy reads the current state, reasons across professional domains, prepares work and keeps the loop visible. Material external changes stay behind explicit approval and independent verification.
 
 Հայերեն՝ HouseNet-ը կառավարվող օպերացիոն համակարգ է, իսկ Deputy-ն՝ մեկ միասնական օպերացիոն գործընկեր։
 
 ## System map
 
-<p align="center"><img src="design-system/assets/github/deputy-flow.svg" alt="Gev to Deputy, brains, skills, Action Runtime and verification" width="100%"></p>
+<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="design-system/assets/github/deputy-flow-dark.svg"><source media="(prefers-color-scheme: light)" srcset="design-system/assets/github/deputy-flow.svg"><img src="design-system/assets/github/deputy-flow.svg" alt="Gev to Deputy, brains, skills, Action Runtime and verification" width="100%"></picture></p>
 
 | Component | Owns | Explore |
 | --- | --- | --- |
@@ -35,6 +37,8 @@ HouseNet brings governance, operating work, durable knowledge, brand standards a
 
 ## What Deputy does
 
+<p align="center"><img src="design-system/assets/github/what-deputy.svg" alt="What Deputy does" width="100%"></p>
+
 - understands natural-language requests and routes them to relevant professional brains;
 - uses the canonical Skill System, Store and operational state;
 - prepares strategies, roadmaps, tasks, reports and follow-through;
@@ -45,7 +49,7 @@ Professional brains never become separate agents, authorities, memories or write
 
 ## Current operating surface
 
-<p align="center"><img src="design-system/assets/github/capabilities.svg" alt="Current HouseNet capabilities" width="100%"></p>
+<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="design-system/assets/github/capabilities-dark.svg"><source media="(prefers-color-scheme: light)" srcset="design-system/assets/github/capabilities.svg"><img src="design-system/assets/github/capabilities.svg" alt="Current HouseNet capabilities" width="100%"></picture></p>
 
 | Capability | State |
 | --- | --- |
@@ -80,6 +84,8 @@ docs/            navigation, audit and provenance
 ```
 
 ## Validate locally
+
+<p align="center"><img src="design-system/assets/github/validate-docs.svg" alt="Validate and navigate HouseNet" width="100%"></p>
 
 ```bash
 python tools/validate_house_net.py
