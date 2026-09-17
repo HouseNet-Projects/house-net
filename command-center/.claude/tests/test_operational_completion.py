@@ -37,3 +37,8 @@ class WorkerHardeningTests(unittest.TestCase):
         s=worker.status(); self.assertIn('running',s); self.assertIn('last_success',s); self.assertIn('last_failure',s)
     def test_dead_pid_is_not_alive(self):
         self.assertFalse(worker._pid_alive(99999999))
+
+class WorkerProcessStatusTests(unittest.TestCase):
+    def test_live_process_is_reported_running(self):
+        s=worker._status({'pid':os.getpid(),'running':False})
+        self.assertTrue(s['running'])
