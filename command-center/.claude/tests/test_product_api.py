@@ -51,4 +51,24 @@ class OperatorPresentationTests(unittest.TestCase):
         self.assertIn('Chronological activity', js)
         self.assertIn('Exact approval inbox', js)
 
+
+class BilingualThemeProviderTests(unittest.TestCase):
+    def test_i18n_theme_and_logo_contract(self):
+        self.assertIn('I18N=', product_api.APP_JS)
+        self.assertIn('deputy-locale', product_api.APP_JS)
+        self.assertIn('deputy-theme', product_api.APP_JS)
+        self.assertIn('data-theme="dark"', product_api.INDEX_HTML)
+        self.assertIn('class="logo"', product_api.INDEX_HTML)
+        self.assertIn('Հաստատումների մուտքային', product_api.APP_JS)
+        self.assertNotIn('__LOGO__', product_api.INDEX_HTML)
+        self.assertIn('data:image/svg+xml;base64,', product_api.INDEX_HTML)
+
+    def test_claude_provider_is_cli_only_and_truthful_when_unavailable(self):
+        from ai_provider import status
+        result = status()
+        self.assertEqual(result.get('provider'), 'claude-code-max')
+        self.assertFalse(result.get('api_key_required'))
+        self.assertNotIn('ANTHROPIC_API_KEY', product_api.APP_JS)
+        self.assertIn('/provider', __import__('inspect').getsource(product_api.Handler.do_GET))
+
 if __name__=='__main__': unittest.main()

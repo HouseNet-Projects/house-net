@@ -1,13 +1,13 @@
 {
-  "authority_id": "EAE-OPERATOR-UI-REMEDIATION",
+  "authority_id": "EAE-BILINGUAL-UI-CLAUDE-MAX",
   "approved_by": "GEV",
-  "approval_reference": "gev-explicit-operator-ui-product-remediation",
+  "approval_reference": "gev-explicit-premium-bilingual-ui-claude-max",
   "approved_at": "2026-09-18T00:00:00Z",
-  "mission": "Replace raw generic operator UI rendering with HouseNet token-aligned screen-specific presentation adapters and regression coverage.",
+  "mission": "Premium bilingual HouseNet operator UI, theme system, official logo embedding, and provider-neutral Claude Code Max adapter",
   "repository": "HouseNet-Projects/house-net",
-  "base_sha": "9ad816ed0ce58df8f313e269ff46e95359438772",
-  "branch": "fix/operator-ui-product",
-  "pr": "18",
+  "base_sha": "4ccf51109739d9f84d55641a907ab903f845c962",
+  "branch": "product/bilingual-ui-claude-max",
+  "pr": "19",
   "allowed_operations": [
     "branch",
     "edit",
@@ -21,7 +21,10 @@
   ],
   "allowed_paths": [
     "command-center/product_api.py",
+    "command-center/deputy.py",
+    "command-center/.claude/runtime/ai_provider.py",
     "command-center/.claude/tests/test_product_api.py",
+    "command-center/README.md",
     ".github/engineering-authority.json"
   ],
   "prohibited_operations": [
@@ -35,7 +38,7 @@
     "action_runtime_bypass"
   ],
   "risk_ceiling": "LOW",
-  "expires_at": "2026-10-18T23:59:59Z",
+  "expires_at": "2026-10-18T00:00:00Z",
   "status": "ACTIVE",
   "audit_trail": [
     {
