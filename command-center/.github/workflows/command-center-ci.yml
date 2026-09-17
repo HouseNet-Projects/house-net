@@ -1,0 +1,48 @@
+name: Command-center CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: command-center-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  policy-gate:
+    name: HouseNet policy gate
+    uses: HouseNet-Projects/house-net-control-plane/.github/workflows/reusable-policy-gate.yml@b36ad10cc02a80d98ad22d04577ebcd512740ce0
+  deputy-tests:
+    name: Deputy tests and evaluations
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          fetch-depth: 0
+          lfs: true
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: '3.13'
+      - name: Checkout Control Plane authority for certification
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          repository: HouseNet-Projects/house-net-control-plane
+          ref: cfde3fb2533f03bb36364bb0db784e53016e4e4e
+          path: control-plane-authority
+          persist-credentials: false
+      - name: Install locked Deputy runtime
+        run: python -m pip install --no-deps -r .claude/runtime/requirements.lock
+      - name: Initialize Deputy test workspace (no secrets)
+        run: |
+          python .claude/policy/sensitive_scan.py --install-hooks
+          python .claude/business/build_business_model.py
+      - name: Run Deputy tests and evals
+        env:
+          PYTHONDONTWRITEBYTECODE: '1'
+          COMMAND_CENTER_TEST_MODE: '1'
+          HOUSENET_CONTROL_PLANE_PATH: ${{ github.workspace }}/control-plane-authority
+        run: python -m unittest discover -s .claude/tests -v

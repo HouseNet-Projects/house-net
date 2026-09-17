@@ -1,0 +1,116 @@
+department: legal
+title: "Իրավաբանական և համապատասխանություն"
+
+kpis:
+  - { id: contracts_pending_review_gt_5d, title: "Ուշացած պայմանագրեր", unit: "հատ", direction: down }
+  - { id: license_expiry_days,   title: "Լիցենզիայի ժամկետ",           unit: "օր",  direction: up }
+  - { id: disputes_open,         title: "Բաց վեճեր",                    unit: "հատ", direction: down }
+
+rituals:
+  - id: legal.contract_queue
+    title: "Պայմանագրերի հերթի վերանայում"
+    cadence: weekly
+    weekday: mon
+    duration_min: 45
+    owner_role: legal_lead
+    participants: [b2b_lead, procurement_lead]
+    inputs: ["Ստուգման սպասող պայմանագրեր", "B2B-ի ոչ ստանդարտ պայմաններ"]
+    outputs: ["Ամեն պայմանագիր ունի կարգավիճակ և ժամկետ"]
+    severity: high
+
+  - id: legal.regulator_check
+    title: "Կարգավորողի պահանջների ստուգում"
+    cadence: monthly
+    day: 12
+    duration_min: 60
+    owner_role: compliance
+    participants: [legal_lead, technical_director]
+    inputs: ["ՀԿԾՀ-ի պահանջներ և ժամկետներ", "Հաշվետվությունների ցուցակ"]
+    outputs: ["Ոչ մի ժամկետ բաց չէ"]
+    severity: high
+
+  - id: legal.disputes_review
+    title: "Բաժանորդական վեճերի վերանայում"
+    cadence: biweekly
+    weekday: thu
+    duration_min: 45
+    owner_role: legal_lead
+    participants: [care_lead, qa_lead]
+    inputs: ["Բաց վեճեր", "Ձայնագրություններ և պայմանագրեր"]
+    outputs: ["Ամեն վեճ՝ դիրքորոշմամբ և հաջորդ քայլով"]
+
+  - id: legal.policy_review
+    title: "Ներքին կանոնակարգերի եռամսյակային վերանայում"
+    cadence: quarterly
+    months: [3, 6, 9, 12]
+    day: 10
+    duration_min: 120
+    owner_role: compliance
+    participants: [hr_lead, it_lead, security_lead]
+    inputs: ["Անձնական տվյալների պաշտպանություն", "Ներքին քաղաքականություններ"]
+    outputs: ["Թարմացված կանոնակարգեր և ուսուցման հայտ"]
+
+deliverables:
+  - id: legal.contract_templates
+    title: "Պայմանագրերի կաղապարների վերանայում"
+    cadence: quarterly
+    months: [2, 5, 8, 11]
+    day: 15
+    owner_role: legal_lead
+    approver_role: ceo
+    asset_type: report
+    lead_days: 7
+    brief: "B2C և B2B կաղապարներ, ակցիաների պայմաններ, հրապարակային օֆերտա."
+
+  - id: legal.regulatory_filing
+    title: "Կարգավորողին հաշվետվություն"
+    cadence: quarterly
+    months: [1, 4, 7, 10]
+    day: 20
+    owner_role: compliance
+    approver_role: legal_lead
+    asset_type: report
+    lead_days: 10
+    brief: "Բաժանորդների քանակ, ծածկույթ, որակի ցուցանիշներ ըստ պահանջվող ձևի."
+    severity: high
+
+controls:
+  - id: legal.ctl_pending
+    title: "Պայմանագրեր 5 օրից ավել ստուգման մեջ"
+    metric: contracts_pending_review_gt_5d
+    op: ">"
+    threshold: 0
+    severity: high
+    owner_role: legal_lead
+    due_in_days: 2
+    action: "Փակել հերթը — ուշացումը ուղիղ արգելակում է B2B վաճառքը"
+
+  - id: legal.ctl_license
+    title: "Լիցենզիայի ժամկետը մոտենում է"
+    metric: license_expiry_days
+    op: "<"
+    threshold: 90
+    severity: critical
+    owner_role: compliance
+    due_in_days: 3
+    action: "Սկսել երկարաձգման ընթացակարգը անմիջապես"
+
+  - id: legal.ctl_regulator_deadline
+    title: "Կարգավորողի ժամկետը մոտենում է"
+    metric: regulator_deadline_days
+    op: "<"
+    threshold: 14
+    severity: critical
+    owner_role: compliance
+    due_in_days: 1
+    action: "Հավաքել տվյալները և պատրաստել հաշվետվությունը"
+
+  - id: legal.ctl_disputes
+    title: "Բաց վեճերի կուտակում"
+    metric: disputes_open
+    op: ">"
+    threshold: 5
+    severity: medium
+    owner_role: legal_lead
+    due_in_days: 5
+    action: "Դասակարգել ըստ պատճառի — կրկնվողը պրոցեսի խնդիր է, ոչ իրավական"

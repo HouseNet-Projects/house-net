@@ -1,0 +1,131 @@
+{
+  "version": "1.4.3",
+  "domain": "actions",
+  "rules": [
+    {
+      "id": "HN-PERMISSIONS",
+      "primitive": "actions.permissions",
+      "scope": "repository",
+      "level": "MANDATORY",
+      "applicability": {
+        "classes": [
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      "expected": {
+        "default": "read",
+        "broad_write": false,
+        "job_permissions": "minimum_required",
+        "enable_only_when_useful": true
+      },
+      "approval_requirement": "explicit_owner",
+      "enforcement": {
+        "mechanism": "workflow_validator"
+      },
+      "source_sections": [
+        13
+      ]
+    },
+    {
+      "id": "HN-SOURCES",
+      "primitive": "actions.sources",
+      "scope": "repository",
+      "level": "MANDATORY",
+      "applicability": {
+        "classes": [
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      "expected": {
+        "official": [
+          "actions/*"
+        ],
+        "housenet": "HouseNet-Projects/*",
+        "third_party": "reviewed_trusted_and_justified",
+        "important_workflows": "prefer_full_commit_sha",
+        "read_only_due_diligence": "allowed_for_required_dependency_verification",
+        "external_mutations": false
+      },
+      "approval_requirement": "explicit_owner",
+      "enforcement": {
+        "mechanism": "workflow_validator"
+      },
+      "source_sections": [
+        14
+      ]
+    },
+    {
+      "id": "HN-CI",
+      "primitive": "actions.ci",
+      "scope": "repository",
+      "level": "MANDATORY",
+      "applicability": {
+        "classes": [
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      "expected": {
+        "purpose": "real_failure_modes",
+        "required_checks": "only_stable_meaningful_checks",
+        "examples": [
+          "tests",
+          "lint",
+          "types",
+          "build",
+          "schema",
+          "migrations",
+          "packaging",
+          "deployment_validation"
+        ]
+      },
+      "approval_requirement": "explicit_owner",
+      "enforcement": {
+        "mechanism": "owner_review"
+      },
+      "source_sections": [
+        15
+      ]
+    },
+    {
+      "id": "HN-DEPLOYMENT",
+      "primitive": "actions.deployment",
+      "scope": "repository",
+      "level": "REPO_SPECIFIC",
+      "applicability": {
+        "classes": [
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      "expected": {
+        "A": {
+          "explicit_design": [
+            "environment",
+            "credentials",
+            "approval",
+            "trigger",
+            "rollback",
+            "auditability"
+          ],
+          "production_automation": "explicit_owner_approval"
+        },
+        "B": "repository_specific",
+        "C": "none_unless_justified"
+      },
+      "approval_requirement": "explicit_owner",
+      "enforcement": {
+        "mechanism": "registration_and_owner_review"
+      },
+      "source_sections": [
+        16
+      ]
+    }
+  ]
+}

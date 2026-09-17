@@ -1,0 +1,61 @@
+#!/usr/bin/env python3
+"""Install only owner-approved HouseNet Codex maps; preserve all unrelated content."""
+import argparse
+import json
+from pathlib import Path
+import re
+import sys
+import tomllib
+
+BEGIN='<!-- BEGIN HOUSENET MANAGED BOOTSTRAP -->'
+END='<!-- END HOUSENET MANAGED BOOTSTRAP -->'
+TBEGIN='# BEGIN HOUSENET MANAGED BOOTSTRAP'
+TEND='# END HOUSENET MANAGED BOOTSTRAP'
+
+def replace_block(text,begin,end,block):
+    if begin in text or end in text:
+        if text.count(begin)!=1 or text.count(end)!=1 or text.index(begin)>text.index(end):
+            raise ValueError('Ambiguous managed block; refusing modification')
+        return text[:text.index(begin)]+block+text[text.index(end)+len(end):]
+    return text+('' if not text or text.endswith('\n') else '\n')+block+'\n'
+
+def install(home,control):
+    if not home.is_dir() or not (home/'config.toml').is_file():
+        raise ValueError('Pass the detected existing Codex home/config; do not guess or create it')
+    if (home/'AGENTS.override.md').exists() and (home/'AGENTS.override.md').read_text().strip():
+        raise ValueError('Existing global override must be reviewed; no overwrite performed')
+    if not (control/'bin/housenet-preflight').is_file():
+        raise ValueError('Control plane missing')
+    config=home/'config.toml';before_text=config.read_text();before=tomllib.loads(before_text)
+    agents=home/'AGENTS.md';agent_before=agents.read_text() if agents.exists() else ''
+    instruction=(f'This is the HouseNet engineering environment. Before HouseNet work, load {control}, '
+        'run bin/housenet-preflight --json (which verifies GitHub identity), and read the current '
+        'policy/manifest.json, policy/authority.json, policy/repository-classes.json and applicable domain rules. '
+        'The required GitHub identity is HouseNet-Projects. Never substitute remembered policy for current '
+        'control-plane truth. If mandatory preflight fails, stop and report. Changes requiring owner approval '
+        'must not execute without explicit approval. Read house-net-control.json in the target repository.')
+    agent_block=BEGIN+'\n'+instruction+'\n'+END
+    agent_after=replace_block(agent_before,BEGIN,END,agent_block)
+    # The observed installation has no existing developer_instructions. If one is
+    # introduced later, refuse ambiguous rewriting rather than replacing user text.
+    if TBEGIN in before_text:
+        original_line=re.search(r'^developer_instructions\s*=.*$',before_text,re.M)
+        if not original_line:raise ValueError('Managed developer instruction missing')
+        new_config=replace_block(before_text,TBEGIN,TEND,TBEGIN+'\ndeveloper_instructions = '+json.dumps(instruction)+'\n'+TEND)
+    else:
+        if 'developer_instructions' in before:
+            raise ValueError('Existing developer_instructions needs explicit merge review')
+        new_config=TBEGIN+'\ndeveloper_instructions = '+json.dumps(instruction)+'\n'+TEND+'\n\n'+before_text
+    after=tomllib.loads(new_config)
+    if {k:v for k,v in before.items() if k!='developer_instructions'}!={k:v for k,v in after.items() if k!='developer_instructions'}:
+        raise ValueError('Unrelated configuration would change')
+    if before_text!=new_config:config.write_text(new_config)
+    if agent_before!=agent_after:agents.write_text(agent_after)
+    return {'home':str(home),'control_plane':str(control),'config_changed':before_text!=new_config,'agents_changed':agent_before!=agent_after,'unrelated_configuration_preserved':True}
+
+if __name__=='__main__':
+    p=argparse.ArgumentParser();p.add_argument('--codex-home',type=Path,required=True);p.add_argument('--control-plane',type=Path,required=True)
+    a=p.parse_args()
+    try:print(json.dumps(install(a.codex_home.resolve(),a.control_plane.resolve()),sort_keys=True))
+    except Exception as e:
+        print(json.dumps({'ok':False,'error':str(e)}));sys.exit(1)

@@ -1,0 +1,8 @@
+{
+  "repository": "HouseNet-Projects/house-net-vault",
+  "classification": "A",
+  "control_plane": "HouseNet-Projects/house-net-control-plane",
+  "policy_version": "1.4.3",
+  "policy_commit": "40ed525b280ab43d59ae69bb27fca73bbe55aa04",
+  "approval_reference": "OWNER-MISSION-DIGITAL-MEMORY-BACKBONE-2026-09-16"
+}

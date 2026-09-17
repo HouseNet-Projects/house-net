@@ -1,0 +1,17 @@
+:root {
+  --hn-primary: #E4003A;
+  --hn-ink: #1D1D1B;
+  --hn-control: #1C2125;
+  --hn-surface: #EDF3F6;
+  --hn-border: #D1DCE2;
+  --hn-success: #78AD57;
+  --hn-radius: 0.75rem;
+  --hn-shadow: 0 8px 24px rgba(28, 33, 37, .10);
+  --hn-font: Inter, "Noto Sans Armenian", Arial, sans-serif;
+}
+.hn-card { box-sizing: border-box; border: 1px solid var(--hn-border); border-radius: var(--hn-radius); background: #fff; box-shadow: var(--hn-shadow); color: var(--hn-ink); font: 1rem/1.5 var(--hn-font); padding: 1.5rem; }
+.hn-card__eyebrow { color: var(--hn-primary); font-size: .75rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+.hn-card__title { margin: .5rem 0; font-size: 1.5rem; line-height: 1.15; }
+.hn-card__meta { color: #6F6F6E; font-size: .875rem; }
+.hn-status { display: inline-flex; align-items: center; gap: .5rem; font-weight: 700; }
+.hn-status::before { width: .55rem; height: .55rem; border-radius: 50%; background: var(--hn-success); content: ""; }

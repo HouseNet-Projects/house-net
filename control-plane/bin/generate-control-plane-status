@@ -1,0 +1,50 @@
+#!/usr/bin/env python3
+"""Generate the mutable README status regions from release and registry authority."""
+from pathlib import Path
+import json, re, sys
+
+root = Path(sys.argv[1]).resolve() if len(sys.argv) > 1 else Path.cwd()
+manifest = json.loads((root/'release/manifest.json').read_text())
+registry = json.loads((root/'registry/repositories.json').read_text())
+version = manifest['version']
+repos = registry['repositories']
+cp = next(r for r in repos if r['repository'] == manifest['repository'])
+visibility = str(cp.get('visibility','unknown')).upper()
+count = len(repos)
+
+english = f'''<!-- housenet-generated: control-plane-status:start -->
+| Surface | Current state |
+| :--- | :--- |
+| **CONTROL PLANE** | **ACTIVE** · CI **GREEN** |
+| **POLICY** | `{version}` · machine authority under [`policy/`](policy/) |
+| **CLASSIFICATION** | **CLASS A — CRITICAL** |
+| **AUTHORITY** | `HouseNet-Projects` · explicit owner approval |
+| **CANONICAL REPOSITORIES** | `{count}` registered · visibility **{visibility}** |
+| **EXECUTION BOOTSTRAP** | **ENFORCED** · global map + deterministic preflight |
+| **LOCAL EXECUTION ENFORCEMENT** | **PENDING** · No secondary local execution client is installed in this WSL |
+| **GITHUB BRANCH PROTECTION** | **ENFORCED** · protected `main`, required CI checks |
+<!-- housenet-generated: control-plane-status:end -->'''
+armenian = f'''<!-- housenet-generated: control-plane-status-hy:start -->
+| Մակերես | Ընթացիկ վիճակ |
+| :--- | :--- |
+| Կառավարման հարթակ | **ԱԿՏԻՎ** · CI **ԿԱՆԱՉ** |
+| Քաղաքականություն | `{version}` |
+| Դասակարգում | **CLASS A — CRITICAL** |
+| Իրավասու սեփականատեր | `HouseNet-Projects` |
+| Կանոնական պահոցներ | `{count}` գրանցված · տեսանելիությունը՝ **{visibility}** |
+| Execution bootstrap | **ԿԻՐԱՐԿՎԱԾ** |
+| Local execution enforcement | **ՍՊԱՍՄԱՆ ՄԵՋ** — երկրորդ local execution client տեղադրված չէ |
+| GitHub branch protection | **ԿԻՐԱՐԿՎԱԾ** · `main`-ը պաշտպանված է, CI ստուգումները պարտադիր են |
+<!-- housenet-generated: control-plane-status-hy:end -->'''
+
+path = root/'README.md'
+text = path.read_text()
+patterns = [
+ (r'<!-- housenet-generated: control-plane-status:start -->.*?<!-- housenet-generated: control-plane-status:end -->', english),
+ (r'<!-- housenet-generated: control-plane-status-hy:start -->.*?<!-- housenet-generated: control-plane-status-hy:end -->', armenian),
+]
+for pattern, replacement in patterns:
+    text, n = re.subn(pattern, replacement, text, flags=re.S)
+    if n != 1:
+        raise SystemExit(f'generated status region missing or duplicated: {pattern}')
+path.write_text(text)

@@ -1,0 +1,58 @@
+{
+  "repository": "HouseNet-Projects/house-net-design-system",
+  "product": "HouseNet Design System",
+  "version": "1.1.0",
+  "release_state": "active",
+  "version_scheme": "semver",
+  "control_plane_version": "1.4.3",
+  "schema_version": "1.0.0",
+  "version_surfaces": [
+    {
+      "path": "README.md",
+      "kind": "generated",
+      "region_start": "<!-- housenet-generated: design-status:start -->",
+      "region_end": "<!-- housenet-generated: design-status:end -->"
+    },
+    {
+      "path": "README.md",
+      "kind": "generated",
+      "region_start": "<!-- housenet-generated: design-status-hy:start -->",
+      "region_end": "<!-- housenet-generated: design-status-hy:end -->"
+    },
+    {
+      "path": "CHANGELOG.md",
+      "kind": "text",
+      "marker": "### 1.1.0"
+    },
+    {
+      "path": "docs/VERSION.md",
+      "kind": "text",
+      "marker": "`1.1.0`"
+    },
+    {
+      "path": "tokens/brand-tokens.json",
+      "kind": "json",
+      "field": "version"
+    },
+    {
+      "path": "tokens/document-tokens.json",
+      "kind": "json",
+      "field": "version"
+    },
+    {
+      "path": "documents/templates/template-manifest.json",
+      "kind": "json",
+      "field": "version"
+    },
+    {
+      "path": "documents/templates/powerpoint/executive.json",
+      "kind": "json",
+      "field": "version"
+    },
+    {
+      "path": "documents/templates/excel/dashboard.json",
+      "kind": "json",
+      "field": "version"
+    }
+  ]
+}

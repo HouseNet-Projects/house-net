@@ -1,0 +1,126 @@
+department: exec
+title: "Ղեկավարություն"
+
+kpis:
+  - { id: net_adds,             title: "Net adds",              unit: "բաժ.", direction: up }
+  - { id: arpu,                 title: "ARPU",                  unit: "֏",    direction: up }
+  - { id: churn_pct,            title: "Ամսական churn",         unit: "%",    direction: down }
+  - { id: targets_at_risk_count, title: "Վտանգված թիրախներ",    unit: "հատ",  direction: down }
+
+rituals:
+  - id: exec.weekly_leadership
+    title: "Ղեկավարության շաբաթական հանդիպում"
+    cadence: weekly
+    weekday: mon
+    time: "16:00"
+    duration_min: 60
+    owner_role: ceo
+    participants: [coo, cfo, commercial_director, technical_director, ops_head]
+    inputs:
+      - "Բոլոր բաժինների շաբաթական հաշվետվությունները"
+      - "Վտանգված թիրախների ցուցակ"
+      - "Էսկալացված որոշումներ"
+    outputs: ["Ամեն վտանգված թիրախ ունի սեփականատեր և շտկող քայլ"]
+    severity: high
+
+  - id: exec.monthly_business_review
+    title: "Ամսվա բիզնես վերանայում"
+    cadence: month_start
+    offset: 8
+    duration_min: 180
+    owner_role: ceo
+    participants: [coo, cfo, commercial_director, technical_director, ops_head, hr_lead]
+    inputs: ["Ամսվա ֆինանսական արդյունք", "Net adds, ARPU, churn, CAC", "Բաժինների կատարողական"]
+    outputs: ["Հաջորդ ամսվա առաջնահերթություններ և թիրախներ"]
+    severity: high
+
+  - id: exec.quarterly_strategy
+    title: "Եռամսյակային ռազմավարական նստաշրջան"
+    cadence: quarterly
+    months: [1, 4, 7, 10]
+    day: 22
+    duration_min: 300
+    owner_role: ceo
+    participants: [coo, cfo, commercial_director, technical_director]
+    inputs: ["Շուկայի և մրցակիցների պատկեր", "Ցանցի ընդլայնման պլան", "Ֆինանսական մոդել"]
+    outputs: ["Հաջորդ եռամսյակի OKR-եր և բյուջե"]
+    severity: high
+
+  - id: exec.risk_review
+    title: "Ռիսկերի վերանայում"
+    cadence: monthly
+    day: 18
+    duration_min: 60
+    owner_role: coo
+    participants: [ceo, cfo, legal_lead, security_lead, technical_director]
+    inputs: ["Ռիսկերի ռեգիստր", "Կարգավորող, ցանց, ֆինանս, կադրեր"]
+    outputs: ["Թարմացված ռիսկերի ռեգիստր՝ մեղմացման քայլերով"]
+
+deliverables:
+  - id: exec.weekly_dashboard
+    title: "Ղեկավարության շաբաթական վահանակ"
+    cadence: weekly
+    weekday: mon
+    owner_role: analyst
+    approver_role: ops_head
+    asset_type: report
+    lead_days: 1
+    time: "14:00"
+    brief: "Մեկ էջ. net adds, ARPU, churn, fallout, uptime, ապառք, վտանգված թիրախներ."
+    checklist:
+      - "Բոլոր բաժինների տվյալը ներառված է"
+      - "Պլան vs փաստ ամեն KPI-ի համար"
+      - "Վտանգված թիրախները՝ պատճառով"
+
+  - id: exec.board_report
+    title: "Հաշվետվություն սեփականատերերին"
+    cadence: quarterly
+    months: [1, 4, 7, 10]
+    day: 25
+    owner_role: cfo
+    approver_role: ceo
+    asset_type: report
+    lead_days: 10
+    brief: "Ֆինանսական արդյունք, բաժանորդային բազա, ցանցի զարգացում, ռիսկեր."
+    severity: high
+
+controls:
+  - id: exec.ctl_targets_at_risk
+    title: "Վտանգված թիրախներ"
+    metric: targets_at_risk_count
+    op: ">"
+    threshold: 2
+    severity: high
+    owner_role: ceo
+    due_in_days: 3
+    action: "Ամեն վտանգված թիրախ ստանում է սեփականատեր և շտկող պլան"
+
+  - id: exec.ctl_net_adds
+    title: "Net adds-ը պլանից հետ է"
+    metric: net_adds_vs_plan_pct
+    op: "<"
+    threshold: 90.0
+    severity: high
+    owner_role: commercial_director
+    due_in_days: 2
+    action: "Ալիք առ ալիք վերլուծություն և շաբաթվա ընթացքում շտկող քայլեր"
+
+  - id: exec.ctl_churn
+    title: "Churn-ը շեմից բարձր է"
+    metric: churn_pct
+    op: ">"
+    threshold: 1.5
+    severity: critical
+    owner_role: coo
+    due_in_days: 3
+    action: "Համատեղ վերլուծություն՝ սպասարկում, ցանց, վաճառքի որակ"
+
+  - id: exec.ctl_okr
+    title: "OKR-երի թարմացումը ուշացած է"
+    metric: okr_updates_overdue
+    op: ">"
+    threshold: 0
+    severity: medium
+    owner_role: coo
+    due_in_days: 3
+    action: "Բոլոր բաժինների ղեկավարները թարմացնում են իրենց OKR-երը"

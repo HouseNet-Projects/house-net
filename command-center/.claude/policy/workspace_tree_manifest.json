@@ -1,0 +1,687 @@
+{
+ "manifest_version": "1.0",
+ "policy_version": "1.8.0",
+ "workspace": "Command-center",
+ "durable_dirs": [
+  "WORKSPACE/00_Inbox",
+  "WORKSPACE/01_Active",
+  "WORKSPACE/02_Reference",
+  "WORKSPACE/03_Completed",
+  "WORKSPACE/04_Sources",
+  "WORKSPACE/05_Archive",
+  ".claude/business",
+  ".claude/docs",
+  ".claude/hooks",
+  ".claude/policy",
+  ".claude/runtime",
+  ".claude/skills",
+  ".claude/tools",
+  ".claude/tests",
+  ".claude/integrations",
+  ".claude/state/durable",
+  ".secure"
+ ],
+ "durable_root_files": [
+  "CLAUDE.md",
+  "README.md",
+  "bootstrap.py",
+  ".gitignore",
+  ".gitattributes",
+  "WORKSPACE/Tasks.xlsx",
+  "WORKSPACE/Journal.md",
+  "WORKSPACE/Actions.md"
+ ],
+ "regenerated_globs": [
+  ".claude/business/*.json",
+  ".claude/business/Business-model.md",
+  ".claude/integrations/certification.json",
+  "**/__pycache__/**",
+  ".venv/**"
+ ],
+ "ephemeral_globs": [
+  ".claude/state/*",
+  ".claude/audit/**",
+  "*.lock",
+  "*.tmp",
+  "~$*",
+  "desktop.ini",
+  ".claude/settings.local.json"
+ ],
+ "release_churn": [
+  "**/.claude/skills/certifications/*.json",
+  ".claude/skills/certifications/*.json",
+  ".claude/skills/registry.json",
+  ".claude/docs/Registry-audit-*.md",
+  ".claude/state/durable/audit.jsonl",
+  ".claude/state/durable/business_observations.jsonl",
+  ".claude/state/durable/actions.jsonl",
+  ".claude/state/durable/write_certifications.json",
+  ".claude/state/durable/checkpoints.jsonl",
+  ".claude/state/durable/loops.jsonl",
+  ".claude/state/durable/alerts.jsonl",
+  ".claude/policy/durable_checksums.json"
+ ],
+ "entries": [
+  {
+   "path": ".claude",
+   "kind": "directory",
+   "required": true,
+   "durability": "VERSION_DIRECTLY",
+   "restore": "git clone (.gitkeep keeps empty directories alive)",
+   "classification": "INTERNAL"
+  },
+  {
+   "path": ".claude/audit",
+   "kind": "directory",
+   "required": true,
+   "durability": "REGENERATE",
+   "restore": "bootstrap.py creates",
+   "classification": "CONFIDENTIAL"
+  },
+  {
+   "path": ".claude/audit/skill_audit.jsonl",
+   "kind": "file",
+   "required": false,
+   "durability": "EPHEMERAL",
+   "restore": "best-effort mirror; the versioned form is .claude/state/durable/audit.jsonl",
+   "classification": "CONFIDENTIAL"
+  },
+  {
+   "path": ".claude/business",
+   "kind": "directory",
+   "required": true,
+   "durability": "VERSION_DIRECTLY",
+   "restore": "git clone (bm_*.py + overlay authoring; generated json regenerated)",
+   "classification": "CONFIDENTIAL"
+  },
+  {
+   "path": ".claude/business/Business-model.md",
+   "kind": "file",
+   "required": false,
+   "durability": "REGENERATE",
+   "restore": "bootstrap.py → build_business_model.py",
+   "classification": "CONFIDENTIAL"
+  },
+  {
+   "path": ".claude/business/business_model.json",
+   "kind": "file",
+   "required": false,
+   "durability": "REGENERATE",
+   "restore": "bootstrap.py → build_business_model.py",
+   "classification": "CONFIDENTIAL"
+  },
+  {
+   "path": ".claude/business/certification.json",
+   "kind": "file",
+   "required": false,
+   "durability": "REGENERATE",
+   "restore": "bootstrap.py → build_business_model.py",
+   "classification": "CONFIDENTIAL"
+  },
+  {
+   "path": ".claude/business/gaps.json",
+   "kind": "file",
+   "required": false,
+   "durability": "REGENERATE",
+   "restore": "bootstrap.py → build_business_model.py",
+   "classification": "CONFIDENTIAL"
+  },
+  {
+   "path": ".claude/business/kpis.json",
+   "kind": "file",
+   "required": false,
+   "durability": "REGENERATE",
+   "restore": "bootstrap.py → build_business_model.py",
+   "classification": "CONFIDENTIAL"
+  },
+  {
+   "path": ".claude/business/overlay",
+   "kind": "directory",
+   "required": true,
+   "durability": "VERSION_DIRECTLY",
+   "restore": "git clone (overlay authoring ov_*.py)",
+   "classification": "CONFIDENTIAL"
+  },
+  {
+   "path": ".claude/business/overlay.json",
+   "kind": "file",
+   "required": false,
+   "durability": "REGENERATE",
+   "restore": "bootstrap.py → build_business_model.py",
+   "classification": "CONFIDENTIAL"
+  },
+  {
+   "path": ".claude/business/ownership.json",
+   "kind": "file",
+   "required": false,
+   "durability": "REGENERATE",
+   "restore": "bootstrap.py → build_business_model.py",
+   "classification": "CONFIDENTIAL"
+  },
+  {
+   "path": ".claude/business/playbooks.json",
+   "kind": "file",
+   "required": false,
+   "durability": "REGENERATE",
+   "restore": "bootstrap.py → build_business_model.py",
+   "classification": "CONFIDENTIAL"
+  },
+  {
+   "path": ".claude/business/processes.json",
+   "kind": "file",
+   "required": false,
+   "durability": "REGENERATE",
+   "restore": "bootstrap.py → build_business_model.py",
+   "classification": "CONFIDENTIAL"
+  },
+  {
+   "path": ".claude/business/routines.json",
+   "kind": "file",
+   "required": false,
+   "durability": "REGENERATE",
+   "restore": "bootstrap.py → build_business_model.py",
+   "classification": "CONFIDENTIAL"
+  },
+  {
+   "path": ".claude/business/sources.json",
+   "kind": "file",
+   "required": false,
+   "durability": "REGENERATE",
+   "restore": "bootstrap.py → build_business_model.py",
+   "classification": "CONFIDENTIAL"
+  },
+  {
+   "path": ".claude/business/targets.json",
+   "kind": "file",
+   "required": false,
+   "durability": "REGENERATE",
+   "restore": "bootstrap.py → build_business_model.py",
+   "classification": "CONFIDENTIAL"
+  },
+  {
+   "path": ".claude/docs",
+   "kind": "directory",
+   "required": true,
+   "durability": "VERSION_DIRECTLY",
+   "restore": "git clone (.gitkeep)",
+   "classification": "INTERNAL"
+  },
+  {
+   "path": ".claude/hooks",
+   "kind": "directory",
+   "required": true,
+   "durability": "VERSION_DIRECTLY",
+   "restore": "git clone (.gitkeep)",
+   "classification": "INTERNAL"
+  },
+  {
+   "path": ".claude/integrations",
+   "kind": "directory",
+   "required": true,
+   "durability": "VERSION_DIRECTLY",
+   "restore": "git clone (adapters, registry, fixed reader)",
+   "classification": "INTERNAL"
+  },
+  {
+   "path": ".claude/integrations/certification.json",
+   "kind": "file",
+   "required": false,
+   "durability": "REGENERATE",
+   "restore": "bootstrap.py → certify_integrations.py",
+   "classification": "INTERNAL"
+  },
+  {
+   "path": ".claude/policy",
+   "kind": "directory",
+   "required": true,
+   "durability": "VERSION_DIRECTLY",
+   "restore": "git clone (.gitkeep)",
+   "classification": "INTERNAL"
+  },
+  {
+   "path": ".claude/policy/durable_checksums.json",
+   "kind": "file",
+   "required": true,
+   "durability": "VERSION_DIRECTLY",
+   "restore": "git clone; refreshed by release/bootstrap",
+   "classification": "INTERNAL"
+  },
+  {
+   "path": ".claude/policy/scope.py",
+   "kind": "file",
+   "required": true,
+   "durability": "VERSION_DIRECTLY",
+   "restore": "git clone (HARD SCOPE LOCK machinery — the rule is only real if it exists)",
+   "classification": "INTERNAL"
+  },
+  {
+   "path": ".claude/policy/workspace_tree_manifest.json",
+   "kind": "file",
+   "required": true,
+   "durability": "VERSION_DIRECTLY",
+   "restore": "git clone; regenerated by tree_manifest.py build (must equal the derived manifest)",
+   "classification": "INTERNAL"
+  },
+  {
+   "path": ".claude/runtime",
+   "kind": "directory",
+   "required": true,
+   "durability": "VERSION_DIRECTLY",
+   "restore": "git clone (.gitkeep)",
+   "classification": "INTERNAL"
+  },
+  {
+   "path": ".claude/runtime/requirements.lock",
+   "kind": "file",
+   "required": true,
+   "durability": "VERSION_DIRECTLY",
+   "restore": "git clone",
+   "classification": "INTERNAL"
+  },
+  {
+   "path": ".claude/runtime/requirements.txt",
+   "kind": "file",
+   "required": true,
+   "durability": "VERSION_DIRECTLY",
+   "restore": "git clone",
+   "classification": "INTERNAL"
+  },
+  {
+   "path": ".claude/settings.json",
+   "kind": "file",
+   "required": true,
+   "durability": "VERSION_DIRECTLY",
+   "restore": "git clone",
+   "classification": "INTERNAL"
+  },
+  {
+   "path": ".claude/settings.local.json",
+   "kind": "file",
+   "required": false,
+   "durability": "MACHINE_LOCAL",
+   "restore": "per machine",
+   "classification": "RESTRICTED"
+  },
+  {
+   "path": ".claude/skills",
+   "kind": "directory",
+   "required": true,
+   "durability": "VERSION_DIRECTLY",
+   "restore": "git clone (.gitkeep)",
+   "classification": "INTERNAL"
+  },
+  {
+   "path": ".claude/skills/registry.json",
+   "kind": "file",
+   "required": true,
+   "durability": "VERSION_DIRECTLY",
+   "restore": "git clone; rebuilt by skill.py release",
+   "classification": "INTERNAL"
+  },
+  {
+   "path": ".claude/state",
+   "kind": "directory",
+   "required": true,
+   "durability": "REGENERATE",
+   "restore": "bootstrap.py creates",
+   "classification": "CONFIDENTIAL"
+  },
+  {
+   "path": ".claude/state/durable",
+   "kind": "directory",
+   "required": true,
+   "durability": "VERSION_DIRECTLY",
+   "restore": "git clone (.gitkeep)",
+   "classification": "CONFIDENTIAL"
+  },
+  {
+   "path": ".claude/state/durable/actions.jsonl",
+   "kind": "file",
+   "required": true,
+   "durability": "VERSION_DIRECTLY",
+   "restore": "git clone → state_snapshot.py import (governed mutations: idempotency survives restart)",
+   "classification": "CONFIDENTIAL"
+  },
+  {
+   "path": ".claude/state/durable/alerts.jsonl",
+   "kind": "file",
+   "required": true,
+   "durability": "VERSION_DIRECTLY",
+   "restore": "git clone → state_snapshot.py import (alert state: dedupe/escalation/ack/resolution, references only)",
+   "classification": "CONFIDENTIAL"
+  },
+  {
+   "path": ".claude/state/durable/audit.jsonl",
+   "kind": "file",
+   "required": true,
+   "durability": "VERSION_DIRECTLY",
+   "restore": "git clone → state_snapshot.py import (governance history)",
+   "classification": "CONFIDENTIAL"
+  },
+  {
+   "path": ".claude/state/durable/checkpoints.jsonl",
+   "kind": "file",
+   "required": true,
+   "durability": "VERSION_DIRECTLY",
+   "restore": "git clone → state_snapshot.py import (Mission 5 observation checkpoints: signatures only)",
+   "classification": "CONFIDENTIAL"
+  },
+  {
+   "path": ".claude/state/durable/commitments.jsonl",
+   "kind": "file",
+   "required": true,
+   "durability": "VERSION_DIRECTLY",
+   "restore": "git clone → state_snapshot.py import (idempotent)",
+   "classification": "CONFIDENTIAL"
+  },
+  {
+   "path": ".claude/state/durable/decisions.jsonl",
+   "kind": "file",
+   "required": true,
+   "durability": "VERSION_DIRECTLY",
+   "restore": "git clone → state_snapshot.py import",
+   "classification": "CONFIDENTIAL"
+  },
+  {
+   "path": ".claude/state/durable/loops.jsonl",
+   "kind": "file",
+   "required": true,
+   "durability": "VERSION_DIRECTLY",
+   "restore": "git clone → state_snapshot.py import (Mission 5 open management loops: references only)",
+   "classification": "CONFIDENTIAL"
+  },
+  {
+   "path": ".claude/state/skill_state.db",
+   "kind": "file",
+   "required": false,
+   "durability": "EPHEMERAL",
+   "restore": "recreated by the hardened store; durable rows imported from .claude/state/durable",
+   "classification": "CONFIDENTIAL"
+  },
+  {
+   "path": ".claude/tests",
+   "kind": "directory",
+   "required": true,
+   "durability": "VERSION_DIRECTLY",
+   "restore": "git clone (.gitkeep)",
+   "classification": "INTERNAL"
+  },
+  {
+   "path": ".claude/tests/test_scope.py",
+   "kind": "file",
+   "required": true,
+   "durability": "VERSION_DIRECTLY",
+   "restore": "git clone (HARD SCOPE LOCK machinery — the rule is only real if it exists)",
+   "classification": "INTERNAL"
+  },
+  {
+   "path": ".claude/tools",
+   "kind": "directory",
+   "required": true,
+   "durability": "VERSION_DIRECTLY",
+   "restore": "git clone (.gitkeep)",
+   "classification": "INTERNAL"
+  },
+  {
+   "path": ".git",
+   "kind": "directory",
+   "required": true,
+   "durability": "MACHINE_LOCAL",
+   "restore": "git clone",
+   "classification": "PUBLIC"
+  },
+  {
+   "path": ".gitattributes",
+   "kind": "file",
+   "required": true,
+   "durability": "VERSION_DIRECTLY",
+   "restore": "git clone",
+   "classification": "INTERNAL"
+  },
+  {
+   "path": ".gitignore",
+   "kind": "file",
+   "required": true,
+   "durability": "VERSION_DIRECTLY",
+   "restore": "git clone",
+   "classification": "INTERNAL"
+  },
+  {
+   "path": ".secure",
+   "kind": "directory",
+   "required": true,
+   "durability": "VERSION_DIRECTLY",
+   "restore": "git clone (.gitkeep keeps empty directories alive)",
+   "classification": "INTERNAL"
+  },
+  {
+   "path": ".secure/credentials.gpg",
+   "kind": "file",
+   "required": true,
+   "durability": "VERSION_ENCRYPTED",
+   "restore": "bootstrap.py → secure_recovery.py restore (needs the external recovery key)",
+   "classification": "RESTRICTED"
+  },
+  {
+   "path": ".secure/manifest.json",
+   "kind": "file",
+   "required": true,
+   "durability": "VERSION_DIRECTLY",
+   "restore": "git clone (names/checksums/restore paths only)",
+   "classification": "INTERNAL"
+  },
+  {
+   "path": ".venv",
+   "kind": "directory",
+   "required": false,
+   "durability": "REGENERATE",
+   "restore": "bootstrap.py → python_runtime.py bootstrap (requirements.lock)",
+   "classification": "PUBLIC"
+  },
+  {
+   "path": "CLAUDE.md",
+   "kind": "file",
+   "required": true,
+   "durability": "VERSION_DIRECTLY",
+   "restore": "git clone",
+   "classification": "INTERNAL"
+  },
+  {
+   "path": "README.md",
+   "kind": "file",
+   "required": true,
+   "durability": "VERSION_DIRECTLY",
+   "restore": "git clone",
+   "classification": "INTERNAL"
+  },
+  {
+   "path": "WORKSPACE",
+   "kind": "directory",
+   "required": true,
+   "durability": "VERSION_DIRECTLY",
+   "restore": "git clone (.gitkeep keeps empty directories alive)",
+   "classification": "CONFIDENTIAL"
+  },
+  {
+   "path": "WORKSPACE/00_Inbox",
+   "kind": "directory",
+   "required": true,
+   "durability": "VERSION_DIRECTLY",
+   "restore": "git clone (.gitkeep keeps empty directories alive)",
+   "classification": "CONFIDENTIAL"
+  },
+  {
+   "path": "WORKSPACE/00_Inbox/Input.md",
+   "kind": "file",
+   "required": true,
+   "durability": "VERSION_DIRECTLY",
+   "restore": "git clone",
+   "classification": "CONFIDENTIAL"
+  },
+  {
+   "path": "WORKSPACE/01_Active",
+   "kind": "directory",
+   "required": true,
+   "durability": "VERSION_DIRECTLY",
+   "restore": "git clone (.gitkeep keeps empty directories alive)",
+   "classification": "CONFIDENTIAL"
+  },
+  {
+   "path": "WORKSPACE/01_Active/Operations",
+   "kind": "directory",
+   "required": true,
+   "durability": "VERSION_DIRECTLY",
+   "restore": "git clone (.gitkeep)",
+   "classification": "CONFIDENTIAL"
+  },
+  {
+   "path": "WORKSPACE/01_Active/People",
+   "kind": "directory",
+   "required": true,
+   "durability": "VERSION_DIRECTLY",
+   "restore": "git clone (.gitkeep)",
+   "classification": "CONFIDENTIAL"
+  },
+  {
+   "path": "WORKSPACE/01_Active/Sales",
+   "kind": "directory",
+   "required": true,
+   "durability": "VERSION_DIRECTLY",
+   "restore": "git clone (.gitkeep)",
+   "classification": "CONFIDENTIAL"
+  },
+  {
+   "path": "WORKSPACE/01_Active/Systems",
+   "kind": "directory",
+   "required": true,
+   "durability": "VERSION_DIRECTLY",
+   "restore": "git clone (.gitkeep)",
+   "classification": "CONFIDENTIAL"
+  },
+  {
+   "path": "WORKSPACE/02_Reference",
+   "kind": "directory",
+   "required": true,
+   "durability": "VERSION_DIRECTLY",
+   "restore": "git clone (.gitkeep keeps empty directories alive)",
+   "classification": "CONFIDENTIAL"
+  },
+  {
+   "path": "WORKSPACE/02_Reference/Operations",
+   "kind": "directory",
+   "required": true,
+   "durability": "VERSION_DIRECTLY",
+   "restore": "git clone (.gitkeep)",
+   "classification": "CONFIDENTIAL"
+  },
+  {
+   "path": "WORKSPACE/02_Reference/People",
+   "kind": "directory",
+   "required": true,
+   "durability": "VERSION_DIRECTLY",
+   "restore": "git clone (.gitkeep)",
+   "classification": "CONFIDENTIAL"
+  },
+  {
+   "path": "WORKSPACE/02_Reference/Sales",
+   "kind": "directory",
+   "required": true,
+   "durability": "VERSION_DIRECTLY",
+   "restore": "git clone (.gitkeep)",
+   "classification": "CONFIDENTIAL"
+  },
+  {
+   "path": "WORKSPACE/02_Reference/Systems",
+   "kind": "directory",
+   "required": true,
+   "durability": "VERSION_DIRECTLY",
+   "restore": "git clone (.gitkeep)",
+   "classification": "CONFIDENTIAL"
+  },
+  {
+   "path": "WORKSPACE/03_Completed",
+   "kind": "directory",
+   "required": true,
+   "durability": "VERSION_DIRECTLY",
+   "restore": "git clone (.gitkeep keeps empty directories alive)",
+   "classification": "CONFIDENTIAL"
+  },
+  {
+   "path": "WORKSPACE/04_Sources",
+   "kind": "directory",
+   "required": true,
+   "durability": "VERSION_DIRECTLY",
+   "restore": "git clone (.gitkeep keeps empty directories alive)",
+   "classification": "CONFIDENTIAL"
+  },
+  {
+   "path": "WORKSPACE/04_Sources/Imports",
+   "kind": "directory",
+   "required": true,
+   "durability": "VERSION_DIRECTLY",
+   "restore": "git clone (.gitkeep)",
+   "classification": "CONFIDENTIAL"
+  },
+  {
+   "path": "WORKSPACE/04_Sources/Screenshots",
+   "kind": "directory",
+   "required": true,
+   "durability": "VERSION_DIRECTLY",
+   "restore": "git clone (.gitkeep)",
+   "classification": "CONFIDENTIAL"
+  },
+  {
+   "path": "WORKSPACE/04_Sources/Whatsapp",
+   "kind": "directory",
+   "required": true,
+   "durability": "VERSION_DIRECTLY",
+   "restore": "git clone (.gitkeep)",
+   "classification": "CONFIDENTIAL"
+  },
+  {
+   "path": "WORKSPACE/05_Archive",
+   "kind": "directory",
+   "required": true,
+   "durability": "VERSION_DIRECTLY",
+   "restore": "git clone (.gitkeep keeps empty directories alive)",
+   "classification": "CONFIDENTIAL"
+  },
+  {
+   "path": "WORKSPACE/Actions.md",
+   "kind": "file",
+   "required": true,
+   "durability": "VERSION_DIRECTLY",
+   "restore": "git clone",
+   "classification": "CONFIDENTIAL"
+  },
+  {
+   "path": "WORKSPACE/Journal.md",
+   "kind": "file",
+   "required": true,
+   "durability": "VERSION_DIRECTLY",
+   "restore": "git clone",
+   "classification": "CONFIDENTIAL"
+  },
+  {
+   "path": "WORKSPACE/Tasks.xlsx",
+   "kind": "file",
+   "required": true,
+   "durability": "VERSION_DIRECTLY",
+   "restore": "git clone",
+   "classification": "CONFIDENTIAL"
+  },
+  {
+   "path": "bootstrap.py",
+   "kind": "file",
+   "required": true,
+   "durability": "VERSION_DIRECTLY",
+   "restore": "git clone",
+   "classification": "INTERNAL"
+  }
+ ],
+ "recovery": {
+  "command": "python bootstrap.py",
+  "external_secret": "~/.command-center/recovery.key (ONE key: decrypts .secure/credentials.gpg and overlay backups)",
+  "law": "No important local-only durable truth. Everything Deputy or Gev needs tomorrow is (1) versioned directly, (2) versioned as an encrypted recovery artifact, or (3) deterministically reproducible from versioned content. Only ephemeral or machine-specific data stays local."
+ }
+}

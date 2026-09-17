@@ -1,0 +1,30 @@
+{
+  "repository": "HouseNet-Projects/house-net-control-plane",
+  "product": "HouseNet Control Plane",
+  "version": "1.4.3",
+  "release_state": "active",
+  "version_scheme": "semver",
+  "control_plane_version": "1.4.3",
+  "schema_version": "1.0.0",
+  "version_surfaces": [
+    {
+      "path": "README.md",
+      "kind": "generated",
+      "region_start": "<!-- housenet-generated: control-plane-status:start -->",
+      "region_end": "<!-- housenet-generated: control-plane-status:end -->",
+      "authority": "release/manifest.json:version + registry/repositories.json"
+    },
+    {
+      "path": "README.md",
+      "kind": "generated",
+      "region_start": "<!-- housenet-generated: control-plane-status-hy:start -->",
+      "region_end": "<!-- housenet-generated: control-plane-status-hy:end -->",
+      "authority": "release/manifest.json:version + registry/repositories.json"
+    },
+    {
+      "path": "docs/POLICY.md",
+      "kind": "generated",
+      "marker": "housenet-version: policy_version"
+    }
+  ]
+}

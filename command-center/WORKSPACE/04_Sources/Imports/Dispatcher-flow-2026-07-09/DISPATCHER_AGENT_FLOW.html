@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dispatcher Lifecycle Autopilot — Build Flow</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0C1424; --panel:#111D33; --card:#16233E; --line:#26375A;
+  --cobalt:#1C3B68; --cobalt-l:#2E5694; --azure:#0EA5E9; --gold:#C5A059;
+  --green:#2FBF71; --red:#E2564B; --purple:#8B7FE8;
+  --txt:#EAF0FA; --txt2:#9DB0CF; --txt3:#5F7396;
+  --mono:'IBM Plex Mono',monospace; --sans:'Archivo',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--txt);font-family:var(--sans);font-size:15px;line-height:1.55}
+.wrap{max-width:860px;margin:0 auto;padding:56px 28px 80px}
+
+header{margin-bottom:52px;border-bottom:1px solid var(--line);padding-bottom:36px}
+.brand{font-family:var(--mono);font-size:12px;letter-spacing:.22em;color:var(--gold);margin-bottom:14px}
+h1{font-size:34px;font-weight:700;line-height:1.15;letter-spacing:-.01em}
+h1 span{color:var(--azure)}
+.sub{color:var(--txt2);margin-top:12px;max-width:640px}
+.meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+.chip{font-family:var(--mono);font-size:11.5px;padding:5px 12px;border:1px solid var(--line);border-radius:100px;color:var(--txt2)}
+.chip.gold{border-color:var(--gold);color:var(--gold)}
+.chip.green{border-color:var(--green);color:var(--green)}
+
+section{margin-bottom:64px}
+.sec-tag{font-family:var(--mono);font-size:11.5px;letter-spacing:.2em;color:var(--azure);margin-bottom:8px}
+h2{font-size:21px;font-weight:600;margin-bottom:6px}
+.sec-note{color:var(--txt2);font-size:14px;margin-bottom:28px;max-width:620px}
+
+.mech{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:32px 28px;display:flex;flex-direction:column;align-items:center;gap:0}
+.mech .mbox{border-radius:10px;padding:16px 26px;text-align:center;width:min(420px,100%)}
+.mech .agent{background:rgba(139,127,232,.10);border:1px solid var(--purple)}
+.mech .engines{background:rgba(14,165,233,.08);border:1px solid var(--azure)}
+.mbox b{display:block;font-size:16px;font-weight:600}
+.mbox small{color:var(--txt2);font-size:12.5px;font-family:var(--mono)}
+.mech .vlink{display:flex;flex-direction:column;align-items:center;padding:10px 0;color:var(--txt3)}
+.mech .vlink .lbl{font-family:var(--mono);font-size:11.5px;color:var(--gold);padding:2px 0}
+.arrowdown{width:1px;height:16px;background:var(--txt3);position:relative}
+.arrowdown:after{content:'';position:absolute;bottom:-1px;left:-4px;border:4.5px solid transparent;border-top-color:var(--txt3)}
+
+.rail{position:relative;padding-left:34px}
+.rail:before{content:'';position:absolute;left:11px;top:8px;bottom:8px;width:2px;background:var(--line)}
+.step{position:relative;margin-bottom:22px}
+.step:last-child{margin-bottom:0}
+.dot{position:absolute;left:-34px;top:18px;width:24px;height:24px;border-radius:50%;background:var(--bg);border:2px solid var(--cobalt-l);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:10px;color:var(--txt2)}
+.step.done .dot{border-color:var(--green);color:var(--green)}
+.step.gate .dot{border-radius:4px;transform:rotate(45deg);border-color:var(--gold)}
+.step.gate .dot span{transform:rotate(-45deg);color:var(--gold)}
+.step.final .dot{border-color:var(--green);background:var(--green);color:#06281A}
+
+.node{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 20px}
+.step.done .node{border-color:rgba(47,191,113,.45)}
+.step.gate .node{background:rgba(197,160,89,.07);border-color:rgba(197,160,89,.5)}
+.step.final .node{background:rgba(47,191,113,.08);border-color:var(--green)}
+.node-head{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.node-head b{font-size:15.5px;font-weight:600}
+.tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;padding:2px 8px;border-radius:4px;background:var(--cobalt);color:#BCD3F5}
+.tag.g{background:rgba(197,160,89,.15);color:var(--gold)}
+.tag.gr{background:rgba(47,191,113,.15);color:var(--green)}
+.tag.p{background:rgba(139,127,232,.15);color:var(--purple)}
+.node p{color:var(--txt2);font-size:13.5px;margin-top:6px}
+.node .out{font-family:var(--mono);font-size:11.5px;color:var(--txt3);margin-top:10px;padding-top:10px;border-top:1px dashed var(--line)}
+.node .out em{font-style:normal;color:var(--azure)}
+.scopes{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px;margin-top:12px}
+.scopes div{font-family:var(--mono);font-size:10.5px;color:var(--txt2);background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:6px 8px}
+.scopes div b{color:var(--gold);font-weight:500;display:block}
+
+.branch{margin-top:12px;border-left:2px solid var(--purple);padding:10px 14px;background:rgba(139,127,232,.06);border-radius:0 10px 10px 0}
+.branch b{font-size:13.5px;color:var(--purple)}
+.branch p{font-size:12.5px;margin-top:2px}
+
+.run{display:flex;flex-direction:column;align-items:stretch}
+.rrow{display:flex;gap:14px;align-items:stretch}
+.rbox{flex:1;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:13px 18px}
+.rbox b{font-size:14.5px;font-weight:600}
+.rbox small{display:block;color:var(--txt2);font-family:var(--mono);font-size:11px;margin-top:3px}
+.rbox.g{background:rgba(197,160,89,.07);border-color:rgba(197,160,89,.5)}
+.rbox.gr{background:rgba(47,191,113,.08);border-color:rgba(47,191,113,.45)}
+.rside{width:190px;border:1px dashed var(--red);border-radius:10px;padding:13px 14px;color:var(--red);display:flex;flex-direction:column;justify-content:center}
+.rside b{font-size:12.5px;font-weight:600}
+.rside small{font-family:var(--mono);font-size:10.5px;color:#C98882;margin-top:2px}
+.rside.hold{border-color:var(--txt3);color:var(--txt2)}
+.rside.hold small{color:var(--txt3)}
+.rjoin{display:flex;justify-content:flex-start;padding:6px 0 6px 0;margin-left:calc(50% - 95px - 102px)}
+.run .rjoin{margin-left:0;justify-content:center}
+.run .rjoin.offset{justify-content:flex-start;padding-left:calc((100% - 204px)/2 - 1px)}
+
+table{width:100%;border-collapse:collapse;background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+th,td{text-align:left;padding:13px 18px;border-bottom:1px solid var(--line);font-size:13.5px}
+th{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--txt3);font-weight:500}
+tr:last-child td{border-bottom:none}
+td b{color:var(--gold);font-weight:600}
+td.who{font-family:var(--mono);font-size:12px;color:var(--azure)}
+
+.hier{display:flex;flex-direction:column;gap:8px}
+.hrow{display:flex;align-items:center;gap:18px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:13px 20px}
+.hnum{font-family:var(--mono);font-size:26px;color:var(--gold);min-width:60px;text-align:right;line-height:1}
+.hrow .hbody b{font-size:14.5px;display:block}
+.hrow .hbody small{color:var(--txt2);font-size:12px;font-family:var(--mono)}
+.hrow.top{border-color:rgba(197,160,89,.5);background:rgba(197,160,89,.06)}
+.hrow.bottom{border-color:rgba(14,165,233,.45)}
+
+.intake{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:28px}
+.intake .in1{border:1px solid var(--gold);background:rgba(197,160,89,.07);border-radius:10px;padding:14px 20px;text-align:center}
+.intake .in1 b{font-size:15.5px}
+.intake .in1 small{display:block;color:var(--txt2);font-family:var(--mono);font-size:11.5px;margin-top:2px}
+.centerlink{display:flex;flex-direction:column;align-items:center;padding:8px 0}
+.centerlink .lbl{font-family:var(--mono);font-size:11px;color:var(--gold);padding:2px 0}
+.in2{border:1px solid var(--purple);background:rgba(139,127,232,.08);border-radius:10px;padding:12px 20px;text-align:center}
+.in2 b{font-size:14.5px;color:var(--purple)}
+.in2 small{display:block;color:var(--txt2);font-family:var(--mono);font-size:11px;margin-top:2px}
+.fields{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:16px}
+.fields div{background:rgba(14,165,233,.07);border:1px solid rgba(14,165,233,.4);border-radius:8px;padding:10px 12px;text-align:center;font-size:13px;font-weight:600}
+.fields div small{display:block;font-weight:400;color:var(--txt2);font-family:var(--mono);font-size:10.5px;margin-top:1px}
+
+.loopbox{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:28px;position:relative}
+.loopcol{display:flex;flex-direction:column;align-items:center;max-width:380px;margin:0 auto}
+.lstep{width:100%;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 18px;text-align:center}
+.lstep b{font-size:14.5px}
+.lstep small{display:block;color:var(--txt2);font-family:var(--mono);font-size:11px;margin-top:2px}
+.lstep.g{background:rgba(197,160,89,.07);border-color:rgba(197,160,89,.5)}
+.lstep.ok{background:rgba(47,191,113,.08);border-color:var(--green)}
+.loopback{font-family:var(--mono);font-size:11.5px;color:var(--red);text-align:center;margin:10px 0}
+
+.stages{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:6px}
+.stage{background:var(--card);border:1px solid rgba(14,165,233,.35);border-radius:10px;padding:13px 16px}
+.stage b{font-size:14px;display:block}
+.stage small{font-family:var(--mono);font-size:11px;color:var(--txt2);display:block;margin-top:3px}
+.stage .own{color:var(--azure)}
+.stage.wide{grid-column:1/-1}
+.contract{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}
+.contract div{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:10px 12px;text-align:center;font-size:13px;font-weight:600}
+.contract div small{display:block;font-weight:400;color:var(--txt2);font-family:var(--mono);font-size:10.5px;margin-top:1px}
+.rule{font-family:var(--mono);font-size:11.5px;color:var(--txt3);text-align:center;margin-top:16px}
+@media(max-width:640px){.stages{grid-template-columns:1fr}.fields,.contract{grid-template-columns:1fr 1fr}}
+
+footer{margin-top:70px;border-top:1px solid var(--line);padding-top:24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;color:var(--txt3);font-family:var(--mono);font-size:11.5px}
+footer .g{color:var(--gold)}
+@media(max-width:640px){.rrow{flex-direction:column}.rside{width:100%}h1{font-size:27px}}
+@media print{body{background:#fff;color:#111}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="brand">HOUSENET · DISPATCHER LIFECYCLE AUTOPILOT v1.0</div>
+  <h1>Dispatcher automation agent — <span>full build flow</span></h1>
+  <p class="sub">Engines decide, the agent orchestrates. ~80% of every decision is fixed by formula, state machine and validators — the LLM never overrides them. Accuracy comes from architecture, closed only on proof.</p>
+  <div class="meta">
+    <span class="chip green">Block 0 · SST — done</span>
+    <span class="chip">Hierarchy 1 → 2 → 9 → 13 → 60</span>
+    <span class="chip">Critical path RM-1 → RM-7</span>
+    <span class="chip gold">3 hard gates</span>
+    <span class="chip">Target ≥98% measured</span>
+  </div>
+</header>
+
+<section>
+  <h2>One sentence in — forced structure out</h2>
+  <div class="intake">
+    <div class="in1"><b>Task in — minimum 1 sentence</b><small>client describes the desired product</small></div>
+    <div class="centerlink"><div class="arrowdown"></div><div class="lbl">expand — never guess</div><div class="arrowdown"></div></div>
+    <div class="in2"><b>Fixed intake — forced fields</b><small>missing field → NEED_OWNER_DECISION</small></div>
+    <div class="fields">
+      <div>What<small>exact scope</small></div>
+      <div>Client<small>= Gev</small></div>
+      <div>Why<small>business reason</small></div>
+      <div>Desired<small>≥98% autopilot</small></div>
+      <div>Constraints<small>hard limits</small></div>
+      <div>Source pack<small>named inputs</small></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Who decides</h2>
+  <div class="mech">
+    <div class="mbox agent"><b>Agent — orchestrator</b><small>judgment only · always gated</small></div>
+    <div class="vlink"><div class="arrowdown"></div><div class="lbl">calls · never overrides</div><div class="arrowdown"></div></div>
+    <div class="mbox engines"><b>Deterministic engines — the 80%</b><small>selection · state · validators · SLA · proof</small></div>
+  </div>
+</section>
+
+<section>
+  <h2>1 → 2 → 9 → 13 → 60</h2>
+  <p class="sec-note">One desired product decomposes deterministically. Every level is countable, owned, and closable — nothing exists outside the tree.</p>
+  <div class="hier">
+    <div class="hrow top"><div class="hnum">1</div><div class="hbody"><b>Desired product</b><small>minimum 1 sentence from the client — ≥98% autopilot</small></div></div>
+    <div class="hrow"><div class="hnum">2</div><div class="hbody"><b>Phases</b><small>PRE-RM (understand + force) · RM (build + ship)</small></div></div>
+    <div class="hrow"><div class="hnum">9</div><div class="hbody"><b>Blocks</b><small>Ph0 boot · Ph1 intake+forcing · RM-1 … RM-7</small></div></div>
+    <div class="hrow"><div class="hnum">13</div><div class="hbody"><b>Checkpoints</b><small>9 blocks + 3 hard gates + 1 live agent</small></div></div>
+    <div class="hrow bottom"><div class="hnum">60</div><div class="hbody"><b>Governed task contracts</b><small>SCOPE 001–060 · 1 task = 1 owner = 1 validation</small></div></div>
+  </div>
+</section>
+
+
+<section>
+  <div class="sec-tag">P2 · THE GOVERNING LOOP</div>
+  <h2>Boot → understand → force → gate — until closed</h2>
+  <p class="sec-note">Every session cycles this loop. "Later" ≠ unblock. Escalation = success, not failure — the loop cannot lie its way through the gate.</p>
+  <div class="loopbox">
+    <div class="loopcol">
+      <div class="lstep"><b>Boot — SST spine</b><small>identity · state resume · laws</small></div>
+      <div class="centerlink"><div class="arrowdown"></div></div>
+      <div class="lstep"><b>Understand</b><small>framed request · locked spec</small></div>
+      <div class="centerlink"><div class="arrowdown"></div></div>
+      <div class="lstep"><b>Force</b><small>every input → named owner</small></div>
+      <div class="centerlink"><div class="arrowdown"></div></div>
+      <div class="lstep g"><b>◇ Gate check</b><small>complete? validated? signed?</small></div>
+      <div class="loopback">↻ no → escalate to owner → loop again</div>
+      <div class="lstep ok"><b>yes → exit to RM roadmap</b><small>RM-1 … RM-7 opens</small></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-tag">P3 · GOVERN SYSTEM — 50++ TASKS</div>
+  <h2>SCOPE 001–060 in five stages</h2>
+  <p class="sec-note">1 task = 1 contract = 1 owner = 1 validation state. No task closes on words — only on validated data. 60/60 valid = gate.</p>
+  <div class="stages">
+    <div class="stage"><b>Stage 1 · Identity</b><small>SCOPE 001–011 · ticket shape · customer · address · coverage</small><small class="own">owner: CRM</small></div>
+    <div class="stage"><b>Stage 2 · Network</b><small>SCOPE 012–021 · OLT / ONT signal · LOS · session telemetry</small><small class="own">owner: NOC</small></div>
+    <div class="stage"><b>Stage 3 · Commercial</b><small>SCOPE 022–031 · billing statuses · inventory taxonomy</small><small class="own">owners: Billing · Inventory</small></div>
+    <div class="stage"><b>Stage 4 · People + rules</b><small>SCOPE 032–048 · skill-matrix · SLA · approval roles · templates</small><small class="own">owners: Tech-Mgr · Process-Owner</small></div>
+    <div class="stage wide"><b>Stage 5 · Truth + proof</b><small>SCOPE 049–060 · audit + idempotency ledgers · real samples · shadow scope</small><small class="own">owner: Process-Owner — PM forces</small></div>
+  </div>
+  <div class="contract">
+    <div>Named owner<small>per task</small></div>
+    <div>Deliverable<small>real data / access</small></div>
+    <div>State<small>open · delivered · valid</small></div>
+  </div>
+  <p class="rule">60/60 VALID → ◇ DATA-COMPLETE → RM-1 … RM-7 BUILD OPENS</p>
+</section>
+
+<section>
+  <div class="sec-tag">A · BUILD CHAIN</div>
+  <h2>From session boot to live production agent</h2>
+  <p class="sec-note">Sequential pipeline. RM-4 runs in parallel and merges into RM-6. Each hard gate must pass before anything downstream is real.</p>
+
+  <div class="rail">
+
+    <div class="step done"><div class="dot">✓</div><div class="node">
+      <div class="node-head"><b>Block 0 · SST boot</b><span class="tag gr">DONE</span></div>
+      <p>SessionStart hook injects the core-pointer → forces the SST spine. Loads identity, project state, laws entry.</p>
+      <div class="out">→ out: <em>booted context</em> · owner: system/hook</div>
+    </div></div>
+
+    <div class="step"><div class="dot">P1</div><div class="node">
+      <div class="node-head"><b>Intake — locked spec</b></div>
+      <p>Fixed intake: what · client = Gev · why · desired = ≥98% autopilot · constraints · source pack.</p>
+      <div class="out">→ out: <em>framed request</em> · owner: PO</div>
+    </div></div>
+
+    <div class="step"><div class="dot">P1</div><div class="node">
+      <div class="node-head"><b>Scope + data + access forcing</b></div>
+      <p>Is every input — data, access, permission — really available from a named owner? "Later" ≠ unblock; a missing field → NEED_OWNER_DECISION.</p>
+      <div class="out">→ out: <em>forced list</em> · gate feeds go/no-go</div>
+    </div></div>
+
+    <div class="step gate"><div class="dot"><span>◇</span></div><div class="node">
+      <div class="node-head"><b>Gate · Go / no-go</b><span class="tag g">HARD</span></div>
+      <p>Design path = GO. Production opens only when every input is owner-confirmed.</p>
+    </div></div>
+
+    <div class="step"><div class="dot">R1</div><div class="node">
+      <div class="node-head"><b>RM-1 · Data &amp; access forcing</b><span class="tag">ROOT</span></div>
+      <p>Force the 60 real data contracts from named owners. Nothing production-real is buildable downstream until validated.</p>
+      <div class="scopes">
+        <div><b>001–004</b>CRM / ticket fields</div>
+        <div><b>005–011</b>Customer · coverage</div>
+        <div><b>012–021</b>NOC / OLT / ONT signal</div>
+        <div><b>022–026</b>Billing statuses</div>
+        <div><b>027–031</b>Inventory taxonomy</div>
+        <div><b>032–037</b>Tech skill-matrix</div>
+        <div><b>038–040</b>SLA + timeouts</div>
+        <div><b>041–044</b>Approval roles</div>
+        <div><b>045–048</b>Templates (hash+ver)</div>
+        <div><b>049–050</b>Audit + idempotency</div>
+        <div><b>055–060</b>Samples + shadow</div>
+      </div>
+      <div class="out">owners: <em>CRM · NOC · Billing · Inventory · Tech-Mgr · Process-Owner</em> — PM forces</div>
+    </div></div>
+
+    <div class="step gate"><div class="dot"><span>◇</span></div><div class="node">
+      <div class="node-head"><b>Gate · Data-complete</b><span class="tag g">HARD</span></div>
+      <p>Every SCOPE contract validated by its owner → opens RM-2 … RM-7.</p>
+    </div></div>
+
+    <div class="step"><div class="dot">R2</div><div class="node">
+      <div class="node-head"><b>RM-2 · Deterministic engines</b><span class="tag">CRITICAL</span></div>
+      <p>Technician-selection score = w1·skill + w2·proximity − w3·load + w4·SLA urgency → pick max. Lifecycle state machine (legal transitions only). Validators: schema · freshness · idempotency. SLA engine with breach escalation. Closure only on proof — never on assertion.</p>
+      <div class="out">weights/thresholds <em>locked from RM-1 data</em> · the 80% the agent never overrides</div>
+      <div class="branch"><b>∥ RM-4 · Approval + RACI wiring</b><p>Parallel track. RACI per lifecycle step, approval scope + expiration, approval package before any irreversible action, message hash + version binding. Merges into RM-6.</p></div>
+    </div></div>
+
+    <div class="step"><div class="dot">R3</div><div class="node">
+      <div class="node-head"><b>RM-3 · Schema + playbook wiring</b><span class="tag">CRITICAL</span></div>
+      <p>LOS → NOC/OLT/ONT fields · NEW_INSTALL → coverage + inventory + tech-matrix · DEGRADED_SIGNAL → thresholds + SLA. Output schemas COMMON / TECH-SELECT / INCIDENT / INSTALL / SIGNAL — invalid schema is rejected. Duplicate tickets = one action (idempotency).</p>
+      <div class="out">→ produces: <em>wired playbooks + validated schemas</em></div>
+    </div></div>
+
+    <div class="step"><div class="dot">R5</div><div class="node">
+      <div class="node-head"><b>RM-5 · Eval suite</b><span class="tag">MEASURES</span></div>
+      <p>Real samples → fixtures with expected outcomes per playbook, plus idempotency and gate-bypass adversarial cases → baseline precision number before any live run.</p>
+      <div class="out">→ produces: <em>eval harness + baseline number</em></div>
+    </div></div>
+
+    <div class="step"><div class="dot">R6</div><div class="node">
+      <div class="node-head"><b>RM-6 · Shadow-mode trial</b><span class="tag p">← RM-4 MERGES</span></div>
+      <p>Agent runs in parallel with real ops, takes no action. Every decision compared to ground truth. Anti-gaming: ground truth = the real outcome, never the agent's own decision.</p>
+      <div class="out">→ produces: <em>measured precision — the real number</em></div>
+    </div></div>
+
+    <div class="step gate"><div class="dot"><span>◇</span></div><div class="node">
+      <div class="node-head"><b>Gate · ≥98% measured — GREEN</b><span class="tag g">REALITY PROOF</span></div>
+      <p>Real, measured precision vs ground truth. Signed by reality, not by claims.</p>
+    </div></div>
+
+    <div class="step gate"><div class="dot"><span>◇</span></div><div class="node">
+      <div class="node-head"><b>Gate · Release-go</b><span class="tag g">HUMAN</span></div>
+      <p>Final human go to ship — Gev + General.</p>
+    </div></div>
+
+    <div class="step"><div class="dot">R7</div><div class="node">
+      <div class="node-head"><b>RM-7 · Staged release</b></div>
+      <p>Canary → ring → full rollout. Live precision monitoring, incident and rollback ready.</p>
+    </div></div>
+
+    <div class="step final"><div class="dot">●</div><div class="node">
+      <div class="node-head"><b>Live production agent</b><span class="tag gr">SHIPPED</span></div>
+      <p>Precision monitored continuously. If precision drops below 98% the agent auto-downgrades its own autonomy — level down + notify — control returns to human dispatch.</p>
+    </div></div>
+
+  </div>
+</section>
+
+<section>
+  <div class="sec-tag">C · RUNTIME</div>
+  <h2>How the built agent handles one ticket</h2>
+  <p class="sec-note">Deterministic, gated, proof-closed — every ticket, every time.</p>
+
+  <div class="run">
+    <div class="rrow"><div class="rbox" style="max-width:100%"><b>Ticket in</b></div></div>
+    <div class="rjoin"><div class="arrowdown"></div></div>
+    <div class="rrow">
+      <div class="rbox"><b>Validate</b><small>schema · freshness · idempotency</small></div>
+      <div class="rside"><b>fail → Reject</b><small>NEED_OWNER_DECISION</small></div>
+    </div>
+    <div class="rjoin"><div class="arrowdown"></div></div>
+    <div class="rrow"><div class="rbox"><b>Classify → playbook</b><small>LOS · NEW_INSTALL · DEGRADED_SIGNAL</small></div></div>
+    <div class="rjoin"><div class="arrowdown"></div></div>
+    <div class="rrow"><div class="rbox"><b>Engines decide</b><small>tech-select formula · state machine · SLA — agent does NOT override</small></div></div>
+    <div class="rjoin"><div class="arrowdown"></div></div>
+    <div class="rrow"><div class="rbox"><b>Build action package</b><small>COMMON / TECH-SELECT / INCIDENT / INSTALL / SIGNAL</small></div></div>
+    <div class="rjoin"><div class="arrowdown"></div></div>
+    <div class="rrow">
+      <div class="rbox g"><b>◇ RACI / approval gate</b><small>scope · expiration · hash</small></div>
+      <div class="rside hold"><b>no → Hold</b><small>wait for approver</small></div>
+    </div>
+    <div class="rjoin"><div class="arrowdown"></div></div>
+    <div class="rrow"><div class="rbox"><b>Act — or shadow</b><small>production write · OR · log decision only (RM-6 mode)</small></div></div>
+    <div class="rjoin"><div class="arrowdown"></div></div>
+    <div class="rrow">
+      <div class="rbox"><b>Close on proof</b><small>signal restored · install verified · customer confirm</small></div>
+      <div class="rside hold"><b>no proof → open</b><small>keep open / escalate</small></div>
+    </div>
+    <div class="rjoin"><div class="arrowdown"></div></div>
+    <div class="rrow"><div class="rbox gr"><b>Write ledgers</b><small>audit + idempotency — every action, replay-safe</small></div></div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-tag">D · GATES &amp; AUTHORITY</div>
+  <h2>Who signs what</h2>
+  <p class="sec-note" style="margin-bottom:20px">Nothing lives in chat — every artifact in sealed, versioned state. Gev = root + safety + the breaker.</p>
+  <table>
+    <tr><th>GATE ◇</th><th>MEANING</th><th>WHO SIGNS</th></tr>
+    <tr><td><b>Data-complete</b></td><td>Every SCOPE contract validated by its owner</td><td class="who">Owners (PM forces)</td></tr>
+    <tr><td><b>≥98% measured</b></td><td>Real, measured precision vs ground truth — not claimed</td><td class="who">Reality (RM-6)</td></tr>
+    <tr><td><b>Release-go</b></td><td>Final human go to ship</td><td class="who">Gev + General</td></tr>
+  </table>
+</section>
+
+<footer>
+  <span>Accuracy from architecture · engines decide · every write gated · closed only on proof</span>
+  <span class="g">Dispatcher Lifecycle Autopilot v1.0</span>
+</footer>
+
+</div>
+</body>
+</html>

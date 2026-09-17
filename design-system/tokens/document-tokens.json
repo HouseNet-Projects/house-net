@@ -1,0 +1,33 @@
+{
+  "$schema": "../schemas/design-tokens.schema.json",
+  "version": "1.1.0",
+  "document": {
+    "page-size": {
+      "value": "A4"
+    },
+    "margin": {
+      "value": "20mm"
+    },
+    "header-height": {
+      "value": "12mm"
+    },
+    "footer-height": {
+      "value": "10mm"
+    },
+    "cover-accent": {
+      "value": "{color.primary}"
+    },
+    "body-font": {
+      "value": "{typography.font-family-sans}"
+    },
+    "heading-font": {
+      "value": "{typography.font-family-sans}"
+    },
+    "table-header": {
+      "value": "{color.secondary}"
+    },
+    "table-stripe": {
+      "value": "{color.surface}"
+    }
+  }
+}

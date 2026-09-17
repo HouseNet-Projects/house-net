@@ -1,0 +1,27 @@
+name: HouseNet Knowledge CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  policy-gate:
+    name: HouseNet policy gate
+    uses: HouseNet-Projects/house-net-control-plane/.github/workflows/reusable-policy-gate.yml@b36ad10cc02a80d98ad22d04577ebcd512740ce0
+  knowledge:
+    name: Knowledge contracts
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - name: Install validator dependency
+        run: python3 -m pip install --disable-pip-version-check -r requirements.txt
+      - name: Validate knowledge catalog
+        run: python3 bin/validate-knowledge
+      - name: Run tests
+        run: python3 -m unittest discover -s tests -v

@@ -1,0 +1,73 @@
+{
+  "_source": "ՆՄՈՒՇ — փոխարինվում է data/metrics.json-ի ավտոմատ արտահանմամբ (it.metrics_pipeline)",
+  "_as_of": "2026-08-24",
+
+  "net_adds": 612,
+  "net_adds_vs_plan_pct": 76.5,
+  "arpu": 7320,
+  "churn_pct": 1.8,
+  "fallout_rate": 14.2,
+  "orders_stuck_gt_10d": 37,
+  "contracts_without_serviceability": 0,
+  "order_to_activation_p50": 5,
+  "survival_90d": 89.4,
+  "waitlist_port_count": 214,
+
+  "cost_per_lead": 2240,
+  "posts_published_wtd": 3,
+  "content_backlog": 4,
+  "campaign_overspend_pct": 4.1,
+
+  "calls_per_agent_avg": 71,
+  "contact_rate": 31.5,
+  "conversion_rate": 5.2,
+  "list_exhaustion_pct": 88.0,
+  "qa_score_avg": 4.3,
+  "missed_callbacks": 12,
+
+  "first_response_p50_min": 22,
+  "tickets_open_gt_48h": 41,
+  "nps": 34,
+  "save_rate": 28.0,
+  "abandoned_call_rate": 11.4,
+
+  "first_visit_success_rate": 78.0,
+  "repeat_visits_pct": 17.5,
+  "no_show_rate": 13.2,
+  "jobs_unassigned": 6,
+  "sla_breach_count": 4,
+
+  "uptime_pct": 99.81,
+  "mttr_hours": 3.2,
+  "incidents_open": 3,
+  "port_utilization_pct": 88.5,
+  "planned_maintenance_overdue": 0,
+
+  "cpe_stock_days": 16,
+  "stock_below_min_items": 3,
+  "unreconciled_items": 8,
+  "devices_with_techs_gt_14d": 5,
+
+  "collection_rate_first_invoice": 91.2,
+  "dso_days": 31,
+  "arrears_gt_30d_amount": 7400000,
+  "invoices_failed": 0,
+  "commission_close_overdue": 0,
+
+  "attrition_rate_monthly": 5.1,
+  "open_vacancies_gt_30d": 4,
+  "onboarding_overdue": 2,
+  "training_overdue": 7,
+  "timesheet_missing": 0,
+
+  "contracts_pending_review_gt_5d": 3,
+  "license_expiry_days": 240,
+  "disputes_open": 2,
+
+  "backup_failures": 0,
+  "critical_vulns_open": 1,
+  "systems_down": 0,
+  "access_reviews_overdue": 3,
+
+  "targets_at_risk_count": 5
+}

@@ -1,0 +1,117 @@
+name: "Housenet"
+timezone: "Asia/Yerevan"
+
+workweek: [mon, tue, wed, thu, fri]
+
+# Ոչ աշխատանքային օրեր — ամսաթվերը ISO ձևաչափով
+holidays:
+  - "2026-01-01"
+  - "2026-01-02"
+  - "2026-01-06"
+  - "2026-03-08"
+  - "2026-05-01"
+  - "2026-05-09"
+  - "2026-07-05"
+  - "2026-09-21"
+
+# ---------------------------------------------------------------- բաժիններ
+# escalates_to — ո՞ր դերին է բարձրանում ուշացած առաջադրանքը
+departments:
+  exec:      { title: "Ղեկավարություն",            escalates_to: ceo }
+  sales:     { title: "Վաճառք",                    escalates_to: commercial_director }
+  marketing: { title: "Մարքեթինգ",                 escalates_to: commercial_director }
+  telesales: { title: "Telesales",                 escalates_to: commercial_director }
+  care:      { title: "Բաժանորդների սպասարկում",   escalates_to: coo }
+  field:     { title: "Դաշտային ծառայություն",     escalates_to: technical_director }
+  network:   { title: "Ցանց և NOC",                escalates_to: technical_director }
+  warehouse: { title: "Պահեստ և լոգիստիկա",        escalates_to: coo }
+  finance:   { title: "Ֆինանս և billing",          escalates_to: cfo }
+  hr:        { title: "HR",                        escalates_to: coo }
+  legal:     { title: "Իրավաբանական",              escalates_to: ceo }
+  it:        { title: "IT և անվտանգություն",       escalates_to: technical_director }
+
+# ---------------------------------------------------------------- մարդիկ
+# Փոխարինիր անունները իրականով. id-ները թող մնան նույնը.
+people:
+  u_ceo:        { name: "Գործադիր տնօրեն",      email: "" }
+  u_coo:        { name: "Օպերացիոն տնօրեն",     email: "" }
+  u_cfo:        { name: "Ֆինանսական տնօրեն",    email: "" }
+  u_comdir:     { name: "Կոմերցիոն տնօրեն",     email: "" }
+  u_techdir:    { name: "Տեխնիկական տնօրեն",    email: "" }
+  u_opshead:    { name: "Sales Ops ղեկավար",    email: "" }
+  u_analyst:    { name: "Վերլուծաբան",          email: "" }
+  u_sales:      { name: "Վաճառքի ղեկավար",      email: "" }
+  u_d2d:        { name: "D2D ղեկավար",           email: "" }
+  u_b2b:        { name: "B2B ղեկավար",           email: "" }
+  u_dealer:     { name: "Դիլերների մենեջեր",    email: "" }
+  u_mkt:        { name: "Մարքեթինգի ղեկավար",   email: "" }
+  u_content:    { name: "Կոնտենտ մենեջեր",      email: "" }
+  u_smm:        { name: "SMM",                   email: "" }
+  u_design:     { name: "Դիզայներ",              email: "" }
+  u_video:      { name: "Վիդեո խմբագիր",        email: "" }
+  u_tele:       { name: "Telesales ղեկավար",     email: "" }
+  u_teleqa:     { name: "Telesales QA",          email: "" }
+  u_care:       { name: "Սպասարկման ղեկավար",   email: "" }
+  u_save:       { name: "Save desk ղեկավար",     email: "" }
+  u_qa:         { name: "Որակի ղեկավար",        email: "" }
+  u_dispatch:   { name: "Dispatch ղեկավար",      email: "" }
+  u_field:      { name: "Դաշտային ղեկավար",     email: "" }
+  u_network:    { name: "Ցանցի ղեկավար",        email: "" }
+  u_noc:        { name: "NOC հերթապահ",          email: "" }
+  u_planeng:    { name: "Պլանավորող ինժեներ",   email: "" }
+  u_warehouse:  { name: "Պահեստի ղեկավար",      email: "" }
+  u_procure:    { name: "Գնումների մենեջեր",    email: "" }
+  u_finance:    { name: "Ֆինանսների ղեկավար",   email: "" }
+  u_billing:    { name: "Billing մասնագետ",      email: "" }
+  u_collect:    { name: "Գանձումների ղեկավար",  email: "" }
+  u_payroll:    { name: "Աշխատավարձ",            email: "" }
+  u_hr:         { name: "HR ղեկավար",            email: "" }
+  u_recruit:    { name: "Ռեկրուտեր",             email: "" }
+  u_trainer:    { name: "Ուսուցման մասնագետ",   email: "" }
+  u_legal:      { name: "Իրավաբան",              email: "" }
+  u_compliance: { name: "Համապատասխանություն",   email: "" }
+  u_it:         { name: "IT ղեկավար",            email: "" }
+  u_security:   { name: "ՏՏ անվտանգություն",     email: "" }
+
+# ---------------------------------------------------------------- դերեր
+# Կանոնները հղվում են դերին, ոչ մարդուն — մարդը փոխվում է, պրոցեսը՝ ոչ.
+roles:
+  ceo: u_ceo
+  coo: u_coo
+  cfo: u_cfo
+  commercial_director: u_comdir
+  technical_director: u_techdir
+  ops_head: u_opshead
+  analyst: u_analyst
+  sales_lead: u_sales
+  d2d_lead: u_d2d
+  b2b_lead: u_b2b
+  dealer_manager: u_dealer
+  marketing_lead: u_mkt
+  content_manager: u_content
+  smm: u_smm
+  designer: u_design
+  video_editor: u_video
+  telesales_lead: u_tele
+  telesales_qa: u_teleqa
+  care_lead: u_care
+  save_desk_lead: u_save
+  qa_lead: u_qa
+  dispatch_lead: u_dispatch
+  field_lead: u_field
+  network_lead: u_network
+  noc_lead: u_noc
+  planning_engineer: u_planeng
+  warehouse_lead: u_warehouse
+  procurement_lead: u_procure
+  finance_lead: u_finance
+  billing_lead: u_billing
+  collections_lead: u_collect
+  payroll: u_payroll
+  hr_lead: u_hr
+  recruiter: u_recruit
+  trainer: u_trainer
+  legal_lead: u_legal
+  compliance: u_compliance
+  it_lead: u_it
+  security_lead: u_security

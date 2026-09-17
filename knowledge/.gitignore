@@ -1,0 +1,16 @@
+__pycache__/
+*.pyc
+.venv/
+.DS_Store
+
+# Local reports and exports
+reports/
+
+# Never stage local secrets or credential material
+.env
+.env.*
+*.key
+*.pem
+*.p12
+*.pfx
+credentials.*

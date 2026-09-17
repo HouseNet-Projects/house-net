@@ -1,0 +1,35 @@
+{
+  "version": "1.1.0",
+  "templates": [
+    {
+      "id": "general",
+      "type": "word",
+      "source": "documents/templates/word/general.md",
+      "bilingual": true
+    },
+    {
+      "id": "policy",
+      "type": "word",
+      "source": "documents/templates/word/policy.md",
+      "bilingual": true
+    },
+    {
+      "id": "report",
+      "type": "word",
+      "source": "documents/templates/word/report.md",
+      "bilingual": true
+    },
+    {
+      "id": "executive",
+      "type": "powerpoint",
+      "source": "documents/templates/powerpoint/executive.json",
+      "bilingual": true
+    },
+    {
+      "id": "dashboard",
+      "type": "excel",
+      "source": "documents/templates/excel/dashboard.json",
+      "bilingual": true
+    }
+  ]
+}

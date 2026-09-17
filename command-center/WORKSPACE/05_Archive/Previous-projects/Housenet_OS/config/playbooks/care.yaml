@@ -1,0 +1,132 @@
+department: care
+title: "Բաժանորդների սպասարկում"
+
+kpis:
+  - { id: first_response_p50_min, title: "Առաջին արձագանք, մեդիան", unit: "րոպե", direction: down }
+  - { id: tickets_open_gt_48h,    title: "Բաց հայտեր > 48ժ",        unit: "հատ",  direction: down }
+  - { id: nps,                    title: "NPS",                      unit: "բալ",  direction: up }
+  - { id: save_rate,              title: "Save rate",                unit: "%",    direction: up }
+  - { id: abandoned_call_rate,    title: "Լքված զանգեր",             unit: "%",    direction: down }
+
+rituals:
+  - id: care.shift_handover
+    title: "Հերթափոխի հանձնում"
+    cadence: daily
+    time: "20:00"
+    duration_min: 15
+    owner_role: care_lead
+    inputs: ["Բաց հայտեր", "Էսկալացված դեպքեր", "Ցանցի ընթացիկ վթարներ"]
+    outputs: ["Հաջորդ հերթափոխը գիտի ամեն բաց դեպքի կարգավիճակը"]
+
+  - id: care.queue_review
+    title: "Հայտերի հերթի վերանայում"
+    cadence: workdays
+    time: "10:00"
+    duration_min: 20
+    owner_role: care_lead
+    inputs: ["48 ժամից ավել բաց հայտեր", "Կրկնվող դիմումներ նույն բաժանորդից"]
+    outputs: ["Ամեն ուշացած հայտ ունի պատճառ և ժամկետ"]
+    severity: high
+
+  - id: care.save_desk_review
+    title: "Save desk-ի վերանայում"
+    cadence: weekly
+    weekday: tue
+    duration_min: 45
+    owner_role: save_desk_lead
+    participants: [care_lead, ops_head]
+    inputs: ["Չեղարկման պատճառների կոդեր", "Մրցակիցների անուններ", "Save rate ըստ պատճառի"]
+    outputs: ["Save ladder-ի ճշգրտում, կրկնվող պատճառների էսկալացիա"]
+    severity: high
+
+  - id: care.nps_review
+    title: "NPS և բաժանորդի ձայնի վերլուծություն"
+    cadence: monthly
+    day: 8
+    duration_min: 60
+    owner_role: care_lead
+    participants: [coo, ops_head, field_lead]
+    inputs: ["NPS ըստ սեգմենտի", "Բաց մեկնաբանություններ"]
+    outputs: ["3 կոնկրետ բարելավման քայլ՝ տերերով"]
+
+  - id: care.onboarding_calls
+    title: "24-ժամյա ստուգիչ զանգերի բլոկ"
+    cadence: workdays
+    time: "11:00"
+    duration_min: 120
+    owner_role: care_lead
+    inputs: ["Երեկ ակտիվացած բաժանորդների ցուցակ"]
+    outputs: ["Ամեն նոր բաժանորդ զանգահարված, խնդիրները՝ հայտով"]
+    severity: high
+
+deliverables:
+  - id: care.weekly_report
+    title: "Սպասարկման շաբաթական հաշվետվություն"
+    cadence: weekly
+    weekday: mon
+    owner_role: analyst
+    approver_role: care_lead
+    asset_type: report
+    lead_days: 1
+    brief: "Հայտեր, արձագանքի ժամանակ, save rate, NPS, կրկնվող պատճառներ."
+
+  - id: care.faq_update
+    title: "FAQ և ինքնասպասարկման նյութերի թարմացում"
+    cadence: monthly
+    day: 15
+    owner_role: care_lead
+    approver_role: marketing_lead
+    asset_type: post
+    lead_days: 3
+    brief: "Ամենահաճախ հարցերը վերածել հոդվածի կամ կարճ վիդեոյի."
+
+controls:
+  - id: care.ctl_response
+    title: "Առաջին արձագանքի ժամանակը շեմից բարձր է"
+    metric: first_response_p50_min
+    op: ">"
+    threshold: 15
+    severity: high
+    owner_role: care_lead
+    due_in_days: 1
+    action: "Ստուգել հերթափոխի ծածկույթը պիկ ժամերին"
+
+  - id: care.ctl_stale_tickets
+    title: "Հայտեր բաց են 48 ժամից ավել"
+    metric: tickets_open_gt_48h
+    op: ">"
+    threshold: 10
+    severity: high
+    owner_role: care_lead
+    due_in_days: 1
+    action: "Ամեն հայտ ստանում է տեր և ժամկետ, կրկնվողները՝ էսկալացիա"
+
+  - id: care.ctl_nps
+    title: "NPS-ը ընկել է"
+    metric: nps
+    op: "<"
+    threshold: 40
+    severity: high
+    owner_role: care_lead
+    due_in_days: 5
+    action: "Բացասական մեկնաբանությունների դասակարգում և արմատական պատճառի վերլուծություն"
+
+  - id: care.ctl_save_rate
+    title: "Save rate-ը շեմից ցածր է"
+    metric: save_rate
+    op: "<"
+    threshold: 35.0
+    severity: medium
+    owner_role: save_desk_lead
+    due_in_days: 3
+    action: "Save ladder-ի կիրառման ստուգում — զեղչը չպիտի լինի առաջին քայլը"
+
+  - id: care.ctl_abandoned
+    title: "Լքված զանգերի տոկոսը բարձր է"
+    metric: abandoned_call_rate
+    op: ">"
+    threshold: 8.0
+    severity: high
+    owner_role: care_lead
+    due_in_days: 2
+    action: "Հերթափոխի վերապլանավորում ըստ զանգերի պրոֆիլի"

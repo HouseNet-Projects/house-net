@@ -1,0 +1,132 @@
+{
+  "version": "1.4.3",
+  "domain": "repository-classes",
+  "rules": [
+    {
+      "id": "HN-CLASS-A",
+      "primitive": "classification.A",
+      "scope": "repository",
+      "level": "MANDATORY",
+      "applicability": {
+        "classes": [
+          "A"
+        ]
+      },
+      "expected": {
+        "name": "CRITICAL",
+        "triggers": [
+          "production",
+          "customer_data",
+          "billing",
+          "authentication",
+          "infrastructure",
+          "privileged_integration",
+          "deployment_control",
+          "secrets",
+          "high_impact"
+        ],
+        "required_files": [
+          "README.md"
+        ],
+        "ci": "required_meaningful",
+        "protection": "strongest_supported",
+        "conditional_files": {
+          "SECURITY.md": "meaningful_security_reporting",
+          "PR_template": "recurring_risk_review",
+          "CODEOWNERS": "multiple_responsible_people"
+        },
+        "deployment": "explicit_design_and_approval",
+        "rollback": "document_where_applicable",
+        "releases": "when_production_releases_exist"
+      },
+      "approval_requirement": "explicit_owner",
+      "enforcement": {
+        "mechanism": "repository_validator"
+      },
+      "source_sections": [
+        5
+      ]
+    },
+    {
+      "id": "HN-CLASS-B",
+      "primitive": "classification.B",
+      "scope": "repository",
+      "level": "MANDATORY",
+      "applicability": {
+        "classes": [
+          "B"
+        ]
+      },
+      "expected": {
+        "name": "STANDARD",
+        "triggers": [
+          "maintained_software",
+          "api",
+          "dashboard",
+          "analytics",
+          "internal_service",
+          "automation",
+          "integration"
+        ],
+        "required_files": [
+          "README.md",
+          ".gitignore",
+          ".editorconfig",
+          ".gitattributes"
+        ],
+        "ci": "only_meaningful_checks",
+        "protection": "important_repositories_where_supported",
+        "conditional_files": {},
+        "deployment": "repository_specific",
+        "rollback": "when_applicable",
+        "releases": "when_lifecycle_exists"
+      },
+      "approval_requirement": "explicit_owner",
+      "enforcement": {
+        "mechanism": "repository_validator"
+      },
+      "source_sections": [
+        5
+      ]
+    },
+    {
+      "id": "HN-CLASS-C",
+      "primitive": "classification.C",
+      "scope": "repository",
+      "level": "MANDATORY",
+      "applicability": {
+        "classes": [
+          "C"
+        ]
+      },
+      "expected": {
+        "name": "LIGHTWEIGHT",
+        "triggers": [
+          "documentation",
+          "low_risk_utility",
+          "experiment",
+          "prototype",
+          "approved_reference_data"
+        ],
+        "required_files": [
+          "README.md"
+        ],
+        "ci": "none_unless_justified",
+        "protection": "optional_proportional",
+        "conditional_files": {
+          ".gitignore": "when_relevant"
+        },
+        "deployment": "none_unless_justified",
+        "rollback": "when_applicable",
+        "releases": "not_forced"
+      },
+      "approval_requirement": "explicit_owner",
+      "enforcement": {
+        "mechanism": "repository_validator"
+      },
+      "source_sections": [
+        5
+      ]
+    }
+  ]
+}

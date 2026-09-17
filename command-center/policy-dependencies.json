@@ -1,0 +1,19 @@
+{
+  "reviewed_on": "2026-09-15",
+  "actions": {
+    "actions/checkout@11d5960a326750d5838078e36cf38b85af677262": {
+      "reviewed": true,
+      "publisher": "actions",
+      "resolved_tag": "v4",
+      "justification": "Read-only checkout of the caller or this control plane; credentials are not persisted.",
+      "review": "Official namespace, immutable Git ref and action.yml inspected; node20 runtime. No arbitrary third-party actions."
+    },
+    "actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065": {
+      "reviewed": true,
+      "publisher": "actions",
+      "resolved_tag": "v5",
+      "justification": "Reproducible Python 3.12 runtime on GitHub-hosted Ubuntu.",
+      "review": "Official namespace, immutable Git ref and action.yml inspected; node20 runtime."
+    }
+  }
+}

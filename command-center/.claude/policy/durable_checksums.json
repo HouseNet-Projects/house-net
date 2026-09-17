@@ -1,0 +1,1150 @@
+{
+ "generated_at": "2026-09-14T20:15:00",
+ "algorithm": "sha256",
+ "files": {
+  ".claude/business/bm_company.py": {
+   "sha256": "2126ebde847c4f3367bca8eff8ba3f9da89f921cfe7b8b784d99cf0aa7c43593",
+   "size": 43551
+  },
+  ".claude/business/bm_governance.py": {
+   "sha256": "0f8cc6f005e9967771ee44d381543845651e413beb64219595a3a013ae53c65d",
+   "size": 26732
+  },
+  ".claude/business/bm_kpis.py": {
+   "sha256": "3787bd702ae0bffd454eeafdd1ead4d7ab0e3d0aec00e02683d4fc7d973c2cd4",
+   "size": 22770
+  },
+  ".claude/business/bm_playbooks.py": {
+   "sha256": "be90cbb29f504f44ee2fde8985b3dd976cb4ca6fe57c01c40f145427d55e0de3",
+   "size": 21183
+  },
+  ".claude/business/bm_processes.py": {
+   "sha256": "ade94ba8861285bf80ff7d6859c8071321972055a953f334b34b2c80ca9a0d95",
+   "size": 25352
+  },
+  ".claude/business/bm_schema.py": {
+   "sha256": "db3a4c652fd5885c6b67bdb382e0ab067c76b11b364171213e1b40f928dd429b",
+   "size": 2998
+  },
+  ".claude/business/bm_sources.py": {
+   "sha256": "b7fe631e710d1ba89d1274b2dce135f6f32612149ae01302cc814cf31d9a7fa6",
+   "size": 14558
+  },
+  ".claude/business/bm_targets.py": {
+   "sha256": "d1bbfe2f92bb75e81fc26f60f1175cbca9dc9812b8d8cb46f36fbce9112b9323",
+   "size": 7711
+  },
+  ".claude/business/build_business_model.py": {
+   "sha256": "b1c028171590aa1db5343fbd117af41b73c034415e8ecdade6a105f69957d688",
+   "size": 35413
+  },
+  ".claude/business/certify_business.py": {
+   "sha256": "82743d98c81c7f6690114045a9fb3340c2315cde6c3ae31c9a3458befec20081",
+   "size": 10615
+  },
+  ".claude/business/overlay/ov_commercials.py": {
+   "sha256": "f1ec793a2c9eb7d5a93fef820839933ffaf77336350db7be90acdbfa99d8f73b",
+   "size": 2366
+  },
+  ".claude/business/overlay/ov_compensation.py": {
+   "sha256": "89943609bcc8849a3da381b4f6848a2aca9597e493d2d6e9739a8b38d99951ec",
+   "size": 1348
+  },
+  ".claude/business/overlay/ov_evidence.py": {
+   "sha256": "4a63cc9ea6cf0e0c10e44b3ce9a3d42c8fa9483d15a0fe9602c83d85732fba67",
+   "size": 5676
+  },
+  ".claude/business/overlay/ov_people.py": {
+   "sha256": "dd8fb391cb37e0f54a0ce04739d1c1232ff710d819ca509a27771556e25d12a0",
+   "size": 3456
+  },
+  ".claude/business/overlay_backup.py": {
+   "sha256": "66e56444f8f64e9b2cf691775b0f1b3ea116e511e7daa73c63f0b2cf0e4fa276",
+   "size": 13942
+  },
+  ".claude/docs/Activation-inputs.md": {
+   "sha256": "c26624b6ad9331adbd946cce637ad72842b7173f76b6f9d20940d0bfb5f36377",
+   "size": 8960
+  },
+  ".claude/docs/Job-description.md": {
+   "sha256": "6c40ad24a4fc0075a01f55815ca4ab827032c0729f2148ce51a15de51ed67cc8",
+   "size": 24943
+  },
+  ".claude/docs/Migration-log-2026-09-10.md": {
+   "sha256": "0c496fd9d0573fcda7524b1cfb3274550a6474a73adf3699461cfece83dacdf1",
+   "size": 7403
+  },
+  ".claude/docs/Role.md": {
+   "sha256": "024fb34d2d93eee257c98f97230b2cfa885423e389f133ef95b39b473f9e698e",
+   "size": 5361
+  },
+  ".claude/hooks/brief.py": {
+   "sha256": "ae69f65d74a2fad68ef4f675857fd9b17b4ea3c80d17a284dbfc392a5c27e9df",
+   "size": 12119
+  },
+  ".claude/hooks/gate.py": {
+   "sha256": "c2349a92604e5096ac614dad61580437b0814fff0a645459dbae6acab396f3b5",
+   "size": 24373
+  },
+  ".claude/hooks/workspace_guard.py": {
+   "sha256": "a53caf1811adb3b41bdf88cc9f2d9e17a90ae279a81a6ef0d75e9b8cf6bc0fe2",
+   "size": 7555
+  },
+  ".claude/integrations/adapter_bitrix24.py": {
+   "sha256": "ea2b8196b45f97b444dfdf4ea95a21003f69af3b56902ce39492facbcf2973c6",
+   "size": 7876
+  },
+  ".claude/integrations/adapter_bitrix24_write.py": {
+   "sha256": "6c39808930e2291675fcfeb4378e90686c491314d8ae2e204bb1b0cd63e58b78",
+   "size": 6730
+  },
+  ".claude/integrations/adapter_mikrobill.py": {
+   "sha256": "ddeef1daeaababa59f4ca810f2fb2ea5013eed4d090bbe5d4800a403c2898a7c",
+   "size": 1442
+  },
+  ".claude/integrations/adapter_outlook.py": {
+   "sha256": "71a908816538a4de525d2d0bc8a45a30eb4aea7199b7abf0f3d2cdde25e5a735",
+   "size": 7952
+  },
+  ".claude/integrations/adapter_outlook_write.py": {
+   "sha256": "94dfff824ef41d4abf0473873847066a1724008aca0fe923c53bbcca89c7c2f1",
+   "size": 11758
+  },
+  ".claude/integrations/adapter_tasks.py": {
+   "sha256": "f4e29a490f1611a44157ada94d8276010f25c730301d75b0fcd803c0aaee5593",
+   "size": 1939
+  },
+  ".claude/integrations/adapter_tasks_write.py": {
+   "sha256": "28d70f9cf53c17a28331a095f130c5da45ec9ed3625f5dada67a8f86755a6c07",
+   "size": 8651
+  },
+  ".claude/integrations/adapter_telegram.py": {
+   "sha256": "650d12e8b46dfe8f98f7e4d3386057c695b5635bfbf62e6864227b9be3de1257",
+   "size": 24870
+  },
+  ".claude/integrations/adapter_telegram_write.py": {
+   "sha256": "639ada583e3cc1995ac175aebb75e0f65e97c75aff1f38163babd03c1b3e2f75",
+   "size": 7716
+  },
+  ".claude/integrations/adapter_whatsapp.py": {
+   "sha256": "d8e5671a43074a2d56332ee537f1518878cee92fe7648a9040713ae576c94fe6",
+   "size": 7914
+  },
+  ".claude/integrations/adapter_whatsapp_write.py": {
+   "sha256": "3f550c517ba68af8c7001e3066578cea5c982940a247a9c11047dfba8d7729c3",
+   "size": 6823
+  },
+  ".claude/integrations/capabilities.py": {
+   "sha256": "ecc64905da3d334564c56e026e64dbf10bea94d0ddc525d256bba21bec9b70ec",
+   "size": 12035
+  },
+  ".claude/integrations/certify_integrations.py": {
+   "sha256": "55c133101e1863c197482b9e116c0b2c8fa91dc0e53f9be87d619a5281f8cb2b",
+   "size": 13368
+  },
+  ".claude/integrations/contracts.py": {
+   "sha256": "da8cc24d57026535c783dca2ed528fb99f737ea512e09d6f293368ef49e5e666",
+   "size": 12220
+  },
+  ".claude/integrations/health.py": {
+   "sha256": "f6ff09cc0dc3135cdacebcbeab2f700912d0aceaf2c601408c3872de597f4907",
+   "size": 5501
+  },
+  ".claude/integrations/int_secrets.py": {
+   "sha256": "069dae6949d352e87ccb46d65634c0ab7b4d2ff0cd6ea3819984b59a17c8c09c",
+   "size": 2500
+  },
+  ".claude/integrations/integration.py": {
+   "sha256": "f29c67077209ee1b1f1596ab738bd425c057b77aef1d5327c73c57791dbc4550",
+   "size": 3233
+  },
+  ".claude/integrations/layer.py": {
+   "sha256": "d167bb697d9738075dee4d151fe09212702aac8049e5184d33189818af5f3120",
+   "size": 21555
+  },
+  ".claude/integrations/normalize.py": {
+   "sha256": "ec56c2db48e1d9ab5469b9701b0916af7a9849294abd2cf5de7c51c6ef1394ad",
+   "size": 10152
+  },
+  ".claude/integrations/outlook_read.ps1": {
+   "sha256": "8e599a14b7877dc5365587053112e1f7e3318e79c3d6b14ff9397507b5d1246c",
+   "size": 8141
+  },
+  ".claude/integrations/outlook_write.ps1": {
+   "sha256": "fc3e3219c012ee1f690b67d9da8bae51b2a0e642a661322a8a54cfe0e9b496c3",
+   "size": 6609
+  },
+  ".claude/integrations/readiness.py": {
+   "sha256": "87a7196231503104506e8631d4812eac30fa88631275561952453adb28dba71b",
+   "size": 6059
+  },
+  ".claude/integrations/reconcile.py": {
+   "sha256": "d1aea07dcd54a893500ec93b05720dfa998e7cf208cf192b1499a03beb70cbea",
+   "size": 15601
+  },
+  ".claude/integrations/registry.py": {
+   "sha256": "884f539a37c4016692ef9051f648d952bbfbcae3bcfd14356265ebb1df96ae66",
+   "size": 21531
+  },
+  ".claude/integrations/whatsapp_webhook.py": {
+   "sha256": "45d7f8b41decea43ddd378fc518d545ae6af64526586a8596b4c59e6a1f914f8",
+   "size": 9919
+  },
+  ".claude/policy/approval_rule.json": {
+   "sha256": "5776ee9b969ce87310d618f25e12e68e9dc67ce5aec6b05a987ab864b56ae06d",
+   "size": 3104
+  },
+  ".claude/policy/data_classification.json": {
+   "sha256": "f0e2159ab05e13cf3db1a380e707ff3e3ab0c7f69f4dbfd05bde646443a18829",
+   "size": 10578
+  },
+  ".claude/policy/paths.py": {
+   "sha256": "71ccc1c75be0aab1998de5c8dedc3aa77040a535f6787676982a88d49c641d10",
+   "size": 4036
+  },
+  ".claude/policy/scope.py": {
+   "sha256": "fc7a2d32e74910df8bdc161f1501b81e39dfd11b05aa9ae741921086a6341494",
+   "size": 17650
+  },
+  ".claude/policy/sensitive_scan.py": {
+   "sha256": "d7116d64d9187132c38affb34ef651cd3f10622d44c7b9e4290e9e411913e02d",
+   "size": 11178
+  },
+  ".claude/policy/tree_manifest.py": {
+   "sha256": "702d6418a37508f8084fd66c8be5bd8b9f51fbec910bfe0f007186856e63759f",
+   "size": 22565
+  },
+  ".claude/policy/validate_workspace.py": {
+   "sha256": "7352ddaa714dc65ca383bc8e5bccb7ea119773eb73ba1b5c9847339c245367f2",
+   "size": 36251
+  },
+  ".claude/policy/workspace_policy.json": {
+   "sha256": "cdfccc933a6ce36b064addb10db098b4bdf7cf86260889c9b49f7265465f9b92",
+   "size": 44558
+  },
+  ".claude/policy/workspace_tree_manifest.json": {
+   "sha256": "f9e55b0bf33c129787bfa43b8a49c86e5b95f04c509a33d9c4ea27617e8312d6",
+   "size": 19288
+  },
+  ".claude/runtime/data_sync.py": {
+   "sha256": "d86948475f5e28ae3aff5a3ea5880d4e0ea5e040dd5131617aa0c7492432fe25",
+   "size": 12339
+  },
+  ".claude/runtime/hook.sh": {
+   "sha256": "835aebda6290cbddd067e647b84f79a6c4c7bcba8c45e2ba3c0ca583e5453405",
+   "size": 1039
+  },
+  ".claude/runtime/python_runtime.py": {
+   "sha256": "7a3c28376199136ed5850b5b29cc43e77d3bbe4d4ba632e3b34a47ded7de5ffb",
+   "size": 14120
+  },
+  ".claude/runtime/requirements.txt": {
+   "sha256": "a419e693c0540785089591514330326ea450bcb20a5f5d5e08a97538d2fc3275",
+   "size": 421
+  },
+  ".claude/runtime/secure_recovery.py": {
+   "sha256": "58c91247017afda16734773a302c5ff0c18a9bfc8931160ac76bc2418cf72c08",
+   "size": 9001
+  },
+  ".claude/runtime/state_snapshot.py": {
+   "sha256": "1bfba6914cc6fb00caa7bae1257249cb5b58007ccc595c4b05f2bdad249394b6",
+   "size": 6663
+  },
+  ".claude/skills/actions.py": {
+   "sha256": "d705c2eff49d040a6663fc76aafc22fd0b61414dbba2b155f2760c3034a8db63",
+   "size": 43439
+  },
+  ".claude/skills/alerts.py": {
+   "sha256": "1780cfa83b1795824ce8f151b29a8ca0435d009bdf84a8e8436622ac6531ba03",
+   "size": 5295
+  },
+  ".claude/skills/build_registry.py": {
+   "sha256": "c345c0e7c5dd69c3f073afb8c9b3f40280aa31f0c8fce4d49acf5b61fe60c076",
+   "size": 74068
+  },
+  ".claude/skills/business.py": {
+   "sha256": "885dc2a2e40abcf9a2ef43ff2ae328b3a6752b995f3765b84e8f3b6c45ddb0ab",
+   "size": 29593
+  },
+  ".claude/skills/certify.py": {
+   "sha256": "6c8a60ad91d3f4f4318a23f6a90c461086a6d79be4ea68c29fe03047e35b8c35",
+   "size": 10022
+  },
+  ".claude/skills/channels.py": {
+   "sha256": "40c69d73d011e9ed9cb03f95390d104a3faefd513a77de1a8e83379fdd9dbe5d",
+   "size": 10866
+  },
+  ".claude/skills/commitments.py": {
+   "sha256": "fe004c8d844740de2860cf9be6efa26c73ce4790861e7aafa52fb97425bc586d",
+   "size": 13817
+  },
+  ".claude/skills/decisions.py": {
+   "sha256": "413c8c564f0538ddff1dc1fcb0d1e5ad55e055e61d810407fa15c1f59c09cc40",
+   "size": 9737
+  },
+  ".claude/skills/documents.py": {
+   "sha256": "bc2ebd764cbf50bcb802d5ccb1b11f43681fcb72c3b2dfd6e78948f3af4e2722",
+   "size": 7378
+  },
+  ".claude/skills/engine.py": {
+   "sha256": "3cef61c05c77f369ac9a82e0e85a2942e30e016c7a98cd2dbde54232da9ad87b",
+   "size": 55058
+  },
+  ".claude/skills/executors.py": {
+   "sha256": "36ae33d72c4b1a246db7185e5745e7495ac9faed42337b250b04f1edd0c297db",
+   "size": 117245
+  },
+  ".claude/skills/intelligence.py": {
+   "sha256": "bd8ac001fec1718678dee99764b2b53b87d681fc6422306e85fd13d1c1e307b0",
+   "size": 77348
+  },
+  ".claude/skills/kpis.py": {
+   "sha256": "c409facd3a524482b86293f8b691b45c5de4226ef801184450866b05a260ad19",
+   "size": 8218
+  },
+  ".claude/skills/people.py": {
+   "sha256": "7fd5ff707e9e35cb246bfc587a0801722db19f1edb5239079edca84130925a86",
+   "size": 14104
+  },
+  ".claude/skills/routines.py": {
+   "sha256": "81044fb1e709ec14544ccdfa6d96a787df0dc8c85210fc3c5e5d6bacb36155d5",
+   "size": 3462
+  },
+  ".claude/skills/skill.py": {
+   "sha256": "470f1871b044fb9fbbde8648a594ad2bd51ecd8dceb96d298dce015523acbe99",
+   "size": 14989
+  },
+  ".claude/skills/store.py": {
+   "sha256": "d5ab1ad0567b0f6ca64108e7e1e53a59e6a3977f635de9c457980349be2181a6",
+   "size": 17565
+  },
+  ".claude/skills/untrusted.py": {
+   "sha256": "31579adb875e649ed12621610beff91718f0264c5bb2dfbe027e40f2f0eeb09d",
+   "size": 3606
+  },
+  ".claude/tests/evals.py": {
+   "sha256": "2a55189dccc12726bb36cb3d405f67efa262a91559ebc7380431112d4596c762",
+   "size": 101760
+  },
+  ".claude/tests/test_actions.py": {
+   "sha256": "5f89a148d949805f93f1f073254cde118fde1fc8825cf77b7a222534cb9ca279",
+   "size": 29721
+  },
+  ".claude/tests/test_boundary.py": {
+   "sha256": "3923a8f9035990d6de31382241bdface45778662169921cfe21850a60def83eb",
+   "size": 12762
+  },
+  ".claude/tests/test_business.py": {
+   "sha256": "f6ccf36d6d9ae492bb19c14e76143fb30249cb2ec393da11f667d7419fe94c7e",
+   "size": 34076
+  },
+  ".claude/tests/test_channels.py": {
+   "sha256": "eb1a424c0c8a5891ea4cb470f021137a426c943115f6fbec2c689599800183f8",
+   "size": 59118
+  },
+  ".claude/tests/test_enforcement.py": {
+   "sha256": "7ccaf6932e1be289f871ae32fe92cc06e9929fb03e665d4e6105327890d1a78d",
+   "size": 18487
+  },
+  ".claude/tests/test_failclosed.py": {
+   "sha256": "5704af3d0a3cfe6845530a8529b3ddc3b1723583f7828d431b6fde59386ab2a7",
+   "size": 10542
+  },
+  ".claude/tests/test_hardening.py": {
+   "sha256": "0cb93d815265aa88379873a411bd4ad1c33c5994c6a558e966585b17acd0cb07",
+   "size": 24409
+  },
+  ".claude/tests/test_integrations.py": {
+   "sha256": "48682261338350441d138cf2eecee4bb48118f8abfc08d4ada29ff02c57d6e28",
+   "size": 60083
+  },
+  ".claude/tests/test_intelligence.py": {
+   "sha256": "1f52434ea04938978d8bc7e3d6de64061570ce0868519fa812a9d5d148a01fd8",
+   "size": 34409
+  },
+  ".claude/tests/test_live_data.py": {
+   "sha256": "8513c1bf59cae7379b18a0b584a8befdcc06561fe660f6c0d40c71866cb5875a",
+   "size": 28238
+  },
+  ".claude/tests/test_operating_layer.py": {
+   "sha256": "f4a24a158155e2f7ddf52209e50e7f2affa7e5c494b033e5710d086f09043615",
+   "size": 37609
+  },
+  ".claude/tests/test_outlook_write.py": {
+   "sha256": "7517b348b86b0ad9f70bc0fdeedb216ca5c6de8936e0d43d7d973a9b10171332",
+   "size": 23787
+  },
+  ".claude/tests/test_portability.py": {
+   "sha256": "ec7989514ea5719d2642d9adb17f278ae7bc110069d50053f36050e449dccd2b",
+   "size": 29535
+  },
+  ".claude/tests/test_runtime.py": {
+   "sha256": "3a669223d227e008608f1da529622ff9ab50bb094d43e1184b8dfb239df0d2a3",
+   "size": 9706
+  },
+  ".claude/tests/test_scope.py": {
+   "sha256": "5de1989cac8926c8f819d2399452ea0c8a61d7d17b13793417181c611bce74a9",
+   "size": 22469
+  },
+  ".claude/tests/test_skills.py": {
+   "sha256": "d591f14aa5a91a2aa83316ded73f9690c1a38acfb1d44aa8fd30c27072e2bb70",
+   "size": 37492
+  },
+  ".claude/tests/test_store.py": {
+   "sha256": "225502b41a8baabb033ad4c113065699973b5c5ae959022ad230e4b3700010e1",
+   "size": 7934
+  },
+  ".claude/tests/test_workspace.py": {
+   "sha256": "7deb4a76999581d9373ae7d866b66e21ff73f0ab89b9c82e5327571bedd2532e",
+   "size": 24282
+  },
+  ".claude/tests/testing.py": {
+   "sha256": "bd418a68df086dd3e9f4a1854e8fd83aac9387dfc8ff3cc136fe52429590ceb1",
+   "size": 1154
+  },
+  ".claude/tools/build_delivery_schedule.py": {
+   "sha256": "ddde59c2980ee704a622e38f6d2a35be02d88dd65d5c67b32d131b13edf7231e",
+   "size": 7218
+  },
+  ".claude/tools/build_requirements_workbook.py": {
+   "sha256": "04826ce1a2550cc3b82ff782063488123001065dd30db5bc451471f9de2eaee1",
+   "size": 11081
+  },
+  ".claude/tools/build_task_workbook.py": {
+   "sha256": "bfa83d2417d0bb3b1b6779b8fd38fe7acc845ca4a51ab36e47e596a77cff000d",
+   "size": 19530
+  },
+  ".claude/tools/requirements_data.py": {
+   "sha256": "01372eab0e7909b4824bf6b39e457f3a699cb8c6235c97d26c8e94d3f048cc48",
+   "size": 5902
+  },
+  ".claude/tools/task_registry_data.py": {
+   "sha256": "9824f1d6c2483692ee0ca5acde0b574c83c652db749a72af1c6dea2bb9bbaf64",
+   "size": 47578
+  },
+  ".claude/tools/xlsx_style.py": {
+   "sha256": "b4e0708424eab312b3e6fb92d93cc8ad8cfa42f545aa65e78b54e37210754eac",
+   "size": 5441
+  },
+  ".gitattributes": {
+   "sha256": "fa20804cb9c228162b396100bd837d5ff27d94769c1dbba5e8695a56eb295436",
+   "size": 1025
+  },
+  ".gitignore": {
+   "sha256": "b640dd27b5f9e0bf016b86748bff3d5ecd38a377d3c7e7ea501aa9bb3a438808",
+   "size": 1312
+  },
+  ".secure/.gitkeep": {
+   "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "size": 0
+  },
+  ".secure/README.md": {
+   "sha256": "ac53e0c9140a536a3bd67e59df9614f3a4d8a0bcc00b62dae044ea49eba47c91",
+   "size": 775
+  },
+  ".secure/credentials.gpg": {
+   "sha256": "7dd8ded85e7360b471ff97d8faea85d49340c6e6716d98d96cdfa68c631214ac",
+   "size": 158
+  },
+  ".secure/manifest.json": {
+   "sha256": "0782f6bc60d79e2ffa835cf27160f3638ea8a4ee381ea4bd73b0ab2147522469",
+   "size": 838
+  },
+  "CLAUDE.md": {
+   "sha256": "f23b1c61134cf61fed932e976e36d75623f8983b340e13095b97e5f3f03d3814",
+   "size": 29773
+  },
+  "README.md": {
+   "sha256": "7c1794aa10654a5a9a71a39f4d0d66fe7d840a85d62d557afeedaea3294957b5",
+   "size": 39326
+  },
+  "WORKSPACE/00_Inbox/Input.md": {
+   "sha256": "42d42c5b60ce454598f5b1481d8b3359972e2c18283edb3989eae2e884f2b2d5",
+   "size": 1242
+  },
+  "WORKSPACE/01_Active/Operations/.gitkeep": {
+   "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "size": 0
+  },
+  "WORKSPACE/01_Active/Operations/Activation-suspension-reconnection-2026-09-07.docx": {
+   "sha256": "f94d88a4d2513be5bd4b8496af594cbad8b0c829f8ee77e94cb37ebc0db22956",
+   "size": 49248
+  },
+  "WORKSPACE/01_Active/Operations/Inspector-list-2026-09-10.docx": {
+   "sha256": "a1dab0b8a031d8ba6c63150be4862ce45ba5e18df1b3f46c659306f2abd05e23",
+   "size": 25259
+  },
+  "WORKSPACE/01_Active/Operations/Open-questions.md": {
+   "sha256": "9a8998906789d44d338968e5da99217630af0ff2c1a900a8ab76ef8822d9b861",
+   "size": 5517
+  },
+  "WORKSPACE/01_Active/People/.gitkeep": {
+   "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "size": 0
+  },
+  "WORKSPACE/01_Active/People/Job-descriptions-v1.1-2026-09-05.docx": {
+   "sha256": "8ebfcdb6002372b509ffb5433e477988c71b302509f8181eda0018c4d73b5d11",
+   "size": 160326
+  },
+  "WORKSPACE/01_Active/Sales/.gitkeep": {
+   "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "size": 0
+  },
+  "WORKSPACE/01_Active/Sales/Churn-save-list-2026-09-09.xlsx": {
+   "sha256": "74cdad530abc1d86a02524a590f65494167bcb19fcf7c84527bbc5abb22ad6c5",
+   "size": 6024
+  },
+  "WORKSPACE/01_Active/Sales/June-sales-bonus-2026-09-09.xlsx": {
+   "sha256": "9dd3f935e18366185fd5984ca23794ec64e87707754bbdbe552aad59f6cc7ea8",
+   "size": 90683
+  },
+  "WORKSPACE/01_Active/Sales/Sales-strategy-2026-09-09.docx": {
+   "sha256": "78bb256bd9e3dba26ded6922697bcea16b0f737437c7b9c35a7c45158aaaa160",
+   "size": 15891
+  },
+  "WORKSPACE/01_Active/Sales/Sales-strategy-hy-2026-09-10.pptx": {
+   "sha256": "e66b41fe04cf7ded570da31b7069805f8ede991d71a3485687bf7c0b86208042",
+   "size": 6351528
+  },
+  "WORKSPACE/01_Active/Sales/Sales-strategy-qa-script-2026-09-10.docx": {
+   "sha256": "efd31cd9d882bbf309e27fd66448e9cabd9e18ab085b8b158730795f99adca87",
+   "size": 52095
+  },
+  "WORKSPACE/01_Active/Systems/.gitkeep": {
+   "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "size": 0
+  },
+  "WORKSPACE/01_Active/Systems/Billing-analysis-may-august-2026-09-10.xlsx": {
+   "sha256": "01f63c244fa211a9aaa340bf89c8765e8b01f6d833c2421e1f657163b9378920",
+   "size": 43867
+  },
+  "WORKSPACE/01_Active/Systems/Billing-roadmap-v2-2026-09-07.docx": {
+   "sha256": "346946bd3d27a072237cd53f528d675ba3bbafdad9d0048f4f0cce56f393ee1d",
+   "size": 47377
+  },
+  "WORKSPACE/02_Reference/Operations/.gitkeep": {
+   "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "size": 0
+  },
+  "WORKSPACE/02_Reference/Operations/Call-center-kpi-2026-08-31.xlsx": {
+   "sha256": "6b8dbacfc14b1ff26892d148c75d1c8fa75950b3c5fbd9ebc3ce1e5bbefd7d0e",
+   "size": 5698
+  },
+  "WORKSPACE/02_Reference/People/.gitkeep": {
+   "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "size": 0
+  },
+  "WORKSPACE/02_Reference/People/Job-descriptions-qualifications-2026-09-05.docx": {
+   "sha256": "95e06a16a916a0facc6da4a204c55652279ac342f71c51ddddc560e245daa82a",
+   "size": 92891
+  },
+  "WORKSPACE/02_Reference/People/Staffing-plan-2026-09-07.xlsx": {
+   "sha256": "fa85aaf168f4fa7df8c45761b0371de838a9673a39dc9e92a6ce8f943c5c8da4",
+   "size": 199875
+  },
+  "WORKSPACE/02_Reference/Sales/.gitkeep": {
+   "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "size": 0
+  },
+  "WORKSPACE/02_Reference/Systems/.gitkeep": {
+   "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "size": 0
+  },
+  "WORKSPACE/02_Reference/Systems/Mikrobill-help-en-2026-09-08.docx": {
+   "sha256": "00da6798c45471864932c1e1b16cf3e70a9efcbe3eb580ce1fd09ab794bc3643",
+   "size": 6234616
+  },
+  "WORKSPACE/02_Reference/Systems/Mikrobill-help-hy-2026-09-08.docx": {
+   "sha256": "0be106fd3b2550db1249cecaf8501eabc8a4bbd5ba2b0febdb8f2049c92cede6",
+   "size": 5941011
+  },
+  "WORKSPACE/03_Completed/.gitkeep": {
+   "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "size": 0
+  },
+  "WORKSPACE/03_Completed/Day-off-request-2026-08-11.docx": {
+   "sha256": "591cb02d354ae044b5b593f22ecf5bab61659af9cad5bffe9d3229e9c425b586",
+   "size": 31325
+  },
+  "WORKSPACE/03_Completed/Day-off-request-v2-2026-08-13.docx": {
+   "sha256": "9eda5fb554f73101e37b44e3f619dd25661da53797855e4b1f7563c0fcbbd263",
+   "size": 32286
+  },
+  "WORKSPACE/03_Completed/Delivery-schedule-2026-09-09.xlsx": {
+   "sha256": "e6abf147d332580dd4bd06955ac474b3fa41392b9d75263af4e7a4cef2291a76",
+   "size": 9901
+  },
+  "WORKSPACE/03_Completed/Delivery-schedule-whatsapp-2026-09-09.txt": {
+   "sha256": "15a2c83453b45b3cd53f46435410cff386405455c83e1363d305c3bfe288d2d5",
+   "size": 6488
+  },
+  "WORKSPACE/03_Completed/Leave-request-2026-08-11.docx": {
+   "sha256": "103743e78373061b5c3dac9302ea27d61262d9c8f890aa051b0cd98b7561d5c8",
+   "size": 56328
+  },
+  "WORKSPACE/03_Completed/Leave-request-v2-2026-09-08.docx": {
+   "sha256": "3019c6a3335b577a491d4f758558b6b398d1b712664de7cb2318b853e14319be",
+   "size": 58332
+  },
+  "WORKSPACE/04_Sources/Imports/.gitkeep": {
+   "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "size": 0
+  },
+  "WORKSPACE/04_Sources/Imports/Brand-assets-2026-08-29/HouseNet-logo-horizontal-CMYK.png": {
+   "sha256": "9094aa6f2be23a8b73c996d7428e5ef4e6ff9dfda824240e41d89428b04f682c",
+   "size": 28189
+  },
+  "WORKSPACE/04_Sources/Imports/Brand-assets-2026-08-29/HouseNet-logo-transparent.png": {
+   "sha256": "2002dcf38c817c2eabcae30f1411dfbb538298d313b7312cd2b14285ad6f34a1",
+   "size": 101631
+  },
+  "WORKSPACE/04_Sources/Imports/Brand-assets-2026-08-29/HouseNet-logo-vertical-CMYK.png": {
+   "sha256": "0b4827a704698ce3ec330013178205014c7616aa8f36abe54b994128fb14843c",
+   "size": 42618
+  },
+  "WORKSPACE/04_Sources/Imports/Brand-assets-2026-08-29/HouseNet-signature-Richard-Khachaturyan.zip": {
+   "sha256": "57cc07ba8ccd8d4a24fcccc9b1e5278d639eb5b8f668b8c4393b3184cdccdc97",
+   "size": 175873
+  },
+  "WORKSPACE/04_Sources/Imports/Brand-assets-2026-08-29/housenet-icon-options.html": {
+   "sha256": "e055cd3bf088d03edf707f466dcc25cf41a6ef5c1f7391f1dec3c189086e83f1",
+   "size": 334227
+  },
+  "WORKSPACE/04_Sources/Imports/Brand-assets-2026-08-29/housenet-signature-designs.html": {
+   "sha256": "a1beb6a1e2107b81c90ff198620844f7b47cef685d5055da54950db2a9fcdbe9",
+   "size": 414361
+  },
+  "WORKSPACE/04_Sources/Imports/Brand-assets-2026-08-29/housenet-signature.html": {
+   "sha256": "97c1e11ac143e646e87bb8d87d434fd66ae5110c53cfcf8003644edab18ceb81",
+   "size": 18975
+  },
+  "WORKSPACE/04_Sources/Imports/Brand-assets-2026-08-29/signature-housenet-approved.html": {
+   "sha256": "e8571e166467ed1c3dd190db1e6c0f57265fc12092e56f17ee6303490acf0d87",
+   "size": 34959
+  },
+  "WORKSPACE/04_Sources/Imports/Brand-assets-2026-08-29/signature-housenet-inline-b.html": {
+   "sha256": "058e7a6e2006c43d9507664182ef755cfe08a68442895ad796326e0607bf752d",
+   "size": 184690
+  },
+  "WORKSPACE/04_Sources/Imports/Brand-assets-2026-08-29/signature-housenet-inline-selection.png": {
+   "sha256": "3ec73b229ce1d0ee716d4b6968a8becc77132a1c8bf30cd82527c1c1f3e648c3",
+   "size": 85769
+  },
+  "WORKSPACE/04_Sources/Imports/Brand-assets-2026-08-29/signature-housenet-inline.html": {
+   "sha256": "7fd27dfc00fc741d4418bf3e3f7e6f9b1b21499b68060e4619d7885a06750b7b",
+   "size": 184618
+  },
+  "WORKSPACE/04_Sources/Imports/Brand-assets-2026-08-29/signature-housenet-v2-paste.html": {
+   "sha256": "18f8bb94360534d5695d5f606c5874e3d87bb81387854db04fd12a9dddb24075",
+   "size": 67152
+  },
+  "WORKSPACE/04_Sources/Imports/Brand-assets-2026-08-29/signature-housenet.html": {
+   "sha256": "a8615372a75acf0f340dc55f15ed3ac11ca741a1b28abf87faa37b8430910801",
+   "size": 5116
+  },
+  "WORKSPACE/04_Sources/Imports/Brand-assets-2026-08-29/signature-housenet.png": {
+   "sha256": "54088c460d08fc4cc6c0d9fbfa846e8e5fb9d6e4b4bea544b8577cb1c4d0a3b4",
+   "size": 58062
+  },
+  "WORKSPACE/04_Sources/Imports/Dispatcher-flow-2026-07-09/DISPATCHER_AGENT_FLOW.html": {
+   "sha256": "501820e3e7084ec19ecdfdb87238a1d86107a39fa3c500fe4f84eec5769926be",
+   "size": 25974
+  },
+  "WORKSPACE/04_Sources/Screenshots/.gitkeep": {
+   "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "size": 0
+  },
+  "WORKSPACE/04_Sources/Screenshots/Churn-risk-signals-2026-09-09.jpeg": {
+   "sha256": "9c3aa0a3cf637b0850bc4ae4c3aa2d7793ef062e69b94b5e386f1cbbb3fa9179",
+   "size": 89492
+  },
+  "WORKSPACE/04_Sources/Screenshots/Whatsapp-image-2026-08-28.jpeg": {
+   "sha256": "12a5d486167729aa09abbc808da39ccbfd599006e5e4344636a5639972dece2c",
+   "size": 217098
+  },
+  "WORKSPACE/04_Sources/Whatsapp/.gitkeep": {
+   "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "size": 0
+  },
+  "WORKSPACE/04_Sources/Whatsapp/Principal-2026-09-09-afternoon/Principal.zip": {
+   "sha256": "03455a7a27fa0ccae390f5454ac3cc80c1b56aff71f9d689dad711ef6b0307bc",
+   "size": 12212
+  },
+  "WORKSPACE/04_Sources/Whatsapp/Principal-2026-09-09-afternoon/chat.md": {
+   "sha256": "a27e6e62117a49bd4dc597c285246e2281be70b4dbc1bfcd933040db13d7c25c",
+   "size": 6169
+  },
+  "WORKSPACE/04_Sources/Whatsapp/Principal-2026-09-09-afternoon/chat.txt": {
+   "sha256": "1b2d42cea5b3cdbb8a52ba2ea7369e954b12a232376183176f4ab3c5ea13c6c6",
+   "size": 5839
+  },
+  "WORKSPACE/04_Sources/Whatsapp/Principal-2026-09-09/Principal.zip": {
+   "sha256": "564062f9505dd4a486eb1b234aa03667ac111e40046b9f7de7e79e7e32068d85",
+   "size": 52253
+  },
+  "WORKSPACE/04_Sources/Whatsapp/Principal-2026-09-09/chat.md": {
+   "sha256": "481f631bb03a2971cdba353f964ad7bcde6ccbc22306874ac6b9d3896b0411ea",
+   "size": 26843
+  },
+  "WORKSPACE/04_Sources/Whatsapp/Principal-2026-09-09/chat.txt": {
+   "sha256": "26f23d790bdb0435c92f51da0208c90cda02adb357ecc07b8091949cdb39146a",
+   "size": 25206
+  },
+  "WORKSPACE/05_Archive/.gitkeep": {
+   "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "size": 0
+  },
+  "WORKSPACE/05_Archive/Billing-2026-07-09/Billing-reports-v2-2026-07-09.xlsx": {
+   "sha256": "c833483a92fa459f86a006bd4095ecde15345eba277c79300e46350052960a7e",
+   "size": 32145
+  },
+  "WORKSPACE/05_Archive/Billing-2026-07-09/Paid-services-2026-07-09.docx": {
+   "sha256": "ca75ce1c2d0a0fd831313d0ccdb4dd8163f5bc520b3a26772a046a5ea9992a3d",
+   "size": 86435
+  },
+  "WORKSPACE/05_Archive/Deputy-charter-2026-09-10/Deputy-charter-draft-2026-09-10.md": {
+   "sha256": "3b436ea662079ec9297f6df6487ecda25060cd696e54e3229451ceda3c3a0c03",
+   "size": 24654
+  },
+  "WORKSPACE/05_Archive/Deputy-handoff-2026-09-14/Deputy-project-handoff-2026-09-12.md": {
+   "sha256": "40e809d2192c59f6ef9010ce51adcf05f1383d9dd0d12dbc77628efb6a31d2ec",
+   "size": 34310
+  },
+  "WORKSPACE/05_Archive/Deputy-handoff-2026-09-14/Deputy-session-handoff-2026-09-14.md": {
+   "sha256": "5d61c73d0890867ff59083e911e36508302c593fceef9afbb47c14907e28935c",
+   "size": 30063
+  },
+  "WORKSPACE/05_Archive/Drafts-2026-09-09/Principal-requirements-2026-09-09.md": {
+   "sha256": "e4e3aa7335135dbf4f26c8a5a2fa1e7a79023cef53a53e14e1499ea722cbb2ad",
+   "size": 10821
+  },
+  "WORKSPACE/05_Archive/Drafts-2026-09-09/Principal-requirements-annotated-2026-09-09.xlsx": {
+   "sha256": "f35a818ccf6283138c8ba720c3881b2a900b8e3be001ab248673f6385b01a8c3",
+   "size": 17004
+  },
+  "WORKSPACE/05_Archive/Drafts-2026-09-09/Schedule-questions-2026-09-09.md": {
+   "sha256": "5f9cef37aee0f2f35fbc748246e744942b36ef2aff7e257e521e158053352ede",
+   "size": 4354
+  },
+  "WORKSPACE/05_Archive/Drafts-2026-09-09/Task-workbook-8-sheet-2026-09-09.xlsx": {
+   "sha256": "aaf1c6d3ab92c81531ce69e722cc5a48ad9100ea92b19849ad8051b819d43090",
+   "size": 68506
+  },
+  "WORKSPACE/05_Archive/Drafts-2026-09-09/run.py": {
+   "sha256": "e9ce187ee1fb5f10fb2f07b4872503399219cd757bb11f30c8ac343aa164a009",
+   "size": 1639
+  },
+  "WORKSPACE/05_Archive/Drafts-2026-09-09/update.bat": {
+   "sha256": "bed54cce730ff4c602dde9e42c4f830a04be3f04613da0b7f52209a9ee2edc34",
+   "size": 140
+  },
+  "WORKSPACE/05_Archive/Isp-sales-ops-2026-08-24/Isp-sales-ops-model-2026-08-24.xlsx": {
+   "sha256": "5db749b036651b46f0a9c1de8987d65216f11dd99c1e253246c9e541077f6b18",
+   "size": 38873
+  },
+  "WORKSPACE/05_Archive/Isp-sales-ops-2026-08-24/Isp-sales-ops-packages-2026-08-24.docx": {
+   "sha256": "7d8a0402e7513d993880c7aaaa798088711ac50a77a8c187de54134401c5d439",
+   "size": 60748
+  },
+  "WORKSPACE/05_Archive/Job-description-drafts-2026-09-05/Billing-collections-specialist-2026-09-05.docx": {
+   "sha256": "8a81692ca8e663d9a66e1ac5d952873d622465a8665fde672ee2215a553294a2",
+   "size": 43055
+  },
+  "WORKSPACE/05_Archive/Job-description-drafts-2026-09-05/Billing-revenue-head-2026-09-05.docx": {
+   "sha256": "0237406d2aedce2dfbab5e969bc930833ce602b419a3e4558da1f14f4fef164a",
+   "size": 42949
+  },
+  "WORKSPACE/05_Archive/Job-description-drafts-2026-09-05/Call-center-job-descriptions-2026-09-05.docx": {
+   "sha256": "2910de8efc4fdaa63183d1d2591268bad2cfa9ab11189f387076b668fd436f32",
+   "size": 30168
+  },
+  "WORKSPACE/05_Archive/Job-description-drafts-2026-09-05/Housenet-job-description-2026-09-05.docx": {
+   "sha256": "80c111ae1a0a37863e9042f92155cec73f7f4d27c524dcd299f6370c462f6880",
+   "size": 48147
+  },
+  "WORKSPACE/05_Archive/Job-description-drafts-2026-09-05/Job-descriptions-2026-08-31.docx": {
+   "sha256": "ffa0fc17ec8e903641de86cc6046af24326e83bab4f19716385c67988172756c",
+   "size": 36841
+  },
+  "WORKSPACE/05_Archive/Job-description-drafts-2026-09-05/Job-descriptions-book-2026-09-02.docx": {
+   "sha256": "588832bbd4b99f4b0184191d2151149a844462d8a48ff5c352cfaccb82daadb2",
+   "size": 30824
+  },
+  "WORKSPACE/05_Archive/Job-description-drafts-2026-09-05/Job-descriptions-chapter1-technical-2026-09-02.docx": {
+   "sha256": "5fde7c52e9f8d69e8d5d19446c13ff4a10ccdf8c979ada1e637f6598dae74b44",
+   "size": 28401
+  },
+  "WORKSPACE/05_Archive/Job-description-drafts-2026-09-05/Marketing-job-descriptions-2026-09-05.docx": {
+   "sha256": "1bd4457d318be65d54d4224ade781fef13c1825a9b2eea1b6835b243d385c774",
+   "size": 42017
+  },
+  "WORKSPACE/05_Archive/Job-description-drafts-2026-09-05/Profile-2026-09-01.docx": {
+   "sha256": "ca728229ec01ec6e53b2d9390533002b214260861247e4e2b22f2ac64ee04ba7",
+   "size": 22787
+  },
+  "WORKSPACE/05_Archive/Job-description-drafts-2026-09-05/Technical-department-job-descriptions-2026-09-02.docx": {
+   "sha256": "dd1ece665c37b69896881dc8a0ae8c2bbcdb25d6c10c59ad4f45a10a5d258a36",
+   "size": 68013
+  },
+  "WORKSPACE/05_Archive/Job-description-drafts-2026-09-05/Technical-profile-2026-08-31.docx": {
+   "sha256": "f54682466d6093d7e3c085be4f241413b3b7cbd68f54967c77e70499c5104d52",
+   "size": 11585
+  },
+  "WORKSPACE/05_Archive/Legacy-whatsapp-2026-09-09/Whatsapp-readme-2026-09-09.md": {
+   "sha256": "f39ffc80d56ea27c236ecefa27194a2c164cde6fdd6fab5ff3d089d67d912db5",
+   "size": 6215
+  },
+  "WORKSPACE/05_Archive/Migration-2026-09-14/Migration-manifest-2026-09-14.json": {
+   "sha256": "6fbe4bcbc3f5363e93b2b44ba9a472e74bf0fc365be46e1798d233afd7f8bf49",
+   "size": 72706
+  },
+  "WORKSPACE/05_Archive/Migration-2026-09-14/Migration-manifest-2026-09-14.md": {
+   "sha256": "a1e3477c6e7f36039058c10c601f81a49a6f415591eda431445f7a324aded73f",
+   "size": 41843
+  },
+  "WORKSPACE/05_Archive/Migration-2026-09-14/Staging-inventory-2026-09-11.md": {
+   "sha256": "1295e66dd52a985942d4d3ee4e85254ddc8cc48f27de5b5c6c9e33e0dcfa767d",
+   "size": 33574
+  },
+  "WORKSPACE/05_Archive/Migration-2026-09-14/Staging-move-log-2026-09-11.json": {
+   "sha256": "4ba4725c3785cd41843e058759d6441607dcea872aa3d707256e50d387e88bc7",
+   "size": 48395
+  },
+  "WORKSPACE/05_Archive/Previous-projects/BroPS-OS-handoff-2026-07/IMPLEMENTATION.patch": {
+   "sha256": "608ffa4287c0b1b8c6b11d5f946f991453ba5efdb69418519f08c6e13bd54533",
+   "size": 276592
+  },
+  "WORKSPACE/05_Archive/Previous-projects/BroPS-OS-handoff-2026-07/MASTER_EXECUTION_ROADMAP.md": {
+   "sha256": "6132e90cb2ea62fc9167874600f2687976a1c9552506e2303ba7f8b2fb145fd9",
+   "size": 41316
+  },
+  "WORKSPACE/05_Archive/Previous-projects/BroPS-OS-handoff-2026-07/OS_PARTIAL_HANDOFF_2026-07-26.zip": {
+   "sha256": "b043ae3bcbcacd3fed6df2b3bde52ea3fcc991b1791e1fa41f761cbfd2faf992",
+   "size": 1474629
+  },
+  "WORKSPACE/05_Archive/Previous-projects/BroPS-OS-handoff-2026-07/OS_PARTIAL_HANDOFF_2026-07-26.zip.sha256": {
+   "sha256": "b0d7b386fe176a884077168870c8d14cda33ca43f55d0117b6cfe5839ba49001",
+   "size": 110
+  },
+  "WORKSPACE/05_Archive/Previous-projects/BroPS-OS-handoff-2026-07/PARTIAL_HANDOFF.md": {
+   "sha256": "655e938d26d4662f4ad6e5403b47759a07baddff07f1a7a261ae557d2fe7ec3c",
+   "size": 3447
+  },
+  "WORKSPACE/05_Archive/Previous-projects/BroPS-OS-handoff-2026-07/brand.svg": {
+   "sha256": "996edf73a8585b478ee0cbf0648275bf80567489af24c451a5abbf808e836e78",
+   "size": 8561
+  },
+  "WORKSPACE/05_Archive/Previous-projects/BroPS-OS-handoff-2026-07/logo.svg": {
+   "sha256": "e369b414baee8d11295e56b2c8d2eb0a01d4e1f18c7487436f3c590cbd5f2f98",
+   "size": 5858
+  },
+  "WORKSPACE/05_Archive/Previous-projects/Daily check.zip": {
+   "sha256": "f614d21b302e1f64c30e8577791652aca2d4531aabd4f1585a4a687f23d3e4f7",
+   "size": 771011
+  },
+  "WORKSPACE/05_Archive/Previous-projects/GAAhex-archives/GAAHEX_CHECKPOINT_14_RELEASE_SNAPSHOT.json": {
+   "sha256": "acbcf6d8b98c8a9b0450e881eb4b7ad205fc39a0af68a1710eeba43a992f5b5d",
+   "size": 211690
+  },
+  "WORKSPACE/05_Archive/Previous-projects/GAAhex-archives/GAAHEX_CHECKPOINT_14_TEST_REMEDIATION_STATUS_2026-09-09.md": {
+   "sha256": "46102db34432ce5f25e6f37fef54c748cb9ecb4b30e0051a114bdf984ba323ee",
+   "size": 7943
+  },
+  "WORKSPACE/05_Archive/Previous-projects/GAAhex-archives/GAAHEX_CHECKPOINT_15_RELEASE_SNAPSHOT.json": {
+   "sha256": "df74b3a19ce436e3b879d645a808f9383aaf711156d3411a84b4eb96caeddcc9",
+   "size": 212202
+  },
+  "WORKSPACE/05_Archive/Previous-projects/GAAhex-archives/GAAHEX_CHECKPOINT_15_ZERO_FAIL_STATUS_2026-09-09.md": {
+   "sha256": "1d299ddbc31a4a3efbc697aee87ccd1f14a0889ee19b250b0980174693962491",
+   "size": 5103
+  },
+  "WORKSPACE/05_Archive/Previous-projects/GAAhex-archives/GAAHEX_CHECKPOINT_17_FINAL.zip": {
+   "sha256": "1f599cb90cb4bfb2a14928b0930877c7f0c79591dec243b600329cdf9afd95df",
+   "size": 7690055
+  },
+  "WORKSPACE/05_Archive/Previous-projects/GAAhex-archives/GAAHEX_CP18_PAGE07_SOURCE_SEALED_2026-09-10.git.bundle": {
+   "sha256": "398f889aa87024de7ece0499bdba6982dbbcac6c9cf3ff317e539169b9d95359",
+   "size": 6828250
+  },
+  "WORKSPACE/05_Archive/Previous-projects/GAAhex-archives/GAAHEX_CP18_PAGE07_SOURCE_SEALED_2026-09-10.zip": {
+   "sha256": "f996de3c4ae66827e0e1548dcb934414cc725644184c6cd661338501fc88c68c",
+   "size": 8120552
+  },
+  "WORKSPACE/05_Archive/Previous-projects/GAAhex-archives/GAAHEX_CP18_PAGE07_SOURCE_SEALED_OHANYAN_GEVORG.git.bundle": {
+   "sha256": "ed4b3b4d2504f7b31ce9050a98069bf41fa5c09b23fd2d9ef7976c823f86f4d8",
+   "size": 6828251
+  },
+  "WORKSPACE/05_Archive/Previous-projects/GAAhex-archives/GAAHEX_INTERIM_FULL_2026-09-10.zip": {
+   "sha256": "508e1a03fcb68e18ba4d8a11c6e6d1a6eb2c61b5d098ce8ae4b865d9b867f185",
+   "size": 8176891
+  },
+  "WORKSPACE/05_Archive/Previous-projects/GAAhex-archives/GAAHEX_MASTER_CLEANUP_CHECKPOINT_14_FULL_TEST_REMEDIATION_2026-09-09.zip": {
+   "sha256": "dff68eb907cc76fba5851449a00b1d2843fa2eee129865c143342b6d5dbb5341",
+   "size": 7810777
+  },
+  "WORKSPACE/05_Archive/Previous-projects/GAAhex-archives/GAAHEX_MASTER_CLEANUP_CHECKPOINT_14_FULL_TEST_REMEDIATION_2026-09-09.zip.sha256": {
+   "sha256": "9bc15802e6dc3c306237df6e479d87bbf2c45b5f0798d4ef96c9772a4bbe19d9",
+   "size": 149
+  },
+  "WORKSPACE/05_Archive/Previous-projects/GAAhex-archives/GAAHEX_MASTER_CLEANUP_CHECKPOINT_15_FULL_ZERO_FAIL_GATE_2026-09-09.zip": {
+   "sha256": "de276539aaee973c0b8b3d2358b9d2caf18531591800f4cb621bf4e6f6003290",
+   "size": 7673867
+  },
+  "WORKSPACE/05_Archive/Previous-projects/GAAhex-archives/GAAHEX_MASTER_CLEANUP_CHECKPOINT_15_FULL_ZERO_FAIL_GATE_2026-09-09.zip.sha256": {
+   "sha256": "1bf74c6fc61a54ada1ccff271d8cab91378ba98175b9a9c046a879e4a819e879",
+   "size": 147
+  },
+  "WORKSPACE/05_Archive/Previous-projects/GAAhex-archives/GAAHEX_MASTER_CLEANUP_HISTORY_THROUGH_CHECKPOINT_14_2026-09-09.md": {
+   "sha256": "701dc675208e37f71df67070992d0c1ff0c3923feab173e50b0ecc29743f70ad",
+   "size": 33003
+  },
+  "WORKSPACE/05_Archive/Previous-projects/GAAhex-archives/GAAHEX_MASTER_CLEANUP_HISTORY_THROUGH_CHECKPOINT_15_2026-09-09.md": {
+   "sha256": "20da05c8d888c144423bbc22936b4294fd4251233cebf15c52d5f0b658d4970d",
+   "size": 36238
+  },
+  "WORKSPACE/05_Archive/Previous-projects/GAAhex-archives/GAAHEX_PROJECT_FULL_CURRENT_CP18_PAGE07_2026-09-10.zip": {
+   "sha256": "014c863a6566151a8b9740578762d309e512b1c01967ff097c27ce4f80577e35",
+   "size": 15009054
+  },
+  "WORKSPACE/05_Archive/Previous-projects/GAAhex-archives/GAAHEX_PROJECT_FULL_EVERYTHING_CP18_PAGE07_2026-09-10.zip": {
+   "sha256": "ac58b47b85862e9a34d1f9166e5ae0650d456fe2e36d973861c99d58ac76d4e9",
+   "size": 231544966
+  },
+  "WORKSPACE/05_Archive/Previous-projects/GAAhex-archives/GAAHEX_PROJECT_FULL_EVERYTHING_CP18_PAGE08_2026-09-10.zip": {
+   "sha256": "e85b0da3a62d71b95d9b6297d847c53fb2f2c3b38cce4656153ac4972fcb78a7",
+   "size": 225283048
+  },
+  "WORKSPACE/05_Archive/Previous-projects/Housenet_OS/README.md": {
+   "sha256": "115a1808afdad57930c30502396196c50f7154ce8a48f1abcc687e3680681263",
+   "size": 6876
+  },
+  "WORKSPACE/05_Archive/Previous-projects/Housenet_OS/config/org.yaml": {
+   "sha256": "21663bc8f7a6570dc04ca283a907ac87480af1f287bf6ef46f71812b06f21704",
+   "size": 5690
+  },
+  "WORKSPACE/05_Archive/Previous-projects/Housenet_OS/config/playbooks/care.yaml": {
+   "sha256": "739c822b29b0c74e2436f657a59bb3f4efb0352f164b5e905dc7da822c9f7e46",
+   "size": 5078
+  },
+  "WORKSPACE/05_Archive/Previous-projects/Housenet_OS/config/playbooks/exec.yaml": {
+   "sha256": "1f38cc0fd9152c2d491f98a61468cbe6ab3b2582fb2651dd17adab1eac81b0b8",
+   "size": 4885
+  },
+  "WORKSPACE/05_Archive/Previous-projects/Housenet_OS/config/playbooks/field.yaml": {
+   "sha256": "8a94fdb695b2aa593365fbea1c4d82d9abc3505f3cc0fa8c9fb559e51bedc3fe",
+   "size": 4920
+  },
+  "WORKSPACE/05_Archive/Previous-projects/Housenet_OS/config/playbooks/finance.yaml": {
+   "sha256": "1d468779c57b6b9ce6ce3fddd9804954c0a2fd4a6f270ccd44f9d1e2ca126ede",
+   "size": 5592
+  },
+  "WORKSPACE/05_Archive/Previous-projects/Housenet_OS/config/playbooks/hr.yaml": {
+   "sha256": "12032190d6c44f531bd8088a323fefcdd915e9a2a1c163980661ef62bdb45a78",
+   "size": 5027
+  },
+  "WORKSPACE/05_Archive/Previous-projects/Housenet_OS/config/playbooks/it.yaml": {
+   "sha256": "affc546f6f2cb304f788543b5f3f3ac5caf904afcc5ba31c8255158d4313358b",
+   "size": 4913
+  },
+  "WORKSPACE/05_Archive/Previous-projects/Housenet_OS/config/playbooks/legal.yaml": {
+   "sha256": "12e67c0df1d4f789d3fc2cb4b8848a7bba44b797d5dca8202996c650f9601138",
+   "size": 4474
+  },
+  "WORKSPACE/05_Archive/Previous-projects/Housenet_OS/config/playbooks/marketing.yaml": {
+   "sha256": "661567b02ce7e50a6523a6f37d9165d8c84266ac4f1f6ea5f5ed55a13447844a",
+   "size": 6413
+  },
+  "WORKSPACE/05_Archive/Previous-projects/Housenet_OS/config/playbooks/network.yaml": {
+   "sha256": "f9dc4984a361715f51fc0fc89a8f27f2392b4224c482f3dc8047ffd32830013d",
+   "size": 5336
+  },
+  "WORKSPACE/05_Archive/Previous-projects/Housenet_OS/config/playbooks/sales.yaml": {
+   "sha256": "8b2fb53bbb45df7946795b0c25587ca8eec1bdb35c10772582f5b156b63f853c",
+   "size": 6242
+  },
+  "WORKSPACE/05_Archive/Previous-projects/Housenet_OS/config/playbooks/telesales.yaml": {
+   "sha256": "da85d683d9138811fcc2b500a6a483b5d705ee4aab79c1bd767130771211560c",
+   "size": 5814
+  },
+  "WORKSPACE/05_Archive/Previous-projects/Housenet_OS/config/playbooks/warehouse.yaml": {
+   "sha256": "8c4cea92e926fea74e2e5a9d5c9dda30eaf540a9731dafe689a1e7cb3e4027ff",
+   "size": 3964
+  },
+  "WORKSPACE/05_Archive/Previous-projects/Housenet_OS/config/targets.yaml": {
+   "sha256": "6595c0ee055460102981d1f0d89e7a71222235fa78d8ae1b89d9ca35abeffa95",
+   "size": 1003
+  },
+  "WORKSPACE/05_Archive/Previous-projects/Housenet_OS/data/metrics.json": {
+   "sha256": "fe462125f9a0e970d28736268f2fe74579cbe9219322d7996610aaf1a7588ff3",
+   "size": 1747
+  },
+  "WORKSPACE/05_Archive/Previous-projects/Housenet_OS/data/state.json": {
+   "sha256": "29285fce48834345adb3e303545125b257b47e7d2ee5502d91cd2579b77ca4f4",
+   "size": 856120
+  },
+  "WORKSPACE/05_Archive/Previous-projects/Housenet_OS/housenet_os/__init__.py": {
+   "sha256": "1b2e2a0049bd3052c50a2eebe5a94afecc506b87e8969c1cd2d1de920a00640c",
+   "size": 336
+  },
+  "WORKSPACE/05_Archive/Previous-projects/Housenet_OS/housenet_os/brief.py": {
+   "sha256": "401c4e70a6af375f650b7563f0d91fad284856a2078848a181ed031e01554861",
+   "size": 4090
+  },
+  "WORKSPACE/05_Archive/Previous-projects/Housenet_OS/housenet_os/calendar_out.py": {
+   "sha256": "718abf4162f46c5fcb10c97144afc7dcf0f02c545976f97aea8f6c6347c96d1e",
+   "size": 3031
+  },
+  "WORKSPACE/05_Archive/Previous-projects/Housenet_OS/housenet_os/cli.py": {
+   "sha256": "b3507cc3740bdf698854d789839b65ab6db8b0e4e19e8f1e990dadc9b5b000e5",
+   "size": 12801
+  },
+  "WORKSPACE/05_Archive/Previous-projects/Housenet_OS/housenet_os/config.py": {
+   "sha256": "7607c103b39713e343efc76c3f805e92c38ed18aac29a1002045d018b9c29df7",
+   "size": 3202
+  },
+  "WORKSPACE/05_Archive/Previous-projects/Housenet_OS/housenet_os/controls.py": {
+   "sha256": "051b86fea37f4d3682ce6391c98d1faf4cb22de750b170edc9dfc9a3882956de",
+   "size": 3099
+  },
+  "WORKSPACE/05_Archive/Previous-projects/Housenet_OS/housenet_os/model.py": {
+   "sha256": "edd2ec9e91e6b178047eaa3b74085b901a747cc0819e2111ed4210259d888345",
+   "size": 2742
+  },
+  "WORKSPACE/05_Archive/Previous-projects/Housenet_OS/housenet_os/planner.py": {
+   "sha256": "2db493e9dbfa96475b6cf89111a4b9fe4098d736b0bdf43921ce696bcf6cc57f",
+   "size": 6500
+  },
+  "WORKSPACE/05_Archive/Previous-projects/Housenet_OS/housenet_os/schedule.py": {
+   "sha256": "7c891b6f4e7cab973fc4359f1480c63c83d912b37c449787cf8da8053f08dfba",
+   "size": 3834
+  },
+  "WORKSPACE/05_Archive/Previous-projects/Housenet_OS/housenet_os/store.py": {
+   "sha256": "03ed03a337412b628a7cc9d854b2cb5f1c5321ed8948e8f7d442afbdfbc13cf3",
+   "size": 2857
+  },
+  "WORKSPACE/05_Archive/Previous-projects/Housenet_OS/housenet_os/tracker.py": {
+   "sha256": "c97a11a486ea820eb151c1e742f2070ae23ef6bc1d0826ba32f083fe92e7d6fd",
+   "size": 4090
+  },
+  "WORKSPACE/05_Archive/Previous-projects/Housenet_OS/out/brief-2026-08-24-care.md": {
+   "sha256": "a12cf5e6e40217365b7b0d066de0bed78df7a0c88155780d3a4a0ac7c781eee3",
+   "size": 5395
+  },
+  "WORKSPACE/05_Archive/Previous-projects/Housenet_OS/out/brief-2026-08-24-exec.md": {
+   "sha256": "27e051bb0c0b03dd30ef0f139328143cb278f245e29baa8e0eb84abc0212d36a",
+   "size": 2201
+  },
+  "WORKSPACE/05_Archive/Previous-projects/Housenet_OS/out/brief-2026-08-24-field.md": {
+   "sha256": "d205e842e25f029b70ea761674438a7fe79c346fb420ec5a88546468a8458028",
+   "size": 4108
+  },
+  "WORKSPACE/05_Archive/Previous-projects/Housenet_OS/out/brief-2026-08-24-finance.md": {
+   "sha256": "9d3456f451bd48cccfa6be0c2f0c20dc1d7f35897078081d65cf0e6b1fd715d8",
+   "size": 1461
+  },
+  "WORKSPACE/05_Archive/Previous-projects/Housenet_OS/out/brief-2026-08-24-hr.md": {
+   "sha256": "ee328a8e5ee5bbf8cee4878f6034262fa94234f77d6bfb542c1ffc698d0fae9a",
+   "size": 2205
+  },
+  "WORKSPACE/05_Archive/Previous-projects/Housenet_OS/out/brief-2026-08-24-it.md": {
+   "sha256": "7894ea0f6731bd887573a2d80d49f5f74f4c13b22b099981d1d164d8e09138bf",
+   "size": 3711
+  },
+  "WORKSPACE/05_Archive/Previous-projects/Housenet_OS/out/brief-2026-08-24-legal.md": {
+   "sha256": "8aa6d42b6afb02723b904faaf34b103c3d6c1ea63a0a3a0898e6edd1eb86668b",
+   "size": 1069
+  },
+  "WORKSPACE/05_Archive/Previous-projects/Housenet_OS/out/brief-2026-08-24-marketing.md": {
+   "sha256": "1c7ef350f134a61c050c72e1271520fe8131a50b5e5fa953264eec5eaace3b25",
+   "size": 7435
+  },
+  "WORKSPACE/05_Archive/Previous-projects/Housenet_OS/out/brief-2026-08-24-network.md": {
+   "sha256": "c51bf40db937bd047c7a10f55be39c8920a99c4064ea5ec3b5eb5ee04487ef46",
+   "size": 2067
+  },
+  "WORKSPACE/05_Archive/Previous-projects/Housenet_OS/out/brief-2026-08-24-sales.md": {
+   "sha256": "76d3de72dc2b742b7e54147e3da44e59d4a20ce1b5dc3c340b0a2bab06f133a6",
+   "size": 3525
+  },
+  "WORKSPACE/05_Archive/Previous-projects/Housenet_OS/out/brief-2026-08-24-telesales.md": {
+   "sha256": "ea257a4b9a9368139249a4ad16bebdd2cb92c75e2affcd8e1abc77489114696d",
+   "size": 5418
+  },
+  "WORKSPACE/05_Archive/Previous-projects/Housenet_OS/out/brief-2026-08-24-warehouse.md": {
+   "sha256": "a5e947274ba8336e0d2fce9955043689be7e0678a225bd8ae858fdf9d4a68a60",
+   "size": 3841
+  },
+  "WORKSPACE/05_Archive/Previous-projects/Housenet_OS/out/brief-2026-08-24.md": {
+   "sha256": "c736ec565c81ae3800d527984cb09e185b0d40fecf92167d28da99c146e2d54b",
+   "size": 39117
+  },
+  "WORKSPACE/05_Archive/Previous-projects/Housenet_OS/out/housenet.ics": {
+   "sha256": "e175f8ab659ce7737ea0fc2a2f9a4c33c8d74ac372a896853f40593f70565600",
+   "size": 478884
+  },
+  "WORKSPACE/05_Archive/Sales-strategy-2026-09-10/Sales-strategy-branded-2026-09-10.pptx": {
+   "sha256": "317749b7009210642a8aae6be6b49fd64cec22a5bf41123e0faf24a74ac7b983",
+   "size": 6345263
+  },
+  "WORKSPACE/05_Archive/Sales-strategy-2026-09-10/Sales-strategy-branded-repaired-2026-09-10.pptx": {
+   "sha256": "b78ef154dde6413b54c6460f0aeb7959914b643c5dd9ecee47a1520681102ab5",
+   "size": 6353864
+  },
+  "WORKSPACE/05_Archive/Sales-strategy-2026-09-10/Sales-strategy-phase1-2026-09-08.docx": {
+   "sha256": "1df8379f681547960a8a09ca3e48fa7e410dcfa9725ca0979a65a3da7cf0852b",
+   "size": 13596
+  },
+  "WORKSPACE/05_Archive/Skill-registry-v1-2026-09-10/registry_132_2026-09-10.json": {
+   "sha256": "8ffd523af79ddec5dc630caaa547a2930b11a0912521c1ec185e59c818423dbd",
+   "size": 222481
+  },
+  "WORKSPACE/05_Archive/Staff-planning-2026-08-28/Staff-planning-salary-bonus-a-2026-08-28.xlsx": {
+   "sha256": "1c78c3f133cea3dc682ce56363ec95f65efcc1f502f32fa422193a70d69d5bd0",
+   "size": 37168
+  },
+  "WORKSPACE/05_Archive/Staff-planning-2026-08-28/Staff-planning-salary-bonus-b-2026-08-28.xlsx": {
+   "sha256": "4fbf375895210c8f2990b3f8785807c760ec9bf7f1c5e1f2aadf5c37fb217694",
+   "size": 229360
+  },
+  "WORKSPACE/05_Archive/Staff-planning-2026-08-28/Staff-planning-salary-bonus-c-2026-08-28.xlsx": {
+   "sha256": "dd88b9bee5ef64f0612d65a2f82ba018bd5ab6b9cd4637f15f4ef5f35a4c87e7",
+   "size": 210129
+  },
+  "WORKSPACE/05_Archive/Staff-planning-2026-08-28/Staff-planning-salary-bonus-d-2026-08-28.xlsx": {
+   "sha256": "2b1ff3aa51e0e2408c5ee675de4836600fff4d3261177df10a186e0ac5897d09",
+   "size": 274797
+  },
+  "WORKSPACE/05_Archive/Staffing-plan-2026-09-05/Staffing-plan-corrected-2026-09-07.xlsx": {
+   "sha256": "d07a14809b6fd10cf6c400474fb119f376f63c1f581c1978c68fc46e28292cea",
+   "size": 159763
+  },
+  "WORKSPACE/05_Archive/Staffing-plan-2026-09-05/Staffing-plan-v2-2026-08-28.xlsx": {
+   "sha256": "368da4c91639d638c29c048228cef8b5a7c4fa2248d2e6d452e0291663b2c0e4",
+   "size": 157905
+  },
+  "WORKSPACE/05_Archive/Staffing-plan-2026-09-05/Staffing-plan-v2-desktop-2026-08-28.xlsx": {
+   "sha256": "ab2c4a72b785365be48a3eb31c1eff9367d26b69af2e1e6d756b56d88d191d54",
+   "size": 196532
+  },
+  "WORKSPACE/05_Archive/Staffing-plan-2026-09-05/Staffing-plan-v3-2026-09-05.xlsx": {
+   "sha256": "39beb75265b6fdfab61df63a04d203cb140d03c147c5ffce4970fc30ed2fd741",
+   "size": 159954
+  },
+  "WORKSPACE/Actions.md": {
+   "sha256": "99dc1de795169173acf4e8edcd9f78bc6e6b3232b28280cb121d43450f629262",
+   "size": 2541
+  },
+  "WORKSPACE/Journal.md": {
+   "sha256": "77c77e6fa4abc06435b7cf70af794b7622a79cb37fc0b6aa5d79540ac2cc1f2e",
+   "size": 50094
+  },
+  "WORKSPACE/Tasks.xlsx": {
+   "sha256": "bb33a6d71f1e36368ee6786044aef242dfbb7c46184c172971b75307a6c50d00",
+   "size": 11984
+  },
+  "bootstrap.py": {
+   "sha256": "ea68ef6b6a1b4423f643846a8142044e799bf2fe5d86d2a342365ae7c9df80eb",
+   "size": 14414
+  }
+ }
+}

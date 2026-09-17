@@ -1,0 +1,7 @@
+# Command-center runtime manifest — DECLARED dependencies of Deputy's hooks, Skill System, tests and evals.
+# The venv (<root>/.venv) is built from requirements.lock (pip freeze of this manifest, installed with --no-deps).
+# Change a pin here → `python .claude/runtime/python_runtime.py bootstrap` then `… lock` → commit both files.
+# python: 3.13
+# import-check: openpyxl docx
+openpyxl==3.1.5
+python-docx==1.2.0

@@ -1,0 +1,148 @@
+department: finance
+title: "Ֆինանս և billing"
+
+kpis:
+  - { id: collection_rate_first_invoice, title: "1-ին հաշվի գանձում", unit: "%",  direction: up }
+  - { id: dso_days,             title: "DSO",                          unit: "օր", direction: down }
+  - { id: arrears_gt_30d_amount, title: "30+ օր ապառք",                unit: "֏",  direction: down }
+  - { id: invoices_failed,      title: "Ձախողված հաշիվներ",            unit: "հատ", direction: down }
+
+rituals:
+  - id: finance.billing_run_check
+    title: "Billing-ի գործարկման ստուգում"
+    cadence: monthly
+    day: 1
+    time: "10:00"
+    duration_min: 60
+    owner_role: billing_lead
+    participants: [it_lead]
+    inputs: ["Հաշիվների գեներացման լոգեր", "Ձախողված հաշիվների ցուցակ"]
+    outputs: ["Բոլոր հաշիվները թողարկված են, ձախողվածները՝ շտկված"]
+    severity: critical
+
+  - id: finance.dunning_review
+    title: "Ապառքների և dunning-ի վերանայում"
+    cadence: weekly
+    weekday: wed
+    duration_min: 45
+    owner_role: collections_lead
+    participants: [care_lead]
+    inputs: ["Ապառքները ըստ վաղեմության", "Dunning-ի փուլերում գտնվողները"]
+    outputs: ["Անջատման ցուցակ, զանգերի ցուցակ, վճարման պայմանավորվածություններ"]
+    severity: high
+
+  - id: finance.commission_close
+    title: "Բոնուսի ամսական փակում"
+    cadence: month_start
+    offset: 1
+    duration_min: 120
+    owner_role: finance_lead
+    participants: [ops_head, payroll]
+    inputs: ["Սառեցված տվյալ", "90-օրյա գոյատևման cohort", "Clawback-ի ցուցակ"]
+    outputs: ["Հաշվարկը՝ ալիքի ղեկավարներին ստուգման"]
+    severity: high
+
+  - id: finance.commission_lock
+    title: "Բոնուսի առարկությունների վերջնաժամկետ"
+    cadence: month_start
+    offset: 3
+    duration_min: 60
+    owner_role: finance_lead
+    participants: [ops_head]
+    inputs: ["Ստացված առարկությունները"]
+    outputs: ["Վերջնական հաստատված հաշվարկ — այս պահից փոփոխություն չկա"]
+    severity: high
+
+  - id: finance.monthly_close
+    title: "Ամսվա ֆինանսական փակում"
+    cadence: month_start
+    offset: 5
+    duration_min: 180
+    owner_role: finance_lead
+    participants: [cfo]
+    inputs: ["Եկամուտ, ծախս, CAC, ARPU", "Պահեստի գույքագրման ակտ"]
+    outputs: ["Ամսվա ֆինանսական արդյունք"]
+    severity: high
+
+  - id: finance.budget_review
+    title: "Բյուջեի եռամսյակային վերանայում"
+    cadence: quarterly
+    months: [1, 4, 7, 10]
+    day: 12
+    duration_min: 150
+    owner_role: cfo
+    participants: [ceo, coo, technical_director, commercial_director]
+    inputs: ["Փաստ vs պլան ըստ բաժնի", "Ցանցի ընդլայնման կապիտալ հայտեր"]
+    outputs: ["Ճշգրտված բյուջե հաջորդ եռամսյակի համար"]
+
+deliverables:
+  - id: finance.monthly_report
+    title: "Ամսական ֆինանսական հաշվետվություն"
+    cadence: month_start
+    offset: 7
+    owner_role: finance_lead
+    approver_role: cfo
+    asset_type: report
+    lead_days: 2
+    brief: "P&L, ARPU, CAC, LTV, ապառքներ, ալիքների շահութաբերություն."
+
+  - id: finance.cashflow_forecast
+    title: "Դրամական հոսքի կանխատեսում"
+    cadence: weekly
+    weekday: fri
+    owner_role: finance_lead
+    approver_role: cfo
+    asset_type: report
+    lead_days: 0
+    brief: "13-շաբաթյա հոսք՝ գանձումներ, վճարումներ, կապիտալ ծախս."
+
+controls:
+  - id: finance.ctl_collection
+    title: "1-ին հաշվի գանձումը շեմից ցածր է"
+    metric: collection_rate_first_invoice
+    op: "<"
+    threshold: 95.0
+    severity: high
+    owner_role: collections_lead
+    due_in_days: 2
+    action: "Ստուգել՝ ալիքի որակի խնդի՞ր է, թե վճարման եղանակի բացատրության"
+
+  - id: finance.ctl_dso
+    title: "DSO-ն շեմից բարձր է"
+    metric: dso_days
+    op: ">"
+    threshold: 25
+    severity: high
+    owner_role: finance_lead
+    due_in_days: 5
+    action: "Dunning-ի փուլերի կիրառման ստուգում"
+
+  - id: finance.ctl_arrears
+    title: "30+ օր ապառքը մեծացել է"
+    metric: arrears_gt_30d_amount
+    op: ">"
+    threshold: 5000000
+    severity: high
+    owner_role: collections_lead
+    due_in_days: 3
+    action: "Սեգմենտավորել ապառքը և գործարկել նպատակային զանգեր"
+
+  - id: finance.ctl_failed_invoices
+    title: "Ձախողված հաշիվներ"
+    metric: invoices_failed
+    op: ">"
+    threshold: 0
+    severity: critical
+    owner_role: billing_lead
+    due_in_days: 1
+    action: "IT-ի հետ շտկել և վերաթողարկել նույն օրը"
+
+  - id: finance.ctl_commission_overdue
+    title: "Բոնուսի փակումը ուշացած է"
+    metric: commission_close_overdue
+    op: ">"
+    threshold: 0
+    severity: high
+    owner_role: finance_lead
+    due_in_days: 1
+    action: "Փակել անմիջապես — ուշացումը ուղիղ հարվածում է թիմի վստահությանը"

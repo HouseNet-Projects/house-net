@@ -1,0 +1,31 @@
+name: HouseNet design system CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  policy:
+    uses: HouseNet-Projects/house-net-control-plane/.github/workflows/reusable-policy-gate.yml@b36ad10cc02a80d98ad22d04577ebcd512740ce0
+  design-system:
+    name: Design system integrity
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: '3.12'
+      - name: Validate tokens, provenance and bilingual documents
+        run: python validators/validate_design_system.py .
+      - name: Check version surfaces
+        run: bin/check-version-consistency .
+      - name: Run design-system tests
+        run: python -m unittest discover -s tests -q
+      - name: Check Python syntax
+        run: python -m py_compile validators/validate_design_system.py tests/test_design_system.py

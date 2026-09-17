@@ -1,0 +1,212 @@
+{
+  "schema": "housenet.enforcement.matrix.v1",
+  "generated_at": "2026-09-16",
+  "policy_version": "1.4.2",
+  "repositories": {
+    "control-plane": "672bd21b85b7a2f6a5050ec89fee608566a57eb0",
+    "design-system": "3757806622b548b7b7d46162b408a31f8a1c1c65",
+    "knowledge": "2a77012e24fc5c3a55e63d76f166189edc08b6b9",
+    "vault": "65bce22cdc781e2f5ee568030dd24424a2032aaa",
+    "command-center": "9e15dd1c00f8c9a5c4a531fa45e7b4c99fce6b8f"
+  },
+  "ci_runs": {
+    "control-plane": [
+      "35025911615",
+      "35025915068"
+    ],
+    "design-system": [
+      "35021709375"
+    ],
+    "knowledge": [
+      "35030289165"
+    ],
+    "vault": [
+      "35027954957"
+    ],
+    "command-center": [
+      "35029509372",
+      "35029509540"
+    ]
+  },
+  "github_protection": {
+    "all_canonical_mains": true,
+    "required_checks": {
+      "house-net-knowledge": [
+        "HouseNet policy gate / HouseNet repository policy",
+        "Knowledge contracts"
+      ],
+      "house-net-vault": [
+        "HouseNet policy gate / HouseNet repository policy",
+        "Vault boundary checks"
+      ]
+    },
+    "strict": true,
+    "enforce_admins": true,
+    "allow_force_pushes": false,
+    "allow_deletions": false
+  },
+  "rules": [
+    {
+      "rule": "VERIFY-FIRST",
+      "owner": "Control Plane",
+      "machine_contract": "policy/preflight + repository locks",
+      "tests": "preflight, policy gate, negative fixtures",
+      "layers": "CI + local",
+      "result": "PARTIALLY ENFORCED",
+      "residual_risk": "runtime/provider state can still require human verification"
+    },
+    {
+      "rule": "FAIL-CLOSED",
+      "owner": "Control Plane / domain repos",
+      "machine_contract": "schemas + validators",
+      "tests": "Knowledge/Vault/bootstrap negative tests",
+      "layers": "CI + runtime",
+      "result": "FULLY ENFORCED",
+      "residual_risk": "covered mandatory repository gates"
+    },
+    {
+      "rule": "OWNER-APPROVAL",
+      "owner": "Control Plane",
+      "machine_contract": "policy/authority.json",
+      "tests": "approval references and exact-owner checks",
+      "layers": "policy CI",
+      "result": "PARTIALLY ENFORCED",
+      "residual_risk": "GitHub account owner action remains provider gate"
+    },
+    {
+      "rule": "SINGLE-OWNERSHIP",
+      "owner": "Control Plane",
+      "machine_contract": "registry + policy authority",
+      "tests": "registry uniqueness/primitive checks",
+      "layers": "CI",
+      "result": "FULLY ENFORCED",
+      "residual_risk": ""
+    },
+    {
+      "rule": "VERSION-AUTHORITY",
+      "owner": "Control Plane",
+      "machine_contract": "release manifests + registry",
+      "tests": "version consistency and lock checks",
+      "layers": "CI + cross-repo",
+      "result": "FULLY ENFORCED",
+      "residual_risk": ""
+    },
+    {
+      "rule": "SECRET-SAFETY",
+      "owner": "Control Plane / Vault",
+      "machine_contract": "security policy + Vault validator",
+      "tests": "tree/history synthetic negative tests",
+      "layers": "CI + local",
+      "result": "PARTIALLY ENFORCED",
+      "residual_risk": "other repos rely on conservative reachable-content scan"
+    },
+    {
+      "rule": "BILINGUAL-HUMAN-DOCS",
+      "owner": "Control Plane",
+      "machine_contract": "bilingual validator",
+      "tests": "positive/negative document fixtures",
+      "layers": "CI",
+      "result": "FULLY ENFORCED",
+      "residual_risk": ""
+    },
+    {
+      "rule": "BRAND-TRUTH",
+      "owner": "Design System",
+      "machine_contract": "brand assets + design contract",
+      "tests": "asset source and contract validation",
+      "layers": "CI",
+      "result": "FULLY ENFORCED",
+      "residual_risk": "subjective visual review remains human"
+    },
+    {
+      "rule": "KNOWLEDGE-TRUTH",
+      "owner": "Knowledge",
+      "machine_contract": "item schema/catalog/provenance",
+      "tests": "schema, freshness, supersession, secret tests",
+      "layers": "CI + runtime",
+      "result": "FULLY ENFORCED",
+      "residual_risk": "canonicalization still owner-reviewed"
+    },
+    {
+      "rule": "AUTHORITY-SEPARATION",
+      "owner": "Control Plane / Command Center",
+      "machine_contract": "runtime digital_memory boundary",
+      "tests": "draft/stale/conflict/policy-separation tests",
+      "layers": "CI + runtime",
+      "result": "FULLY ENFORCED",
+      "residual_risk": ""
+    },
+    {
+      "rule": "NO-FAKE-COMPLETION",
+      "owner": "Command Center",
+      "machine_contract": "bootstrap reports + runtime contracts",
+      "tests": "zero-state and unavailable dependency tests",
+      "layers": "CI + runtime",
+      "result": "FULLY ENFORCED",
+      "residual_risk": ""
+    },
+    {
+      "rule": "DELIVERY-HYGIENE",
+      "owner": "Control Plane",
+      "machine_contract": "merge policy + branch protection",
+      "tests": "live protection read-back",
+      "layers": "GitHub provider",
+      "result": "PARTIALLY ENFORCED",
+      "residual_risk": "agent sequencing remains operational discipline"
+    },
+    {
+      "rule": "CURRENT-MAIN-CERTIFICATION",
+      "owner": "Control Plane",
+      "machine_contract": "preflight remote-main check",
+      "tests": "merged SHA + CI evidence",
+      "layers": "local + CI",
+      "result": "FULLY ENFORCED",
+      "residual_risk": ""
+    },
+    {
+      "rule": "PROVIDER-INDEPENDENCE",
+      "owner": "Control Plane",
+      "machine_contract": "provider scanner + runtime boundary",
+      "tests": "provider leak and env dependency tests",
+      "layers": "CI",
+      "result": "FULLY ENFORCED",
+      "residual_risk": "approved adapters remain explicit"
+    },
+    {
+      "rule": "MIGRATION-STAGED-ADOPTION",
+      "owner": "Control Plane",
+      "machine_contract": "registry migration state + import tooling",
+      "tests": "intake/dedupe evidence and stage validation",
+      "layers": "CI + review",
+      "result": "PARTIALLY ENFORCED",
+      "residual_risk": "owner canonicalization decision required"
+    },
+    {
+      "rule": "BOOTSTRAP-IDEMPOTENCE",
+      "owner": "Command Center",
+      "machine_contract": "bootstrap/backbone contract",
+      "tests": "11 zero-state tests + merged CI",
+      "layers": "CI + runtime",
+      "result": "FULLY ENFORCED",
+      "residual_risk": ""
+    },
+    {
+      "rule": "VAULT-BOUNDARY",
+      "owner": "Vault / Command Center",
+      "machine_contract": "Vault metadata + digital_memory API",
+      "tests": "no-secret metadata-only tests",
+      "layers": "CI + runtime",
+      "result": "FULLY ENFORCED",
+      "residual_risk": ""
+    },
+    {
+      "rule": "GREEN-BEFORE-NEXT",
+      "owner": "Control Plane / GitHub",
+      "machine_contract": "required checks + protection",
+      "tests": "live required checks on all canonical mains",
+      "layers": "GitHub provider",
+      "result": "PARTIALLY ENFORCED",
+      "residual_risk": "GitHub cannot prevent opening unrelated branches; operator law remains required"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "type":"object","additionalProperties":false,
+  "required":["id","purpose","owner_principal","target_system","secret_type","storage","recovery","rotation","last_verified","required_for_bootstrap","sensitivity"],
+  "properties":{
+    "id":{"type":"string","pattern":"^HN-VAULT-[A-Z0-9-]+$"},
+    "purpose":{"type":"string","minLength":1},"owner_principal":{"type":"string","minLength":1},"target_system":{"type":"string","minLength":1},"secret_type":{"type":"string","minLength":1},
+    "storage":{"type":"object","additionalProperties":false,"required":["backend","reference","encrypted"],"properties":{"backend":{"enum":["external_secret_store","encrypted_backup","owner_managed_local_store"]},"reference":{"type":"string","minLength":1},"encrypted":{"const":true}}},
+    "recovery":{"type":"object","additionalProperties":false,"required":["available","requirements"],"properties":{"available":{"type":"boolean"},"requirements":{"type":"array","items":{"type":"string"}}}},
+    "rotation":{"type":"object","additionalProperties":false,"required":["owner","interval_days"],"properties":{"owner":{"type":"string","minLength":1},"interval_days":{"type":["integer","null"],"minimum":1}}},
+    "last_verified":{"type":"string","pattern":"^20[0-9]{2}-[0-9]{2}-[0-9]{2}$"},"required_for_bootstrap":{"type":"boolean"},"sensitivity":{"enum":["CONFIDENTIAL","RESTRICTED"]},"integrity":{"type":["string","null"]}
+  }
+}

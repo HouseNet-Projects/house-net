@@ -1,0 +1,116 @@
+{
+ "skill_id": "commitment_memory",
+ "skill_version": "1.2.0",
+ "maturity_level": "L3",
+ "declared_maturity": "L3",
+ "computed_maturity": "L4",
+ "tests": [
+  "test_channels.C06_TelegramBusiness.test_edited_and_deleted_business_messages_change_evidence_not_truth",
+  "test_integrations.I09_MeetingPrepAndOpenLoops.test_open_loops_extract_candidates_not_facts",
+  "test_intelligence.Q03_ChangeDetectionDurable.test_open_loops_persist_survive_restart_and_close_on_evidence_only",
+  "test_live_data.L05_LiveDataSync.test_sync_never_exports_a_store_that_is_behind_the_versioned_durable_history",
+  "test_operating_layer.M01_Commitments.test_extraction_strength_due_and_cross_channel_dedupe",
+  "test_operating_layer.M01_Commitments.test_lifecycle_evidence_close_late_leaders_and_expected",
+  "test_operating_layer.N01_Meetings.test_pre_meeting_pack",
+  "test_portability.P03_DurableState.test_export_is_deterministic_and_import_is_idempotent",
+  "test_skills.T06_StateIdempotency.test_commitment_memory"
+ ],
+ "failure_tests": [
+  "test_live_data.L05_LiveDataSync.test_sync_never_exports_a_store_that_is_behind_the_versioned_durable_history",
+  "test_operating_layer.M01_Commitments.test_lifecycle_evidence_close_late_leaders_and_expected",
+  "test_skills.T06_StateIdempotency.test_memory_reads_fail_loudly_on_corrupt_store"
+ ],
+ "hardening_cases": [
+  "test_channels.C06_TelegramBusiness.test_edited_and_deleted_business_messages_change_evidence_not_truth",
+  "test_hardening.H03_StateHardening.test_corrupt_store_is_quarantined_and_state_survives",
+  "test_hardening.H03_StateHardening.test_unwritable_state_dir_fails_loudly",
+  "test_hardening.H04_AdversarialInputs.test_material_and_external_blocked_on_every_skill",
+  "test_intelligence.Q03_ChangeDetectionDurable.test_open_loops_persist_survive_restart_and_close_on_evidence_only",
+  "test_live_data.L05_LiveDataSync.test_sync_never_exports_a_store_that_is_behind_the_versioned_durable_history",
+  "test_operating_layer.M01_Commitments.test_extraction_strength_due_and_cross_channel_dedupe",
+  "test_portability.P03_DurableState.test_export_is_deterministic_and_import_is_idempotent",
+  "test_store.S02_AtomicityInterruption.test_crash_before_commit_leaves_no_partial_row",
+  "test_store.S02_AtomicityInterruption.test_journal_written_but_db_row_lost_is_healed_by_recovery",
+  "test_store.S02_AtomicityInterruption.test_torn_journal_line_is_skipped_not_fatal",
+  "test_store.S02_AtomicityInterruption.test_unwritable_dir_fails_loudly",
+  "test_store.S03_CorruptionDetection.test_garbage_db_file_detected_quarantined_recovered",
+  "test_store.S03_CorruptionDetection.test_recovery_is_deterministic",
+  "test_store.S03_CorruptionDetection.test_row_tamper_detected_by_checksum"
+ ],
+ "adversarial": [
+  "test_channels.C06_TelegramBusiness.test_edited_and_deleted_business_messages_change_evidence_not_truth",
+  "test_hardening.H04_AdversarialInputs.test_material_and_external_blocked_on_every_skill",
+  "test_operating_layer.M01_Commitments.test_extraction_strength_due_and_cross_channel_dedupe"
+ ],
+ "failure_injection": [
+  "test_hardening.H03_StateHardening.test_corrupt_store_is_quarantined_and_state_survives",
+  "test_hardening.H03_StateHardening.test_unwritable_state_dir_fails_loudly",
+  "test_intelligence.Q03_ChangeDetectionDurable.test_open_loops_persist_survive_restart_and_close_on_evidence_only",
+  "test_live_data.L05_LiveDataSync.test_sync_never_exports_a_store_that_is_behind_the_versioned_durable_history",
+  "test_portability.P03_DurableState.test_export_is_deterministic_and_import_is_idempotent",
+  "test_store.S02_AtomicityInterruption.test_crash_before_commit_leaves_no_partial_row",
+  "test_store.S02_AtomicityInterruption.test_journal_written_but_db_row_lost_is_healed_by_recovery",
+  "test_store.S02_AtomicityInterruption.test_torn_journal_line_is_skipped_not_fatal",
+  "test_store.S02_AtomicityInterruption.test_unwritable_dir_fails_loudly",
+  "test_store.S03_CorruptionDetection.test_garbage_db_file_detected_quarantined_recovered",
+  "test_store.S03_CorruptionDetection.test_recovery_is_deterministic",
+  "test_store.S03_CorruptionDetection.test_row_tamper_detected_by_checksum"
+ ],
+ "authority_tests": [
+  "test_hardening.H04_AdversarialInputs.test_material_and_external_blocked_on_every_skill",
+  "test_operating_layer.M01_Commitments.test_lifecycle_evidence_close_late_leaders_and_expected"
+ ],
+ "completion_verification": [
+  "test_integrations.I09_MeetingPrepAndOpenLoops.test_open_loops_extract_candidates_not_facts",
+  "test_intelligence.Q03_ChangeDetectionDurable.test_open_loops_persist_survive_restart_and_close_on_evidence_only",
+  "test_operating_layer.M01_Commitments.test_executor_answers",
+  "test_operating_layer.N01_Meetings.test_pre_meeting_pack",
+  "test_portability.P03_DurableState.test_export_is_deterministic_and_import_is_idempotent",
+  "test_skills.T06_StateIdempotency.test_commitment_memory"
+ ],
+ "concurrency_tests": [
+  "test_store.S01_Concurrency.test_processes_distinct_ops_all_recorded",
+  "test_store.S01_Concurrency.test_processes_same_op_exactly_one_record",
+  "test_store.S01_Concurrency.test_threads_distinct_tables_no_interference",
+  "test_store.S01_Concurrency.test_threads_same_op_exactly_one_record"
+ ],
+ "enforcement_tests": [],
+ "evals": [
+  "eval:f_email_no_permanent_fact",
+  "eval:i_ambiguous_commitment",
+  "eval:i_commitment_extraction",
+  "eval:i_meeting_prep",
+  "eval:open_loops",
+  "eval:what_did_i_promise"
+ ],
+ "routing_evals": [
+  "test_operating_layer.B01_DocumentsRoutinesRouting.test_natural_language_routing_regression",
+  "test_operating_layer.M01_Commitments.test_executor_answers"
+ ],
+ "failed_tests": [],
+ "certified_at": "2026-09-14T20:14:36",
+ "fingerprint": "69504b2d99e620b8c03f7cc3",
+ "core_fingerprint": "0af15296acbfd2ed",
+ "result": "PASS",
+ "suites": [
+  "test_skills",
+  "test_store",
+  "test_failclosed",
+  "test_hardening",
+  "test_enforcement",
+  "test_workspace",
+  "test_scope",
+  "test_runtime",
+  "test_business",
+  "test_boundary",
+  "test_integrations",
+  "test_portability",
+  "test_actions",
+  "test_live_data",
+  "test_intelligence",
+  "test_outlook_write",
+  "test_channels",
+  "test_operating_layer"
+ ],
+ "audit_infrastructure": false
+}

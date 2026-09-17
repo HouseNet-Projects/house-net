@@ -1,0 +1,27 @@
+{
+ "artifact_version": "1.0",
+ "created_at": "2026-09-12T00:09:29",
+ "format": "tar inside GnuPG symmetric AES-256 (s2k iterated+salted)",
+ "artifact": "credentials.gpg",
+ "artifact_sha256": "7dd8ded85e7360b471ff97d8faea85d49340c6e6716d98d96cdfa68c631214ac",
+ "artifact_size": 158,
+ "plain_sha256": "84ff92691f909a05b224e1c56abb4864f01b4f8e3c854e4bb4c7baf1d3f6d652",
+ "files": [],
+ "expected_credentials": {
+  "INT-B24": {
+   "secrets": [
+    "webhook_url"
+   ],
+   "status": "ABSENT"
+  },
+  "INT-MB": {
+   "secrets": [
+    "dsn_or_api_url",
+    "token_or_password"
+   ],
+   "status": "ABSENT"
+  }
+ },
+ "key": "external — COMMAND_CENTER_RECOVERY_KEY_FILE | $COMMAND_CENTER_HOME/recovery.key | ~/.command-center/recovery.key (never in Git)",
+ "restore": "python bootstrap.py (or secure_recovery.py restore)"
+}

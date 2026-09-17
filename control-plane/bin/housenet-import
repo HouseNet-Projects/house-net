@@ -1,0 +1,45 @@
+#!/usr/bin/env python3
+"""Provider-neutral, non-destructive HouseNet intake assistant."""
+from pathlib import Path
+import argparse, hashlib, json, re
+
+STAGES = ['DISCOVERED','QUARANTINED','AUDITED','PROPOSED','OWNER_APPROVED','MIGRATED','CERTIFIED','CANONICAL']
+SECRET = re.compile(r'(-----BEGIN .*PRIVATE KEY-----|github_pat_|gh[pousr]_[A-Za-z0-9]{20,}|AWS_SECRET_ACCESS_KEY|OPENAI_API_KEY|ANTHROPIC_API_KEY)', re.I)
+SENSITIVE_NAMES = {'.env', '.env.local', 'id_rsa', 'id_ed25519', 'dump.sql', 'backup.sql'}
+
+def inspect_source(source: Path):
+    if not source.exists(): raise ValueError('Source does not exist')
+    files = [p for p in source.rglob('*') if p.is_file() and '.git' not in p.parts]
+    findings=[]; sensitive=[]
+    for p in files:
+        if p.name in SENSITIVE_NAMES: sensitive.append(str(p.relative_to(source)))
+        if p.stat().st_size <= 2_000_000 and SECRET.search(p.read_bytes().decode('utf-8','ignore')): findings.append(str(p.relative_to(source)))
+    return {'source':str(source), 'source_type':'git' if (source/'.git').exists() else 'local', 'source_sha256':hashlib.sha256(('\n'.join(sorted(str(p.relative_to(source)) for p in files))).encode()).hexdigest(), 'file_count':len(files), 'secret_findings':sorted(set(findings)), 'sensitive_paths':sorted(set(sensitive)), 'stage':'DISCOVERED', 'canonical_status':'LEGACY', 'certification_status':'PENDING'}
+
+def validate(evidence):
+    errors=[]
+    if evidence.get('stage') not in STAGES: errors.append('invalid migration stage')
+    if evidence.get('canonical_status') == 'CANONICAL' and evidence.get('stage') != 'CANONICAL': errors.append('canonical status requires CANONICAL stage')
+    if evidence.get('secret_findings'): errors.append('SECRET FINDINGS BLOCK MIGRATION')
+    if evidence.get('source_candidates') and len(evidence['source_candidates']) > 1 and not evidence.get('source_of_truth_decision'): errors.append('CONFLICTING SOURCE CANDIDATES BLOCK CANONICALIZATION')
+    if evidence.get('stage') in {'OWNER_APPROVED','MIGRATED','CERTIFIED','CANONICAL'} and evidence.get('approval_state') != 'approved': errors.append('owner approval required')
+    return errors
+
+parser=argparse.ArgumentParser(); parser.add_argument('command', choices=['inspect','report','propose','validate','certify']); parser.add_argument('source', nargs='?'); parser.add_argument('--input', type=Path); parser.add_argument('--output', type=Path)
+a=parser.parse_args()
+try:
+    if a.command in {'inspect','report'}:
+        if not a.source: raise ValueError('source is required')
+        data=inspect_source(Path(a.source).resolve()); out=json.dumps(data,indent=2,ensure_ascii=False)+'\n'
+        if a.output: a.output.write_text(out)
+        print(out,end='')
+    else:
+        if not a.input: raise ValueError('--input evidence file is required')
+        data=json.loads(a.input.read_text())
+        if a.command == 'propose': data['stage']='PROPOSED'; print(json.dumps(data,indent=2,ensure_ascii=False)); raise SystemExit(0)
+        errors=validate(data)
+        if errors: print('FAIL — '+'; '.join(errors)); raise SystemExit(1)
+        if a.command == 'certify' and data.get('stage') not in {'CERTIFIED','CANONICAL'}: raise ValueError('certification requires CERTIFIED or CANONICAL stage')
+        print('PASS — migration evidence is valid')
+except (OSError, ValueError, json.JSONDecodeError) as exc:
+    print('FAIL — '+str(exc)); raise SystemExit(1)

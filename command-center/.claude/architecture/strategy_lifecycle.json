@@ -1,0 +1,8 @@
+{
+  "schema":"housenet.deputy.strategy-lifecycle.v1",
+  "owner":"DEPUTY",
+  "authority":"GEV_DECISION_REQUIRED_AT_DECISION_BOUNDARY",
+  "stages":["IDEA","CURRENT_STATE","DIAGNOSIS","OPTIONS","RECOMMENDATION","GEV_DECISION","STRATEGY","ROADMAP","INITIATIVES","ACTION_PLAN","TASKS","EXECUTION","TRACKING","DEVIATION","CORRECTIVE_PROPOSAL","VERIFIED_OUTCOME"],
+  "required_fields":["id","title","stage","owner","source","evidence","next_action","approval_state"],
+  "mutation_boundary":"strategy preparation is non-mutating; authoritative task/status/owner changes use existing Action Runtime and explicit approval"
+}

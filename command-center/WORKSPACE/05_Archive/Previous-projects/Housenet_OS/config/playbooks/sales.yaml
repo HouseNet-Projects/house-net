@@ -1,0 +1,172 @@
+department: sales
+title: "Վաճառք"
+
+kpis:
+  - { id: net_adds,            title: "Net adds",                    unit: "բաժ.", direction: up }
+  - { id: fallout_rate,        title: "Fallout rate",                unit: "%",    direction: down }
+  - { id: order_to_activation_p50, title: "Order-to-activation, մեդիան", unit: "օր", direction: down }
+  - { id: survival_90d,        title: "90-օրյա գոյատևում",           unit: "%",    direction: up }
+  - { id: b2b_new_mrr,         title: "B2B նոր MRR",                 unit: "֏",    direction: up }
+
+rituals:
+  - id: sales.dispatch_sync
+    title: "Dispatch sync"
+    cadence: workdays
+    time: "09:00"
+    duration_min: 15
+    owner_role: ops_head
+    participants: [dispatch_lead, sales_lead]
+    inputs:
+      - "Երեկվա fallout՝ պատճառների կոդերով"
+      - "Այսօրվա montage-ների ցուցակ"
+      - "Կախված պատվերների զամբյուղ"
+    outputs:
+      - "Ամեն կախված պատվեր ունի տեր և հաջորդ քայլ"
+    severity: high
+
+  - id: sales.funnel_review
+    title: "Ձագարի շաբաթական վերանայում"
+    cadence: weekly
+    weekday: mon
+    time: "10:00"
+    duration_min: 45
+    owner_role: ops_head
+    participants: [sales_lead, d2d_lead, b2b_lead, dealer_manager, telesales_lead]
+    inputs:
+      - "Ալիք առ ալիք՝ lead → sold → activated → 90d"
+      - "Ռեփերի արտադրողականություն"
+    outputs:
+      - "Շաբաթվա պլանի ճշգրտում ըստ ալիքի"
+    severity: high
+
+  - id: sales.fallout_desk
+    title: "Fallout desk"
+    cadence: weekly
+    weekday: thu
+    time: "15:00"
+    duration_min: 30
+    owner_role: ops_head
+    participants: [field_lead, care_lead, network_lead]
+    inputs:
+      - "Բոլոր չակտիվացած վաճառքները՝ NET/SLS/CUS կոդերով"
+    outputs:
+      - "Ամեն կոդի համար՝ շտկող քայլ և տեր"
+    severity: high
+
+  - id: sales.waitlist_review
+    title: "Port-ի սպասման ցուցակի վերանայում"
+    cadence: weekly
+    weekday: wed
+    duration_min: 30
+    owner_role: ops_head
+    participants: [planning_engineer, network_lead]
+    inputs: ["WAITLIST_PORT ըստ շենքի, ըստ վաղեմության"]
+    outputs: ["Ցանցի ընդլայնման առաջնահերթ ցուցակ"]
+
+  - id: sales.b2b_pipeline
+    title: "B2B pipeline վերանայում"
+    cadence: weekly
+    weekday: tue
+    duration_min: 45
+    owner_role: b2b_lead
+    participants: [ops_head, planning_engineer]
+    inputs: ["Փուլերով pipeline", "Site survey-ների կարգավիճակ"]
+    outputs: ["Ամեն գործարք՝ հաջորդ քայլով և ամսաթվով"]
+
+  - id: sales.month_close
+    title: "Ամսվա փակում և forecast"
+    cadence: month_start
+    offset: 1
+    duration_min: 90
+    owner_role: ops_head
+    participants: [commercial_director, finance_lead, sales_lead]
+    inputs: ["Net adds, ARPU, CAC, 90d գոյատևում", "Բոնուսի նախնական հաշվարկ"]
+    outputs: ["Հաստատված բոնուս", "Հաջորդ ամսվա պլան ըստ ալիքի"]
+    severity: high
+
+deliverables:
+  - id: sales.channel_report
+    title: "Ալիքների շաբաթական հաշվետվություն"
+    cadence: weekly
+    weekday: mon
+    owner_role: analyst
+    approver_role: ops_head
+    asset_type: report
+    lead_days: 1
+    brief: "Ալիք առ ալիք ձագար, ARPU, CAC, 90d cohort."
+    checklist:
+      - "Տվյալի ամբողջականության ստուգում"
+      - "Նախորդ շաբաթվա համեմատություն"
+      - "Անոմալիաների նշում"
+
+  - id: sales.territory_plan
+    title: "Տարածքային ծածկույթի պլան"
+    cadence: quarterly
+    months: [1, 4, 7, 10]
+    day: 5
+    owner_role: ops_head
+    approver_role: commercial_director
+    asset_type: report
+    lead_days: 5
+    brief: "Ներթափանցում ըստ շենքի, մրցակցի ակտիվություն, նոր կառուցապատում."
+
+controls:
+  - id: sales.ctl_fallout
+    title: "Fallout rate-ը շեմից բարձր է"
+    metric: fallout_rate
+    op: ">"
+    threshold: 8.0
+    severity: high
+    owner_role: ops_head
+    due_in_days: 2
+    action: "Ալիք առ ալիք վերլուծել պատճառների կոդերը և ներկայացնել շտկող պլան"
+
+  - id: sales.ctl_stuck_orders
+    title: "Կախված պատվերներ > 10 օր"
+    metric: orders_stuck_gt_10d
+    op: ">"
+    threshold: 0
+    severity: high
+    owner_role: ops_head
+    due_in_days: 1
+    action: "Ամեն record ստանում է պատճառի կոդ և հաջորդ քայլ"
+
+  - id: sales.ctl_unverified_contracts
+    title: "Պայմանագիր առանց վավեր serviceability ստուգման"
+    metric: contracts_without_serviceability
+    op: ">"
+    threshold: 0
+    severity: critical
+    owner_role: ops_head
+    due_in_days: 1
+    action: "Համակարգային արգելափակումը կոտրված է — IT-ի հետ վերականգնել նույն օրը"
+
+  - id: sales.ctl_o2a
+    title: "Order-to-activation-ը շեմից բարձր է"
+    metric: order_to_activation_p50
+    op: ">"
+    threshold: 3
+    severity: high
+    owner_role: ops_head
+    due_in_days: 2
+    action: "Dispatch-ի և ցանցի հետ գտնել խցանման կետը"
+
+  - id: sales.ctl_survival
+    title: "90-օրյա գոյատևումը շեմից ցածր է"
+    metric: survival_90d
+    op: "<"
+    threshold: 92.0
+    severity: high
+    owner_role: ops_head
+    due_in_days: 3
+    action: "Cohort-ի վերլուծություն ըստ ալիքի և ռեփի, ուղարկել որակի աուդիտ"
+
+  - id: sales.ctl_waitlist
+    title: "Port-ի սպասման ցուցակը մեծացել է"
+    metric: waitlist_port_count
+    op: ">"
+    threshold: 150
+    severity: medium
+    owner_role: ops_head
+    due_in_days: 5
+    action: "Ցանցին ներկայացնել ընդլայնման հայտ՝ շենքերի առաջնահերթությամբ"

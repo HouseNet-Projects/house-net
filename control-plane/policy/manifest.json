@@ -1,0 +1,339 @@
+{
+  "version": "1.4.3",
+  "effective_date": "2026-09-15",
+  "owner": "HouseNet-Projects",
+  "github_identity": "HouseNet-Projects",
+  "namespace": "HouseNet-Projects",
+  "classification": "A",
+  "source": {
+    "path": "docs/source/HouseNet-GitHub-Policy-v1.0.md",
+    "sha256": "a15b6b22aeecc7beaaf2f13e9de20e45b1a49be24c6ba280a5b3ac364f034491",
+    "external_original_path": "/home/gevorg/HouseNet-GitHub-Policy.md",
+    "semantics": "Immutable historical provenance; runtime authority is policy/*.json. Implementation instruction was fulfilled before migration."
+  },
+  "canonical_files": [
+    "policy/actions.json",
+    "policy/authority.json",
+    "policy/git.json",
+    "policy/merge.json",
+    "policy/notifications.json",
+    "policy/repository-baseline.json",
+    "policy/repository-classes.json",
+    "policy/security.json",
+    "schemas/authority.schema.json",
+    "schemas/manifest.schema.json",
+    "schemas/policy.schema.json",
+    "schemas/registry.schema.json",
+    "schemas/release-manifest.schema.json",
+    "schemas/repository-class.schema.json",
+    "schemas/repository-lock.schema.json",
+    "schemas/repository-registration.schema.json"
+  ],
+  "coverage": [
+    {
+      "section": 1,
+      "source_sha256": "bc973945f1af7673310d1624922179f58172d0ca5454529c3be496d5bc01d8aa",
+      "rule_ids": [
+        "HN-PURPOSE"
+      ]
+    },
+    {
+      "section": 2,
+      "source_sha256": "7402abc55c1be7c66feca46167cc4f49512a31247080fc14131aa8c13aca4592",
+      "rule_ids": [
+        "HN-IDENTITY",
+        "HN-NAMESPACE",
+        "HN-CREATION",
+        "HN-CONFIGURATION"
+      ]
+    },
+    {
+      "section": 3,
+      "source_sha256": "bc35fa29f241591b91e6fdea4af530a60e0f2a9594f35318932eee02625e4118",
+      "rule_ids": [
+        "HN-DESTRUCTIVE"
+      ]
+    },
+    {
+      "section": 4,
+      "source_sha256": "83719d5684370862212016954aa4a2be58a099327aeb867b3a1c6757539b488a",
+      "rule_ids": [
+        "HN-CREATE"
+      ]
+    },
+    {
+      "section": 5,
+      "source_sha256": "0cffacb037f8249a11a64cb706bd42c6ed8e11f812d4541e01099d924d1377cb",
+      "rule_ids": [
+        "HN-CLASSIFICATION",
+        "HN-CLASS-A",
+        "HN-CLASS-B",
+        "HN-CLASS-C"
+      ]
+    },
+    {
+      "section": 6,
+      "source_sha256": "160db4cf0d589830c7fb2f0190e56d5b88e322a235bea4f7d5c07c368c393763",
+      "rule_ids": [
+        "HN-RECLASSIFY"
+      ]
+    },
+    {
+      "section": 7,
+      "source_sha256": "3428eadb3d78c270559778aca7240df12ac365f1441e51175e8f2cca2cd8917d",
+      "rule_ids": [
+        "HN-NAMING"
+      ]
+    },
+    {
+      "section": 8,
+      "source_sha256": "40f24940d1fea0678b2120b44022ccc2dd1ad68842d2d3870e8ae37d495c16b0",
+      "rule_ids": [
+        "HN-BRANCH",
+        "HN-DEVELOPMENT",
+        "HN-BRANCH-NAMES"
+      ]
+    },
+    {
+      "section": 9,
+      "source_sha256": "538c23209e48160b756122abd423967610facf63a990a91190732f137b72effe",
+      "rule_ids": [
+        "HN-PROTECTION"
+      ]
+    },
+    {
+      "section": 10,
+      "source_sha256": "7b663cece57b3d7befdcee8dc496ec8bef079103cf2be5b0db595ef45b6208df",
+      "rule_ids": [
+        "HN-REVIEW"
+      ]
+    },
+    {
+      "section": 11,
+      "source_sha256": "a97ccf39f43324f19977d3e3dcd35f6480c385174459fa790a8861ebdf1e21d8",
+      "rule_ids": [
+        "HN-METHODS"
+      ]
+    },
+    {
+      "section": 12,
+      "source_sha256": "9c8460cf2e3584cbd0ba46cd46cd80f00f6a59e3254dc74cbc743037368a6105",
+      "rule_ids": [
+        "HN-AUTHOR-NAME",
+        "HN-AUTHOR-EMAIL",
+        "HN-INIT-BRANCH",
+        "HN-EXPLICIT-IDENTITY",
+        "HN-PULL"
+      ]
+    },
+    {
+      "section": 13,
+      "source_sha256": "5112e4cac06e6bf7b94b3efe705314fafe4d6f262487043244fe547e770f3182",
+      "rule_ids": [
+        "HN-PERMISSIONS"
+      ]
+    },
+    {
+      "section": 14,
+      "source_sha256": "34bdab3fd7a1922586c3f653385fc231965ee5cbbc9abfd783b5b0f4542f8f32",
+      "rule_ids": [
+        "HN-SOURCES"
+      ]
+    },
+    {
+      "section": 15,
+      "source_sha256": "97b14220fa9ca6fc1959ec41b09b9b4749914334f86f570526afa07472671cb7",
+      "rule_ids": [
+        "HN-CI"
+      ]
+    },
+    {
+      "section": 16,
+      "source_sha256": "f8a9c4f218e79cd2b5fc6295b44bf4d22845cf12442b2af2711e446e9f54fe3f",
+      "rule_ids": [
+        "HN-DEPLOYMENT"
+      ]
+    },
+    {
+      "section": 17,
+      "source_sha256": "55b957660366a010ffd792412ca667e492f0db37889a059cf822971c6b3db7e1",
+      "rule_ids": [
+        "HN-DEPENDENCIES"
+      ]
+    },
+    {
+      "section": 18,
+      "source_sha256": "85471ce671ff1d4dccf703367d8e1ac833f978bda6c1d0ce350e82940bcceb9e",
+      "rule_ids": [
+        "HN-SECRETS"
+      ]
+    },
+    {
+      "section": 19,
+      "source_sha256": "e249cc21619ada80f07ca647cdac7867746dd3cc46674119578f3c872c021c66",
+      "rule_ids": [
+        "HN-FILES"
+      ]
+    },
+    {
+      "section": 20,
+      "source_sha256": "423366f796b86468c01831575d76ca1d7a452cbe1e4251a6a1387cc6d1cd5f07",
+      "rule_ids": [
+        "HN-GOVERNANCE"
+      ]
+    },
+    {
+      "section": 21,
+      "source_sha256": "ef8d46df8a07f90a0b3ef57f6bd066a013e3ca7818fc00e413f1f52bdda4ccb7",
+      "rule_ids": [
+        "HN-LICENSE"
+      ]
+    },
+    {
+      "section": 22,
+      "source_sha256": "dfdfd63e5ad68b91bbda3a6b36e39ca98e0ae2e63f5148d1f53bbd31930d8bbc",
+      "rule_ids": [
+        "HN-VERSIONING"
+      ]
+    },
+    {
+      "section": 23,
+      "source_sha256": "f0e0b69c64f0244c25562dfb10c3169678623797892ced742975a806eca39cbe",
+      "rule_ids": [
+        "HN-COMMITS"
+      ]
+    },
+    {
+      "section": 24,
+      "source_sha256": "460bbc2fecc591bd52149ba9df098762c643b09fcfbeb557a6b830a7ef324aea",
+      "rule_ids": [
+        "HN-PRS"
+      ]
+    },
+    {
+      "section": 25,
+      "source_sha256": "ab3f3df0f4df49acc8b3bba0d0fa5513722eb00134f7446f25095cb21d281178",
+      "rule_ids": [
+        "HN-SCOPE"
+      ]
+    },
+    {
+      "section": 26,
+      "source_sha256": "16f9277e9247fc8a316f323d7d1ef547e4c972ad2be9162af15e193c099992a1",
+      "rule_ids": [
+        "HN-DEPRECATION"
+      ]
+    },
+    {
+      "section": 27,
+      "source_sha256": "f6b96a5bfd393601035be806b6958b61bb70a664d71c7c21d2cfaa9931a3997f",
+      "rule_ids": [
+        "HN-SIGNAL"
+      ]
+    },
+    {
+      "section": 28,
+      "source_sha256": "26ad4aef8eb4babea6a13f737f342f503b7b796510c0a4f19c50bd866df9b1f8",
+      "rule_ids": [
+        "HN-LEVELS"
+      ]
+    },
+    {
+      "section": 29,
+      "source_sha256": "8364dc7a694d5c242318ea6afafc034d2ddf3b71a16c6b025981500ebdf90c4c",
+      "rule_ids": [
+        "HN-OPERATING-FLOW",
+        "HN-OUT-OF-SCOPE"
+      ]
+    },
+    {
+      "section": 30,
+      "source_sha256": "64a393e5613f2f95d739765a290397a12d5e27cb7169b2da9cda7fae489ef3dd",
+      "rule_ids": [
+        "HN-PROPORTIONALITY"
+      ]
+    }
+  ],
+  "amendments": [
+    {
+      "id": "MISSION-1.0-ACTIONS",
+      "authority": "Owner mission section 1",
+      "decision": "Read-only access to official/trusted external action repositories and documentation is allowed only for necessary dependency resolution and security due diligence; external mutations remain prohibited."
+    },
+    {
+      "id": "DOC-HUMAN-VISIBLE-BILINGUAL-1.1",
+      "authority": "OWNER-POLICY-UPDATE-2026-09-15",
+      "decision": "Human-facing HouseNet artifacts must contain materially equivalent English and Armenian content; machine and agent artifacts may remain English-only."
+    },
+    {
+      "id": "VERSION-SINGLE-SOURCE-UNIVERSAL-1.2",
+      "authority": "OWNER-POLICY-UPDATE-2026-09-15",
+      "decision": "Every versioned HouseNet entity has one registered machine-readable version authority; registered derived surfaces must remain synchronized and drift fails validation."
+    },
+    {
+      "id": "MIGRATION-AI-NEUTRAL-1.3",
+      "authority": "OWNER-MISSION-UNIVERSAL-ENGINEERING-MIGRATION-2026-09-15",
+      "decision": "HouseNet governance is agent-neutral; build-time agents must not create unapproved runtime provider dependencies, and legacy adoption is staged with source-of-truth evidence."
+    }
+  ],
+  "supplemental_rules": [
+    {
+      "id": "HN-DOC-HUMAN-VISIBLE-BILINGUAL",
+      "authority": "OWNER-POLICY-UPDATE-2026-09-15",
+      "decision": "Mandatory bilingual contract for human-facing content across repository classes A, B and C."
+    },
+    {
+      "id": "HN-VERSION-SINGLE-SOURCE",
+      "authority": "OWNER-POLICY-UPDATE-2026-09-15",
+      "decision": "Universal single-source version authority and deterministic drift enforcement for versioned HouseNet entities."
+    },
+    {
+      "id": "HN-ARCH-AI-PROVIDER-INDEPENDENCE",
+      "authority": "OWNER-MISSION-UNIVERSAL-ENGINEERING-MIGRATION-2026-09-15",
+      "decision": "Build-time agent use does not justify an unregistered runtime AI-provider dependency."
+    },
+    {
+      "id": "HN-MIGRATION-STAGED-ADOPTION",
+      "authority": "OWNER-MISSION-UNIVERSAL-ENGINEERING-MIGRATION-2026-09-15",
+      "decision": "Legacy projects pass staged discovery, quarantine, audit, proposal, approval, migration and certification states before canonicalization."
+    },
+    {
+      "id": "HN-DATA-CLASSIFICATION",
+      "authority": "OWNER-MISSION-UNIVERSAL-ENGINEERING-MIGRATION-2026-09-15",
+      "decision": "Operational class and independent data classification are both recorded; unknown sensitivity requires owner decision."
+    },
+    {
+      "id": "HN-SOURCE-OF-TRUTH",
+      "authority": "OWNER-MISSION-UNIVERSAL-ENGINEERING-MIGRATION-2026-09-15",
+      "decision": "Conflicting source candidates block canonicalization and legacy evidence is preserved."
+    },
+    {
+      "id": "HN-DESIGN-SYSTEM-ADOPTION",
+      "authority": "OWNER-ZERO-TRUST-FINAL-HARDENING-2026-09-15",
+      "decision": "Every canonical HouseNet repository declares and validates its Design System release, visual category, approved asset source, bilingual README/document contract and social-preview state."
+    },
+    {
+      "id": "HN-PERSON-INDEPENDENT-AUTHORITY",
+      "authority": "OWNER-ZERO-TRUST-FINAL-HARDENING-2026-09-15",
+      "decision": "Machine authority uses stable HouseNet owner/principal roles; human display names and historical evidence remain allowed."
+    }
+  ],
+  "file_sha256": {
+    "policy/actions.json": "ce83c60181191ae989e3f5734ce61418ac607f480aa4606fcb71073fcadf720e",
+    "policy/authority.json": "6d36e77f5deee4edc7faff0dc54c92e83ef207265b2a93d4797dedc7e5bbde0f",
+    "policy/git.json": "71120ba71f7745bdbf9c3820e593bf7f4d3460bee8e33d74835a44e296fcaa06",
+    "policy/merge.json": "264139e81c84e9df49834191e1f1b831bd83e0524e9f948087bb673dc021dbce",
+    "policy/notifications.json": "67c758d48cfa842985585981083da0f1b9f3fea5ab553cc53f823385b4245231",
+    "policy/repository-baseline.json": "bfc79f8aa2eaabcdbba86b1f1e787a092b5693dd72145209252146fca8bf76de",
+    "policy/repository-classes.json": "bd631a1605635d9f7ecf6c66470bbf1f4ff8d93a4ef517ba0580ee8d8e1ca863",
+    "policy/security.json": "c8d016831037c45fb062e47d7b01cc85e833933879726667c98b4d2aead525cb",
+    "schemas/authority.schema.json": "5b19327dffbbfc8492935520fef45a8e6a86a703e7a41c0004d4ee6f5dcd2a6d",
+    "schemas/manifest.schema.json": "f9f19b593d3b9aa4701e38dc3a2d5fb3f466333708c2ee6c9fe0ac2e79d2798a",
+    "schemas/policy.schema.json": "963c96616a5da685d8d31e4bf42291baa053cc9be0197182c731d62d58bdabbf",
+    "schemas/registry.schema.json": "54f2821edb660c334f6ad4f2dd7abfef89dc6d8a29165990e1f4b419c0911dd1",
+    "schemas/release-manifest.schema.json": "c5c65c44cab3f40ca7fa59bc47cd299f1814d39162c83bf32d374573e7845d09",
+    "schemas/repository-class.schema.json": "f3309da9a401b352f46da4c050f6c80a454a00ad8fb407b7590de8ab4236782e",
+    "schemas/repository-lock.schema.json": "6f706c3786f823a4d172b33bedc569a624abb91afc8b83a00c892931b1e4fce6",
+    "schemas/repository-registration.schema.json": "8f1248dd6171c2a336cb06a5f9f249e4fb53ec2b4057e4fafd87401af153133d"
+  }
+}

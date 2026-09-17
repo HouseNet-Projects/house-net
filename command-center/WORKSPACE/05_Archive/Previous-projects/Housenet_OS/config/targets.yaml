@@ -1,0 +1,55 @@
+# Ամսվա թիրախներ — այս թվերը ձերն են, ոչ ոլորտային միջին.
+# Մինչև իրական բազային չափումը սրանք տեղապահ են.
+
+period: "2026-09"
+
+company:
+  net_adds: 800
+  arpu_amd: 7500
+  churn_pct_max: 1.5
+
+sales:
+  gross_adds: 950
+  fallout_pct_max: 8.0
+  order_to_activation_days_p50_max: 3
+  b2b_new_mrr_amd: 4500000
+
+channel_mix:
+  d2d: 0.35
+  telesales: 0.25
+  inbound: 0.20
+  dealer: 0.12
+  online: 0.05
+  b2b: 0.03
+
+marketing:
+  leads: 3200
+  cost_per_lead_amd_max: 1800
+  posts_per_week: 5
+  videos_per_month: 4
+
+telesales:
+  calls_per_agent_per_day: 90
+  contact_rate_pct_min: 35
+  conversion_pct_min: 6
+
+care:
+  first_response_min_max: 15
+  nps_min: 40
+  save_rate_pct_min: 35
+
+field:
+  first_visit_success_pct_min: 85
+  repeat_visit_pct_max: 12
+
+network:
+  uptime_pct_min: 99.7
+  mttr_hours_max: 4
+
+finance:
+  first_invoice_collection_pct_min: 95
+  dso_days_max: 25
+
+hr:
+  attrition_pct_max: 4.0
+  time_to_hire_days_max: 30
