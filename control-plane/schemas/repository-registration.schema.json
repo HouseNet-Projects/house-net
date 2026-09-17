@@ -1,0 +1,619 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "repository": {
+      "type": "string",
+      "pattern": "^HouseNet-Projects/house-net-[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "classification": {
+      "enum": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    "purpose": {
+      "type": "string",
+      "minLength": 1
+    },
+    "owner": {
+      "const": "HouseNet-Projects"
+    },
+    "visibility": {
+      "enum": [
+        "public",
+        "private"
+      ]
+    },
+    "control_plane_version": {
+      "const": "1.4.3"
+    },
+    "control_plane_commit": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "versioned": {
+      "type": "boolean"
+    },
+    "canonical_version_source": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "field": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "path",
+        "field"
+      ],
+      "additionalProperties": false
+    },
+    "current_version": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+    },
+    "version_scheme": {
+      "enum": [
+        "semver",
+        "explicit_exception"
+      ]
+    },
+    "release_state": {
+      "enum": [
+        "active",
+        "pre-release",
+        "deprecated",
+        "archived"
+      ]
+    },
+    "data_classification": {
+      "enum": [
+        "PUBLIC",
+        "INTERNAL",
+        "CONFIDENTIAL",
+        "RESTRICTED",
+        "UNKNOWN"
+      ]
+    },
+    "migration": {
+      "type": "object",
+      "properties": {
+        "stage": {
+          "enum": [
+            "DISCOVERED",
+            "QUARANTINED",
+            "AUDITED",
+            "PROPOSED",
+            "OWNER_APPROVED",
+            "MIGRATED",
+            "CERTIFIED",
+            "CANONICAL"
+          ]
+        },
+        "source_type": {
+          "enum": [
+            "git",
+            "local",
+            "archive",
+            "server",
+            "shared_drive",
+            "unknown"
+          ]
+        },
+        "mode": {
+          "enum": [
+            "FULL_HISTORY",
+            "CLEAN_IMPORT",
+            "SOURCE_SNAPSHOT",
+            "REBUILD",
+            "ARCHIVE_ONLY"
+          ]
+        },
+        "source": {
+          "type": "string",
+          "minLength": 1
+        },
+        "canonical_status": {
+          "enum": [
+            "LEGACY",
+            "SUPERSEDED",
+            "ARCHIVED",
+            "CANONICAL"
+          ]
+        },
+        "certification_status": {
+          "enum": [
+            "PENDING",
+            "PARTIALLY_VERIFIED",
+            "CERTIFIED",
+            "BLOCKED"
+          ]
+        }
+      },
+      "required": [
+        "stage",
+        "source_type",
+        "mode",
+        "source",
+        "canonical_status",
+        "certification_status"
+      ],
+      "additionalProperties": false
+    },
+    "external_dependencies": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "service": {
+            "type": "string",
+            "minLength": 1
+          },
+          "provider": {
+            "type": "string",
+            "minLength": 1
+          },
+          "purpose": {
+            "type": "string",
+            "minLength": 1
+          },
+          "environment": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "uniqueItems": true
+          },
+          "criticality": {
+            "enum": [
+              "low",
+              "medium",
+              "high",
+              "critical"
+            ]
+          },
+          "approval": {
+            "enum": [
+              "approved",
+              "pending",
+              "not_applicable"
+            ]
+          },
+          "runtime": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "service",
+          "provider",
+          "purpose",
+          "environment",
+          "criticality",
+          "approval",
+          "runtime"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "capabilities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "capability_id": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
+          },
+          "purpose": {
+            "type": "string",
+            "minLength": 1
+          },
+          "type": {
+            "enum": [
+              "knowledge",
+              "vault",
+              "design",
+              "runtime",
+              "integration",
+              "state",
+              "output"
+            ]
+          },
+          "mode": {
+            "enum": [
+              "READ",
+              "WRITE",
+              "READ_WRITE"
+            ]
+          },
+          "path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "schema_version": {
+            "type": "string",
+            "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+          },
+          "sensitivity": {
+            "enum": [
+              "PUBLIC",
+              "INTERNAL",
+              "CONFIDENTIAL",
+              "RESTRICTED"
+            ]
+          },
+          "authority_requirement": {
+            "enum": [
+              "NONE",
+              "OWNER_APPROVAL",
+              "ACTION_RUNTIME"
+            ]
+          },
+          "certification": {
+            "enum": [
+              "certified",
+              "pending",
+              "deprecated"
+            ]
+          },
+          "health": {
+            "enum": [
+              "healthy",
+              "degraded",
+              "unavailable"
+            ]
+          },
+          "validator": {
+            "type": "string",
+            "minLength": 1
+          },
+          "semantics": {
+            "enum": [
+              "authoritative",
+              "derived",
+              "cache"
+            ]
+          }
+        },
+        "required": [
+          "capability_id",
+          "purpose",
+          "type",
+          "mode",
+          "path",
+          "schema_version",
+          "sensitivity",
+          "authority_requirement",
+          "certification",
+          "health",
+          "validator",
+          "semantics"
+        ],
+        "additionalProperties": false
+      },
+      "uniqueItems": true
+    },
+    "certified_release": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+        },
+        "commit": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40}$"
+        },
+        "control_plane_compatibility": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+        },
+        "status": {
+          "enum": [
+            "certified",
+            "pending",
+            "deprecated"
+          ]
+        }
+      },
+      "required": [
+        "version",
+        "commit",
+        "control_plane_compatibility",
+        "status"
+      ],
+      "additionalProperties": false
+    },
+    "version_surfaces": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "field": {
+            "type": "string",
+            "minLength": 1
+          },
+          "kind": {
+            "enum": [
+              "text",
+              "json",
+              "yaml",
+              "generated"
+            ]
+          }
+        },
+        "required": [
+          "path",
+          "field",
+          "kind"
+        ],
+        "additionalProperties": false
+      },
+      "uniqueItems": true
+    },
+    "applicable_rules": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "approval": {
+      "type": "object",
+      "properties": {
+        "state": {
+          "enum": [
+            "proposed",
+            "approved",
+            "rejected"
+          ]
+        },
+        "reference": {
+          "type": "string",
+          "minLength": 1
+        },
+        "approved_by": {
+          "const": "HouseNet-Projects"
+        }
+      },
+      "required": [
+        "state",
+        "reference",
+        "approved_by"
+      ],
+      "additionalProperties": false
+    },
+    "profile": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "enum": [
+            "code",
+            "documentation",
+            "reference",
+            "experiment"
+          ]
+        },
+        "technology": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "dependencies": {
+          "type": "boolean"
+        },
+        "meaningful_ci": {
+          "type": "boolean"
+        },
+        "deployment": {
+          "enum": [
+            "none",
+            "nonproduction",
+            "production"
+          ]
+        },
+        "data_sensitivity": {
+          "type": "string",
+          "minLength": 1
+        },
+        "required_files": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "exceptions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "rule_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "reason": {
+                "type": "string",
+                "minLength": 1
+              },
+              "approval_reference": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "rule_id",
+              "reason",
+              "approval_reference"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "compatibility_adapters": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "path": {
+                "type": "string",
+                "minLength": 1
+              },
+              "required": {
+                "type": "boolean"
+              },
+              "kind": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "path",
+              "required",
+              "kind"
+            ],
+            "additionalProperties": false
+          },
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "kind",
+        "technology",
+        "dependencies",
+        "meaningful_ci",
+        "deployment",
+        "data_sensitivity",
+        "required_files",
+        "exceptions",
+        "compatibility_adapters"
+      ],
+      "additionalProperties": false
+    },
+    "design_system": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+        },
+        "category": {
+          "enum": [
+            "CONTROL",
+            "PRODUCT",
+            "DESIGN_SYSTEM",
+            "TOOLING",
+            "DATA",
+            "DOCUMENTATION",
+            "LEGACY_ARCHIVE"
+          ]
+        },
+        "asset_source": {
+          "const": "HouseNet-Projects/house-net-design-system"
+        },
+        "readme_contract": {
+          "const": "bilingual_status_navigation"
+        },
+        "human_docs_policy": {
+          "const": "en_hy_required"
+        },
+        "social_preview": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "enum": [
+                "candidate",
+                "validated",
+                "applied",
+                "manual_required",
+                "exempt"
+              ]
+            },
+            "candidate_path": {
+              "type": "string"
+            },
+            "validated": {
+              "type": "boolean"
+            },
+            "applied": {
+              "type": "boolean"
+            },
+            "manual_action_required": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "status",
+            "validated",
+            "applied",
+            "manual_action_required"
+          ],
+          "additionalProperties": false
+        },
+        "control_plane_compatibility": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+        }
+      },
+      "required": [
+        "version",
+        "category",
+        "asset_source",
+        "readme_contract",
+        "human_docs_policy",
+        "social_preview",
+        "control_plane_compatibility"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "repository",
+    "classification",
+    "purpose",
+    "owner",
+    "visibility",
+    "control_plane_version",
+    "control_plane_commit",
+    "applicable_rules",
+    "approval",
+    "profile",
+    "versioned",
+    "release_state",
+    "design_system"
+  ],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "versioned": {
+            "const": true
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "canonical_version_source",
+          "current_version",
+          "version_scheme",
+          "version_surfaces"
+        ]
+      }
+    }
+  ],
+  "additionalProperties": false
+}

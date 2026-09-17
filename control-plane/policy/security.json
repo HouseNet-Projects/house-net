@@ -1,0 +1,72 @@
+{
+  "version": "1.4.3",
+  "domain": "security",
+  "rules": [
+    {
+      "id": "HN-DEPENDENCIES",
+      "primitive": "security.dependencies",
+      "scope": "repository",
+      "level": "MANDATORY",
+      "applicability": {
+        "classes": [
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      "expected": {
+        "dependency_graph": true,
+        "dependabot_alerts": true,
+        "security_updates": true,
+        "when": "available_and_applicable",
+        "version_updates": "real_ecosystem_only",
+        "cadence": "weekly",
+        "auto_merge": "separate_explicit_automation_approval"
+      },
+      "approval_requirement": "explicit_owner",
+      "enforcement": {
+        "mechanism": "repository_validator"
+      },
+      "source_sections": [
+        17
+      ]
+    },
+    {
+      "id": "HN-SECRETS",
+      "primitive": "security.secrets",
+      "scope": "repository",
+      "level": "MANDATORY",
+      "applicability": {
+        "classes": [
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      "expected": {
+        "git_history": false,
+        "hardcoded": false,
+        "storage": [
+          "GitHub Secrets",
+          "environment secrets",
+          "approved external manager",
+          "ignored local environment files"
+        ],
+        "incident": [
+          "stop",
+          "report_repository_and_secret_identifier_without_value",
+          "report_exposure",
+          "propose_remediation"
+        ],
+        "rotation_or_history_rewrite": "exact_owner_approval"
+      },
+      "approval_requirement": "explicit_owner",
+      "enforcement": {
+        "mechanism": "content_scan_and_owner_review"
+      },
+      "source_sections": [
+        18
+      ]
+    }
+  ]
+}

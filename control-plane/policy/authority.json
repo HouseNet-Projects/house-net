@@ -1,0 +1,324 @@
+{
+  "version": "1.4.3",
+  "domain": "authority",
+  "rules": [
+    {
+      "id": "HN-PURPOSE",
+      "primitive": "engineering.purpose",
+      "scope": "environment",
+      "level": "MANDATORY",
+      "applicability": {
+        "classes": [
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      "expected": {
+        "principle": "Minimum correct configuration for actual risk and purpose; every primitive must have a real purpose."
+      },
+      "approval_requirement": "explicit_owner",
+      "enforcement": {
+        "mechanism": "owner_review"
+      },
+      "source_sections": [
+        1
+      ]
+    },
+    {
+      "id": "HN-IDENTITY",
+      "primitive": "github.identity",
+      "scope": "environment",
+      "level": "MANDATORY",
+      "applicability": {
+        "classes": [
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      "expected": "HouseNet-Projects",
+      "approval_requirement": "explicit_owner",
+      "enforcement": {
+        "mechanism": "preflight"
+      },
+      "source_sections": [
+        2
+      ]
+    },
+    {
+      "id": "HN-NAMESPACE",
+      "primitive": "github.namespace",
+      "scope": "repository",
+      "level": "MANDATORY",
+      "applicability": {
+        "classes": [
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      "expected": "HouseNet-Projects",
+      "approval_requirement": "explicit_owner",
+      "enforcement": {
+        "mechanism": "repository_validator"
+      },
+      "source_sections": [
+        2
+      ]
+    },
+    {
+      "id": "HN-CREATION",
+      "primitive": "repository.creation",
+      "scope": "repository",
+      "level": "MANDATORY",
+      "applicability": {
+        "classes": [
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      "expected": {
+        "requires": "explicit_owner_instruction",
+        "recommendation_is_not_approval": true
+      },
+      "approval_requirement": "explicit_owner",
+      "enforcement": {
+        "mechanism": "registry_and_owner_review"
+      },
+      "source_sections": [
+        2
+      ]
+    },
+    {
+      "id": "HN-CONFIGURATION",
+      "primitive": "github.configuration_change",
+      "scope": "account",
+      "level": "MANDATORY",
+      "applicability": {
+        "classes": [
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      "expected": {
+        "requires": "explicit_owner_approval",
+        "silence_is_approval": false
+      },
+      "approval_requirement": "explicit_owner",
+      "enforcement": {
+        "mechanism": "owner_review"
+      },
+      "source_sections": [
+        2
+      ]
+    },
+    {
+      "id": "HN-DESTRUCTIVE",
+      "primitive": "operation.destructive",
+      "scope": "repository",
+      "level": "MANDATORY",
+      "applicability": {
+        "classes": [
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      "expected": {
+        "requires": "exact_owner_approval",
+        "actions": [
+          "repository_delete",
+          "repository_archive",
+          "important_branch_delete",
+          "force_push",
+          "shared_history_rewrite",
+          "visibility_change",
+          "credential_change",
+          "authentication_change",
+          "token_create_or_revoke",
+          "secret_rotate_or_remove",
+          "destructive_migration",
+          "release_or_tag_delete",
+          "destructive_environment_change"
+        ],
+        "remediation": "report_before_acting"
+      },
+      "approval_requirement": "exact_owner",
+      "enforcement": {
+        "mechanism": "owner_review"
+      },
+      "source_sections": [
+        3
+      ]
+    },
+    {
+      "id": "HN-SCOPE",
+      "primitive": "engineering.scope",
+      "scope": "repository",
+      "level": "MANDATORY",
+      "applicability": {
+        "classes": [
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      "expected": {
+        "clear_purpose": true,
+        "unrelated_functionality": false,
+        "restructure": "recommend_then_owner_approval"
+      },
+      "approval_requirement": "explicit_owner",
+      "enforcement": {
+        "mechanism": "owner_review"
+      },
+      "source_sections": [
+        25
+      ]
+    },
+    {
+      "id": "HN-LEVELS",
+      "primitive": "policy.levels",
+      "scope": "control_plane",
+      "level": "MANDATORY",
+      "applicability": {
+        "classes": [
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      "expected": {
+        "MANDATORY": "owner_override_only",
+        "RECOMMENDED": "preferred_unless_justified",
+        "REPO_SPECIFIC": "purpose_class_technology_risk_deployment_sensitivity",
+        "missing_context": "ask_or_recommend"
+      },
+      "approval_requirement": "explicit_owner",
+      "enforcement": {
+        "mechanism": "schema_validator"
+      },
+      "source_sections": [
+        28
+      ]
+    },
+    {
+      "id": "HN-OPERATING-FLOW",
+      "primitive": "engineering.operating_flow",
+      "scope": "environment",
+      "level": "MANDATORY",
+      "applicability": {
+        "classes": [
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      "expected": [
+        "verify_identity",
+        "read",
+        "understand",
+        "classify",
+        "recommend",
+        "owner_ok",
+        "execute",
+        "verify",
+        "report"
+      ],
+      "approval_requirement": "explicit_owner",
+      "enforcement": {
+        "mechanism": "owner_review"
+      },
+      "source_sections": [
+        29
+      ]
+    },
+    {
+      "id": "HN-OUT-OF-SCOPE",
+      "primitive": "engineering.out_of_scope",
+      "scope": "environment",
+      "level": "MANDATORY",
+      "applicability": {
+        "classes": [
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      "expected": {
+        "report": true,
+        "apply": false
+      },
+      "approval_requirement": "explicit_owner",
+      "enforcement": {
+        "mechanism": "owner_review"
+      },
+      "source_sections": [
+        29
+      ]
+    },
+    {
+      "id": "HN-PROPORTIONALITY",
+      "primitive": "engineering.proportionality",
+      "scope": "environment",
+      "level": "MANDATORY",
+      "applicability": {
+        "classes": [
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      "expected": {
+        "qualities": [
+          "simple",
+          "private",
+          "secure",
+          "auditable",
+          "reproducible",
+          "intentional"
+        ],
+        "maximize_configuration": false
+      },
+      "approval_requirement": "explicit_owner",
+      "enforcement": {
+        "mechanism": "owner_review"
+      },
+      "source_sections": [
+        30
+      ]
+    },
+    {
+      "id": "HN-PERSON-INDEPENDENT-AUTHORITY",
+      "primitive": "architecture.person_independent_authority",
+      "scope": "repository",
+      "level": "MANDATORY",
+      "applicability": {
+        "classes": [
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      "expected": {
+        "machine_authority_uses": [
+          "OWNER",
+          "AUTHORIZED_OWNER",
+          "HOUSE_NET_OWNER",
+          "stable_principal_id"
+        ],
+        "display_names_optional": true,
+        "historical_evidence_exempt": true,
+        "literal_person_names_as_machine_keys": "forbidden"
+      },
+      "approval_requirement": "explicit_owner",
+      "enforcement": {
+        "mechanism": "registration_schema_and_target_validator"
+      },
+      "source_sections": []
+    }
+  ]
+}

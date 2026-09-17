@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "const": "1.4.3"
+    },
+    "repositories": {
+      "type": "array",
+      "items": {
+        "$ref": "repository-registration.schema.json"
+      },
+      "minItems": 1
+    }
+  },
+  "required": [
+    "version",
+    "repositories"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,506 @@
+{
+  "version": "1.4.3",
+  "domain": "repository-baseline",
+  "rules": [
+    {
+      "id": "HN-CREATE",
+      "primitive": "repository.creation_baseline",
+      "scope": "repository",
+      "level": "MANDATORY",
+      "applicability": {
+        "classes": [
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      "expected": {
+        "owner": "HouseNet-Projects",
+        "visibility": "private",
+        "default_branch": "main",
+        "automatic_import": false,
+        "automatic_framework": false,
+        "automatic_license": false,
+        "proposal_fields": [
+          "name",
+          "purpose",
+          "separate_repository_justification",
+          "classification",
+          "technology",
+          "ci_requirement",
+          "deployment_model",
+          "data_sensitivity",
+          "baseline"
+        ],
+        "then": "wait_for_owner"
+      },
+      "approval_requirement": "explicit_owner",
+      "enforcement": {
+        "mechanism": "owner_review"
+      },
+      "source_sections": [
+        4
+      ]
+    },
+    {
+      "id": "HN-CLASSIFICATION",
+      "primitive": "repository.classification",
+      "scope": "repository",
+      "level": "MANDATORY",
+      "applicability": {
+        "classes": [
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      "expected": {
+        "required_before_creation": true,
+        "allowed": [
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      "approval_requirement": "explicit_owner",
+      "enforcement": {
+        "mechanism": "repository_validator"
+      },
+      "source_sections": [
+        5
+      ]
+    },
+    {
+      "id": "HN-RECLASSIFY",
+      "primitive": "repository.reclassification",
+      "scope": "repository",
+      "level": "MANDATORY",
+      "applicability": {
+        "classes": [
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      "expected": {
+        "requires": "explicit_owner_approval",
+        "automatic_governance_change": false
+      },
+      "approval_requirement": "explicit_owner",
+      "enforcement": {
+        "mechanism": "owner_review"
+      },
+      "source_sections": [
+        6
+      ]
+    },
+    {
+      "id": "HN-NAMING",
+      "primitive": "repository.naming",
+      "scope": "repository",
+      "level": "MANDATORY",
+      "applicability": {
+        "classes": [
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      "expected": {
+        "format": "^house-net-[a-z0-9]+(?:-[a-z0-9]+)*$",
+        "avoid": [
+          "final",
+          "final-v2",
+          "test123",
+          "new-project",
+          "stuff"
+        ],
+        "exception": "justified_product_convention",
+        "exceptions": [
+          ".github",
+          "account-profile"
+        ]
+      },
+      "approval_requirement": "explicit_owner",
+      "enforcement": {
+        "mechanism": "repository_registration_schema_and_validator"
+      },
+      "source_sections": [
+        7
+      ]
+    },
+    {
+      "id": "HN-FILES",
+      "primitive": "repository.files",
+      "scope": "repository",
+      "level": "RECOMMENDED",
+      "applicability": {
+        "classes": [
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      "expected": {
+        "normal_code": [
+          "README.md",
+          ".gitignore",
+          ".editorconfig",
+          ".gitattributes"
+        ],
+        "readme": [
+          "purpose",
+          "setup",
+          "run",
+          "tests",
+          "ownership"
+        ]
+      },
+      "approval_requirement": "explicit_owner",
+      "enforcement": {
+        "mechanism": "repository_validator"
+      },
+      "source_sections": [
+        19
+      ]
+    },
+    {
+      "id": "HN-GOVERNANCE",
+      "primitive": "repository.governance_files",
+      "scope": "repository",
+      "level": "REPO_SPECIFIC",
+      "applicability": {
+        "classes": [
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      "expected": {
+        "only_when_justified": [
+          "SECURITY.md",
+          "CONTRIBUTING.md",
+          "CODEOWNERS",
+          "issue_templates",
+          "PR_template",
+          "dependabot.yml",
+          ".github/workflows",
+          "architecture_docs",
+          "release_docs"
+        ],
+        "mechanical_scaffolding": false
+      },
+      "approval_requirement": "explicit_owner",
+      "enforcement": {
+        "mechanism": "registration_and_owner_review"
+      },
+      "source_sections": [
+        20
+      ]
+    },
+    {
+      "id": "HN-LICENSE",
+      "primitive": "repository.license",
+      "scope": "repository",
+      "level": "MANDATORY",
+      "applicability": {
+        "classes": [
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      "expected": {
+        "automatic_open_source": false,
+        "public_transition": "separate_license_review"
+      },
+      "approval_requirement": "explicit_owner",
+      "enforcement": {
+        "mechanism": "repository_validator"
+      },
+      "source_sections": [
+        21
+      ]
+    },
+    {
+      "id": "HN-VERSIONING",
+      "primitive": "repository.versioning",
+      "scope": "repository",
+      "level": "RECOMMENDED",
+      "applicability": {
+        "classes": [
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      "expected": {
+        "when": "real_release_lifecycle",
+        "preferred": "SemVer vX.Y.Z",
+        "mandatory_for_notes_or_experiments": false
+      },
+      "approval_requirement": "explicit_owner",
+      "enforcement": {
+        "mechanism": "owner_review"
+      },
+      "source_sections": [
+        22
+      ]
+    },
+    {
+      "id": "HN-PRS",
+      "primitive": "repository.pull_requests",
+      "scope": "repository",
+      "level": "RECOMMENDED",
+      "applicability": {
+        "classes": [
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      "expected": {
+        "answer": [
+          "what",
+          "why",
+          "verification"
+        ],
+        "risky_add": [
+          "risk",
+          "rollback"
+        ],
+        "excessive_paperwork": false
+      },
+      "approval_requirement": "explicit_owner",
+      "enforcement": {
+        "mechanism": "owner_review"
+      },
+      "source_sections": [
+        24
+      ]
+    },
+    {
+      "id": "HN-DEPRECATION",
+      "primitive": "repository.deprecation",
+      "scope": "repository",
+      "level": "MANDATORY",
+      "applicability": {
+        "classes": [
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      "expected": {
+        "approval": "explicit_owner",
+        "document_when_applicable": [
+          "status",
+          "replacement",
+          "migration_path",
+          "last_supported_version"
+        ],
+        "preserve_history": true
+      },
+      "approval_requirement": "explicit_owner",
+      "enforcement": {
+        "mechanism": "owner_review"
+      },
+      "source_sections": [
+        26
+      ]
+    },
+    {
+      "id": "HN-DOC-HUMAN-VISIBLE-BILINGUAL",
+      "primitive": "documentation.human_visible_bilingual",
+      "scope": "repository",
+      "level": "MANDATORY",
+      "applicability": {
+        "classes": [
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      "expected": {
+        "human_facing": true,
+        "required_languages": [
+          "en",
+          "hy"
+        ],
+        "contract": "English and Հայերեն sections are both non-empty",
+        "classification": "deterministic_path_and_marker_convention"
+      },
+      "approval_requirement": "explicit_owner",
+      "enforcement": {
+        "mechanism": "bilingual_document_validator"
+      },
+      "source_sections": []
+    },
+    {
+      "id": "HN-VERSION-SINGLE-SOURCE",
+      "primitive": "repository.version_single_source",
+      "scope": "repository",
+      "level": "MANDATORY",
+      "applicability": {
+        "classes": [
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      "expected": {
+        "when": "versioned=true",
+        "canonical_source": "one_registered_machine_readable_source",
+        "preferred_path": "release/manifest.json",
+        "version_scheme": "MAJOR.MINOR.PATCH",
+        "surface_registry": "required",
+        "derived_surfaces": "generated_or_validated",
+        "drift": "ci_failure",
+        "consumer_versions": "explicit_and_distinct_from_own_version"
+      },
+      "approval_requirement": "explicit_owner",
+      "enforcement": {
+        "mechanism": "repository_validator_and_ci"
+      },
+      "source_sections": []
+    },
+    {
+      "id": "HN-ARCH-AI-PROVIDER-INDEPENDENCE",
+      "primitive": "architecture.ai_provider_independence",
+      "scope": "repository",
+      "level": "MANDATORY",
+      "applicability": {
+        "classes": [
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      "expected": {
+        "build_time_agent_is_not_runtime_dependency": true,
+        "runtime_ai_requires": [
+          "registered_external_dependency",
+          "explicit_owner_approval",
+          "business_justification",
+          "fallback_or_outage_impact"
+        ],
+        "unapproved_provider_credentials_in_ci_or_deployment": "forbidden"
+      },
+      "approval_requirement": "explicit_owner",
+      "enforcement": {
+        "mechanism": "dependency_registry_and_deterministic_gate"
+      },
+      "source_sections": []
+    },
+    {
+      "id": "HN-MIGRATION-STAGED-ADOPTION",
+      "primitive": "migration.lifecycle",
+      "scope": "repository",
+      "level": "MANDATORY",
+      "applicability": {
+        "classes": [
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      "expected": {
+        "stages": [
+          "DISCOVERED",
+          "QUARANTINED",
+          "AUDITED",
+          "PROPOSED",
+          "OWNER_APPROVED",
+          "MIGRATED",
+          "CERTIFIED",
+          "CANONICAL"
+        ],
+        "direct_legacy_to_canonical": false,
+        "destructive_cleanup_during_intake": false
+      },
+      "approval_requirement": "explicit_owner",
+      "enforcement": {
+        "mechanism": "migration_registry_and_import_validator"
+      },
+      "source_sections": []
+    },
+    {
+      "id": "HN-DATA-CLASSIFICATION",
+      "primitive": "repository.data_classification",
+      "scope": "repository",
+      "level": "MANDATORY",
+      "applicability": {
+        "classes": [
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      "expected": {
+        "levels": [
+          "PUBLIC",
+          "INTERNAL",
+          "CONFIDENTIAL",
+          "RESTRICTED"
+        ],
+        "independent_of_operational_class": true,
+        "unknown_requires_owner_decision": true
+      },
+      "approval_requirement": "explicit_owner",
+      "enforcement": {
+        "mechanism": "registration_schema_and_owner_review"
+      },
+      "source_sections": []
+    },
+    {
+      "id": "HN-SOURCE-OF-TRUTH",
+      "primitive": "migration.source_of_truth",
+      "scope": "repository",
+      "level": "MANDATORY",
+      "applicability": {
+        "classes": [
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      "expected": {
+        "one_canonical_source": true,
+        "conflicting_candidates": "block_canonicalization",
+        "legacy_preserved": true
+      },
+      "approval_requirement": "explicit_owner",
+      "enforcement": {
+        "mechanism": "migration_evidence_and_validator"
+      },
+      "source_sections": []
+    },
+    {
+      "id": "HN-DESIGN-SYSTEM-ADOPTION",
+      "primitive": "repository.design_system_adoption",
+      "scope": "repository",
+      "level": "MANDATORY",
+      "applicability": {
+        "classes": [
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      "expected": {
+        "contract": "required",
+        "version": "certified_design_system_release",
+        "category": "registered_visual_repository_category",
+        "asset_source": "HouseNet-owned_design_system",
+        "readme": "bilingual_status_navigation",
+        "human_docs": "en_hy_required",
+        "social_preview": "present_or_justified_exemption"
+      },
+      "approval_requirement": "explicit_owner",
+      "enforcement": {
+        "mechanism": "registration_schema_and_repository_validator"
+      },
+      "source_sections": []
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "source": {
+    "website": "https://www.housenet.am/",
+    "logo_sources": [
+      "https://www.housenet.am/storage/settings/main-logo.svg",
+      "https://www.housenet.am/images/logo.svg"
+    ],
+    "observed_css_sources": [
+      "https://www.housenet.am/build/assets/home-4d915779.css",
+      "https://www.housenet.am/build/assets/custom-09375824.css",
+      "https://www.housenet.am/build/assets/step2_home-bd18a643.css"
+    ],
+    "note": "Values are copied from first-party SVG fills or first-party CSS declarations. Role assignments are this repository's interface mapping."
+  },
+  "tokens": {
+    "primary": {"value": "#E4003A", "source": "homepage CSS"},
+    "secondary": {"value": "#1C2125", "source": "homepage CSS"},
+    "accent": {"value": "#A9143D", "source": "homepage CSS"},
+    "dark_background": {"value": "#1C2125", "source": "homepage CSS"},
+    "light_background": {"value": "#F6F9FB", "source": "homepage CSS"},
+    "foreground": {"value": "#1D1D1B", "source": "main logo SVG"},
+    "muted": {"value": "#6F6F6E", "source": "main logo SVG"},
+    "success": {"value": "#78AD57", "source": "homepage CSS; semantic success role"},
+    "warning": {"value": "#A9143D", "source": "homepage CSS; semantic warning role"},
+    "critical": {"value": "#E4003A", "source": "homepage CSS; semantic critical role"},
+    "surface_dark": {"value": "#464F55", "source": "homepage CSS"},
+    "surface_light": {"value": "#EDF3F6", "source": "homepage CSS"},
+    "border_light": {"value": "#D1DCE2", "source": "homepage CSS"},
+    "white": {"value": "#FFFFFF", "source": "footer logo SVG and homepage CSS"}
+  }
+}

@@ -1,0 +1,221 @@
+{
+  "version": "1.4.3",
+  "domain": "git",
+  "rules": [
+    {
+      "id": "HN-BRANCH",
+      "primitive": "git.default_branch",
+      "scope": "repository",
+      "level": "MANDATORY",
+      "applicability": {
+        "classes": [
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      "expected": "main",
+      "approval_requirement": "explicit_owner",
+      "enforcement": {
+        "mechanism": "repository_settings_audit"
+      },
+      "source_sections": [
+        8
+      ]
+    },
+    {
+      "id": "HN-DEVELOPMENT",
+      "primitive": "git.development_flow",
+      "scope": "repository",
+      "level": "MANDATORY",
+      "applicability": {
+        "classes": [
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      "expected": [
+        "branch",
+        "change",
+        "test",
+        "PR",
+        "merge"
+      ],
+      "approval_requirement": "explicit_owner",
+      "enforcement": {
+        "mechanism": "owner_review"
+      },
+      "source_sections": [
+        8
+      ]
+    },
+    {
+      "id": "HN-BRANCH-NAMES",
+      "primitive": "git.branch_names",
+      "scope": "repository",
+      "level": "RECOMMENDED",
+      "applicability": {
+        "classes": [
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      "expected": [
+        "feat/",
+        "fix/",
+        "chore/",
+        "docs/",
+        "refactor/"
+      ],
+      "approval_requirement": "explicit_owner",
+      "enforcement": {
+        "mechanism": "owner_review"
+      },
+      "source_sections": [
+        8
+      ]
+    },
+    {
+      "id": "HN-AUTHOR-NAME",
+      "primitive": "git.user.name",
+      "scope": "environment",
+      "level": "MANDATORY",
+      "applicability": {
+        "classes": [
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      "expected": "ohanyan",
+      "approval_requirement": "explicit_owner",
+      "enforcement": {
+        "mechanism": "preflight"
+      },
+      "source_sections": [
+        12
+      ]
+    },
+    {
+      "id": "HN-AUTHOR-EMAIL",
+      "primitive": "git.user.email",
+      "scope": "environment",
+      "level": "MANDATORY",
+      "applicability": {
+        "classes": [
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      "expected": "329470240+HouseNet-Projects@users.noreply.github.com",
+      "approval_requirement": "explicit_owner",
+      "enforcement": {
+        "mechanism": "preflight"
+      },
+      "source_sections": [
+        12
+      ]
+    },
+    {
+      "id": "HN-INIT-BRANCH",
+      "primitive": "git.init.defaultBranch",
+      "scope": "environment",
+      "level": "MANDATORY",
+      "applicability": {
+        "classes": [
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      "expected": "main",
+      "approval_requirement": "explicit_owner",
+      "enforcement": {
+        "mechanism": "preflight"
+      },
+      "source_sections": [
+        12
+      ]
+    },
+    {
+      "id": "HN-EXPLICIT-IDENTITY",
+      "primitive": "git.user.useConfigOnly",
+      "scope": "environment",
+      "level": "MANDATORY",
+      "applicability": {
+        "classes": [
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      "expected": "true",
+      "approval_requirement": "explicit_owner",
+      "enforcement": {
+        "mechanism": "preflight"
+      },
+      "source_sections": [
+        12
+      ]
+    },
+    {
+      "id": "HN-PULL",
+      "primitive": "git.pull.ff",
+      "scope": "environment",
+      "level": "MANDATORY",
+      "applicability": {
+        "classes": [
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      "expected": "only",
+      "approval_requirement": "explicit_owner",
+      "enforcement": {
+        "mechanism": "preflight"
+      },
+      "source_sections": [
+        12
+      ]
+    },
+    {
+      "id": "HN-COMMITS",
+      "primitive": "git.commit_messages",
+      "scope": "repository",
+      "level": "RECOMMENDED",
+      "applicability": {
+        "classes": [
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      "expected": {
+        "meaningful": true,
+        "suggested_prefixes": [
+          "feat",
+          "fix",
+          "docs",
+          "chore"
+        ],
+        "avoid": [
+          "update",
+          "stuff",
+          "final",
+          "changes2"
+        ]
+      },
+      "approval_requirement": "explicit_owner",
+      "enforcement": {
+        "mechanism": "owner_review"
+      },
+      "source_sections": [
+        23
+      ]
+    }
+  ]
+}

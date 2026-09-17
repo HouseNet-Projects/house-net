@@ -1,0 +1,27 @@
+#!/usr/bin/env python3
+from pathlib import Path
+import subprocess, sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from housenet.versioning import read_manifest, sync_surfaces, valid_semver
+
+root = Path.cwd()
+if len(sys.argv) < 2 or sys.argv[1] not in {'get', 'check', 'set', 'sync'}:
+    print('usage: housenet-version get|check|set X.Y.Z|sync', file=sys.stderr); raise SystemExit(2)
+mode = sys.argv[1]
+if mode == 'get': print(read_manifest(root)['version']); raise SystemExit(0)
+if mode == 'check': raise SystemExit(subprocess.call([str(root/'bin/check-version-consistency'), str(root)]))
+if mode == 'sync':
+    version = read_manifest(root)['version']
+else:
+    if len(sys.argv) != 3 or not valid_semver(sys.argv[2]):
+        print('FAIL — version must be strict MAJOR.MINOR.PATCH', file=sys.stderr); raise SystemExit(2)
+    version = sys.argv[2]
+status = subprocess.run(['git', 'status', '--porcelain'], capture_output=True, text=True)
+if status.stdout.strip():
+    print('FAIL — working tree must be clean before version change', file=sys.stderr); raise SystemExit(1)
+try:
+    changed = sync_surfaces(root, version)
+    subprocess.check_call([str(root/'bin/check-version-consistency'), str(root)])
+    print('CHANGED ' + ', '.join(changed))
+except Exception as exc:
+    print('FAIL — ' + str(exc), file=sys.stderr); raise SystemExit(1)
