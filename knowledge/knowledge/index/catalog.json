@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "generated": true,
+  "items": [
+    {
+      "id": "HN-KNOW-DEPUTY-IDENTITY",
+      "status": "canonical",
+      "path": "knowledge/canonical/HN-KNOW-DEPUTY-IDENTITY.json"
+    }
+  ]
+}

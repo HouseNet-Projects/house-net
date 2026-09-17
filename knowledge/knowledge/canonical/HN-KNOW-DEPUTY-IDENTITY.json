@@ -1,0 +1,21 @@
+{
+  "id": "HN-KNOW-DEPUTY-IDENTITY",
+  "title": "Deputy identity and operating role",
+  "domain": "Deputy identity",
+  "owner": "HOUSE_NET_OWNER",
+  "status": "canonical",
+  "source": {
+    "type": "repository",
+    "uri": "repo://HouseNet-Projects/house-net-command-center/.claude/policy/workspace_policy.json@9078f6a0467275350231615931d25d52c466d730",
+    "hash": "87982e2f9a5da455016790f76ad9e8f272df4c131155182c15050cd766682fec"
+  },
+  "sensitivity": "INTERNAL",
+  "language": [
+    "en",
+    "hy"
+  ],
+  "last_verified": "2026-09-16",
+  "freshness": {
+    "state": "current"
+  }
+}
