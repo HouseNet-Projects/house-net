@@ -45,6 +45,8 @@ Professional brains never become separate agents, authorities, memories or write
 
 ## Current operating surface
 
+<p align="center"><img src="design-system/assets/github/capabilities.svg" alt="Current HouseNet capabilities" width="100%"></p>
+
 | Capability | State |
 | --- | --- |
 | Tasks register | Verified read |
@@ -59,6 +61,14 @@ Professional brains never become separate agents, authorities, memories or write
 Status is presented for navigation; the canonical runtime and policy remain in their component folders.
 
 ## Repository map
+
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="design-system/assets/github/repo-map-dark.svg">
+    <source media="(prefers-color-scheme: light)" srcset="design-system/assets/github/repo-map-light.svg">
+    <img src="design-system/assets/github/repo-map-light.svg" alt="HouseNet repository map" width="100%">
+  </picture>
+</p>
 
 ```text
 control-plane/   governance and contracts
