@@ -1,0 +1,19 @@
+[Unit]
+Description=HouseNet Deputy operator API
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=gevorg
+WorkingDirectory=/home/gevorg/house-net/command-center
+Environment=DEPUTY_BIND=127.0.0.1
+Environment=DEPUTY_PORT=8765
+ExecStart=/home/gevorg/house-net/command-center/.venv/bin/python product_api.py
+Restart=on-failure
+RestartSec=5
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

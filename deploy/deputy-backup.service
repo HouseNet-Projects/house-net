@@ -1,0 +1,10 @@
+[Unit]
+Description=HouseNet Deputy durable backup
+
+[Service]
+Type=oneshot
+User=gevorg
+WorkingDirectory=/home/gevorg/house-net/command-center
+ExecStart=/home/gevorg/house-net/command-center/.venv/bin/python -c "import backup_ops; print(backup_ops.backup())"
+NoNewPrivileges=true
+PrivateTmp=true

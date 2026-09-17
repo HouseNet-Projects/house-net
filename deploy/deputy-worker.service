@@ -1,0 +1,18 @@
+[Unit]
+Description=HouseNet Deputy proactive worker
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=gevorg
+WorkingDirectory=/home/gevorg/house-net/command-center
+Environment=DEPUTY_WORKER_INTERVAL=900
+ExecStart=/home/gevorg/house-net/command-center/.venv/bin/python worker.py
+Restart=on-failure
+RestartSec=10
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
