@@ -1,13 +1,13 @@
 {
-  "authority_id": "EAE-OCI-DEPUTY-HOST-SETUP",
+  "authority_id": "EAE-OPERATOR-UI-REMEDIATION",
   "approved_by": "GEV",
-  "approval_reference": "gev-explicit-oci-free-tier-deputy-setup",
-  "approved_at": "2026-09-17T21:00:00Z",
-  "mission": "Create and prepare the dedicated Always Free Oracle Cloud Deputy host, isolated network, localhost-only deployment, and operational certification.",
+  "approval_reference": "gev-explicit-operator-ui-product-remediation",
+  "approved_at": "2026-09-18T00:00:00Z",
+  "mission": "Replace raw generic operator UI rendering with HouseNet token-aligned screen-specific presentation adapters and regression coverage.",
   "repository": "HouseNet-Projects/house-net",
-  "base_sha": "72f10c7e10fff6aaffd745183007eec4b07d9cee",
-  "branch": "fix/deploy-backup-ownership",
-  "pr": "17",
+  "base_sha": "9ad816ed0ce58df8f313e269ff46e95359438772",
+  "branch": "fix/operator-ui-product",
+  "pr": "18",
   "allowed_operations": [
     "branch",
     "edit",
@@ -20,7 +20,8 @@
     "regenerate_artifacts"
   ],
   "allowed_paths": [
-    "deploy/install.sh",
+    "command-center/product_api.py",
+    "command-center/.claude/tests/test_product_api.py",
     ".github/engineering-authority.json"
   ],
   "prohibited_operations": [
@@ -34,7 +35,7 @@
     "action_runtime_bypass"
   ],
   "risk_ceiling": "LOW",
-  "expires_at": "2026-10-17T23:59:59Z",
+  "expires_at": "2026-10-18T23:59:59Z",
   "status": "ACTIVE",
   "audit_trail": [
     {

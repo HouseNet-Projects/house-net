@@ -13,7 +13,6 @@ class ProductApiTests(unittest.TestCase):
         self.assertTrue(hasattr(product_api, 'serve'))
         self.assertTrue(hasattr(product_api, 'Handler'))
 
-if __name__=='__main__': unittest.main()
 
 class ProductHardeningTests(unittest.TestCase):
     def test_ui_has_all_operator_surfaces(self):
@@ -28,3 +27,28 @@ class ProductHardeningTests(unittest.TestCase):
     def test_request_limit_and_safe_headers(self):
         self.assertIn('REQUEST_TOO_LARGE', product_api.Handler.do_POST.__code__.co_consts)
         self.assertIn('X-Content-Type-Options', product_api.Handler._json.__code__.co_consts)
+
+class OperatorPresentationTests(unittest.TestCase):
+    def test_house_net_tokens_are_the_single_visual_contract(self):
+        css = product_api.INDEX_HTML
+        for token in ('#E4003A', '#1C2125', '#F6F9FB', '#EDF3F6', '#D1DCE2', '#78AD57', 'Inter', 'Noto Sans Armenian', '1180px'):
+            self.assertIn(token, css)
+        self.assertNotIn('--blue', css)
+
+    def test_screen_specific_adapters_and_safe_diagnostic_boundary(self):
+        js = product_api.APP_JS
+        for fn in ('renderCockpit','renderAttention','renderApprovals','renderMissions','renderExecution','renderSources','renderReports','renderHistory','renderNotifications','renderWorker'):
+            self.assertIn('function '+fn, js)
+        self.assertIn('Evidence and diagnostic details', js)
+        self.assertNotIn('[object Object]', js)
+        self.assertNotIn("'Record '+(i+1)", js)
+        self.assertNotIn('Record '+"' +", js)
+
+    def test_humanized_timestamps_and_semantic_empty_states(self):
+        js = product_api.APP_JS
+        self.assertIn('toLocaleString', js)
+        self.assertIn('Deputy has no matching canonical data', js)
+        self.assertIn('Chronological activity', js)
+        self.assertIn('Exact approval inbox', js)
+
+if __name__=='__main__': unittest.main()
