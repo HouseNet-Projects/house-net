@@ -493,7 +493,11 @@ def commitment_memory(inputs, skill=None, reg=None):
     answers «ով ինչ ա խոստացել», «ով ա ամենաշատ խոստում ուշացնում», «վաղը ումից ինչ եմ սպասում». Read-only; closing needs evidence (fulfil)."""
     import commitments as CM
     today = _today(inputs); t = today.isoformat(); q = _norm(inputs.get("query") or inputs.get("intent") or inputs.get("text") or "")
-    items = CM.open_rows(t); out = {"status": "EXECUTED", "count": len(items), "commitments": items, "by_person": {k: [{"op_id": r["op_id"], "what": r["what"][:100], "due": r["due_display"], "lifecycle": r["lifecycle"], "evidence_refs": len(r.get("evidence") or [])} for r in v] for k, v in CM.by_person(t).items()},
+    # Work-graph checkpoints and commitments share the historical Store table;
+    # only canonical commitment-shaped rows belong in this view.
+    items = [r for r in CM.open_rows(t) if r.get("what")]
+    grouped = {k: [r for r in v if r.get("what")] for k, v in CM.by_person(t).items()}
+    out = {"status": "EXECUTED", "count": len(items), "commitments": items, "by_person": {k: [{"op_id": r["op_id"], "what": r["what"][:100], "due": r["due_display"], "lifecycle": r["lifecycle"], "evidence_refs": len(r.get("evidence") or [])} for r in v] for k, v in grouped.items()},
            "overdue": [r for r in items if r["lifecycle"] == "OVERDUE"], "due_soon": [r for r in items if r["lifecycle"] == "DUE_SOON"], "unknown_due": [r for r in items if not r.get("due")], "late_leaders": CM.late_leaders(t), "mutation_performed": False}
     if inputs.get("fulfil"):
         f = inputs["fulfil"]; out["fulfil"] = CM.fulfil(f.get("op_id"), f.get("evidence"), by="Gev"); out["mutation_performed"] = out["fulfil"].get("status") == "FULFILLED"

@@ -101,6 +101,25 @@ For the full operating contract, start with [`docs/README.md`](docs/README.md), 
 
 `HouseNet-Projects/house-net` is the canonical HouseNet source tree. The root control contract is [`house-net-control.json`](house-net-control.json). Runtime truth, policy and approvals are machine-enforced by the component owners and required CI checks.
 
+## Run the operating loop
+
+```bash
+cd command-center
+./.venv/bin/python deputy.py run "Give me today operating brief"
+./.venv/bin/python deputy.py run "Prepare this week Sales and Operations execution plan" --json
+```
+
+Deputy records the interpreted scope, current source state, routed brains, work graph and follow-through in the existing Command Center Store. `resume MIS-…` reopens a recorded mission. Analysis and preparation continue without a second confirmation; material external changes remain behind the Action Runtime and exact Gev approval.
+
+### Գործառնական ցիկլը
+
+```bash
+cd command-center
+./.venv/bin/python deputy.py run "Տուր այսօրվա գործառնական ամփոփագիրը"
+```
+
+Deputy-ն պահպանում է խնդրի մեկնաբանությունը, ընթացիկ աղբյուրները, աշխատանքային գրաֆը և բաց օղակները։ Արտաքին նյութական փոփոխությունները կատարվում են միայն Action Runtime-ով և Գևի հստակ հաստատմամբ։
+
 ---
 
 <p align="center"><sub>HouseNet · governed operations with evidence at the end of every loop</sub></p>
