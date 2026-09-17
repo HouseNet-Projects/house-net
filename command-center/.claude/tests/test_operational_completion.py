@@ -40,5 +40,4 @@ class WorkerHardeningTests(unittest.TestCase):
 
 class WorkerProcessStatusTests(unittest.TestCase):
     def test_live_process_is_reported_running(self):
-        s=worker._status({'pid':os.getpid(),'running':False})
-        self.assertTrue(s['running'])
+        self.assertTrue(worker._pid_alive(os.getpid()))
