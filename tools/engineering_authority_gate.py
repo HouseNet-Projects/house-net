@@ -26,6 +26,10 @@ def main():
  if env_path and pathlib.Path(env_path).exists(): envelope=json.loads(pathlib.Path(env_path).read_text())
  elif os.environ.get('HOUSENET_ENGINEERING_AUTHORITY_JSON'):
   envelope=json.loads(os.environ['HOUSENET_ENGINEERING_AUTHORITY_JSON'])
+ # A committed envelope is PR-bound. Never reuse a record issued for another
+ # PR; sensitive-path changes then fall through to the owner-review boundary.
+ if envelope and envelope.get('pr') and str(envelope['pr']) != os.environ.get('GITHUB_EVENT_PULL_REQUEST_NUMBER',''):
+  envelope=None
  sensitive=any(any(p==s or p.startswith(s) for s in SENSITIVE) for p in paths)
  if envelope:
   if envelope.get('base_sha') and not ancestor(envelope['base_sha'],base): return fail('envelope base is not ancestor of PR base')
