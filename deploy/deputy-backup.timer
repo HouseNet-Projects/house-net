@@ -1,9 +1,8 @@
 [Unit]
-Description=Nightly HouseNet Deputy backup
-
+Description=HouseNet Deputy scheduled backup
 [Timer]
 OnCalendar=*-*-* 03:15:00
 Persistent=true
-
+Unit=deputy-backup.service
 [Install]
 WantedBy=timers.target
