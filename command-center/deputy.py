@@ -7,7 +7,7 @@ human-readable rendering needed for an operator to use the existing runtime.
 No provider writer, task store or approval mechanism is implemented here.
 """
 from __future__ import annotations
-import argparse, datetime, hashlib, json, pathlib, sys
+import argparse, datetime, hashlib, json, pathlib, sys, os
 import re
 
 ROOT = pathlib.Path(__file__).resolve().parent
