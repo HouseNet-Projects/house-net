@@ -7,7 +7,7 @@
   "repository": "HouseNet-Projects/house-net",
   "base_sha": "50c57c23f3243a377c4656fa2a8d5d5cb24bff6a",
   "branch": "product/deputy-live-operating-loop",
-  "pr": "PENDING",
+  "pr": "8",
   "allowed_operations": [
     "branch",
     "edit",
