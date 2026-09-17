@@ -1,13 +1,13 @@
 {
-  "authority_id": "EAE-FINAL-PRODUCT-HARDENING",
+  "authority_id": "EAE-FINAL-PRODUCT-HARDENING-UI",
   "approved_by": "GEV",
   "approval_reference": "gev-mission-product-completion-hardening",
   "approved_at": "2026-09-17T20:00:00Z",
-  "mission": "Complete the Deputy browser operator product, approval execution path, readiness, supervised worker recovery, host-adaptable deployment and operational backup/restore.",
+  "mission": "Complete the operator approval inbox presentation without changing runtime semantics.",
   "repository": "HouseNet-Projects/house-net",
-  "base_sha": "c92fa956c3aae1e7a6a9097b66e014bcc47d50d5",
-  "branch": "product/final-product-hardening",
-  "pr": "14",
+  "base_sha": "4f133cfdff16427359e2eb380e076dfcbaf48c4f",
+  "branch": "product/final-product-hardening-ui",
+  "pr": "15",
   "allowed_operations": [
     "branch",
     "edit",
