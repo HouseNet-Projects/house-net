@@ -25,7 +25,6 @@ jobs:
         with: {lfs: true}
       - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
         with: {python-version: '3.12'}
-      - run: python -m pip install --disable-pip-version-check --no-input -q -r knowledge/requirements.txt
       - run: python design-system/validators/validate_design_system.py design-system
       - run: python -m unittest discover -s design-system/tests -q
   knowledge:
@@ -35,7 +34,7 @@ jobs:
         with: {lfs: true}
       - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
         with: {python-version: '3.12'}
-      - run: python -m pip install --disable-pip-version-check --no-input -q -r vault/requirements.txt
+      - run: python -m pip install --disable-pip-version-check --no-input -q -r knowledge/requirements.txt
       - run: python knowledge/bin/validate-knowledge
       - run: python -m unittest discover -s knowledge/tests -v
   vault:
@@ -45,6 +44,7 @@ jobs:
         with: {lfs: true}
       - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
         with: {python-version: '3.12'}
+      - run: python -m pip install --disable-pip-version-check --no-input -q -r vault/requirements.txt
       - run: python vault/bin/validate-vault
       - run: python -m unittest discover -s vault/tests -v
   command-center:
