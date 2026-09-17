@@ -85,3 +85,16 @@ flowchart LR
 ### Անվտանգության սահման
 
 Գաղտնիքները, provider credentials-ը, production database-ները, live provider record-ները և machine-local recovery key-երը source history չեն մտնում։ Հաստատված encrypted recovery artifact-ը մնում է opaque և անփոփոխ։ Provider-specific adapter-ները runtime integration-ի մանրամասներ են, իսկ HouseNet governance-ը մնում է provider-neutral։
+
+## Production operator surface / Արտադրական օպերատորի մակերես
+
+`product_api.py` is the thin operator controller over the canonical Deputy runtime.
+It serves the cockpit, attention and approval views, mission questions, source
+health, notifications and dry-run previews. It binds to localhost by default;
+set `DEPUTY_OPERATOR_TOKEN` before hosting it beyond the local machine.
+
+`product_api.py`-ը բարակ օպերատորի վերահսկիչ է, որը աշխատում է Deputy-ի
+կանոնական runtime-ի վրա։ Այն տրամադրում է cockpit, ուշադրության և հաստատումների
+տեսքերը, առաքելությունների հարցերը, աղբյուրների առողջությունը, ծանուցումները և
+նախնական փորձարկումները։ Լռելյայն կապվում է localhost-ին․ արտաքին հոսթինգից
+առաջ սահմանեք `DEPUTY_OPERATOR_TOKEN`։
