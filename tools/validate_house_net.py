@@ -7,7 +7,7 @@ def fail(msg): print(f"FAIL — {msg}"); return 2
 def main():
     try:
         control=json.loads((ROOT/'house-net-control.json').read_text())
-        matrix=json.loads((ROOT/'control-plane/policy/enforcement-matrix.json').read_text())
+        matrix=json.loads((ROOT/'docs/governance/enforcement-matrix.json').read_text())
         docs=json.loads((ROOT/'docs/document-index.json').read_text())
     except Exception as e: return fail(f"control artifact unreadable: {type(e).__name__}")
     if control.get('repository')!='HouseNet-Projects/house-net' or control.get('control_plane')!='HouseNet-Projects/house-net': return fail('root canonical authority mismatch')
