@@ -1,0 +1,27 @@
+{
+  "template": "executive",
+  "version": "1.1.0",
+  "bilingual": true,
+  "layouts": [
+    "cover",
+    "agenda",
+    "section",
+    "executive-summary",
+    "kpi",
+    "two-column",
+    "comparison",
+    "table",
+    "chart",
+    "timeline",
+    "process",
+    "risk",
+    "decision",
+    "closing"
+  ],
+  "rules": {
+    "logo": "assets/brand/original/housenet-main-logo.svg",
+    "accent": "{color.primary}",
+    "body": "{typography.font-family-sans}",
+    "safe_area": "8%"
+  }
+}

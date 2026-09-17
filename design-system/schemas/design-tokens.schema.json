@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "$schema",
+    "version"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "source": {
+      "type": "string"
+    },
+    "color": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/token"
+      }
+    },
+    "typography": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/token"
+      }
+    },
+    "space": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/token"
+      }
+    },
+    "radius": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/token"
+      }
+    },
+    "shadow": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/token"
+      }
+    },
+    "status": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object"
+      }
+    },
+    "document": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/token"
+      }
+    },
+    "grid": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/token"
+      }
+    },
+    "diagram": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/token"
+      }
+    },
+    "chart": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/token"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "token": {
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {},
+        "role": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

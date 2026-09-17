@@ -1,0 +1,22 @@
+#!/usr/bin/env python3
+from pathlib import Path
+import json,re,sys
+root=Path(sys.argv[1]).resolve() if len(sys.argv)>1 else Path.cwd()
+m=json.loads((root/'release/manifest.json').read_text())
+version=m['version']; cp=m['control_plane_version']
+en=f'''<!-- housenet-generated: design-status:start -->
+| STATUS | VERSION | CLASS | CONTROL PLANE | LANGUAGE |
+| :--- | :--- | :--- | :--- | :--- |
+| **ACTIVE** | **{version}** | **B — STANDARD** | **Policy {cp}** | **EN + HY** |
+<!-- housenet-generated: design-status:end -->'''
+hy=f'''<!-- housenet-generated: design-status-hy:start -->
+| ԿԱՐԳԱՎԻՃԱԿ | ՏԱՐԲԵՐԱԿ | ԴԱՍ | CONTROL PLANE | ԼԵԶՈՒ |
+| :--- | :--- | :--- | :--- | :--- |
+| **ԱԿՏԻՎ** | **{version}** | **B — STANDARD** | **Policy {cp}** | **EN + HY** |
+<!-- housenet-generated: design-status-hy:end -->'''
+p=root/'README.md'; s=p.read_text()
+s,n=re.subn(r'<!-- housenet-generated: design-status:start -->.*?<!-- housenet-generated: design-status:end -->',en,s,flags=re.S)
+if n!=1: raise SystemExit('English status region missing')
+s,n=re.subn(r'<!-- housenet-generated: design-status-hy:start -->.*?<!-- housenet-generated: design-status-hy:end -->',hy,s,flags=re.S)
+if n!=1: raise SystemExit('Armenian status region missing')
+p.write_text(s)
