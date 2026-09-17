@@ -21,7 +21,7 @@ class ProductHardeningTests(unittest.TestCase):
             self.assertIn(label, product_api.INDEX_HTML)
     def test_readiness_is_dependency_shaped(self):
         self.assertIn('actions', product_api.Handler._readiness.__code__.co_names)
-        self.assertIn('optional_sources', product_api.Handler._readiness.__code__.co_consts)
+        self.assertIn('optional_sources', __import__('inspect').getsource(product_api.Handler._readiness))
     def test_approval_routes_delegate_to_action_runtime(self):
         self.assertIn('approve', product_api.Handler.do_POST.__code__.co_names)
         self.assertIn('execute_approved', product_api.Handler.do_POST.__code__.co_names)
