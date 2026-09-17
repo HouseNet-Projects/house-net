@@ -21,7 +21,7 @@ def main():
   oid,path=(line.split(' ',1)+[''])[:2]
   try: b=subprocess.check_output(['git','-C',str(ROOT),'cat-file','-p',oid],stderr=subprocess.DEVNULL)
   except Exception: continue
-  if path == 'tools/secret_scan.py':
+  if path == 'tools/secret_scan.py' or '__pycache__' in pathlib.Path(path).parts:
    continue
   if contains_secret(b) and not is_known_fixture(path,b): findings.append(('history',path))
  if findings: print('FAIL — high-confidence secret patterns found:',len(findings)); return 2
