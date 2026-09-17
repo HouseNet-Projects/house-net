@@ -19,6 +19,7 @@ for p in (SKILLS, ARCH, INTEGRATIONS):
 import engine
 import company_cockpit
 import execution_surface
+import proactive
 
 
 def _mission_id(intent):
@@ -37,6 +38,7 @@ def _canonical_intent(intent):
         return "company cockpit"
     if "weekly management review" in text: return "weekly management review"
     if "monthly management review" in text: return "monthly management review"
+    if any(k in text for k in ("watch current", "proactive check", "what changed today")): return "proactive cycle"
     return intent
 
 
@@ -122,6 +124,7 @@ def run(intent, *, inputs=None, as_json=False):
         execution = {"mode": "PREPARE_ONLY", "approval_inbox": execution_surface.approval_inbox(mission_id),
                      "capability_matrix": execution_surface.capability_matrix(),
                      "policy": "THINK/PREPARE proceeds; COMMIT/CHANGE remains exact Action Runtime approval."}
+    proactive_result = proactive.run_cycle() if canonical_intent == "proactive cycle" else None
     graph = None
     try:
         # Mission graphs are checkpoints in the existing Store. The
@@ -146,6 +149,7 @@ def run(intent, *, inputs=None, as_json=False):
         "context": context, "routing": routing, "runtime": result, "work_graph": graph,
         "cockpit": cockpit,
         "execution": execution,
+        "proactive": proactive_result,
         "completion_state": "PREPARED" if result.get("status") in ("OK", "PARTIAL") else "BLOCKED",
         "authority": "ACTION_RUNTIME_ONLY_FOR_MATERIAL_MUTATION"}
     store = engine._store(); store.upsert("commitments", mission_id, payload)
