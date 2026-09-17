@@ -1,0 +1,313 @@
+{
+  "schema_version": "1.0",
+  "total_rules": 51,
+  "unmapped_rules": [],
+  "rules": [
+    {
+      "source": "control-plane/policy/actions.json",
+      "index": 0,
+      "rule_id": "HN-PERMISSIONS",
+      "classification": "MACHINE_ENFORCED"
+    },
+    {
+      "source": "control-plane/policy/actions.json",
+      "index": 1,
+      "rule_id": "HN-SOURCES",
+      "classification": "MACHINE_ENFORCED"
+    },
+    {
+      "source": "control-plane/policy/actions.json",
+      "index": 2,
+      "rule_id": "HN-CI",
+      "classification": "HUMAN_DECISION_REQUIRED"
+    },
+    {
+      "source": "control-plane/policy/actions.json",
+      "index": 3,
+      "rule_id": "HN-DEPLOYMENT",
+      "classification": "HUMAN_DECISION_REQUIRED"
+    },
+    {
+      "source": "control-plane/policy/authority.json",
+      "index": 0,
+      "rule_id": "HN-PURPOSE",
+      "classification": "HUMAN_DECISION_REQUIRED"
+    },
+    {
+      "source": "control-plane/policy/authority.json",
+      "index": 1,
+      "rule_id": "HN-IDENTITY",
+      "classification": "MACHINE_ENFORCED"
+    },
+    {
+      "source": "control-plane/policy/authority.json",
+      "index": 2,
+      "rule_id": "HN-NAMESPACE",
+      "classification": "MACHINE_ENFORCED"
+    },
+    {
+      "source": "control-plane/policy/authority.json",
+      "index": 3,
+      "rule_id": "HN-CREATION",
+      "classification": "HUMAN_DECISION_REQUIRED"
+    },
+    {
+      "source": "control-plane/policy/authority.json",
+      "index": 4,
+      "rule_id": "HN-CONFIGURATION",
+      "classification": "HUMAN_DECISION_REQUIRED"
+    },
+    {
+      "source": "control-plane/policy/authority.json",
+      "index": 5,
+      "rule_id": "HN-DESTRUCTIVE",
+      "classification": "HUMAN_DECISION_REQUIRED"
+    },
+    {
+      "source": "control-plane/policy/authority.json",
+      "index": 6,
+      "rule_id": "HN-SCOPE",
+      "classification": "HUMAN_DECISION_REQUIRED"
+    },
+    {
+      "source": "control-plane/policy/authority.json",
+      "index": 7,
+      "rule_id": "HN-LEVELS",
+      "classification": "MACHINE_ENFORCED"
+    },
+    {
+      "source": "control-plane/policy/authority.json",
+      "index": 8,
+      "rule_id": "HN-OPERATING-FLOW",
+      "classification": "HUMAN_DECISION_REQUIRED"
+    },
+    {
+      "source": "control-plane/policy/authority.json",
+      "index": 9,
+      "rule_id": "HN-OUT-OF-SCOPE",
+      "classification": "HUMAN_DECISION_REQUIRED"
+    },
+    {
+      "source": "control-plane/policy/authority.json",
+      "index": 10,
+      "rule_id": "HN-PROPORTIONALITY",
+      "classification": "HUMAN_DECISION_REQUIRED"
+    },
+    {
+      "source": "control-plane/policy/authority.json",
+      "index": 11,
+      "rule_id": "HN-PERSON-INDEPENDENT-AUTHORITY",
+      "classification": "MACHINE_ENFORCED"
+    },
+    {
+      "source": "control-plane/policy/git.json",
+      "index": 0,
+      "rule_id": "HN-BRANCH",
+      "classification": "MACHINE_ENFORCED"
+    },
+    {
+      "source": "control-plane/policy/git.json",
+      "index": 1,
+      "rule_id": "HN-DEVELOPMENT",
+      "classification": "HUMAN_DECISION_REQUIRED"
+    },
+    {
+      "source": "control-plane/policy/git.json",
+      "index": 2,
+      "rule_id": "HN-BRANCH-NAMES",
+      "classification": "HUMAN_DECISION_REQUIRED"
+    },
+    {
+      "source": "control-plane/policy/git.json",
+      "index": 3,
+      "rule_id": "HN-AUTHOR-NAME",
+      "classification": "MACHINE_ENFORCED"
+    },
+    {
+      "source": "control-plane/policy/git.json",
+      "index": 4,
+      "rule_id": "HN-AUTHOR-EMAIL",
+      "classification": "MACHINE_ENFORCED"
+    },
+    {
+      "source": "control-plane/policy/git.json",
+      "index": 5,
+      "rule_id": "HN-INIT-BRANCH",
+      "classification": "MACHINE_ENFORCED"
+    },
+    {
+      "source": "control-plane/policy/git.json",
+      "index": 6,
+      "rule_id": "HN-EXPLICIT-IDENTITY",
+      "classification": "MACHINE_ENFORCED"
+    },
+    {
+      "source": "control-plane/policy/git.json",
+      "index": 7,
+      "rule_id": "HN-PULL",
+      "classification": "MACHINE_ENFORCED"
+    },
+    {
+      "source": "control-plane/policy/git.json",
+      "index": 8,
+      "rule_id": "HN-COMMITS",
+      "classification": "HUMAN_DECISION_REQUIRED"
+    },
+    {
+      "source": "control-plane/policy/merge.json",
+      "index": 0,
+      "rule_id": "HN-PROTECTION",
+      "classification": "MACHINE_ENFORCED"
+    },
+    {
+      "source": "control-plane/policy/merge.json",
+      "index": 1,
+      "rule_id": "HN-REVIEW",
+      "classification": "HUMAN_DECISION_REQUIRED"
+    },
+    {
+      "source": "control-plane/policy/merge.json",
+      "index": 2,
+      "rule_id": "HN-METHODS",
+      "classification": "MACHINE_ENFORCED"
+    },
+    {
+      "source": "control-plane/policy/notifications.json",
+      "index": 0,
+      "rule_id": "HN-SIGNAL",
+      "classification": "HUMAN_DECISION_REQUIRED"
+    },
+    {
+      "source": "control-plane/policy/repository-baseline.json",
+      "index": 0,
+      "rule_id": "HN-CREATE",
+      "classification": "HUMAN_DECISION_REQUIRED"
+    },
+    {
+      "source": "control-plane/policy/repository-baseline.json",
+      "index": 1,
+      "rule_id": "HN-CLASSIFICATION",
+      "classification": "MACHINE_ENFORCED"
+    },
+    {
+      "source": "control-plane/policy/repository-baseline.json",
+      "index": 2,
+      "rule_id": "HN-RECLASSIFY",
+      "classification": "HUMAN_DECISION_REQUIRED"
+    },
+    {
+      "source": "control-plane/policy/repository-baseline.json",
+      "index": 3,
+      "rule_id": "HN-NAMING",
+      "classification": "MACHINE_ENFORCED"
+    },
+    {
+      "source": "control-plane/policy/repository-baseline.json",
+      "index": 4,
+      "rule_id": "HN-FILES",
+      "classification": "MACHINE_ENFORCED"
+    },
+    {
+      "source": "control-plane/policy/repository-baseline.json",
+      "index": 5,
+      "rule_id": "HN-GOVERNANCE",
+      "classification": "HUMAN_DECISION_REQUIRED"
+    },
+    {
+      "source": "control-plane/policy/repository-baseline.json",
+      "index": 6,
+      "rule_id": "HN-LICENSE",
+      "classification": "MACHINE_ENFORCED"
+    },
+    {
+      "source": "control-plane/policy/repository-baseline.json",
+      "index": 7,
+      "rule_id": "HN-VERSIONING",
+      "classification": "HUMAN_DECISION_REQUIRED"
+    },
+    {
+      "source": "control-plane/policy/repository-baseline.json",
+      "index": 8,
+      "rule_id": "HN-PRS",
+      "classification": "HUMAN_DECISION_REQUIRED"
+    },
+    {
+      "source": "control-plane/policy/repository-baseline.json",
+      "index": 9,
+      "rule_id": "HN-DEPRECATION",
+      "classification": "HUMAN_DECISION_REQUIRED"
+    },
+    {
+      "source": "control-plane/policy/repository-baseline.json",
+      "index": 10,
+      "rule_id": "HN-DOC-HUMAN-VISIBLE-BILINGUAL",
+      "classification": "MACHINE_ENFORCED"
+    },
+    {
+      "source": "control-plane/policy/repository-baseline.json",
+      "index": 11,
+      "rule_id": "HN-VERSION-SINGLE-SOURCE",
+      "classification": "MACHINE_ENFORCED"
+    },
+    {
+      "source": "control-plane/policy/repository-baseline.json",
+      "index": 12,
+      "rule_id": "HN-ARCH-AI-PROVIDER-INDEPENDENCE",
+      "classification": "MACHINE_ENFORCED"
+    },
+    {
+      "source": "control-plane/policy/repository-baseline.json",
+      "index": 13,
+      "rule_id": "HN-MIGRATION-STAGED-ADOPTION",
+      "classification": "MACHINE_ENFORCED"
+    },
+    {
+      "source": "control-plane/policy/repository-baseline.json",
+      "index": 14,
+      "rule_id": "HN-DATA-CLASSIFICATION",
+      "classification": "MACHINE_ENFORCED"
+    },
+    {
+      "source": "control-plane/policy/repository-baseline.json",
+      "index": 15,
+      "rule_id": "HN-SOURCE-OF-TRUTH",
+      "classification": "MACHINE_ENFORCED"
+    },
+    {
+      "source": "control-plane/policy/repository-baseline.json",
+      "index": 16,
+      "rule_id": "HN-DESIGN-SYSTEM-ADOPTION",
+      "classification": "MACHINE_ENFORCED"
+    },
+    {
+      "source": "control-plane/policy/repository-classes.json",
+      "index": 0,
+      "rule_id": "HN-CLASS-A",
+      "classification": "MACHINE_ENFORCED"
+    },
+    {
+      "source": "control-plane/policy/repository-classes.json",
+      "index": 1,
+      "rule_id": "HN-CLASS-B",
+      "classification": "MACHINE_ENFORCED"
+    },
+    {
+      "source": "control-plane/policy/repository-classes.json",
+      "index": 2,
+      "rule_id": "HN-CLASS-C",
+      "classification": "MACHINE_ENFORCED"
+    },
+    {
+      "source": "control-plane/policy/security.json",
+      "index": 0,
+      "rule_id": "HN-DEPENDENCIES",
+      "classification": "MACHINE_ENFORCED"
+    },
+    {
+      "source": "control-plane/policy/security.json",
+      "index": 1,
+      "rule_id": "HN-SECRETS",
+      "classification": "HUMAN_DECISION_REQUIRED"
+    }
+  ]
+}

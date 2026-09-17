@@ -10,7 +10,7 @@ The machine-readable inventory is [`docs/document-index.json`](document-index.js
 
 ## Where to start
 
-- Governance and enforcement: `house-net-control.json`, `control-plane/policy/`, `docs/governance/enforcement-matrix.json`, `tools/validate_house_net.py`
+- Governance and enforcement: `house-net-control.json`, `control-plane/policy/`, `docs/governance/enforcement-matrix.json`, `docs/governance/engineering-authority.schema.json`, `tools/validate_house_net.py`
 - Deputy runtime and operational state: `command-center/.claude/`
 - Durable knowledge: `knowledge/`
 - Secret references and recovery metadata: `vault/`
@@ -19,6 +19,6 @@ The machine-readable inventory is [`docs/document-index.json`](document-index.js
 
 ## Enforcement
 
-Critical rules are mapped to executable validators, runtime gates, tests and CI in `docs/governance/enforcement-matrix.json`. Run `python tools/validate_house_net.py` and the Control Plane validator before reviewing a change.
+Critical rules are mapped to executable validators, runtime gates, tests and CI in `docs/governance/enforcement-matrix.json`; complete Control Plane rule coverage is generated in `docs/governance/policy-coverage.json`. Engineering work is bounded by `EngineeringAuthorityEnvelope`; credentials are scanned by `tools/secret_scan.py`. Run `python tools/validate_house_net.py`, `python tools/policy_coverage.py`, `python tools/secret_scan.py` and the Control Plane validator before reviewing a change.
 
-Կրիտիկական կանոնները executable validator-ների, runtime gate-երի, թեստերի և CI-ի հետ կապված են `docs/governance/enforcement-matrix.json`-ում։ Փոփոխություն վերանայելիս գործարկիր `python tools/validate_house_net.py` և Control Plane validator-ը։
+Կրիտիկական կանոնները executable validator-ների, runtime gate-երի, թեստերի և CI-ի հետ կապված են `docs/governance/enforcement-matrix.json`-ում, իսկ Control Plane-ի բոլոր կանոնների ծածկույթը գեներացվում է `docs/governance/policy-coverage.json`-ում։ Engineering աշխատանքը սահմանափակվում է `EngineeringAuthorityEnvelope`-ով, իսկ credentials-ը ստուգվում է `tools/secret_scan.py`-ով։ Վերանայելիս գործարկիր `python tools/validate_house_net.py`, `python tools/policy_coverage.py`, `python tools/secret_scan.py` և Control Plane validator-ը։
