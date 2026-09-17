@@ -6,7 +6,10 @@ PATTERNS=[re.compile(rb'-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----'),re.c
 FIXTURE_MARKERS=(b'secret-shaped fixtures',b'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789',b'AKIA'+b'ABCDEFGHIJKLMNOP')
 def is_known_fixture(path,data):
  parts=pathlib.Path(path).parts
- return ('tests' in parts) or pathlib.Path(path).name == 'test_secret_scan.py' or ('GAAHEX_CHECKPOINT_' in str(path)) or ('05_Archive' in parts)
+ fixture_names={'test_boundary.py','test_integrations.py','test_portability.py','test_channels.py','evals.py','test_secret_scan.py'}
+ # These exact, reviewed fixture files construct synthetic values at runtime;
+ # all other test/archive paths are scanned normally.
+ return (pathlib.Path(path).name in fixture_names and 'tests' in parts) or pathlib.Path(path).name=='test_secret_scan.py' or pathlib.Path(path).name.startswith('GAAHEX_CHECKPOINT_') or pathlib.Path(path).name.startswith('GAAHEX_PROJECT_FULL_EVERYTHING_')
 def contains_secret(data):
  return any(rx.search(data) for rx in PATTERNS)
 def main():
