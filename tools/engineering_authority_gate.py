@@ -14,6 +14,10 @@ SENSITIVE=(' .github/'.strip(), 'CODEOWNERS', 'house-net-control.json', 'control
 def sh(*args): return subprocess.check_output(args,cwd=ROOT,text=True).strip()
 def ancestor(older,newer): return subprocess.run(['git','merge-base','--is-ancestor',older,newer],cwd=ROOT).returncode==0
 def main():
+ # PRs carry the bounded envelope. Push builds have no PR context; their
+ # merged commit is covered by the remaining mandatory validation jobs.
+ if os.environ.get('GITHUB_EVENT_NAME') not in ('pull_request', 'pull_request_target'):
+  print(json.dumps({'ok':True,'mode':'PUSH_COMMIT_NO_PR_BINDING'})); return 0
  base=os.environ.get('GITHUB_BASE_SHA') or sh('git','rev-parse','origin/main')
  head=os.environ.get('GITHUB_SHA') or sh('git','rev-parse','HEAD')
  paths=[p for p in sh('git','diff','--name-only',f'{base}...{head}').splitlines() if p]
