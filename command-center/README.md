@@ -98,3 +98,15 @@ set `DEPUTY_OPERATOR_TOKEN` before hosting it beyond the local machine.
 տեսքերը, առաքելությունների հարցերը, աղբյուրների առողջությունը, ծանուցումները և
 նախնական փորձարկումները։ Լռելյայն կապվում է localhost-ին․ արտաքին հոսթինգից
 առաջ սահմանեք `DEPUTY_OPERATOR_TOKEN`։
+
+## Operator language, theme and AI provider
+
+The local operator UI opens in Armenian by default. Use **EN / ՀԱ** in the header to switch between Armenian and English; the choice is retained in browser storage. Use the sun/moon control to switch between HouseNet light and dark themes.
+
+Ask Deputy remains on the provider-neutral runtime path. When enabled with `DEPUTY_USE_CLAUDE=1`, the adapter invokes the authenticated Claude Code CLI session associated with Gev's Max plan. It never reads `ANTHROPIC_API_KEY` and has no API-billing fallback. `/provider` and `/readiness` report `NOT_INSTALLED`, `AUTH_REQUIRED`, or `READY` truthfully.
+
+## Օպերատորի լեզու, թեմա և AI մատակարար
+
+Տեղական օպերատորի միջավայրը լռելյայն բացվում է հայերեն։ Վերնագրի **EN / ՀԱ** կոճակով կարելի է փոխել հայերենի և անգլերենի միջև, իսկ ընտրությունը պահվում է բրաուզերում։ Արև/լուսին կոճակը փոխում է HouseNet-ի բաց և մուգ թեմաները։
+
+Ask Deputy-ը շարունակում է օգտագործել provider-neutral կանոնական runtime ուղին։ `DEPUTY_USE_CLAUDE=1`-ի դեպքում adapter-ը կանչում է Գևի Max պլանին միացված authenticated Claude Code CLI session-ը։ Այն երբեք չի կարդում `ANTHROPIC_API_KEY` և չունի API վճարովի fallback։ `/provider` և `/readiness` endpoint-ները ճշմարտացիորեն ցույց են տալիս `NOT_INSTALLED`, `AUTH_REQUIRED` կամ `READY` վիճակները։

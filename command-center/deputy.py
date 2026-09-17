@@ -7,19 +7,21 @@ human-readable rendering needed for an operator to use the existing runtime.
 No provider writer, task store or approval mechanism is implemented here.
 """
 from __future__ import annotations
-import argparse, datetime, hashlib, json, pathlib, sys
+import argparse, datetime, hashlib, json, pathlib, sys, os
 import re
 
 ROOT = pathlib.Path(__file__).resolve().parent
 SKILLS = ROOT / ".claude" / "skills"
 ARCH = ROOT / ".claude" / "architecture"
 INTEGRATIONS = ROOT / ".claude" / "integrations"
-for p in (SKILLS, ARCH, INTEGRATIONS):
+RUNTIME = ROOT / ".claude" / "runtime"
+for p in (SKILLS, ARCH, INTEGRATIONS, RUNTIME):
     if str(p) not in sys.path: sys.path.insert(0, str(p))
 import engine
 import company_cockpit
 import execution_surface
 import proactive
+from ai_provider import status as provider_status, ask as provider_ask
 
 
 def _mission_id(intent):
@@ -143,13 +145,14 @@ def run(intent, *, inputs=None, as_json=False):
         graph={"nodes":nodes,"validation":"GREEN","records":[engine._store().record("checkpoints", mission_id + ":graph", {"kind":"MISSION_WORK_GRAPH","mission_id":mission_id,"nodes":nodes})]}
     except Exception as exc:
         graph = {"status": "BLOCKED", "reason": type(exc).__name__}
+    provider = provider_ask(intent) if os.environ.get("DEPUTY_USE_CLAUDE") == "1" else {"status": "NOT_INVOKED", "provider": "claude-code-max", "reason": "Claude Code invocation is opt-in; canonical runtime remains provider-neutral."}
     payload = {"mission_id": mission_id, "request": intent, "understanding": {"raw_intent": intent, "outcome": understood,
         "scope": "current HouseNet operating state", "constraints": ["no external mutation without Action Runtime approval"],
         "completion_criteria": ["facts have provenance", "prepared actions are separated", "verification state is honest"]},
         "context": context, "routing": routing, "runtime": result, "work_graph": graph,
         "cockpit": cockpit,
         "execution": execution,
-        "proactive": proactive_result,
+        "proactive": proactive_result, "provider": provider,
         "completion_state": "PREPARED" if result.get("status") in ("OK", "PARTIAL") else "BLOCKED",
         "authority": "ACTION_RUNTIME_ONLY_FOR_MATERIAL_MUTATION"}
     store = engine._store(); store.upsert("commitments", mission_id, payload)
