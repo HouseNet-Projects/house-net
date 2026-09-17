@@ -9,7 +9,12 @@ BACKUP_DIR=${DEPUTY_BACKUP_DIR:-$ROOT_DIR/command-center/.secure/backups}
 OUT=${DEPUTY_UNIT_DIR:-/etc/systemd/system}; ENV_FILE=${DEPUTY_ENV_FILE:-/etc/house-net/deputy.env}
 for x in "$ROOT_DIR" "$VENV"; do test -d "$x" || { echo "missing directory: $x" >&2; exit 2; }; done
 case "$BIND" in *[!a-zA-Z0-9:._-]*) echo 'invalid bind address' >&2; exit 2;; esac
-mkdir -p "$BACKUP_DIR"
+if [ "$(id -u)" -eq 0 ]; then
+  # Services run as USER_NAME; keep the backup target writable without broad permissions.
+  install -d -o "$USER_NAME" -g "$(id -gn "$USER_NAME")" -m 0750 "$BACKUP_DIR"
+else
+  mkdir -p "$BACKUP_DIR"
+fi
 render(){ sed -e "s|@USER@|$USER_NAME|g" -e "s|@ROOT@|$ROOT_DIR|g" -e "s|@VENV@|$VENV|g" -e "s|@BIND@|$BIND|g" -e "s|@PORT@|$PORT|g" -e "s|@INTERVAL@|$INTERVAL|g" -e "s|@BACKUP@|$BACKUP_DIR|g" -e "s|@ENV@|$ENV_FILE|g" "$1"; }
 if [ "$(id -u)" -ne 0 ]; then OUT=${DEPUTY_UNIT_DIR:-$ROOT_DIR/.generated-systemd}; mkdir -p "$OUT"; echo "rendered units to $OUT (run as root to install)"; fi
 for n in deputy-api.service deputy-worker.service deputy-backup.service deputy-backup.timer; do render "$(dirname "$0")/$n" > "$OUT/$n"; done
