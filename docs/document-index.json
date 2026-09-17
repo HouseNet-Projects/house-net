@@ -1323,6 +1323,15 @@
     "purpose": "canonical governance for root"
   },
   {
+    "path": "docs/governance/PUBLIC_AUDIT.md",
+    "category": "CANONICAL_GOVERNANCE",
+    "owner": "root",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "safe public audit entrypoint"
+  },
+  {
     "path": "knowledge/AGENTS.md",
     "category": "CANONICAL_GOVERNANCE",
     "owner": "knowledge",
