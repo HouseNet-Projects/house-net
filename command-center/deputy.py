@@ -18,6 +18,7 @@ for p in (SKILLS, ARCH, INTEGRATIONS):
     if str(p) not in sys.path: sys.path.insert(0, str(p))
 import engine
 import company_cockpit
+import execution_surface
 
 
 def _mission_id(intent):
@@ -116,6 +117,11 @@ def run(intent, *, inputs=None, as_json=False):
     cockpit = None
     if canonical_intent in ("company cockpit", "weekly management review", "monthly management review"):
         cockpit = company_cockpit.query(intent)
+    execution = None
+    if any(k in intent.casefold() for k in ("do everything", "needs my approval", "what needs my approval")):
+        execution = {"mode": "PREPARE_ONLY", "approval_inbox": execution_surface.approval_inbox(mission_id),
+                     "capability_matrix": execution_surface.capability_matrix(),
+                     "policy": "THINK/PREPARE proceeds; COMMIT/CHANGE remains exact Action Runtime approval."}
     graph = None
     try:
         # Mission graphs are checkpoints in the existing Store. The
@@ -139,6 +145,7 @@ def run(intent, *, inputs=None, as_json=False):
         "completion_criteria": ["facts have provenance", "prepared actions are separated", "verification state is honest"]},
         "context": context, "routing": routing, "runtime": result, "work_graph": graph,
         "cockpit": cockpit,
+        "execution": execution,
         "completion_state": "PREPARED" if result.get("status") in ("OK", "PARTIAL") else "BLOCKED",
         "authority": "ACTION_RUNTIME_ONLY_FOR_MATERIAL_MUTATION"}
     store = engine._store(); store.upsert("commitments", mission_id, payload)
