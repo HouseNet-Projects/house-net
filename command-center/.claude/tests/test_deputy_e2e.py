@@ -43,4 +43,33 @@ class DeputyE2ETests(unittest.TestCase):
             self.assertEqual(bad.returncode, 2)
             self.assertEqual(json.loads(bad.stdout)['status'], 'BLOCKED')
 
+    def test_company_cockpit_is_derived_partial_and_truthful(self):
+        root = Path(__file__).parents[2]
+        with tempfile.TemporaryDirectory() as state:
+            env = os.environ.copy(); env['SKILL_STATE_DIR'] = state
+            p = subprocess.run([sys.executable, str(root / 'deputy.py'), 'run',
+                                'Give me today’s company cockpit', '--json'], cwd=root,
+                               env=env, text=True, capture_output=True)
+            self.assertEqual(p.returncode, 0, p.stderr + p.stdout)
+            cockpit = json.loads(p.stdout)['cockpit']
+            self.assertIn(cockpit['company_status'], ('CURRENT', 'PARTIAL_SUCCESS'))
+            self.assertTrue(cockpit['source_health'])
+            self.assertIn('truth_hierarchy', cockpit)
+            self.assertIn('missing_data', cockpit)
+            self.assertNotIn('health_score', json.dumps(cockpit))
+
+    def test_company_queries_share_snapshot_pipeline_and_do_not_write(self):
+        root = Path(__file__).parents[2]
+        with tempfile.TemporaryDirectory() as state:
+            env = os.environ.copy(); env['SKILL_STATE_DIR'] = state
+            for request, mode in [('What is overdue or blocked?', 'exceptions'),
+                                  ('What needs my attention?', 'attention'),
+                                  ('What changed since the last review?', 'delta'),
+                                  ('Prepare my weekly management review', 'weekly')]:
+                p = subprocess.run([sys.executable, str(root / 'deputy.py'), 'run', request, '--json'], cwd=root,
+                                   env=env, text=True, capture_output=True)
+                self.assertEqual(p.returncode, 0, p.stderr + p.stdout)
+                data = json.loads(p.stdout); self.assertEqual(data['cockpit']['query'], mode)
+                self.assertIn(data['cockpit']['company_status'], ('CURRENT', 'PARTIAL_SUCCESS'))
+
 if __name__ == '__main__': unittest.main()
