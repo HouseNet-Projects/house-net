@@ -17,6 +17,7 @@ INTEGRATIONS = ROOT / ".claude" / "integrations"
 for p in (SKILLS, ARCH, INTEGRATIONS):
     if str(p) not in sys.path: sys.path.insert(0, str(p))
 import engine
+import company_cockpit
 
 
 def _mission_id(intent):
@@ -31,6 +32,10 @@ def _canonical_intent(intent):
         return "daily brief"
     if re.search(r"sales", text) and re.search(r"operations?", text) and re.search(r"(plan|execution|week)", text):
         return "weekly sales & operations review"
+    if any(k in text for k in ("company cockpit", "what is happening in the company", "what needs my attention", "what changed", "overdue or blocked", "approvals are waiting", "current kpi data")):
+        return "company cockpit"
+    if "weekly management review" in text: return "weekly management review"
+    if "monthly management review" in text: return "monthly management review"
     return intent
 
 
@@ -108,6 +113,9 @@ def run(intent, *, inputs=None, as_json=False):
                                       "reported by the runtime as UNKNOWN when not certified; no figures are inferred.")
     result = engine.run_deputy_request(reg, canonical_intent, runtime_inputs, action_level="ANALYZE",
                                        session_id=mission_id, source="DeputyCLI")
+    cockpit = None
+    if canonical_intent in ("company cockpit", "weekly management review", "monthly management review"):
+        cockpit = company_cockpit.query(intent)
     graph = None
     try:
         # Mission graphs are checkpoints in the existing Store. The
@@ -130,10 +138,12 @@ def run(intent, *, inputs=None, as_json=False):
         "scope": "current HouseNet operating state", "constraints": ["no external mutation without Action Runtime approval"],
         "completion_criteria": ["facts have provenance", "prepared actions are separated", "verification state is honest"]},
         "context": context, "routing": routing, "runtime": result, "work_graph": graph,
+        "cockpit": cockpit,
         "completion_state": "PREPARED" if result.get("status") in ("OK", "PARTIAL") else "BLOCKED",
         "authority": "ACTION_RUNTIME_ONLY_FOR_MATERIAL_MUTATION"}
     store = engine._store(); store.upsert("commitments", mission_id, payload)
     if as_json: return payload
+    if cockpit: return cockpit["human"] + "\n\nFOLLOW-THROUGH\n- Resume with: deputy resume " + mission_id
     return _human(result, understood, context, mission_id)
 
 
