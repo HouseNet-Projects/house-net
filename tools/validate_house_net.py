@@ -15,7 +15,8 @@ def main():
     req=matrix.get('requirements',[])
     if len(req)<1 or len({x.get('requirement_id') for x in req})!=len(req): return fail('enforcement matrix ids are not unique')
     critical=[x for x in req if x.get('severity')=='CRITICAL']
-    if any(not x.get('enforcement_location') or not x.get('validation_command') or not x.get('CI_check') or x.get('fail_closed') is not True for x in critical): return fail('critical requirement lacks executable enforcement mapping')
+    required_fields=('source_policy','scope','enforcement_location','runtime_gate','validation_command','CI_check','test_ids','documentation_reference')
+    if any(any(k not in x for k in required_fields) or not x.get('enforcement_location') or not x.get('validation_command') or not x.get('CI_check') or x.get('fail_closed') is not True for x in critical): return fail('critical requirement lacks complete executable enforcement mapping')
     if not isinstance(docs,list) or not docs or any(not x.get('path') or x.get('category') in ('UNKNOWN_PURPOSE',None) for x in docs): return fail('documentation index has unknown entries')
     tracked={p.as_posix() for p in ROOT.rglob('*') if p.is_file() and '.git' not in p.parts and not any(part in ('__pycache__','.venv') for part in p.parts)}
     indexed={x['path'] for x in docs}
