@@ -1,0 +1,14 @@
+{
+  "id": "HN-VAULT-EXAMPLE-RECOVERY",
+  "purpose": "Synthetic contract fixture; contains no secret value.",
+  "owner_principal": "HOUSE_NET_OWNER",
+  "target_system": "example-only",
+  "secret_type": "opaque_recovery_material",
+  "storage": {"backend":"encrypted_backup","reference":"external://example/recovery-material","encrypted":true},
+  "recovery": {"available":false,"requirements":["owner approval","external recovery key"]},
+  "rotation": {"owner":"HOUSE_NET_OWNER","interval_days":null},
+  "last_verified": "2026-09-16",
+  "required_for_bootstrap": false,
+  "sensitivity": "RESTRICTED",
+  "integrity": null
+}
