@@ -8,6 +8,18 @@ on:
 permissions:
   contents: read
 jobs:
+  monorepo-governance:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with: {fetch-depth: 0, lfs: true}
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with: {python-version: '3.12'}
+      - run: python -m pip install --disable-pip-version-check --no-input -q -r control-plane/requirements.txt
+      - run: python tools/validate_house_net.py
+      - run: python tools/validate_house_net.py
+      - run: |
+          ! git grep -nE '(^|[^A-Za-z])(AKIA[0-9A-Z]{16}|-----BEGIN (RSA|OPENSSH|EC) PRIVATE KEY-----|gh[pousr]_[A-Za-z0-9]{20,})' -- ':!docs/governance/MONOREPO_MIGRATION_MANIFEST.md'
   control-plane:
     runs-on: ubuntu-24.04
     steps:
@@ -73,7 +85,7 @@ jobs:
           COMMAND_CENTER_TEST_MODE: '1'
   full-system:
     runs-on: ubuntu-24.04
-    needs: [control-plane, design-system, knowledge, vault, command-center]
+    needs: [monorepo-governance, control-plane, design-system, knowledge, vault, command-center]
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with: {fetch-depth: 0, lfs: true}
