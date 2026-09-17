@@ -19,6 +19,11 @@ def main():
     required_fields=('source_policy','scope','enforcement_location','runtime_gate','validation_command','CI_check','test_ids','documentation_reference')
     if any(any(k not in x for k in required_fields) or not x.get('enforcement_location') or not x.get('validation_command') or not x.get('CI_check') or x.get('fail_closed') is not True for x in critical): return fail('critical requirement lacks complete executable enforcement mapping')
     if not isinstance(docs,list) or not docs or any(not x.get('path') or x.get('category') in ('UNKNOWN_PURPOSE',None) for x in docs): return fail('documentation index has unknown entries')
+    allowed_categories={'CANONICAL_GOVERNANCE','CANONICAL_PRODUCT','OPERATING_GUIDE','REFERENCE','HISTORICAL_PROVENANCE','MIGRATION_RECORD','TEMPLATE','GENERATED_REPORT','SOURCE_DATA','BUILD_INPUT','RUNTIME_CONFIG','SCHEMA','MACHINE_POLICY'}
+    if any(x.get('category') not in allowed_categories or not x.get('purpose') or not isinstance(x.get('machine_consumed'),bool) for x in docs): return fail('documentation taxonomy is invalid')
+    for x in docs:
+        if '/legacy/' in x['path'] and x.get('current') is True: return fail(f"legacy document marked current: {x['path']}")
+        if x['path'].endswith('runtime/requirements.txt') and (x.get('category')!='BUILD_INPUT' or not x.get('machine_consumed')): return fail('runtime requirements semantic classification invalid')
     required_schema={'authority_id','approved_by','approved_at','mission','repository','base_sha','allowed_operations','allowed_paths','prohibited_operations','risk_ceiling','expires_at','status','audit_trail','consumed'}
     if set(envelope_schema.get('required',[])) != required_schema: return fail('engineering authority schema incomplete')
     if envelope_schema.get('properties',{}).get('repository',{}).get('const') != control.get('repository'): return fail('engineering authority repository drift')
@@ -35,6 +40,11 @@ def main():
         cov=json.loads((ROOT/'docs/governance/policy-coverage.json').read_text())
         if cov.get('total_rules') != len(cov.get('rules',[])) or cov.get('unmapped_rules'): return fail('policy coverage incomplete')
     except Exception: return fail('policy coverage unreadable')
+    workflow=(ROOT/'.github/workflows/house-net-ci.yml').read_text()
+    for item in critical:
+        target=ROOT/item['enforcement_location']
+        if not target.exists(): return fail(f"missing enforcement target: {item['requirement_id']}")
+        if item['CI_check'] not in workflow: return fail(f"missing CI job: {item['requirement_id']}")
     print(json.dumps({'ok':True,'critical_requirements':len(critical),'requirements':len(req),'indexed_documents':len(docs)},ensure_ascii=False))
     return 0
 if __name__=='__main__': sys.exit(main())

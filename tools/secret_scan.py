@@ -7,13 +7,15 @@ FIXTURE_MARKERS=(b'secret-shaped fixtures',b'ABCDEFGHIJKLMNOPQRSTUVWXYZ012345678
 def is_known_fixture(path,data):
  parts=pathlib.Path(path).parts
  return ('tests' in parts) or ('GAAHEX_CHECKPOINT_' in str(path)) or ('05_Archive' in parts)
+def contains_secret(data):
+ return any(rx.search(data) for rx in PATTERNS)
 def main():
  findings=[]
  for p in ROOT.rglob('*'):
    if p.is_file() and p.name != pathlib.Path(__file__).name and '.git' not in p.parts and ('.venv' not in p.parts and '__pycache__' not in p.parts):
     try:
      data=p.read_bytes()
-     if any(rx.search(data) for rx in PATTERNS) and not is_known_fixture(p,data): findings.append(('tree',str(p.relative_to(ROOT))))
+     if contains_secret(data) and not is_known_fixture(p,data): findings.append(('tree',str(p.relative_to(ROOT))))
     except OSError: pass
  for line in subprocess.check_output(['git','-C',str(ROOT),'rev-list','--objects','--all'],text=True,errors='ignore').splitlines():
   oid,path=(line.split(' ',1)+[''])[:2]
@@ -21,7 +23,7 @@ def main():
   except Exception: continue
   if path == 'tools/secret_scan.py':
    continue
-  if any(rx.search(b) for rx in PATTERNS) and not is_known_fixture(path,b): findings.append(('history',path))
+  if contains_secret(b) and not is_known_fixture(path,b): findings.append(('history',path))
  if findings: print('FAIL — high-confidence secret patterns found:',len(findings)); return 2
  print('PASS — secret scan (all current paths and reachable history)'); return 0
 if __name__=='__main__': sys.exit(main())

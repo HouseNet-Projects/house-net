@@ -1,0 +1,14 @@
+# Governance-boundary files require Gev owner review.
+/.github/ @HouseNet-Projects
+/CODEOWNERS @HouseNet-Projects
+/house-net-control.json @HouseNet-Projects
+/control-plane/policy/ @HouseNet-Projects
+/control-plane/schemas/ @HouseNet-Projects
+/docs/governance/ @HouseNet-Projects
+/tools/engineering_authority.py @HouseNet-Projects
+/tools/engineering_authority_gate.py @HouseNet-Projects
+/tools/validate_house_net.py @HouseNet-Projects
+/tools/policy_coverage.py @HouseNet-Projects
+/tools/secret_scan.py @HouseNet-Projects
+/vault/bin/validate-vault @HouseNet-Projects
+/command-center/.claude/skills/actions.py @HouseNet-Projects
