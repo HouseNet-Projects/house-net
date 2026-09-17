@@ -26,7 +26,8 @@
     "docs/governance/engineering-authority.schema.json",
     "tools/engineering_authority_gate.py",
     "tools/test_engineering_authority.py",
-    "tools/validate_house_net.py"
+    "tools/validate_house_net.py",
+    "tools/test_engineering_authority_gate.py"
   ],
   "prohibited_operations": [
     "external_write",
