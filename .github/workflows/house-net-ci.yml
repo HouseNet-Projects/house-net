@@ -8,6 +8,22 @@ on:
 permissions:
   contents: read
 jobs:
+  engineering-authority:
+    runs-on: ubuntu-24.04
+    env:
+      GITHUB_BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
+      GITHUB_SHA: ${{ github.sha }}
+      GITHUB_HEAD_REF: ${{ github.head_ref }}
+      GITHUB_EVENT_PULL_REQUEST_NUMBER: ${{ github.event.pull_request.number }}
+      HOUSENET_ENGINEERING_AUTHORITY_JSON: ${{ secrets.HOUSENET_ENGINEERING_AUTHORITY_JSON }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with: {fetch-depth: 0, lfs: true}
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with: {python-version: '3.12'}
+      - name: Bind PR diff to engineering authority
+        run: python tools/engineering_authority_gate.py
+      - run: python -m unittest tools/test_engineering_authority.py tools/test_engineering_authority_gate.py
   monorepo-governance:
     runs-on: ubuntu-24.04
     steps:
@@ -17,7 +33,10 @@ jobs:
         with: {python-version: '3.12'}
       - run: python -m pip install --disable-pip-version-check --no-input -q -r control-plane/requirements.txt
       - run: python tools/validate_house_net.py
-      - run: python tools/validate_house_net.py
+      - run: python tools/test_engineering_authority.py
+      - run: python tools/policy_coverage.py
+      - run: python tools/secret_scan.py
+      - run: git lfs fsck
       - run: |
           ! git grep -nE '(^|[^A-Za-z])(AKIA[0-9A-Z]{16}|-----BEGIN (RSA|OPENSSH|EC) PRIVATE KEY-----|gh[pousr]_[A-Za-z0-9]{20,})' -- ':!docs/governance/MONOREPO_MIGRATION_MANIFEST.md'
   control-plane:

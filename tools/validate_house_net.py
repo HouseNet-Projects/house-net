@@ -5,10 +5,12 @@ ROOT = pathlib.Path(__file__).resolve().parents[1]
 OLD = tuple(f"HouseNet-Projects/house-net-{x}" for x in ("control-plane","design-system","command-center","knowledge","vault"))
 def fail(msg): print(f"FAIL — {msg}"); return 2
 def main():
+    workflow=(ROOT/'.github/workflows/house-net-ci.yml').read_text()
     try:
         control=json.loads((ROOT/'house-net-control.json').read_text())
         matrix=json.loads((ROOT/'docs/governance/enforcement-matrix.json').read_text())
         docs=json.loads((ROOT/'docs/document-index.json').read_text())
+        envelope_schema=json.loads((ROOT/'docs/governance/engineering-authority.schema.json').read_text())
     except Exception as e: return fail(f"control artifact unreadable: {type(e).__name__}")
     if control.get('repository')!='HouseNet-Projects/house-net' or control.get('control_plane')!='HouseNet-Projects/house-net': return fail('root canonical authority mismatch')
     if control.get('policy_version')!='1.4.3': return fail('unsupported policy version')
@@ -18,6 +20,15 @@ def main():
     required_fields=('source_policy','scope','enforcement_location','runtime_gate','validation_command','CI_check','test_ids','documentation_reference')
     if any(any(k not in x for k in required_fields) or not x.get('enforcement_location') or not x.get('validation_command') or not x.get('CI_check') or x.get('fail_closed') is not True for x in critical): return fail('critical requirement lacks complete executable enforcement mapping')
     if not isinstance(docs,list) or not docs or any(not x.get('path') or x.get('category') in ('UNKNOWN_PURPOSE',None) for x in docs): return fail('documentation index has unknown entries')
+    allowed_categories={'CANONICAL_GOVERNANCE','CANONICAL_PRODUCT','OPERATING_GUIDE','REFERENCE','HISTORICAL_PROVENANCE','MIGRATION_RECORD','TEMPLATE','GENERATED_REPORT','SOURCE_DATA','BUILD_INPUT','RUNTIME_CONFIG','SCHEMA','MACHINE_POLICY'}
+    if any(x.get('category') not in allowed_categories or not x.get('purpose') or not isinstance(x.get('machine_consumed'),bool) for x in docs): return fail('documentation taxonomy is invalid')
+    for x in docs:
+        if '/legacy/' in x['path'] and x.get('current') is True: return fail(f"legacy document marked current: {x['path']}")
+        if x['path'].endswith('runtime/requirements.txt') and (x.get('category')!='BUILD_INPUT' or not x.get('machine_consumed')): return fail('runtime requirements semantic classification invalid')
+    required_schema={'authority_id','approved_by','owner_proof','approved_at','mission','repository','base_sha','allowed_operations','allowed_paths','prohibited_operations','risk_ceiling','expires_at','status','audit_trail','consumed','branch','pr'}
+    if set(envelope_schema.get('required',[])) != required_schema: return fail('engineering authority schema incomplete')
+    if envelope_schema.get('properties',{}).get('repository',{}).get('const') != control.get('repository'): return fail('engineering authority repository drift')
+    if not (ROOT/'tools/engineering_authority.py').is_file() or not (ROOT/'tools/test_engineering_authority.py').is_file(): return fail('engineering authority enforcement missing')
     tracked={p.as_posix() for p in ROOT.rglob('*') if p.is_file() and '.git' not in p.parts and not any(part in ('__pycache__','.venv') for part in p.parts)}
     indexed={x['path'] for x in docs}
     doc_ext={'.md','.txt','.rst','.docx','.pdf','.pptx','.xlsx'}
@@ -26,6 +37,17 @@ def main():
     # Active workflow/runtime references to archived repositories are forbidden; historical docs remain allowed.
     for p in (ROOT/'.github').rglob('*'):
         if p.is_file() and any(old in p.read_text(errors='ignore') for old in OLD): return fail(f'active CI references archived repository: {p.relative_to(ROOT)}')
+    try:
+        cov=json.loads((ROOT/'docs/governance/policy-coverage.json').read_text())
+        if cov.get('total_rules') != len(cov.get('rules',[])) or cov.get('unmapped_rules'): return fail('policy coverage incomplete')
+        for c in cov['rules']:
+            if not c.get('source_policy') or not c.get('rule_id') or not c.get('rationale'): return fail('policy coverage evidence incomplete')
+            if c.get('classification')=='MACHINE_ENFORCED' and (not c.get('artifacts') or not all((ROOT/a).exists() for a in c['artifacts']) or not c.get('tests') or c.get('ci_check') not in workflow or c.get('fail_closed') is not True): return fail('policy coverage technical evidence incomplete')
+    except Exception: return fail('policy coverage unreadable')
+    for item in critical:
+        target=ROOT/item['enforcement_location']
+        if not target.exists(): return fail(f"missing enforcement target: {item['requirement_id']}")
+        if item['CI_check'] not in workflow: return fail(f"missing CI job: {item['requirement_id']}")
     print(json.dumps({'ok':True,'critical_requirements':len(critical),'requirements':len(req),'indexed_documents':len(docs)},ensure_ascii=False))
     return 0
 if __name__=='__main__': sys.exit(main())

@@ -1,0 +1,127 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "EngineeringAuthorityEnvelope",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "authority_id",
+    "approved_by",
+    "owner_proof",
+    "approved_at",
+    "mission",
+    "repository",
+    "base_sha",
+    "allowed_operations",
+    "allowed_paths",
+    "prohibited_operations",
+    "risk_ceiling",
+    "expires_at",
+    "status",
+    "audit_trail",
+    "consumed",
+    "branch",
+    "pr"
+  ],
+  "properties": {
+    "authority_id": {
+      "type": "string",
+      "pattern": "^EAE-[A-Z0-9-]+$"
+    },
+    "approved_by": {
+      "type": "string",
+      "const": "GEV"
+    },
+    "approved_at": {
+      "type": "string",
+      "minLength": 10
+    },
+    "mission": {
+      "type": "string",
+      "minLength": 1
+    },
+    "repository": {
+      "type": "string",
+      "const": "HouseNet-Projects/house-net"
+    },
+    "base_sha": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "allowed_operations": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "branch",
+          "edit",
+          "test",
+          "validate",
+          "push_branch",
+          "open_pr",
+          "update_pr",
+          "fix_ci",
+          "merge_green",
+          "cleanup_branch",
+          "regenerate_artifacts"
+        ]
+      },
+      "minItems": 1
+    },
+    "allowed_paths": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1
+    },
+    "prohibited_operations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    },
+    "risk_ceiling": {
+      "type": "string",
+      "enum": [
+        "LOW",
+        "MEDIUM"
+      ]
+    },
+    "expires_at": {
+      "type": "string",
+      "minLength": 10
+    },
+    "branch": {
+      "type": "string",
+      "minLength": 1
+    },
+    "pr": {
+      "type": "string",
+      "minLength": 1
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "ACTIVE",
+        "CLOSED",
+        "EXPIRED",
+        "REVOKED"
+      ]
+    },
+    "audit_trail": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "consumed": {
+      "type": "boolean"
+    },
+    "owner_proof": {
+      "type": "string",
+      "minLength": 16
+    }
+  }
+}

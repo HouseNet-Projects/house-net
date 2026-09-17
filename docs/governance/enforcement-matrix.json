@@ -62,13 +62,13 @@
       "canonical_owner": "Command Center",
       "severity": "CRITICAL",
       "enforcement_type": "runtime+tests+ci",
-      "enforcement_location": "command-center/.claude/skills/verification.py",
+      "enforcement_location": "command-center/.claude/skills/certify.py",
       "validation_command": "python -m unittest test_actions test_failclosed",
       "CI_check": "command-center",
       "fail_closed": true,
       "source_policy": "root AGENTS.md + Control Plane policy/authority.json",
       "scope": "monorepo and Deputy production paths",
-      "runtime_gate": "command-center/.claude/skills/verification.py",
+      "runtime_gate": "command-center/.claude/skills/certify.py",
       "test_ids": [
         "component_governance_suite"
       ],
