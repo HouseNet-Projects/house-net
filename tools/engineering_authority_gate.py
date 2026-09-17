@@ -14,6 +14,10 @@ SENSITIVE=(' .github/'.strip(), 'CODEOWNERS', 'house-net-control.json', 'control
 def sh(*args): return subprocess.check_output(args,cwd=ROOT,text=True).strip()
 def ancestor(older,newer): return subprocess.run(['git','merge-base','--is-ancestor',older,newer],cwd=ROOT).returncode==0
 def main():
+ # PRs carry the bounded envelope. Push builds have no PR context; their
+ # merged commit is covered by the remaining mandatory validation jobs.
+ if os.environ.get('GITHUB_EVENT_NAME') not in ('pull_request', 'pull_request_target'):
+  print(json.dumps({'ok':True,'mode':'PUSH_COMMIT_NO_PR_BINDING'})); return 0
  base=os.environ.get('GITHUB_BASE_SHA') or sh('git','rev-parse','origin/main')
  head=os.environ.get('GITHUB_SHA') or sh('git','rev-parse','HEAD')
  paths=[p for p in sh('git','diff','--name-only',f'{base}...{head}').splitlines() if p]
@@ -22,6 +26,10 @@ def main():
  if env_path and pathlib.Path(env_path).exists(): envelope=json.loads(pathlib.Path(env_path).read_text())
  elif os.environ.get('HOUSENET_ENGINEERING_AUTHORITY_JSON'):
   envelope=json.loads(os.environ['HOUSENET_ENGINEERING_AUTHORITY_JSON'])
+ # A committed envelope is PR-bound. Never reuse a record issued for another
+ # PR; sensitive-path changes then fall through to the owner-review boundary.
+ if envelope and envelope.get('pr') and str(envelope['pr']) != os.environ.get('GITHUB_EVENT_PULL_REQUEST_NUMBER',''):
+  envelope=None
  sensitive=any(any(p==s or p.startswith(s) for s in SENSITIVE) for p in paths)
  if envelope:
   if envelope.get('base_sha') and not ancestor(envelope['base_sha'],base): return fail('envelope base is not ancestor of PR base')
