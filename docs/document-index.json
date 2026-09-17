@@ -1,0 +1,1397 @@
+[
+  {
+    "path": "AGENTS.md",
+    "category": "CANONICAL_GOVERNANCE",
+    "owner": "root",
+    "authoritative": true,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "canonical governance for root"
+  },
+  {
+    "path": "README.md",
+    "category": "OPERATING_GUIDE",
+    "owner": "root",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "operating guide for root"
+  },
+  {
+    "path": "command-center/.claude/business/Business-model.md",
+    "category": "REFERENCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "reference for command-center"
+  },
+  {
+    "path": "command-center/.claude/docs/Activation-inputs.md",
+    "category": "REFERENCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "reference for command-center"
+  },
+  {
+    "path": "command-center/.claude/docs/Job-description.md",
+    "category": "REFERENCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "reference for command-center"
+  },
+  {
+    "path": "command-center/.claude/docs/Migration-log-2026-09-10.md",
+    "category": "REFERENCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "reference for command-center"
+  },
+  {
+    "path": "command-center/.claude/docs/Registry-audit-2026-09-10.md",
+    "category": "REFERENCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "reference for command-center"
+  },
+  {
+    "path": "command-center/.claude/docs/Role.md",
+    "category": "REFERENCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "reference for command-center"
+  },
+  {
+    "path": "command-center/.claude/docs/legacy/CLAUDE-command-center-original.md",
+    "category": "REFERENCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "reference for command-center"
+  },
+  {
+    "path": "command-center/.claude/docs/legacy/README-command-center-original.md",
+    "category": "REFERENCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "reference for command-center"
+  },
+  {
+    "path": "command-center/.claude/runtime/requirements.txt",
+    "category": "REFERENCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "reference for command-center"
+  },
+  {
+    "path": "command-center/.secure/README.md",
+    "category": "OPERATING_GUIDE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "operating guide for command-center"
+  },
+  {
+    "path": "command-center/AGENTS.md",
+    "category": "CANONICAL_GOVERNANCE",
+    "owner": "command-center",
+    "authoritative": true,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "canonical governance for command-center"
+  },
+  {
+    "path": "command-center/CLAUDE.md",
+    "category": "CANONICAL_GOVERNANCE",
+    "owner": "command-center",
+    "authoritative": true,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "canonical governance for command-center"
+  },
+  {
+    "path": "command-center/README.md",
+    "category": "OPERATING_GUIDE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "operating guide for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/00_Inbox/Input.md",
+    "category": "REFERENCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "reference for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/01_Active/Operations/Activation-suspension-reconnection-2026-09-07.docx",
+    "category": "REFERENCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "reference for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/01_Active/Operations/Inspector-list-2026-09-10.docx",
+    "category": "REFERENCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "reference for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/01_Active/Operations/Open-questions.md",
+    "category": "REFERENCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "reference for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/01_Active/People/Job-descriptions-v1.1-2026-09-05.docx",
+    "category": "REFERENCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "reference for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/01_Active/Sales/Churn-save-list-2026-09-09.xlsx",
+    "category": "REFERENCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "reference for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/01_Active/Sales/June-sales-bonus-2026-09-09.xlsx",
+    "category": "REFERENCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "reference for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/01_Active/Sales/Sales-strategy-2026-09-09.docx",
+    "category": "REFERENCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "reference for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/01_Active/Sales/Sales-strategy-hy-2026-09-10.pptx",
+    "category": "REFERENCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "reference for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/01_Active/Sales/Sales-strategy-qa-script-2026-09-10.docx",
+    "category": "REFERENCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "reference for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/01_Active/Systems/Billing-analysis-may-august-2026-09-10.xlsx",
+    "category": "REFERENCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "reference for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/01_Active/Systems/Billing-roadmap-v2-2026-09-07.docx",
+    "category": "REFERENCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "reference for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/02_Reference/Operations/Call-center-kpi-2026-08-31.xlsx",
+    "category": "REFERENCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "reference for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/02_Reference/People/Job-descriptions-qualifications-2026-09-05.docx",
+    "category": "REFERENCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "reference for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/02_Reference/People/Staffing-plan-2026-09-07.xlsx",
+    "category": "REFERENCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "reference for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/02_Reference/Systems/Mikrobill-help-en-2026-09-08.docx",
+    "category": "REFERENCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "reference for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/02_Reference/Systems/Mikrobill-help-hy-2026-09-08.docx",
+    "category": "REFERENCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "reference for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/03_Completed/Day-off-request-2026-08-11.docx",
+    "category": "REFERENCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "reference for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/03_Completed/Day-off-request-v2-2026-08-13.docx",
+    "category": "REFERENCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "reference for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/03_Completed/Delivery-schedule-2026-09-09.xlsx",
+    "category": "REFERENCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "reference for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/03_Completed/Delivery-schedule-whatsapp-2026-09-09.txt",
+    "category": "REFERENCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "reference for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/03_Completed/Leave-request-2026-08-11.docx",
+    "category": "REFERENCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "reference for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/03_Completed/Leave-request-v2-2026-09-08.docx",
+    "category": "REFERENCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "reference for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/04_Sources/Whatsapp/Principal-2026-09-09-afternoon/chat.md",
+    "category": "REFERENCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "reference for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/04_Sources/Whatsapp/Principal-2026-09-09-afternoon/chat.txt",
+    "category": "REFERENCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "reference for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/04_Sources/Whatsapp/Principal-2026-09-09/chat.md",
+    "category": "REFERENCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "reference for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/04_Sources/Whatsapp/Principal-2026-09-09/chat.txt",
+    "category": "REFERENCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "reference for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/05_Archive/Billing-2026-07-09/Billing-reports-v2-2026-07-09.xlsx",
+    "category": "HISTORICAL_PROVENANCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": false,
+    "machine_consumed": false,
+    "purpose": "historical provenance for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/05_Archive/Billing-2026-07-09/Paid-services-2026-07-09.docx",
+    "category": "HISTORICAL_PROVENANCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": false,
+    "machine_consumed": false,
+    "purpose": "historical provenance for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/05_Archive/Deputy-charter-2026-09-10/Deputy-charter-draft-2026-09-10.md",
+    "category": "HISTORICAL_PROVENANCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": false,
+    "machine_consumed": false,
+    "purpose": "historical provenance for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/05_Archive/Deputy-handoff-2026-09-14/Deputy-project-handoff-2026-09-12.md",
+    "category": "HISTORICAL_PROVENANCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": false,
+    "machine_consumed": false,
+    "purpose": "historical provenance for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/05_Archive/Deputy-handoff-2026-09-14/Deputy-session-handoff-2026-09-14.md",
+    "category": "HISTORICAL_PROVENANCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": false,
+    "machine_consumed": false,
+    "purpose": "historical provenance for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/05_Archive/Drafts-2026-09-09/Principal-requirements-2026-09-09.md",
+    "category": "HISTORICAL_PROVENANCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": false,
+    "machine_consumed": false,
+    "purpose": "historical provenance for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/05_Archive/Drafts-2026-09-09/Principal-requirements-annotated-2026-09-09.xlsx",
+    "category": "HISTORICAL_PROVENANCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": false,
+    "machine_consumed": false,
+    "purpose": "historical provenance for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/05_Archive/Drafts-2026-09-09/Schedule-questions-2026-09-09.md",
+    "category": "HISTORICAL_PROVENANCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": false,
+    "machine_consumed": false,
+    "purpose": "historical provenance for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/05_Archive/Drafts-2026-09-09/Task-workbook-8-sheet-2026-09-09.xlsx",
+    "category": "HISTORICAL_PROVENANCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": false,
+    "machine_consumed": false,
+    "purpose": "historical provenance for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/05_Archive/Isp-sales-ops-2026-08-24/Isp-sales-ops-model-2026-08-24.xlsx",
+    "category": "HISTORICAL_PROVENANCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": false,
+    "machine_consumed": false,
+    "purpose": "historical provenance for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/05_Archive/Isp-sales-ops-2026-08-24/Isp-sales-ops-packages-2026-08-24.docx",
+    "category": "HISTORICAL_PROVENANCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": false,
+    "machine_consumed": false,
+    "purpose": "historical provenance for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/05_Archive/Job-description-drafts-2026-09-05/Billing-collections-specialist-2026-09-05.docx",
+    "category": "HISTORICAL_PROVENANCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": false,
+    "machine_consumed": false,
+    "purpose": "historical provenance for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/05_Archive/Job-description-drafts-2026-09-05/Billing-revenue-head-2026-09-05.docx",
+    "category": "HISTORICAL_PROVENANCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": false,
+    "machine_consumed": false,
+    "purpose": "historical provenance for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/05_Archive/Job-description-drafts-2026-09-05/Call-center-job-descriptions-2026-09-05.docx",
+    "category": "HISTORICAL_PROVENANCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": false,
+    "machine_consumed": false,
+    "purpose": "historical provenance for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/05_Archive/Job-description-drafts-2026-09-05/Housenet-job-description-2026-09-05.docx",
+    "category": "HISTORICAL_PROVENANCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": false,
+    "machine_consumed": false,
+    "purpose": "historical provenance for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/05_Archive/Job-description-drafts-2026-09-05/Job-descriptions-2026-08-31.docx",
+    "category": "HISTORICAL_PROVENANCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": false,
+    "machine_consumed": false,
+    "purpose": "historical provenance for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/05_Archive/Job-description-drafts-2026-09-05/Job-descriptions-book-2026-09-02.docx",
+    "category": "HISTORICAL_PROVENANCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": false,
+    "machine_consumed": false,
+    "purpose": "historical provenance for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/05_Archive/Job-description-drafts-2026-09-05/Job-descriptions-chapter1-technical-2026-09-02.docx",
+    "category": "HISTORICAL_PROVENANCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": false,
+    "machine_consumed": false,
+    "purpose": "historical provenance for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/05_Archive/Job-description-drafts-2026-09-05/Marketing-job-descriptions-2026-09-05.docx",
+    "category": "HISTORICAL_PROVENANCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": false,
+    "machine_consumed": false,
+    "purpose": "historical provenance for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/05_Archive/Job-description-drafts-2026-09-05/Profile-2026-09-01.docx",
+    "category": "HISTORICAL_PROVENANCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": false,
+    "machine_consumed": false,
+    "purpose": "historical provenance for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/05_Archive/Job-description-drafts-2026-09-05/Technical-department-job-descriptions-2026-09-02.docx",
+    "category": "HISTORICAL_PROVENANCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": false,
+    "machine_consumed": false,
+    "purpose": "historical provenance for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/05_Archive/Job-description-drafts-2026-09-05/Technical-profile-2026-08-31.docx",
+    "category": "HISTORICAL_PROVENANCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": false,
+    "machine_consumed": false,
+    "purpose": "historical provenance for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/05_Archive/Legacy-whatsapp-2026-09-09/Whatsapp-readme-2026-09-09.md",
+    "category": "HISTORICAL_PROVENANCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": false,
+    "machine_consumed": false,
+    "purpose": "historical provenance for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/05_Archive/Migration-2026-09-14/Migration-manifest-2026-09-14.md",
+    "category": "HISTORICAL_PROVENANCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": false,
+    "machine_consumed": false,
+    "purpose": "historical provenance for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/05_Archive/Migration-2026-09-14/Staging-inventory-2026-09-11.md",
+    "category": "HISTORICAL_PROVENANCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": false,
+    "machine_consumed": false,
+    "purpose": "historical provenance for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/05_Archive/Previous-projects/BroPS-OS-handoff-2026-07/MASTER_EXECUTION_ROADMAP.md",
+    "category": "HISTORICAL_PROVENANCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": false,
+    "machine_consumed": false,
+    "purpose": "historical provenance for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/05_Archive/Previous-projects/BroPS-OS-handoff-2026-07/PARTIAL_HANDOFF.md",
+    "category": "HISTORICAL_PROVENANCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": false,
+    "machine_consumed": false,
+    "purpose": "historical provenance for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/05_Archive/Previous-projects/GAAhex-archives/GAAHEX_CHECKPOINT_14_TEST_REMEDIATION_STATUS_2026-09-09.md",
+    "category": "HISTORICAL_PROVENANCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": false,
+    "machine_consumed": false,
+    "purpose": "historical provenance for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/05_Archive/Previous-projects/GAAhex-archives/GAAHEX_CHECKPOINT_15_ZERO_FAIL_STATUS_2026-09-09.md",
+    "category": "HISTORICAL_PROVENANCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": false,
+    "machine_consumed": false,
+    "purpose": "historical provenance for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/05_Archive/Previous-projects/GAAhex-archives/GAAHEX_MASTER_CLEANUP_HISTORY_THROUGH_CHECKPOINT_14_2026-09-09.md",
+    "category": "HISTORICAL_PROVENANCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": false,
+    "machine_consumed": false,
+    "purpose": "historical provenance for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/05_Archive/Previous-projects/GAAhex-archives/GAAHEX_MASTER_CLEANUP_HISTORY_THROUGH_CHECKPOINT_15_2026-09-09.md",
+    "category": "HISTORICAL_PROVENANCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": false,
+    "machine_consumed": false,
+    "purpose": "historical provenance for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/05_Archive/Previous-projects/Housenet_OS/README.md",
+    "category": "HISTORICAL_PROVENANCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": false,
+    "machine_consumed": false,
+    "purpose": "historical provenance for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/05_Archive/Previous-projects/Housenet_OS/out/brief-2026-08-24-care.md",
+    "category": "HISTORICAL_PROVENANCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": false,
+    "machine_consumed": false,
+    "purpose": "historical provenance for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/05_Archive/Previous-projects/Housenet_OS/out/brief-2026-08-24-exec.md",
+    "category": "HISTORICAL_PROVENANCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": false,
+    "machine_consumed": false,
+    "purpose": "historical provenance for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/05_Archive/Previous-projects/Housenet_OS/out/brief-2026-08-24-field.md",
+    "category": "HISTORICAL_PROVENANCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": false,
+    "machine_consumed": false,
+    "purpose": "historical provenance for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/05_Archive/Previous-projects/Housenet_OS/out/brief-2026-08-24-finance.md",
+    "category": "HISTORICAL_PROVENANCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": false,
+    "machine_consumed": false,
+    "purpose": "historical provenance for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/05_Archive/Previous-projects/Housenet_OS/out/brief-2026-08-24-hr.md",
+    "category": "HISTORICAL_PROVENANCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": false,
+    "machine_consumed": false,
+    "purpose": "historical provenance for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/05_Archive/Previous-projects/Housenet_OS/out/brief-2026-08-24-it.md",
+    "category": "HISTORICAL_PROVENANCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": false,
+    "machine_consumed": false,
+    "purpose": "historical provenance for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/05_Archive/Previous-projects/Housenet_OS/out/brief-2026-08-24-legal.md",
+    "category": "HISTORICAL_PROVENANCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": false,
+    "machine_consumed": false,
+    "purpose": "historical provenance for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/05_Archive/Previous-projects/Housenet_OS/out/brief-2026-08-24-marketing.md",
+    "category": "HISTORICAL_PROVENANCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": false,
+    "machine_consumed": false,
+    "purpose": "historical provenance for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/05_Archive/Previous-projects/Housenet_OS/out/brief-2026-08-24-network.md",
+    "category": "HISTORICAL_PROVENANCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": false,
+    "machine_consumed": false,
+    "purpose": "historical provenance for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/05_Archive/Previous-projects/Housenet_OS/out/brief-2026-08-24-sales.md",
+    "category": "HISTORICAL_PROVENANCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": false,
+    "machine_consumed": false,
+    "purpose": "historical provenance for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/05_Archive/Previous-projects/Housenet_OS/out/brief-2026-08-24-telesales.md",
+    "category": "HISTORICAL_PROVENANCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": false,
+    "machine_consumed": false,
+    "purpose": "historical provenance for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/05_Archive/Previous-projects/Housenet_OS/out/brief-2026-08-24-warehouse.md",
+    "category": "HISTORICAL_PROVENANCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": false,
+    "machine_consumed": false,
+    "purpose": "historical provenance for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/05_Archive/Previous-projects/Housenet_OS/out/brief-2026-08-24.md",
+    "category": "HISTORICAL_PROVENANCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": false,
+    "machine_consumed": false,
+    "purpose": "historical provenance for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/05_Archive/Sales-strategy-2026-09-10/Sales-strategy-branded-2026-09-10.pptx",
+    "category": "HISTORICAL_PROVENANCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": false,
+    "machine_consumed": false,
+    "purpose": "historical provenance for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/05_Archive/Sales-strategy-2026-09-10/Sales-strategy-branded-repaired-2026-09-10.pptx",
+    "category": "HISTORICAL_PROVENANCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": false,
+    "machine_consumed": false,
+    "purpose": "historical provenance for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/05_Archive/Sales-strategy-2026-09-10/Sales-strategy-phase1-2026-09-08.docx",
+    "category": "HISTORICAL_PROVENANCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": false,
+    "machine_consumed": false,
+    "purpose": "historical provenance for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/05_Archive/Staff-planning-2026-08-28/Staff-planning-salary-bonus-a-2026-08-28.xlsx",
+    "category": "HISTORICAL_PROVENANCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": false,
+    "machine_consumed": false,
+    "purpose": "historical provenance for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/05_Archive/Staff-planning-2026-08-28/Staff-planning-salary-bonus-b-2026-08-28.xlsx",
+    "category": "HISTORICAL_PROVENANCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": false,
+    "machine_consumed": false,
+    "purpose": "historical provenance for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/05_Archive/Staff-planning-2026-08-28/Staff-planning-salary-bonus-c-2026-08-28.xlsx",
+    "category": "HISTORICAL_PROVENANCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": false,
+    "machine_consumed": false,
+    "purpose": "historical provenance for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/05_Archive/Staff-planning-2026-08-28/Staff-planning-salary-bonus-d-2026-08-28.xlsx",
+    "category": "HISTORICAL_PROVENANCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": false,
+    "machine_consumed": false,
+    "purpose": "historical provenance for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/05_Archive/Staffing-plan-2026-09-05/Staffing-plan-corrected-2026-09-07.xlsx",
+    "category": "HISTORICAL_PROVENANCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": false,
+    "machine_consumed": false,
+    "purpose": "historical provenance for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/05_Archive/Staffing-plan-2026-09-05/Staffing-plan-v2-2026-08-28.xlsx",
+    "category": "HISTORICAL_PROVENANCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": false,
+    "machine_consumed": false,
+    "purpose": "historical provenance for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/05_Archive/Staffing-plan-2026-09-05/Staffing-plan-v2-desktop-2026-08-28.xlsx",
+    "category": "HISTORICAL_PROVENANCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": false,
+    "machine_consumed": false,
+    "purpose": "historical provenance for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/05_Archive/Staffing-plan-2026-09-05/Staffing-plan-v3-2026-09-05.xlsx",
+    "category": "HISTORICAL_PROVENANCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": false,
+    "machine_consumed": false,
+    "purpose": "historical provenance for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/Actions.md",
+    "category": "REFERENCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "reference for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/Journal.md",
+    "category": "REFERENCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "reference for command-center"
+  },
+  {
+    "path": "command-center/WORKSPACE/Tasks.xlsx",
+    "category": "REFERENCE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "reference for command-center"
+  },
+  {
+    "path": "command-center/assets/brand/README.md",
+    "category": "OPERATING_GUIDE",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "operating guide for command-center"
+  },
+  {
+    "path": "control-plane/AGENTS.md",
+    "category": "CANONICAL_GOVERNANCE",
+    "owner": "control-plane",
+    "authoritative": true,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "canonical governance for control-plane"
+  },
+  {
+    "path": "control-plane/CHANGELOG.md",
+    "category": "REFERENCE",
+    "owner": "control-plane",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "reference for control-plane"
+  },
+  {
+    "path": "control-plane/CLAUDE.md",
+    "category": "CANONICAL_GOVERNANCE",
+    "owner": "control-plane",
+    "authoritative": true,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "canonical governance for control-plane"
+  },
+  {
+    "path": "control-plane/README.md",
+    "category": "OPERATING_GUIDE",
+    "owner": "control-plane",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "operating guide for control-plane"
+  },
+  {
+    "path": "control-plane/assets/brand/BRAND.md",
+    "category": "REFERENCE",
+    "owner": "control-plane",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "reference for control-plane"
+  },
+  {
+    "path": "control-plane/audit/VERIFICATION.md",
+    "category": "HISTORICAL_PROVENANCE",
+    "owner": "control-plane",
+    "authoritative": false,
+    "current": false,
+    "machine_consumed": false,
+    "purpose": "historical provenance for control-plane"
+  },
+  {
+    "path": "control-plane/audit/enforcement-hardening/2026-09-16/ENFORCEMENT-HARDENING.md",
+    "category": "HISTORICAL_PROVENANCE",
+    "owner": "control-plane",
+    "authoritative": false,
+    "current": false,
+    "machine_consumed": false,
+    "purpose": "historical provenance for control-plane"
+  },
+  {
+    "path": "control-plane/audit/zero-trust/2026-09-15/ZERO-TRUST-AUDIT.md",
+    "category": "HISTORICAL_PROVENANCE",
+    "owner": "control-plane",
+    "authoritative": false,
+    "current": false,
+    "machine_consumed": false,
+    "purpose": "historical provenance for control-plane"
+  },
+  {
+    "path": "control-plane/docs/AGENT-BOOTSTRAP.md",
+    "category": "REFERENCE",
+    "owner": "control-plane",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "reference for control-plane"
+  },
+  {
+    "path": "control-plane/docs/AGENT-CONTRACT.md",
+    "category": "REFERENCE",
+    "owner": "control-plane",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "reference for control-plane"
+  },
+  {
+    "path": "control-plane/docs/ARCHITECTURE.md",
+    "category": "REFERENCE",
+    "owner": "control-plane",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "reference for control-plane"
+  },
+  {
+    "path": "control-plane/docs/ENFORCEMENT.md",
+    "category": "REFERENCE",
+    "owner": "control-plane",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "reference for control-plane"
+  },
+  {
+    "path": "control-plane/docs/MIGRATION-LIFECYCLE.md",
+    "category": "REFERENCE",
+    "owner": "control-plane",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "reference for control-plane"
+  },
+  {
+    "path": "control-plane/docs/POLICY.md",
+    "category": "REFERENCE",
+    "owner": "control-plane",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "reference for control-plane"
+  },
+  {
+    "path": "control-plane/docs/REPOSITORY-LIFECYCLE.md",
+    "category": "REFERENCE",
+    "owner": "control-plane",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "reference for control-plane"
+  },
+  {
+    "path": "control-plane/docs/source/HouseNet-GitHub-Policy-v1.0.md",
+    "category": "REFERENCE",
+    "owner": "control-plane",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "reference for control-plane"
+  },
+  {
+    "path": "control-plane/requirements.txt",
+    "category": "REFERENCE",
+    "owner": "control-plane",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "reference for control-plane"
+  },
+  {
+    "path": "control-plane/templates/AGENTS.md",
+    "category": "TEMPLATE",
+    "owner": "control-plane",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "template for control-plane"
+  },
+  {
+    "path": "control-plane/templates/CLAUDE.md",
+    "category": "TEMPLATE",
+    "owner": "control-plane",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "template for control-plane"
+  },
+  {
+    "path": "design-system/AGENTS.md",
+    "category": "CANONICAL_GOVERNANCE",
+    "owner": "design-system",
+    "authoritative": true,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "canonical governance for design-system"
+  },
+  {
+    "path": "design-system/CHANGELOG.md",
+    "category": "REFERENCE",
+    "owner": "design-system",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "reference for design-system"
+  },
+  {
+    "path": "design-system/CLAUDE.md",
+    "category": "CANONICAL_GOVERNANCE",
+    "owner": "design-system",
+    "authoritative": true,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "canonical governance for design-system"
+  },
+  {
+    "path": "design-system/README.md",
+    "category": "OPERATING_GUIDE",
+    "owner": "design-system",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "operating guide for design-system"
+  },
+  {
+    "path": "design-system/assets/brand/BRAND.md",
+    "category": "REFERENCE",
+    "owner": "design-system",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "reference for design-system"
+  },
+  {
+    "path": "design-system/docs/ACCESSIBILITY.md",
+    "category": "REFERENCE",
+    "owner": "design-system",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "reference for design-system"
+  },
+  {
+    "path": "design-system/docs/ARCHITECTURE.md",
+    "category": "REFERENCE",
+    "owner": "design-system",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "reference for design-system"
+  },
+  {
+    "path": "design-system/docs/DESIGN-LANGUAGE.md",
+    "category": "REFERENCE",
+    "owner": "design-system",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "reference for design-system"
+  },
+  {
+    "path": "design-system/docs/ENFORCEMENT.md",
+    "category": "REFERENCE",
+    "owner": "design-system",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "reference for design-system"
+  },
+  {
+    "path": "design-system/docs/TOKENS.md",
+    "category": "REFERENCE",
+    "owner": "design-system",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "reference for design-system"
+  },
+  {
+    "path": "design-system/docs/UI-SYSTEM.md",
+    "category": "REFERENCE",
+    "owner": "design-system",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "reference for design-system"
+  },
+  {
+    "path": "design-system/docs/USAGE.md",
+    "category": "REFERENCE",
+    "owner": "design-system",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "reference for design-system"
+  },
+  {
+    "path": "design-system/docs/VERSION.md",
+    "category": "REFERENCE",
+    "owner": "design-system",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "reference for design-system"
+  },
+  {
+    "path": "design-system/documents/README.md",
+    "category": "OPERATING_GUIDE",
+    "owner": "design-system",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "operating guide for design-system"
+  },
+  {
+    "path": "design-system/documents/generators/README.md",
+    "category": "OPERATING_GUIDE",
+    "owner": "design-system",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "operating guide for design-system"
+  },
+  {
+    "path": "design-system/documents/memo/README.md",
+    "category": "OPERATING_GUIDE",
+    "owner": "design-system",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "operating guide for design-system"
+  },
+  {
+    "path": "design-system/documents/operational-review/README.md",
+    "category": "OPERATING_GUIDE",
+    "owner": "design-system",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "operating guide for design-system"
+  },
+  {
+    "path": "design-system/documents/policy/README.md",
+    "category": "CANONICAL_GOVERNANCE",
+    "owner": "design-system",
+    "authoritative": true,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "canonical governance for design-system"
+  },
+  {
+    "path": "design-system/documents/procedure/README.md",
+    "category": "OPERATING_GUIDE",
+    "owner": "design-system",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "operating guide for design-system"
+  },
+  {
+    "path": "design-system/documents/proposal/README.md",
+    "category": "OPERATING_GUIDE",
+    "owner": "design-system",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "operating guide for design-system"
+  },
+  {
+    "path": "design-system/documents/report/README.md",
+    "category": "OPERATING_GUIDE",
+    "owner": "design-system",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "operating guide for design-system"
+  },
+  {
+    "path": "design-system/documents/templates/word/general.md",
+    "category": "TEMPLATE",
+    "owner": "design-system",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "template for design-system"
+  },
+  {
+    "path": "design-system/documents/templates/word/policy.md",
+    "category": "TEMPLATE",
+    "owner": "design-system",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "template for design-system"
+  },
+  {
+    "path": "design-system/documents/templates/word/report.md",
+    "category": "TEMPLATE",
+    "owner": "design-system",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "template for design-system"
+  },
+  {
+    "path": "docs/README.md",
+    "category": "OPERATING_GUIDE",
+    "owner": "root",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "documentation index and navigation"
+  },
+  {
+    "path": "docs/governance/MONOREPO_MIGRATION_MANIFEST.md",
+    "category": "CANONICAL_GOVERNANCE",
+    "owner": "root",
+    "authoritative": true,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "canonical governance for root"
+  },
+  {
+    "path": "knowledge/AGENTS.md",
+    "category": "CANONICAL_GOVERNANCE",
+    "owner": "knowledge",
+    "authoritative": true,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "canonical governance for knowledge"
+  },
+  {
+    "path": "knowledge/README.md",
+    "category": "OPERATING_GUIDE",
+    "owner": "knowledge",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "operating guide for knowledge"
+  },
+  {
+    "path": "knowledge/knowledge/intake/inventory/OWNER-DECISIONS.md",
+    "category": "REFERENCE",
+    "owner": "knowledge",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "reference for knowledge"
+  },
+  {
+    "path": "knowledge/knowledge/intake/inventory/REPORT.md",
+    "category": "REFERENCE",
+    "owner": "knowledge",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "reference for knowledge"
+  },
+  {
+    "path": "knowledge/requirements.txt",
+    "category": "REFERENCE",
+    "owner": "knowledge",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "reference for knowledge"
+  },
+  {
+    "path": "vault/AGENTS.md",
+    "category": "CANONICAL_GOVERNANCE",
+    "owner": "vault",
+    "authoritative": true,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "canonical governance for vault"
+  },
+  {
+    "path": "vault/README.md",
+    "category": "OPERATING_GUIDE",
+    "owner": "vault",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "operating guide for vault"
+  },
+  {
+    "path": "vault/requirements.txt",
+    "category": "REFERENCE",
+    "owner": "vault",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "reference for vault"
+  }
+]
