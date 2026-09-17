@@ -19,6 +19,6 @@ The machine-readable inventory is [`docs/document-index.json`](document-index.js
 
 ## Enforcement
 
-Critical rules are mapped to executable validators, runtime gates, tests and CI in `docs/governance/enforcement-matrix.json`. Run `python tools/validate_house_net.py` and `control-plane/bin/housenet-preflight --json` before reviewing a change.
+Critical rules are mapped to executable validators, runtime gates, tests and CI in `docs/governance/enforcement-matrix.json`. Run `python tools/validate_house_net.py` and the Control Plane validator before reviewing a change.
 
-Կրիտիկական կանոնները executable validator-ների, runtime gate-երի, թեստերի և CI-ի հետ կապված են `docs/governance/enforcement-matrix.json`-ում։ Փոփոխություն վերանայելիս գործարկիր `python tools/validate_house_net.py` և `control-plane/bin/housenet-preflight --json`։
+Կրիտիկական կանոնները executable validator-ների, runtime gate-երի, թեստերի և CI-ի հետ կապված են `docs/governance/enforcement-matrix.json`-ում։ Փոփոխություն վերանայելիս գործարկիր `python tools/validate_house_net.py` և Control Plane validator-ը։
