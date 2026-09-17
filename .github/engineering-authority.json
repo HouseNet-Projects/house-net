@@ -1,13 +1,13 @@
 {
-  "authority_id": "EAE-PRODUCTION-DEPUTY",
+  "authority_id": "EAE-FINAL-PRODUCT-COMPLETION",
   "approved_by": "GEV",
-  "approval_reference": "gev-mission-production-deputy",
-  "approved_at": "2026-09-17T18:00:00Z",
-  "mission": "Deliver the thin production operator product over the canonical Deputy runtime.",
+  "approval_reference": "gev-mission-final-product-completion",
+  "approved_at": "2026-09-17T19:00:00Z",
+  "mission": "Complete the Deputy browser operator product, supervised worker, hosting package and operational backup/restore.",
   "repository": "HouseNet-Projects/house-net",
-  "base_sha": "8743756fcd0d347d227ae600f5ef7c01de8e2f5e",
-  "branch": "product/production-deputy",
-  "pr": "12",
+  "base_sha": "bd070c424507dc4f49f4176545c9b683a4c1c330",
+  "branch": "product/final-product-completion",
+  "pr": "13",
   "allowed_operations": [
     "branch",
     "edit",
@@ -21,6 +21,8 @@
   ],
   "allowed_paths": [
     "command-center/**",
+    "deploy/**",
+    ".github/workflows/house-net-ci.yml",
     ".github/engineering-authority.json"
   ],
   "prohibited_operations": [
