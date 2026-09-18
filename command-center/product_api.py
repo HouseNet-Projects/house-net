@@ -118,6 +118,15 @@ class Handler(BaseHTTPRequestHandler):
             if path=='/sources':return self._json(200,company_cockpit.build_snapshot()['source_health'])
             if path=='/notifications':return self._json(200,proactive.events())
             if path=='/worker':return self._json(200,worker.status())
+            if path=='/self-audit':
+                hm=health_model.build(provider=provider_status(), worker=worker.status())
+                return self._json(200, {
+                    'deputy': hm['product']['state'],
+                    'ai': {'state': hm['product']['claude_provider']},
+                    'business_data': hm['business_data'],
+                    'technical_diagnostics': hm.get('developer_diagnostics', {}),
+                    'impact': [r['limitation'] for r in hm['business_data']['sources'] if r.get('limitation')],
+                })
             if path=='/documents':return self._json(200,document_exports.list_artifacts())
             if path.startswith('/documents/') and path.count('/')==2:
                 aid=path.split('/')[2]; matches=[p for p in document_exports.ARTIFACTS.iterdir() if aid in p.stem]
