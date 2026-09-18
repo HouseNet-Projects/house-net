@@ -23,6 +23,7 @@ import execution_surface
 import proactive
 import health_model
 from ai_provider import status as provider_status, ask as provider_ask
+from context_orchestrator import retrieve as retrieve_context
 
 
 def _mission_id(intent):
@@ -103,6 +104,7 @@ def _provider_prompt(intent, context, understood, runtime, routing, graph, langu
         "language": language, "intent": intent, "understanding": understood,
         "sources": context.get("sources", []), "health": context.get("health", {}), "operational_state": context.get("operational_state", {}),
         "conversation": context.get("conversation", []),
+        "tool_trace": context.get("tool_trace", {}),
         "truth_rule": context.get("truth_rule"),
         "runtime": {"status": runtime.get("status"), "blocked": runtime.get("blocked", []),
                     "steps": [{"skill": s.get("skill"), "status": s.get("status"),
@@ -162,6 +164,7 @@ def run(intent, *, inputs=None, as_json=False):
     intent = intent.strip(); mission_id = _mission_id(intent)
     canonical_intent = _canonical_intent(intent)
     context = assemble_context()
+    context["tool_trace"] = retrieve_context(intent, store=engine._store())
     if isinstance(inputs, dict) and isinstance(inputs.get("conversation"), list):
         context["conversation"] = inputs["conversation"][-12:]
     reg = engine.load_registry()

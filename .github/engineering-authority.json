@@ -1,13 +1,13 @@
 {
-  "authority_id": "EAE-GEV-CONTINUOUS-INBOUND-PREP",
+  "authority_id": "EAE-GEV-CONTEXT-ORCHESTRATOR",
   "approved_by": "GEV",
   "approval_reference": "gev-explicit-gev-work-product-rebuild-2026-09-18",
   "approved_at": "2026-09-18T00:00:00Z",
-  "mission": "Process certified inbound observations into deduplicated internal work and follow-up candidates",
+  "mission": "Add bounded read-only context retrieval before Claude reasoning",
   "repository": "HouseNet-Projects/house-net",
-  "base_sha": "235c6e20f64e3e9ac31e95e56862d358c678060a",
-  "branch": "product/claude-brain-loop",
-  "pr": "37",
+  "base_sha": "c2f83d06fd3162782b2e1256bde50ab1720858c5",
+  "branch": "product/context-tool-orchestrator",
+  "pr": "38",
   "allowed_operations": [
     "branch",
     "edit",
@@ -29,7 +29,9 @@
     "command-center/.claude/skills/executors.py",
     "command-center/.claude/runtime/conversation_store.py",
     "command-center/.claude/architecture/proactive.py",
-    "command-center/.claude/tests/test_proactive_inbound.py"
+    "command-center/.claude/tests/test_proactive_inbound.py",
+    "command-center/.claude/runtime/context_orchestrator.py",
+    "command-center/.claude/tests/test_context_orchestrator.py"
   ],
   "prohibited_operations": [
     "external_write",
