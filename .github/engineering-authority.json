@@ -7,7 +7,7 @@
   "repository": "HouseNet-Projects/house-net",
   "base_sha": "a5520de56452a93610e069058e029943466afe19",
   "branch": "product/gev-work-product-l10n-fix",
-  "pr": "PENDING",
+  "pr": "24",
   "allowed_operations": [
     "branch",
     "edit",
