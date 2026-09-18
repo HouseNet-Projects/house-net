@@ -99,6 +99,48 @@ def _human(result, understood, context, mission_id):
               "", "FOLLOW-THROUGH", f"- Resume with: deputy resume {mission_id}"]
     return "\n".join(lines)
 
+def _provider_prompt(intent, context, understood, runtime, routing, graph, language="hy"):
+    """Bounded, sanitized context for the reasoning provider; never grants write authority."""
+    compact = {
+        "language": language, "intent": intent, "understanding": understood,
+        "sources": context.get("sources", []), "operational_state": context.get("operational_state", {}),
+        "truth_rule": context.get("truth_rule"),
+        "runtime": {"status": runtime.get("status"), "blocked": runtime.get("blocked", []),
+                    "steps": [{"skill": s.get("skill"), "status": s.get("status"),
+                               "summary": s.get("result_summary")} for s in runtime.get("steps", [])]},
+        "brains": [b.get("brain_id") for b in routing.get("selected_brains", [])],
+        "work_graph": {"validation": (graph or {}).get("validation"), "nodes": len((graph or {}).get("nodes", []))},
+        "authority": "Reasoning and preparation only. Never execute or invent external mutations. Material changes require Action Runtime and exact Gev approval.",
+    }
+    return ("You are Deputy's reasoning layer. Answer the user's question using only the governed context below. "
+            "State unavailable or stale data honestly; do not invent facts. Do not expose chain-of-thought, secrets, "
+            "raw credentials, or internal implementation noise. Return a concise human answer with priorities, "
+            "recommended next actions, limitations, and evidence references.\n\n" +
+            json.dumps(compact, ensure_ascii=False, default=str, indent=2))
+
+def operator_response(payload, language="hy"):
+    provider = payload.get("provider") or {}
+    runtime = payload.get("runtime") or {}
+    answer = provider.get("answer") or payload.get("understanding", {}).get("outcome") or "Deputy prepared the current governed context."
+    limitations = []
+    if provider.get("status") not in ("OK", "NOT_INVOKED"):
+        limitations.append(provider.get("reason") or "The reasoning provider is unavailable.")
+    limitations.extend(x.get("code", x.get("reason", "unavailable")) for x in runtime.get("blocked", [])[:5])
+    actions = []
+    for step in runtime.get("steps", []):
+        if step.get("result_summary") or step.get("skill"):
+            actions.append({"skill": step.get("skill"), "status": step.get("status"), "summary": step.get("result_summary")})
+    return {"status": payload.get("completion_state", runtime.get("status", "PREPARED")),
+            "answer": answer, "language": language, "mission_id": payload.get("mission_id"),
+            "provider": provider.get("provider", "claude-code-max"),
+            "provider_state": provider.get("provider_state") or provider.get("state") or provider.get("status"),
+            "runtime_state": runtime.get("status"),
+            "summary": payload.get("understanding", {}).get("outcome"),
+            "recommended_actions": actions, "evidence": {"sources": payload.get("context", {}).get("sources", []),
+                "work_graph": {"validation": (payload.get("work_graph") or {}).get("validation"), "nodes": len((payload.get("work_graph") or {}).get("nodes", []))}},
+            "limitations": limitations, "approval_required": bool(payload.get("execution", {}).get("approval_inbox")) if payload.get("execution") else False,
+            "work_graph_summary": {"validation": (payload.get("work_graph") or {}).get("validation"), "node_count": len((payload.get("work_graph") or {}).get("nodes", []))}}
+
 
 def run(intent, *, inputs=None, as_json=False):
     if not isinstance(intent, str) or not intent.strip():
@@ -145,7 +187,8 @@ def run(intent, *, inputs=None, as_json=False):
         graph={"nodes":nodes,"validation":"GREEN","records":[engine._store().record("checkpoints", mission_id + ":graph", {"kind":"MISSION_WORK_GRAPH","mission_id":mission_id,"nodes":nodes})]}
     except Exception as exc:
         graph = {"status": "BLOCKED", "reason": type(exc).__name__}
-    provider = provider_ask(intent) if os.environ.get("DEPUTY_USE_CLAUDE") == "1" else {"status": "NOT_INVOKED", "provider": "claude-code-max", "reason": "Claude Code invocation is opt-in; canonical runtime remains provider-neutral."}
+    language = (inputs or {}).get("language", "hy")
+    provider = provider_ask(_provider_prompt(intent, context, understood, result, routing, graph, language), context=context) if os.environ.get("DEPUTY_USE_CLAUDE") == "1" else {"status": "NOT_INVOKED", "provider": "claude-code-max", "reason": "Claude Code invocation is opt-in; canonical runtime remains provider-neutral."}
     payload = {"mission_id": mission_id, "request": intent, "understanding": {"raw_intent": intent, "outcome": understood,
         "scope": "current HouseNet operating state", "constraints": ["no external mutation without Action Runtime approval"],
         "completion_criteria": ["facts have provenance", "prepared actions are separated", "verification state is honest"]},
