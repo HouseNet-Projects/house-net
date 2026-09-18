@@ -130,12 +130,17 @@ def operator_response(payload, language="hy"):
     for step in runtime.get("steps", []):
         if step.get("result_summary") or step.get("skill"):
             actions.append({"skill": step.get("skill"), "status": step.get("status"), "summary": step.get("result_summary")})
+    localized_summary = payload.get("understanding", {}).get("outcome")
+    if language == "hy":
+        localized_summary = "Կօգտագործեմ HouseNet-ի ընթացիկ հավաստված աղբյուրները, կպատրաստեմ հաջորդ քայլերը և արտաքին փոփոխությունները կպահեմ պահանջվող հաստատման սահմաններում։"
+    else:
+        localized_summary = localized_summary or "I will use current certified HouseNet sources, prepare next actions, and keep material external changes behind the required approval boundary."
     return {"status": payload.get("completion_state", runtime.get("status", "PREPARED")),
             "answer": answer, "language": language, "mission_id": payload.get("mission_id"),
             "provider": provider.get("provider", "claude-code-max"),
             "provider_state": provider.get("provider_state") or provider.get("state") or provider.get("status"),
             "runtime_state": runtime.get("status"),
-            "summary": payload.get("understanding", {}).get("outcome"),
+            "summary": localized_summary,
             "recommended_actions": actions, "evidence": {"sources": payload.get("context", {}).get("sources", []),
                 "work_graph": {"validation": (payload.get("work_graph") or {}).get("validation"), "nodes": len((payload.get("work_graph") or {}).get("nodes", []))}},
             "limitations": limitations, "approval_required": bool(payload.get("execution", {}).get("approval_inbox")) if payload.get("execution") else False,

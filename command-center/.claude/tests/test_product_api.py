@@ -52,6 +52,16 @@ class OperatorPresentationTests(unittest.TestCase):
         self.assertNotIn("'Record '+(i+1)", js)
         self.assertNotIn('Record '+"' +", js)
 
+    def test_operator_summary_localizes_armenian_requests(self):
+        import deputy
+        result = deputy.operator_response({
+            "completion_state": "PREPARED",
+            "provider": {"status": "OK", "answer": "Բարև"},
+            "understanding": {"outcome": "I will review"},
+            "runtime": {}, "context": {}, "work_graph": {}
+        }, language="hy")
+        self.assertTrue(result["summary"].startswith("Կօգտագործեմ"))
+
     def test_humanized_timestamps_and_semantic_empty_states(self):
         js = product_api.APP_JS
         self.assertIn('toLocaleString', js)
