@@ -21,6 +21,7 @@ import engine
 import company_cockpit
 import execution_surface
 import proactive
+import health_model
 from ai_provider import status as provider_status, ask as provider_ask
 
 
@@ -56,20 +57,17 @@ def assemble_context():
                         "updated_at": task_data.get("source_updated_at"), "provenance": task_data.get("identity")})
     except Exception as exc:
         sources.append({"source": "INT-TASKS", "state": "UNAVAILABLE", "reason": type(exc).__name__})
-    cert_path = ROOT / ".claude" / "integrations" / "certification.json"
-    try:
-        cert = json.loads(cert_path.read_text(encoding="utf-8")).get("integrations", {})
-        for sid in ("INT-TG", "INT-OL-CAL", "INT-OL-MAIL", "INT-B24", "INT-MB"):
-            row = cert.get(sid, {})
-            sources.append({"source": sid, "state": row.get("state", "UNKNOWN"),
-                            "read_ops": row.get("read_ops", []), "retrieved_at": row.get("certified_at")})
-    except (OSError, ValueError):
-        sources.append({"source": "integration-certification", "state": "UNAVAILABLE"})
+    # Certification is host/runtime evidence, not a required repository file.
+    # Derive source state from the canonical registry/readiness contract so a
+    # missing local evidence artifact never makes Deputy itself appear blocked.
+    for row in health_model.build(provider=provider_status()).get("business_data", {}).get("sources", []):
+        sources.append({"source": row["source_id"], "state": row["state"],
+                        "limitation": row.get("limitation"), "freshness": row.get("freshness")})
     st = engine._store()
     loops = st.list("loops", limit=200)
     actions = st.list("actions", limit=200)
     tickets = st.list("tickets", where="status='OPEN'", limit=100)
-    return {"sources": sources, "operational_state": {
+    return {"sources": sources, "health": health_model.build(provider=provider_status()), "operational_state": {
         "open_loops": len([x for x in loops if x.get("state") not in ("CLOSED", "VERIFIED")]),
         "pending_actions": len([x for x in actions if x.get("state") in ("APPROVAL_REQUIRED", "RESULT_UNKNOWN", "EXECUTED_UNVERIFIED")]),
         "open_tickets": len(tickets),
@@ -103,7 +101,8 @@ def _provider_prompt(intent, context, understood, runtime, routing, graph, langu
     """Bounded, sanitized context for the reasoning provider; never grants write authority."""
     compact = {
         "language": language, "intent": intent, "understanding": understood,
-        "sources": context.get("sources", []), "operational_state": context.get("operational_state", {}),
+        "sources": context.get("sources", []), "health": context.get("health", {}), "operational_state": context.get("operational_state", {}),
+        "conversation": context.get("conversation", []),
         "truth_rule": context.get("truth_rule"),
         "runtime": {"status": runtime.get("status"), "blocked": runtime.get("blocked", []),
                     "steps": [{"skill": s.get("skill"), "status": s.get("status"),
@@ -153,6 +152,8 @@ def run(intent, *, inputs=None, as_json=False):
     intent = intent.strip(); mission_id = _mission_id(intent)
     canonical_intent = _canonical_intent(intent)
     context = assemble_context()
+    if isinstance(inputs, dict) and isinstance(inputs.get("conversation"), list):
+        context["conversation"] = inputs["conversation"][-12:]
     reg = engine.load_registry()
     routing = __import__("brain_router").route(canonical_intent)
     understood = (f"I will {intent[0].lower() + intent[1:]}. I will use current certified HouseNet sources, "
@@ -165,6 +166,13 @@ def run(intent, *, inputs=None, as_json=False):
                                       "reported by the runtime as UNKNOWN when not certified; no figures are inferred.")
     result = engine.run_deputy_request(reg, canonical_intent, runtime_inputs, action_level="ANALYZE",
                                        session_id=mission_id, source="DeputyCLI")
+    # An analytical question does not need a pre-authored skill trigger. Keep
+    # the resolver evidence, but allow the governed reasoning provider to
+    # answer it without granting any mutation authority.
+    if result.get("status") == "BLOCKED" and any(
+        b.get("code") == "NO_APPLICABLE_SKILL" for b in result.get("blocked", [])
+    ):
+        result["status"] = "PARTIAL"
     cockpit = None
     if canonical_intent in ("company cockpit", "weekly management review", "monthly management review"):
         cockpit = company_cockpit.query(intent)

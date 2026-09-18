@@ -285,7 +285,15 @@ def daily_briefing(inputs, skill=None, reg=None):
     (calendar, mail candidates, integration health). Sections are emitted only when non-empty; an unavailable critical
     integration is reported explicitly with its last successful read — never silently omitted, never shown as current data."""
     today = _today(inputs)
-    dl = deadline_management(inputs); wf = waiting_for_tracking(inputs); pr = executive_prioritization(inputs)
+    task_error = None
+    try:
+        dl = deadline_management(inputs); wf = waiting_for_tracking(inputs); pr = executive_prioritization(inputs)
+    except Exception as exc:
+        # A damaged/unavailable task register degrades only task sections. The
+        # brief still assembles mail/calendar/registered-source signals.
+        task_error = f"INT-TASKS unavailable: {type(exc).__name__}"
+        inputs = {**inputs, "tasks": []}
+        dl = deadline_management(inputs); wf = waiting_for_tracking(inputs); pr = executive_prioritization(inputs)
     b = dl["buckets"]
     head_actions = [r for r in pr["ranked"] if r["P"] == "P1" and not _counterpart(r["owner"])[1]]
     decisions = [r for r in pr["ranked"] if r["owner"].isupper()]
@@ -326,7 +334,7 @@ def daily_briefing(inputs, skill=None, reg=None):
         + [{"kind": "business", "text": f"{c['id']} {c['topic']}"} for c in bc.get("conflicts", [])])
     sec("RISKS", "ՌԻՍԿԵՐ", risks)
     sec("PREPARATION", "ՊԱՏՐԱՍՏՈՒԹՅՈՒՆ", [{"kind": "meeting", "text": f"{p['meeting']} ({(p['start'] or '')[5:16]}): " + ("; ".join(p["missing"]) if p["missing"] else "context ready"), "agenda": p["agenda"]} for p in prep])
-    brief = {"status": "EXECUTED", "date": today.isoformat(), "weekday": HY[today.weekday()],
+    brief = {"status": "PARTIAL_DATA" if task_error or lv.get("available") is False else "EXECUTED", "date": today.isoformat(), "weekday": HY[today.weekday()],
              "top_priorities": pr["ranked"][:5], "head_actions": head_actions[:5], "decisions_pending": decisions,
              "deadlines_today": b["today"], "overdue": b["overdue"], "tomorrow": b["tomorrow"],
              "waiting_for": wf["waiting_for"], "no_deadline": b["no_deadline"],
@@ -335,9 +343,12 @@ def daily_briefing(inputs, skill=None, reg=None):
                       "email_candidates": act, "email_candidates_total": len(cands), "integration_health": lv.get("health_lines", []), "unavailable": lv.get("unavailable", []),
                       "critical_unavailable": lv.get("critical_unavailable", []), "reason": lv.get("reason"), "sales_sources": live_sales, "operations_sources": live_ops},
              "preparation": prep, "risks": risks,
+             "completeness": {"task_register": "UNAVAILABLE" if task_error else "AVAILABLE",
+                              "missing_sources": (["INT-TASKS"] if task_error else []) + list(lv.get("unavailable", [])),
+                              "partial": bool(task_error or lv.get("available") is False)},
              "data_gaps": ([f"sales: no VERIFIED live source ({', '.join(str(s.get('integration_id')) + '=' + str(s.get('certification')) for s in live_sales)})"] if not sales_ok else [])
                           + ([f"operations: no VERIFIED live source beyond the task register ({', '.join(str(s.get('integration_id')) + '=' + str(s.get('certification')) for s in live_ops if s.get('integration_id') != 'INT-TASKS')})"] if not ops_ok else [])
-                          + bc.get("routine_missing_data", []),
+                          + bc.get("routine_missing_data", []) + ([task_error] if task_error else []),
              "business_alerts": {"pending_decisions": [c["id"] for c in bc.get("conflicts", [])], "gaps": bc.get("gaps", [])}, "business_context": _bc_brief(inputs)}
     # MISSION 5 — the management brief (TOP LINE · CHANGES · SALES · OPERATIONS · TASKS · CALENDAR · MAIL · RISKS · ACTIONS · GEV) on the same live reads
     brief["management"] = _management(inputs, lv, lambda IQ, st: IQ.brief(st, record=not inputs.get("no_checkpoint")))
