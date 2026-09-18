@@ -20,6 +20,7 @@
     "regenerate_artifacts"
   ],
   "allowed_paths": [
+    "command-center/deputy.py",
     "command-center/product_api.py",
     "command-center/document_exports.py",
     "command-center/.claude/tests/test_product_api.py",
