@@ -35,7 +35,7 @@ def approval_inbox(session_id=None):
     return [{"action_id": a["action_id"], "mission": a.get("session_id"), "target": a["request"].get("operation_id"),
              "effect": a["request"].get("expected_effect"), "risk": a["request"].get("risk_class"),
              "fingerprint": a["request"].get("action_fingerprint"), "state": a["state"],
-             "expires_at": (a.get("approval") or {}).get("expires_at"), "card": a.get("card")}
+             "expires_at": (a.get("approval") or {}).get("expires_at"), "batch_id": a.get("batch_id"), "card": a.get("card")}
             for a in actions.pending(session_id)]
 
 
