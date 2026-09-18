@@ -4,6 +4,7 @@ from pathlib import Path
 import sys
 sys.path.insert(0,str(Path(__file__).parents[2]))
 import product_api
+import deputy
 
 class ProductApiTests(unittest.TestCase):
     def test_health_and_auth_contract(self):
@@ -16,6 +17,10 @@ class ProductApiTests(unittest.TestCase):
 
 
 class ProductHardeningTests(unittest.TestCase):
+    def test_provider_prompt_binds_requested_language(self):
+        prompt = deputy._provider_prompt('status', {}, {}, {}, {}, {}, 'en')
+        self.assertIn("English when language is 'en'", prompt)
+        self.assertIn('"language": "en"', prompt)
     def test_ui_has_all_operator_surfaces(self):
         for label in ('Home','Deputy','Inbox','Work','Reports','Documents','Settings'):
             self.assertIn(label, product_api.INDEX_HTML)

@@ -1,13 +1,13 @@
 {
-  "authority_id": "EAE-GEV-HOME-SOURCE-VISIBILITY",
+  "authority_id": "EAE-GEV-ASK-LANGUAGE",
   "approved_by": "GEV",
   "approval_reference": "gev-explicit-gev-work-product-rebuild-2026-09-18",
   "approved_at": "2026-09-18T00:00:00Z",
-  "mission": "Keep Home focused on human executive work by honoring its source visibility boundary",
+  "mission": "Bind Deputy provider responses to the requested operator language",
   "repository": "HouseNet-Projects/house-net",
-  "base_sha": "319709f4eb6d90a883b9cd5ec20c1c8ab125baa2",
-  "branch": "fix/home-source-visibility",
-  "pr": "26",
+  "base_sha": "0523de62206b9275cd218d8eda0cf0d0655d6624",
+  "branch": "fix/ask-language-contract",
+  "pr": "27",
   "allowed_operations": [
     "branch",
     "edit",
