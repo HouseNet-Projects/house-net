@@ -34,6 +34,14 @@ def _business_rows():
             state = "AVAILABLE"
         elif state in ("NOT CERTIFIED", "IMPLEMENTED", "CONFIGURED", "DECLARED"):
             state = "NEEDS_SETUP" if state != "CONFIGURED" else "PARTIAL"
+        if source_id == "INT-TASKS":
+            try:
+                import adapter_tasks
+                adapter_tasks.read("tasks.list", {})
+                state = "AVAILABLE"
+            except Exception as exc:
+                state = "UNAVAILABLE"
+                row = {**row, "unblock": f"Task register unavailable: {type(exc).__name__}"}
         out.append({
             "source_id": source_id,
             "name": row.get("system") or source_id,
@@ -69,4 +77,3 @@ def build(*, store_state="READY", action_runtime_state="READY", worker=None, pro
                            "state": "AVAILABLE" if available == len(business) else ("PARTIAL" if available else "UNAVAILABLE")},
         "developer_diagnostics": developer,
     }
-
