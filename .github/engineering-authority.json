@@ -1,13 +1,13 @@
 {
-  "authority_id": "EAE-I18N-RENDER-REFRESH",
+  "authority_id": "EAE-DEPUTY-FULL-FUNCTIONAL-RECOVERY",
   "approved_by": "GEV",
-  "approval_reference": "gev-explicit-bilingual-render-refresh",
+  "approval_reference": "gev-explicit-deputy-functionality-recovery-2026-09-18",
   "approved_at": "2026-09-18T00:00:00Z",
-  "mission": "Ensure localized page titles and section text are applied after each screen render",
+  "mission": "Restore governed Deputy product functionality: semantic bilingual UI, normalized Ask Deputy, strict Claude context/readiness, and exact approval execution browser flow",
   "repository": "HouseNet-Projects/house-net",
-  "base_sha": "faa6c411a49a10deacee789ab2b881fc3bd2f4eb",
-  "branch": "fix/i18n-render-refresh",
-  "pr": "21",
+  "base_sha": "38d0dc24ee032d9e6ce58f463e9fed70c380eb5e",
+  "branch": "product/full-functional-recovery",
+  "pr": "PENDING",
   "allowed_operations": [
     "branch",
     "edit",
@@ -21,6 +21,9 @@
   ],
   "allowed_paths": [
     "command-center/product_api.py",
+    "command-center/deputy.py",
+    "command-center/.claude/runtime/ai_provider.py",
+    "command-center/.claude/tests/test_product_api.py",
     ".github/engineering-authority.json"
   ],
   "prohibited_operations": [

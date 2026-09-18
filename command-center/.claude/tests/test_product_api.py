@@ -1,4 +1,5 @@
 import unittest
+from unittest.mock import patch
 from pathlib import Path
 import sys
 sys.path.insert(0,str(Path(__file__).parents[2]))
@@ -70,5 +71,43 @@ class BilingualThemeProviderTests(unittest.TestCase):
         self.assertFalse(result.get('api_key_required'))
         self.assertNotIn('ANTHROPIC_API_KEY', product_api.APP_JS)
         self.assertIn('/provider', __import__('inspect').getsource(product_api.Handler.do_GET))
+
+class BehavioralProductTests(unittest.TestCase):
+    def test_i18n_uses_stable_ids_and_no_visible_text_lookup(self):
+        js = product_api.APP_JS
+        self.assertIn("function t(id)", js)
+        self.assertIn("data-i18n=\"nav.cockpit\"", product_api.INDEX_HTML)
+        self.assertNotIn("key=el.dataset.i18n||el.textContent", js)
+        self.assertIn("localStorage.setItem('deputy-locale'", js)
+
+    def test_normalized_ask_contract_is_operator_shaped(self):
+        out = product_api._normalize_ask({
+            'mission_id':'MIS-test', 'completion_state':'PREPARED',
+            'understanding': {'outcome':'Review current work'},
+            'provider': {'status':'OK','provider':'claude-code-max','provider_state':'READY','answer':'All good.'},
+            'runtime': {'status':'OK','steps':[]}, 'context': {'sources':[{'source':'INT-TASKS','state':'VERIFIED_READ'}]},
+            'work_graph': {'validation':'GREEN','nodes':[{}]}
+        }, 'en')
+        self.assertEqual(out['answer'], 'All good.')
+        self.assertEqual(out['provider'], 'claude-code-max')
+        self.assertEqual(out['language'], 'en')
+        self.assertIn('evidence', out)
+        self.assertNotIn('raw', out)
+
+    def test_provider_auth_truth_is_strict(self):
+        from ai_provider import _auth_state
+        self.assertEqual(_auth_state({'loggedIn':False}), 'AUTH_REQUIRED')
+        self.assertEqual(_auth_state({'loggedIn':True,'authMethod':'api_key','apiProvider':'firstParty','subscriptionType':'max'}), 'WRONG_PROVIDER')
+        self.assertEqual(_auth_state({'loggedIn':True,'authMethod':'claude.ai','apiProvider':'firstParty','subscriptionType':'max'}), 'READY')
+
+    def test_provider_output_is_normalized(self):
+        from ai_provider import _answer
+        self.assertEqual(_answer({'result':'human answer'}), 'human answer')
+        self.assertEqual(_answer({'result':{'content':[{'text':'nested answer'}]}}), 'nested answer')
+
+    def test_ask_renderer_is_dedicated_and_approval_execute_is_bound(self):
+        self.assertIn('function renderAskResponse', product_api.APP_JS)
+        self.assertIn("data-execute", product_api.APP_JS)
+        self.assertIn("/actions/'+encodeURIComponent(b.dataset.execute)+'/execute", product_api.APP_JS)
 
 if __name__=='__main__': unittest.main()
