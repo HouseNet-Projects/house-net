@@ -127,6 +127,14 @@ class BehavioralProductTests(unittest.TestCase):
         self.assertIn("actions.invalidate_if_changed", source)
         self.assertIn("actions.prepare(changed['new_request']", source)
 
+    def test_batch_approval_and_execution_delegate_to_canonical_runtime(self):
+        import inspect
+        post = inspect.getsource(product_api.Handler.do_POST)
+        get = inspect.getsource(product_api.Handler.do_GET)
+        self.assertIn("actions.approve(text,batch_id=batch_id)", post)
+        self.assertIn("actions.execute_batch(batch_id)", post)
+        self.assertIn("actions.list_actions(\"batch_id=?\"", get)
+
     def test_i18n_uses_stable_ids_and_no_visible_text_lookup(self):
         js = product_api.APP_JS
         self.assertIn("function t(id)", js)

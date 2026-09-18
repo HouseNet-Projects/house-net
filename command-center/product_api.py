@@ -115,6 +115,15 @@ class Handler(BaseHTTPRequestHandler):
                 return self._json(200,rows)
             if path.startswith('/actions/'):
                 return self._json(200,_safe_action(actions.get(path.split('/')[2])))
+            if path.startswith('/batches/') and path.count('/')==2:
+                batch_id=urllib.parse.unquote(path.split('/')[2])
+                rows=[]
+                for a in actions.list_actions("batch_id=?", (batch_id,)):
+                    rows.append(_safe_action(a))
+                if not rows:return self._json(404,{'status':'NOT_FOUND','batch_id':batch_id})
+                return self._json(200,{'batch_id':batch_id,'actions':rows,
+                    'state':'APPROVAL_REQUIRED' if any(a.get('state')=='APPROVAL_REQUIRED' for a in rows) else
+                            ('VERIFIED' if all(a.get('state')=='VERIFIED' for a in rows) else 'IN_PROGRESS')})
             if path=='/sources':return self._json(200,company_cockpit.build_snapshot()['source_health'])
             if path=='/notifications':return self._json(200,proactive.events())
             if path=='/worker':return self._json(200,worker.status())
@@ -213,6 +222,17 @@ class Handler(BaseHTTPRequestHandler):
                 aid=urllib.parse.unquote(parts[1]);token=str(body.get('token_id') or '')
                 if not token:return self._json(400,{'status':'APPROVAL_REQUIRED','reason':'exact token_id required'})
                 return self._json(200,execution_surface.execute_approved(aid,token_id=token))
+            if len(parts)==3 and parts[0]=='batches':
+                batch_id=urllib.parse.unquote(parts[1])
+                if parts[2]=='approve':
+                    text=str(body.get('text') or '')
+                    out=actions.approve(text,batch_id=batch_id)
+                    return self._json(200 if out.get('status')=='APPROVED' else 409,out)
+                if parts[2]=='execute':
+                    # Each step retains its own exact approval token.  The
+                    # canonical batch executor re-validates every fingerprint
+                    # and stops on the first unverified result.
+                    return self._json(200,actions.execute_batch(batch_id))
             return self._json(404,{'status':'NOT_FOUND'})
         except actions.ActionError as e:return self._json(409,{'status':e.code,'reason':e.reason})
         except Exception as e:return self._json(500,{'status':'FAILED','reason':type(e).__name__})
