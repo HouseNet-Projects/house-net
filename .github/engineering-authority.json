@@ -7,7 +7,7 @@
   "repository": "HouseNet-Projects/house-net",
   "base_sha": "38d0dc24ee032d9e6ce58f463e9fed70c380eb5e",
   "branch": "product/full-functional-recovery",
-  "pr": "PENDING",
+  "pr": "22",
   "allowed_operations": [
     "branch",
     "edit",
