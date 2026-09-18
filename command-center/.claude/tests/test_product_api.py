@@ -121,6 +121,12 @@ class BehavioralProductTests(unittest.TestCase):
         self.assertIn("path=='/conversations'",source)
         self.assertIn("conversation_store",inspect.getsource(product_api.Handler.do_POST))
 
+    def test_approval_edit_delegates_to_runtime_invalidation(self):
+        import inspect
+        source=inspect.getsource(product_api.Handler.do_POST)
+        self.assertIn("actions.invalidate_if_changed", source)
+        self.assertIn("actions.prepare(changed['new_request']", source)
+
     def test_i18n_uses_stable_ids_and_no_visible_text_lookup(self):
         js = product_api.APP_JS
         self.assertIn("function t(id)", js)

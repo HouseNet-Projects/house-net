@@ -198,6 +198,13 @@ class Handler(BaseHTTPRequestHandler):
             parts=path.strip('/').split('/')
             if len(parts)==3 and parts[0]=='approvals':
                 aid=urllib.parse.unquote(parts[1])
+                if parts[2]=='edit':
+                    current=actions.get(aid)
+                    if not current:return self._json(404,{'status':'NOT_FOUND'})
+                    changed=actions.invalidate_if_changed(aid, body.get('parameters') or {})
+                    if not changed.get('changed'):return self._json(409,{'status':'UNCHANGED','action':_safe_action(current)})
+                    prepared=actions.prepare(changed['new_request'], session_id=current.get('session_id'))
+                    return self._json(200, _safe_action(prepared))
                 if parts[2]=='approve':
                     out=actions.approve(str(body.get('text') or ''),action_id=aid)
                     return self._json(200 if out.get('status')=='APPROVED' else 409,out)

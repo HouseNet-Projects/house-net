@@ -1,13 +1,13 @@
 {
-  "authority_id": "EAE-GEV-COMMITMENT-DIRECTION",
+  "authority_id": "EAE-GEV-APPROVAL-EDIT",
   "approved_by": "GEV",
   "approval_reference": "gev-explicit-gev-work-product-rebuild-2026-09-18",
   "approved_at": "2026-09-18T00:00:00Z",
-  "mission": "Classify inbound obligation direction with evidence and confidence",
+  "mission": "Expose governed approval edit and re-preparation through the canonical Action Runtime",
   "repository": "HouseNet-Projects/house-net",
-  "base_sha": "d2694a2ae45df4beb4b92ce9899880a4ee6632db",
-  "branch": "product/commitment-intelligence",
-  "pr": "39",
+  "base_sha": "3d7a7406a8b1aefaf3f90f054e31a4f37788e964",
+  "branch": "product/approval-edit-tool-contract",
+  "pr": "40",
   "allowed_operations": [
     "branch",
     "edit",
