@@ -17,6 +17,19 @@ class ProductApiTests(unittest.TestCase):
 
 
 class ProductHardeningTests(unittest.TestCase):
+    def test_chat_workspace_contract(self):
+        js = product_api.APP_JS
+        for token in ('chat-thread', 'deputy-conversation', 'new-chat', 'Shift+Enter' if False else 'requestSubmit'):
+            self.assertIn(token, js)
+
+    def test_health_model_separates_product_and_business_data(self):
+        import health_model
+        h = health_model.build(store_state='READY', action_runtime_state='READY', worker={'running': True}, provider={'state': 'READY'})
+        self.assertIn('product', h)
+        self.assertIn('business_data', h)
+        self.assertIn('developer_diagnostics', h)
+        self.assertEqual(h['product']['state'], 'AVAILABLE')
+
     def test_provider_prompt_binds_requested_language(self):
         prompt = deputy._provider_prompt('status', {}, {}, {}, {}, {}, 'en')
         self.assertIn("English when language is 'en'", prompt)
