@@ -1,13 +1,13 @@
 {
-  "authority_id": "EAE-BATCH-APPROVAL-UI",
+  "authority_id": "EAE-BOUNDED-CLAUDE-CONTEXT",
   "approved_by": "GEV",
   "approval_reference": "gev-explicit-gev-work-product-rebuild-2026-09-18",
   "approved_at": "2026-09-18T00:00:00Z",
-  "mission": "Expose enumerated batch approval identity in the operator inbox without bypassing the canonical Action Runtime",
+  "mission": "Bound governed Claude context projection and provider prompt size to preserve reliable Ask Deputy execution",
   "repository": "HouseNet-Projects/house-net",
-  "base_sha": "24123530cd6a00e746908e0f8974426af42ef743",
-  "branch": "product/batch-approval-ui",
-  "pr": "42",
+  "base_sha": "8e63578ea29df2847d41973377224ce2bce04715",
+  "branch": "product/bounded-claude-context",
+  "pr": "43",
   "allowed_operations": [
     "branch",
     "edit",
