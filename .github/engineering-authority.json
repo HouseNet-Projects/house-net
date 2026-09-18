@@ -1,13 +1,13 @@
 {
-  "authority_id": "EAE-GEV-HEALTH-CONVERSATION",
+  "authority_id": "EAE-GEV-TASK-HEALTH-PROBE",
   "approved_by": "GEV",
   "approval_reference": "gev-explicit-gev-work-product-rebuild-2026-09-18",
   "approved_at": "2026-09-18T00:00:00Z",
-  "mission": "Separate Deputy health domains and provide governed conversational workspace with resilient source degradation",
+  "mission": "Probe registered task source truth in the separated health model",
   "repository": "HouseNet-Projects/house-net",
-  "base_sha": "443e242fe71f587edeb119debb2be8ef14c8557e",
+  "base_sha": "bcea1cfecb38ee6cf1ce5e2c085310b70e03e7ab",
   "branch": "product/health-and-conversation",
-  "pr": "29",
+  "pr": "30",
   "allowed_operations": [
     "branch",
     "edit",
