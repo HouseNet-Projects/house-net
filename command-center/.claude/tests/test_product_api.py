@@ -103,6 +103,24 @@ class BilingualThemeProviderTests(unittest.TestCase):
         self.assertIn('/provider', __import__('inspect').getsource(product_api.Handler.do_GET))
 
 class BehavioralProductTests(unittest.TestCase):
+    def test_conversation_store_uses_canonical_channel_events(self):
+        import tempfile
+        from store import Store
+        import conversation_store
+        with tempfile.TemporaryDirectory() as td:
+            s=Store(td)
+            cid=conversation_store.create(s, title='Sales')
+            conversation_store.append(cid,'user','Show blockers',s,language='en')
+            conversation_store.append(cid,'assistant','There are none.',s,language='en')
+            self.assertEqual(len(conversation_store.get(cid,s)['messages']),2)
+            self.assertEqual(conversation_store.list_conversations(s)[0]['conversation_id'],cid)
+
+    def test_api_exposes_canonical_conversation_routes(self):
+        import inspect
+        source=inspect.getsource(product_api.Handler.do_GET)
+        self.assertIn("path=='/conversations'",source)
+        self.assertIn("conversation_store",inspect.getsource(product_api.Handler.do_POST))
+
     def test_i18n_uses_stable_ids_and_no_visible_text_lookup(self):
         js = product_api.APP_JS
         self.assertIn("function t(id)", js)
