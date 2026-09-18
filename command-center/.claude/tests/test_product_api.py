@@ -34,6 +34,13 @@ class ProductHardeningTests(unittest.TestCase):
         prompt = deputy._provider_prompt('status', {}, {}, {}, {}, {}, 'en')
         self.assertIn("English when language is 'en'", prompt)
         self.assertIn('"language": "en"', prompt)
+
+    def test_provider_prompt_has_argv_safe_context_ceiling(self):
+        context = {'sources': [], 'health': {}, 'operational_state': {},
+                   'tool_trace': {'records': {'search_work': [{'blob': 'x' * 100000}]}}}
+        prompt = deputy._provider_prompt('status', context, {}, {}, {}, {}, 'en')
+        self.assertLessEqual(len(prompt), 60080)
+        self.assertIn('Context truncated', prompt)
     def test_ui_has_all_operator_surfaces(self):
         for label in ('Home','Deputy','Inbox','Work','Reports','Documents','Settings'):
             self.assertIn(label, product_api.INDEX_HTML)
