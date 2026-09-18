@@ -5,7 +5,7 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 ROOT=pathlib.Path(__file__).resolve().parent
 for p in (ROOT/'.claude/architecture',ROOT/'.claude/skills',ROOT/'.claude/integrations',ROOT/'.claude/runtime'):
     sys.path.insert(0,str(p))
-import deputy, company_cockpit, proactive, execution_surface, worker, actions, document_exports, health_model
+import deputy, company_cockpit, proactive, execution_surface, worker, actions, document_exports, health_model, conversation_store
 from ai_provider import status as provider_status
 
 def _normalize_ask(payload, language="hy"):
@@ -128,6 +128,9 @@ class Handler(BaseHTTPRequestHandler):
                     'impact': [r['limitation'] for r in hm['business_data']['sources'] if r.get('limitation')],
                 })
             if path=='/documents':return self._json(200,document_exports.list_artifacts())
+            if path=='/conversations':return self._json(200, conversation_store.list_conversations())
+            if path.startswith('/conversations/') and path.count('/')==2:
+                return self._json(200, conversation_store.get(path.split('/')[2]))
             if path.startswith('/documents/') and path.count('/')==2:
                 aid=path.split('/')[2]; matches=[p for p in document_exports.ARTIFACTS.iterdir() if aid in p.stem]
                 if not matches:return self._json(404,{'status':'NOT_FOUND'})
@@ -178,8 +181,15 @@ class Handler(BaseHTTPRequestHandler):
             if path=='/ask':
                 q=str(body.get('intent') or '').strip()
                 if not q:return self._json(400,{'status':'BLOCKED','reason':'intent required'})
-                payload=deputy.run(q,inputs={'language':str(body.get('language') or 'hy'), 'conversation': body.get('conversation') or []},as_json=True)
-                return self._json(200,_normalize_ask(payload,str(body.get('language') or 'hy')))
+                language=str(body.get('language') or 'hy')
+                cid=str(body.get('conversation_id') or conversation_store.create(title=q[:80]))
+                history=conversation_store.messages(cid)
+                conversation_store.append(cid,'user',q,language=language)
+                payload=deputy.run(q,inputs={'language':language, 'conversation': history[-12:]},as_json=True)
+                out=_normalize_ask(payload,language)
+                conversation_store.append(cid,'assistant',out.get('answer') or '',language=out.get('language'))
+                out['conversation_id']=cid
+                return self._json(200,out)
             if path=='/preview':return self._json(200,execution_surface.preview(body.get('actions') or []))
             if path=='/documents/generate':
                 kind=str(body.get('kind') or 'pdf'); title=str(body.get('title') or 'Deputy report'); data=body.get('data') or company_cockpit.query('Give me today\'s company cockpit')
