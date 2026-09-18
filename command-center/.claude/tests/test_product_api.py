@@ -17,8 +17,10 @@ class ProductApiTests(unittest.TestCase):
 
 class ProductHardeningTests(unittest.TestCase):
     def test_ui_has_all_operator_surfaces(self):
-        for label in ('Company Cockpit','Gev Attention','Approval Inbox','Mission Center','Execution Center','Integration Health','Reports','Ask Deputy','Search','History / Timeline','Notifications','Worker status'):
+        for label in ('Home','Deputy','Inbox','Work','Reports','Documents','Settings'):
             self.assertIn(label, product_api.INDEX_HTML)
+        self.assertNotIn('data-view="attention"', product_api.INDEX_HTML)
+        self.assertNotIn('data-view="approvals"', product_api.INDEX_HTML)
     def test_readiness_is_dependency_shaped(self):
         self.assertIn('actions', product_api.Handler._readiness.__code__.co_names)
         self.assertIn('optional_sources', __import__('inspect').getsource(product_api.Handler._readiness))
@@ -76,7 +78,7 @@ class BehavioralProductTests(unittest.TestCase):
     def test_i18n_uses_stable_ids_and_no_visible_text_lookup(self):
         js = product_api.APP_JS
         self.assertIn("function t(id)", js)
-        self.assertIn("data-i18n=\"nav.cockpit\"", product_api.INDEX_HTML)
+        self.assertIn("data-i18n=\"nav.home\"", product_api.INDEX_HTML)
         self.assertNotIn("key=el.dataset.i18n||el.textContent", js)
         self.assertIn("localStorage.setItem('deputy-locale'", js)
 
@@ -109,5 +111,11 @@ class BehavioralProductTests(unittest.TestCase):
         self.assertIn('function renderAskResponse', product_api.APP_JS)
         self.assertIn("data-execute", product_api.APP_JS)
         self.assertIn("/actions/'+encodeURIComponent(b.dataset.execute)+'/execute", product_api.APP_JS)
+
+    def test_human_work_product_navigation_and_documents(self):
+        for view in ('home','deputy','inbox','work','reports','documents','settings'):
+            self.assertIn('data-view="'+view+'"', product_api.INDEX_HTML)
+        self.assertIn("/documents/generate", __import__('inspect').getsource(product_api.Handler.do_POST))
+        self.assertIn('function renderDocuments', product_api.APP_JS)
 
 if __name__=='__main__': unittest.main()
