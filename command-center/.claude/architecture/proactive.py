@@ -7,6 +7,7 @@ from __future__ import annotations
 import datetime as dt, hashlib, json
 import intelligence
 import engine
+import inbound_intelligence
 
 def _now(): return dt.datetime.now().isoformat(timespec="seconds")
 def _st(): return engine._store()
@@ -41,6 +42,27 @@ def run_cycle(*, persist=True):
     for iid,v in state.get("visibility",{}).items():
         if v.get("state") in ("STALE","UNAVAILABLE","NOT_CONFIGURED") and iid not in ("INT-MB",):
             out.append(_event("SOURCE_GAP",iid,iid,"MEDIUM",v,f"restore or certify {iid}",requires_attention=False))
+    # Process normalized inbound observations already written by a certified
+    # adapter.  This is internal preparation only: inbound content remains
+    # evidence and can never grant approval or perform an external write.
+    for obs in _st().list("channel_events", limit=500):
+        if obs.get("kind") != "INBOUND_SIGNAL" or obs.get("processed_at"):
+            continue
+        ev = inbound_intelligence.event(obs.get("text", ""), channel=obs.get("channel", "unknown"),
+                                       source_id=obs.get("source_id", "unknown"),
+                                       retrieved_at=obs.get("retrieved_at") or _now(), sender=obs.get("sender"))
+        inbound_intelligence.assert_safe(ev)
+        _st().record("checkpoints", "observation:" + ev["id"], ev)
+        if "COMMITMENT" in ev["event_classes"] or "ACTION" in ev["event_classes"] or "DEADLINE" in ev["event_classes"]:
+            _st().upsert("loops", "inbound:" + ev["id"], {
+                "loop_id": "inbound:" + ev["id"], "kind": "PREPARED_INBOUND_WORK",
+                "summary": ev["text"][:240], "state": "OPEN", "source": ev["provenance"],
+                "event_classes": ev["event_classes"], "confidence": "CANDIDATE",
+                "authority": "INTERNAL_ONLY", "next_action": "Review and prepare governed follow-up",
+            })
+            out.append(_event("INBOUND_WORK_DETECTED", ev["channel"], ev["id"], "MEDIUM",
+                              ev["provenance"], "Review prepared follow-up", requires_attention=True))
+        obs["processed_at"] = _now(); _st().upsert("channel_events", obs.get("op_id") or ev["id"], obs)
     if persist: _st().upsert("checkpoints","proactive:last_cycle",{"at":_now(),"events":len(out),"truth_mode":state.get("truth_mode")})
     return {"status":"PARTIAL_SUCCESS" if state.get("unavailable") else "CURRENT","at":state.get("at"),"events":out,"attention":queue,"state":state}
 
