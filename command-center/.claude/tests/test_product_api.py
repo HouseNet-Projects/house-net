@@ -135,6 +135,10 @@ class BehavioralProductTests(unittest.TestCase):
         self.assertIn("actions.execute_batch(batch_id)", post)
         self.assertIn("actions.list_actions(\"batch_id=?\"", get)
 
+    def test_approval_inbox_preserves_batch_identity(self):
+        import inspect
+        self.assertIn("'batch_id':a.get('batch_id')", inspect.getsource(product_api.Handler.do_GET))
+
     def test_i18n_uses_stable_ids_and_no_visible_text_lookup(self):
         js = product_api.APP_JS
         self.assertIn("function t(id)", js)
