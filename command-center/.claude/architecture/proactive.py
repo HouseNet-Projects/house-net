@@ -57,7 +57,7 @@ def run_cycle(*, persist=True):
             _st().upsert("loops", "inbound:" + ev["id"], {
                 "loop_id": "inbound:" + ev["id"], "kind": "PREPARED_INBOUND_WORK",
                 "summary": ev["text"][:240], "state": "OPEN", "source": ev["provenance"],
-                "event_classes": ev["event_classes"], "confidence": "CANDIDATE",
+                "event_classes": ev["event_classes"], "commitment": ev.get("commitment"), "confidence": "CANDIDATE",
                 "authority": "INTERNAL_ONLY", "next_action": "Review and prepare governed follow-up",
             })
             out.append(_event("INBOUND_WORK_DETECTED", ev["channel"], ev["id"], "MEDIUM",
