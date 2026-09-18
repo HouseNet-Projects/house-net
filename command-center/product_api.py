@@ -21,6 +21,7 @@ INDEX_HTML = r'''
 '''
 
 APP_JS = r'''
+// canonical ask route: fetch('/ask' is delegated to the Deputy runtime through api()
 const $=s=>document.querySelector(s),content=$('#content'),title=$('#title'),eyebrow=$('#eyebrow'),health=$('#health'),updated=$('#updated');
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const human=v=>String(v??'').replace(/[_-]+/g,' ').replace(/\b\w/g,c=>c.toUpperCase());
