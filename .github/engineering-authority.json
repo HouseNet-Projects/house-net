@@ -26,7 +26,8 @@
     "command-center/.claude/tests/test_product_api.py",
     ".github/engineering-authority.json",
     "command-center/.claude/runtime/health_model.py",
-    "command-center/.claude/skills/executors.py"
+    "command-center/.claude/skills/executors.py",
+    "command-center/.claude/runtime/conversation_store.py"
   ],
   "prohibited_operations": [
     "external_write",
