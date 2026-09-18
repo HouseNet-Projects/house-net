@@ -10,7 +10,7 @@ class ProactiveInboundTests(unittest.TestCase):
         a=event('I will send you the proposal Friday.',channel='fixture',source_id='a',retrieved_at='now')
         b=event('Please send me the proposal Friday.',channel='fixture',source_id='b',retrieved_at='now')
         c=event('FYI the office is closed.',channel='fixture',source_id='c',retrieved_at='now')
-        self.assertEqual(a['commitment']['kind'],'OWES_GEV')
+        self.assertEqual(a['commitment']['kind'],'GEV_OWES')
         self.assertEqual(b['commitment']['kind'],'REQUEST_TO_GEV')
         self.assertIsNone(c['commitment'])
 
