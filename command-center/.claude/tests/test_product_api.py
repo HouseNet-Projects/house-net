@@ -124,6 +124,22 @@ class BehavioralProductTests(unittest.TestCase):
         self.assertIn('evidence', out)
         self.assertNotIn('raw', out)
 
+    def test_partial_business_data_is_not_reported_as_full_product_block(self):
+        import deputy
+        out = deputy.operator_response({
+            'completion_state': 'BLOCKED',
+            'provider': {'status': 'OK', 'answer': 'Partial answer'},
+            'runtime': {'status': 'BLOCKED', 'blocked': [{'code': 'SOURCE_UNAVAILABLE'}]},
+            'context': {'health': {'business_data': {'state': 'PARTIAL'}}},
+            'understanding': {}, 'work_graph': {}
+        }, 'en')
+        self.assertEqual(out['status'], 'PARTIAL_DATA')
+        self.assertIn('unavailable', ' '.join(out['limitations']).lower())
+
+    def test_self_audit_endpoint_is_separate_from_developer_diagnostics(self):
+        import inspect
+        self.assertIn("path=='/self-audit'", inspect.getsource(product_api.Handler.do_GET))
+
     def test_provider_auth_truth_is_strict(self):
         from ai_provider import _auth_state
         self.assertEqual(_auth_state({'loggedIn':False}), 'AUTH_REQUIRED')

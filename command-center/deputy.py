@@ -124,7 +124,14 @@ def operator_response(payload, language="hy"):
     limitations = []
     if provider.get("status") not in ("OK", "NOT_INVOKED"):
         limitations.append(provider.get("reason") or "The reasoning provider is unavailable.")
-    limitations.extend(x.get("code", x.get("reason", "unavailable")) for x in runtime.get("blocked", [])[:5])
+    def _limitation(item):
+        code = item.get("code", item.get("reason", "unavailable")) if isinstance(item, dict) else str(item)
+        labels = {
+            "NO_APPLICABLE_SKILL": "No dedicated skill matched; Deputy used general governed analysis.",
+            "SOURCE_UNAVAILABLE": "A required source is currently unavailable.",
+        }
+        return labels.get(code, code)
+    limitations.extend(_limitation(x) for x in runtime.get("blocked", [])[:5])
     actions = []
     for step in runtime.get("steps", []):
         if step.get("result_summary") or step.get("skill"):
@@ -134,7 +141,10 @@ def operator_response(payload, language="hy"):
         localized_summary = "Կօգտագործեմ HouseNet-ի ընթացիկ հավաստված աղբյուրները, կպատրաստեմ հաջորդ քայլերը և արտաքին փոփոխությունները կպահեմ պահանջվող հաստատման սահմաններում։"
     else:
         localized_summary = localized_summary or "I will use current certified HouseNet sources, prepare next actions, and keep material external changes behind the required approval boundary."
-    return {"status": payload.get("completion_state", runtime.get("status", "PREPARED")),
+    status = payload.get("completion_state", runtime.get("status", "PREPARED"))
+    if status == "BLOCKED" and payload.get("context", {}).get("health", {}).get("business_data", {}).get("state") in ("PARTIAL", "UNAVAILABLE"):
+        status = "PARTIAL_DATA"
+    return {"status": status,
             "answer": answer, "language": language, "mission_id": payload.get("mission_id"),
             "provider": provider.get("provider", "claude-code-max"),
             "provider_state": provider.get("provider_state") or provider.get("state") or provider.get("status"),
@@ -209,7 +219,9 @@ def run(intent, *, inputs=None, as_json=False):
         "cockpit": cockpit,
         "execution": execution,
         "proactive": proactive_result, "provider": provider,
-        "completion_state": "PREPARED" if result.get("status") in ("OK", "PARTIAL") else "BLOCKED",
+        "completion_state": ("PREPARED" if result.get("status") in ("OK", "PARTIAL")
+                              else "PARTIAL_DATA" if context.get("health", {}).get("business_data", {}).get("state") in ("PARTIAL", "UNAVAILABLE")
+                              else "BLOCKED"),
         "authority": "ACTION_RUNTIME_ONLY_FOR_MATERIAL_MUTATION"}
     store = engine._store(); store.upsert("commitments", mission_id, payload)
     if as_json: return payload
