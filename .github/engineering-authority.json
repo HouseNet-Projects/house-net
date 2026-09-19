@@ -1,13 +1,13 @@
 {
-  "authority_id": "EAE-OUTLOOK-WINDOWS-BRIDGE",
+  "authority_id": "EAE-COMPANY-COCKPIT-SOURCE-HEALTH",
   "approved_by": "GEV",
-  "approval_reference": "gev-explicit-outlook-bridge-completion-2026-09-19",
-  "approved_at": "2026-09-19T19:30:00Z",
-  "mission": "Connect the authenticated Windows Classic Outlook read surface to the OCI Deputy host through a localhost-only reverse SSH bridge while preserving Action Runtime write governance",
+  "approval_reference": "gev-explicit-company-cockpit-health-fix-2026-09-19",
+  "approved_at": "2026-09-19T19:35:00Z",
+  "mission": "Fix Company Cockpit source-health rendering when optional integration certification has no deferred object",
   "repository": "HouseNet-Projects/house-net",
-  "base_sha": "9f554d940a401fe101ecaf0263aa12e12d7f6b2f",
-  "branch": "fix/outlook-windows-bridge",
-  "pr": "59",
+  "base_sha": "f8c6fb1f283a7d2c5a8b2f8c7dbfd3788d47c705",
+  "branch": "fix/company-cockpit-source-health",
+  "pr": "60",
   "allowed_operations": [
     "branch",
     "edit",
@@ -21,9 +21,8 @@
   ],
   "allowed_paths": [
     ".github/engineering-authority.json",
-    "command-center/.claude/integrations/adapter_outlook.py",
-    "command-center/.claude/tests/test_outlook_bridge.py",
-    "command-center/OPERATIONS.md"
+    "command-center/.claude/architecture/company_cockpit.py",
+    "command-center/.claude/tests/test_deputy_e2e.py"
   ],
   "prohibited_operations": [
     "external_write",
@@ -41,11 +40,11 @@
   "audit_trail": [
     {
       "event": "GEV_EXPLICIT_MISSION_AUTHORIZATION",
-      "reference": "outlook-windows-bridge-oci"
+      "reference": "company-cockpit-health"
     },
     {
       "event": "PR_OPENED",
-      "reference": "pr-59"
+      "reference": "pr-60"
     }
   ],
   "consumed": false

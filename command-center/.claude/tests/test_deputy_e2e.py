@@ -2,6 +2,7 @@ import unittest
 from pathlib import Path
 import sys
 import json, os, subprocess, tempfile
+from unittest import mock
 sys.path.insert(0, str(Path(__file__).parents[1] / 'certifications'))
 from deputy_e2e import run_all
 
@@ -71,5 +72,15 @@ class DeputyE2ETests(unittest.TestCase):
                 self.assertEqual(p.returncode, 0, p.stderr + p.stdout)
                 data = json.loads(p.stdout); self.assertEqual(data['cockpit']['query'], mode)
                 self.assertIn(data['cockpit']['company_status'], ('CURRENT', 'PARTIAL_SUCCESS'))
+
+    def test_source_health_handles_non_deferred_rows_without_attribute_error(self):
+        root = Path(__file__).parents[2]
+        sys.path.insert(0, str(root / '.claude' / 'architecture'))
+        import company_cockpit
+        with mock.patch.object(company_cockpit.readiness, 'row', return_value={
+                'read_state': 'VERIFIED_READ', 'read': 'VERIFIED_READ', 'deferred': None}):
+            rows = company_cockpit._source_health()
+        self.assertTrue(rows)
+        self.assertTrue(all(row.get('read_state') == 'VERIFIED_READ' for row in rows))
 
 if __name__ == '__main__': unittest.main()
