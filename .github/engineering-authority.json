@@ -1,13 +1,13 @@
 {
-  "authority_id": "EAE-GOVERNED-INTERNAL-PREPARATION",
+  "authority_id": "EAE-DESIGN-DARK-CONTRAST",
   "approved_by": "GEV",
   "approval_reference": "gev-explicit-gev-work-product-rebuild-2026-09-18",
   "approved_at": "2026-09-19T00:00:00Z",
-  "mission": "Extend bounded Claude reasoning with idempotent internal follow-up preparation without external mutation authority",
+  "mission": "Fix unreadable dark-mode repository map and local validation artwork contrast",
   "repository": "HouseNet-Projects/house-net",
-  "base_sha": "a492d81463e83fd93806e43172dcdde74bd80861",
-  "branch": "feature/governed-internal-preparation",
-  "pr": "57",
+  "base_sha": "da7b550e414a5569181ee6613ce658d27ca88420",
+  "branch": "fix/design-system-dark-contrast",
+  "pr": "TBD",
   "allowed_operations": [
     "branch",
     "edit",
@@ -21,25 +21,8 @@
   ],
   "allowed_paths": [
     ".github/engineering-authority.json",
-    ".github/workflows/house-net-ci.yml",
-    "command-center/deputy.py",
-    "command-center/product_api.py",
-    "command-center/document_exports.py",
-    "command-center/.claude/tests/test_product_api.py",
-    ".github/engineering-authority.json",
-    "command-center/.claude/runtime/health_model.py",
-    "command-center/.claude/skills/executors.py",
-    "command-center/.claude/runtime/conversation_store.py",
-    "command-center/.claude/architecture/proactive.py",
-    "command-center/.claude/tests/test_proactive_inbound.py",
-    "command-center/.claude/runtime/context_orchestrator.py",
-    "command-center/.claude/tests/test_context_orchestrator.py",
-    "command-center/.claude/architecture/inbound_intelligence.py",
-    "command-center/.claude/architecture/execution_surface.py",
-    "command-center/.claude/skills/commitments.py",
-    "command-center/.claude/runtime/ai_provider.py",
-    "command-center/.claude/tests/test_agent_loop.py",
-    "command-center/.claude/tests/test_context_tools.py"
+    "design-system/assets/github/repo-map-dark.svg",
+    "design-system/assets/github/validate-docs-dark.svg"
   ],
   "prohibited_operations": [
     "external_write",
@@ -57,11 +40,7 @@
   "audit_trail": [
     {
       "event": "GEV_EXPLICIT_MISSION_AUTHORIZATION",
-      "reference": "conversation-mission-pr6"
-    },
-    {
-      "event": "PR_OPENED",
-      "reference": "pr-57"
+      "reference": "conversation-ui-contrast-fix"
     }
   ],
   "consumed": false
