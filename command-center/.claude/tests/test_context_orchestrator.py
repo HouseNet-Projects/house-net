@@ -1,6 +1,6 @@
 import tempfile, unittest
 from store import Store
-from context_orchestrator import retrieve, _compact_value, correlate
+from context_orchestrator import retrieve, _compact_value, _compact_rows, correlate
 
 
 class ContextOrchestratorTests(unittest.TestCase):
@@ -27,6 +27,14 @@ class ContextOrchestratorTests(unittest.TestCase):
     def test_generated_answers_cannot_become_current_source_evidence(self):
         compact = _compact_value({'mission_id': 'm-1', 'provider': {'answer': 'worker is degraded'}, 'answer': 'old answer', 'summary': 'historical work'})
         self.assertEqual(compact, {'mission_id': 'm-1', 'summary': 'historical work'})
+
+    def test_generated_missions_and_assistant_messages_are_not_retrieved_as_evidence(self):
+        rows = _compact_rows([
+            {'mission_id': 'm-1', 'authority': 'ACTION_RUNTIME_ONLY_FOR_MATERIAL_MUTATION', 'request': 'old self-audit'},
+            {'kind': 'CONVERSATION_MESSAGE', 'role': 'assistant', 'content': 'old technical diagnosis'},
+            {'kind': 'CONVERSATION_MESSAGE', 'role': 'user', 'content': 'what is blocked?'}
+        ])
+        self.assertEqual(rows, [{'kind': 'CONVERSATION_MESSAGE', 'role': 'user', 'content': 'what is blocked?'}])
 
     def test_cross_source_context_links_only_exact_evidence(self):
         grouped = correlate({

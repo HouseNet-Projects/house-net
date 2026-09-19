@@ -41,7 +41,21 @@ def _compact_value(value, *, depth=0, max_chars=900):
 
 
 def _compact_rows(rows):
-    return [_compact_value(row) for row in rows]
+    projected = []
+    for row in rows:
+        if not isinstance(row, dict):
+            continue
+        # Mission records contain the full historical Deputy answer/context.
+        # They are useful for audit, but are not current business evidence and
+        # can reintroduce stale health claims into a new reasoning request.
+        if row.get("mission_id") and row.get("authority") == "ACTION_RUNTIME_ONLY_FOR_MATERIAL_MUTATION":
+            continue
+        # Preserve user conversation turns, never recycle an old assistant
+        # answer as if it were a current source observation.
+        if row.get("kind") == "CONVERSATION_MESSAGE" and row.get("role") == "assistant":
+            continue
+        projected.append(_compact_value(row))
+    return projected
 
 
 def _evidence_keys(row):
