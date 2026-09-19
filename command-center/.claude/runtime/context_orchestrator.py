@@ -6,7 +6,8 @@ provider write capability.
 """
 from __future__ import annotations
 import json, re
-from store import Store
+from store import Store, op_id_for
+import datetime
 
 
 def _terms(text):
@@ -118,12 +119,26 @@ def run_tool(request, *, store=None):
     """Execute one registered read-only Deputy tool for the agent loop."""
     request = request if isinstance(request, dict) else {}
     name = request.get("tool")
-    if name not in {"search_work", "search_open_loops", "search_observations", "search_approvals", "search_context"}:
+    if name not in {"search_work", "search_open_loops", "search_observations", "search_approvals", "search_context", "prepare_follow_up"}:
         raise ValueError("unregistered Deputy read tool")
     query = str(request.get("query") or "").strip()
     if not query:
         raise ValueError("tool query is required")
     limit = max(1, min(int(request.get("limit", 8)), 12))
+    if name == "prepare_follow_up":
+        # Internal preparation only. This creates a durable Deputy loop; it
+        # never invokes a provider connector or grants external authority.
+        loop_id = op_id_for("prepared-follow-up", query)
+        row = {
+            "loop_id": loop_id, "kind": "PREPARED_FOLLOW_UP",
+            "summary": query, "state": "PREPARED", "owner": "Deputy",
+            "authority": "INTERNAL_PREPARE_ONLY",
+            "created_at": datetime.datetime.now().isoformat(timespec="seconds"),
+            "evidence": {"source": "claude-agent-loop", "query": query},
+        }
+        store.upsert("loops", loop_id, row)
+        return {"tool": name, "query": query, "records": [row],
+                "authority": "INTERNAL_PREPARE_ONLY", "result_limit": 1}
     result = retrieve(query, store=store, limit=limit)
     if name == "search_context":
         records = result.get("records", {})

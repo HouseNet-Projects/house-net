@@ -8,6 +8,7 @@ class AgentLoopTests(unittest.TestCase):
     def test_parse_accepts_only_registered_read_requests(self):
         self.assertEqual(parse_tool_request('DEPUTY_TOOL_REQUEST {"type":"tool_request","tool":"search_work","query":"sales blockers"}')["tool"], "search_work")
         self.assertIsNone(parse_tool_request('DEPUTY_TOOL_REQUEST {"type":"tool_request","tool":"send_email","query":"send it"}'))
+        self.assertEqual(parse_tool_request('DEPUTY_TOOL_REQUEST {"type":"tool_request","tool":"prepare_follow_up","query":"Ask Arman for the revised offer"}')['tool'], 'prepare_follow_up')
 
     def test_multi_step_read_loop(self):
         responses = [
