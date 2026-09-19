@@ -86,7 +86,7 @@ def parse_tool_request(answer: str) -> dict | None:
     """
     if not isinstance(answer, str):
         return None
-    allowed = {"search_work", "search_open_loops", "search_observations", "search_approvals", "search_context"}
+    allowed = {"search_work", "search_open_loops", "search_observations", "search_approvals", "search_context", "prepare_follow_up"}
     text = answer.strip().replace("```json", "").replace("```", "").strip()
     candidates = [text]
     match = re.search(r"DEPUTY_TOOL_REQUEST\s*[:]?\s*(\{.*\})", text, flags=re.S)
@@ -111,6 +111,7 @@ def ask_agent(prompt: str, *, context=None, tool_executor=None, timeout: int = 9
     current = prompt + (
         "\n\nIf the evidence is insufficient, request one registered read tool by returning only "
         "DEPUTY_TOOL_REQUEST {\\\"type\\\":\\\"tool_request\\\",\\\"tool\\\":\\\"search_work\\\",\\\"query\\\":\\\"...\\\"}. "
+        "When useful internal follow-up is clear, you may request prepare_follow_up; this only records internal Deputy preparation. "
         "Never request or perform an external write."
     )
     for iteration in range(max(1, min(int(max_iterations), 6))):
