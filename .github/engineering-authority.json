@@ -1,13 +1,13 @@
 {
-  "authority_id": "EAE-COMMITMENT-FOLLOW-THROUGH",
+  "authority_id": "EAE-EXACT-CONTEXT-CORRELATION",
   "approved_by": "GEV",
   "approval_reference": "gev-explicit-gev-work-product-rebuild-2026-09-18",
   "approved_at": "2026-09-18T00:00:00Z",
-  "mission": "Surface durable overdue and due-soon commitment follow-up through the proactive worker",
+  "mission": "Add conservative exact-evidence linking to the existing read-only Deputy context orchestrator",
   "repository": "HouseNet-Projects/house-net",
-  "base_sha": "8057240da2da5551e9d011c1cb4cc7303a86adf0",
-  "branch": "product/commitment-follow-through",
-  "pr": "45",
+  "base_sha": "065811ea987bb7c20143500d63c3330050d766b7",
+  "branch": "product/work-evidence-linking",
+  "pr": "46",
   "allowed_operations": [
     "branch",
     "edit",

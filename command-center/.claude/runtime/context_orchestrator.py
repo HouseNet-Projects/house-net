@@ -40,6 +40,43 @@ def _compact_rows(rows):
     return [_compact_value(row) for row in rows]
 
 
+def _evidence_keys(row):
+    """Exact identifiers only; no fuzzy person/name merging."""
+    keys = []
+    for field in ("conversation_id", "source_record_id", "record_id", "person", "person_token", "deal_id", "meeting_id"):
+        value = row.get(field) if isinstance(row, dict) else None
+        if value not in (None, ""):
+            keys.append((field, str(value).casefold().strip()))
+    source = row.get("source") if isinstance(row, dict) else None
+    if isinstance(source, dict):
+        for field in ("record_id", "source_record_id", "external_id", "conversation_id"):
+            value = source.get(field)
+            if value not in (None, ""):
+                keys.append((field, str(value).casefold().strip()))
+    return keys
+
+
+def correlate(selected):
+    """Return conservative exact-evidence groups across retrieved records."""
+    buckets = {}
+    for tool, rows in (selected or {}).items():
+        for row in rows or []:
+            if not isinstance(row, dict):
+                continue
+            ref = row.get("op_id") or row.get("record_id") or row.get("id") or row.get("event_id")
+            for field, value in _evidence_keys(row):
+                if len(value) < 3:
+                    continue
+                buckets.setdefault((field, value), []).append({"tool": tool, "ref": str(ref)})
+    out = []
+    for (field, value), refs in buckets.items():
+        unique = {(r["tool"], r["ref"]) for r in refs}
+        if len(unique) >= 2:
+            out.append({"basis": field, "value": value, "records": sorted(unique),
+                        "confidence": "OBSERVED_EXACT", "authority": "EVIDENCE_LINK_ONLY"})
+    return out[:32]
+
+
 def retrieve(intent, *, store=None, limit=8):
     """Run bounded read-only tools against the canonical Store."""
     store = store or Store()
@@ -55,5 +92,5 @@ def retrieve(intent, *, store=None, limit=8):
         except Exception as exc:
             selected[name] = []
             tools.append({"tool": name, "status": "UNAVAILABLE", "reason": type(exc).__name__})
-    return {"query": intent, "tools": tools, "records": selected,
+    return {"query": intent, "tools": tools, "records": selected, "correlations": correlate(selected),
             "authority": "READ_ONLY_EVIDENCE", "result_limit": limit}
