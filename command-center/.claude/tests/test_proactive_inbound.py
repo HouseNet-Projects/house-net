@@ -31,6 +31,9 @@ class ProactiveInboundTests(unittest.TestCase):
                 self.assertTrue(any(e.get('event_type') == 'INBOUND_WORK_DETECTED' for e in first['events']))
                 self.assertEqual(len(loops), 1)
                 self.assertEqual(len([e for e in second['events'] if e.get('event_type') == 'INBOUND_WORK_DETECTED']), 0)
+                commitments = store.list('commitments')
+                self.assertEqual(len(commitments), 1)
+                self.assertEqual(commitments[0].get('direction'), 'REQUEST_TO_GEV')
             finally:
                 proactive._st = original
 

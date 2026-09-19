@@ -1,13 +1,13 @@
 {
-  "authority_id": "EAE-BOUNDED-CLAUDE-CONTEXT",
+  "authority_id": "EAE-PROACTIVE-COMMITMENT-INGEST",
   "approved_by": "GEV",
   "approval_reference": "gev-explicit-gev-work-product-rebuild-2026-09-18",
   "approved_at": "2026-09-18T00:00:00Z",
-  "mission": "Bound governed Claude context projection and provider prompt size to preserve reliable Ask Deputy execution",
+  "mission": "Persist confidence-aware commitment records from safe proactive inbound observations through the canonical Store",
   "repository": "HouseNet-Projects/house-net",
-  "base_sha": "8e63578ea29df2847d41973377224ce2bce04715",
-  "branch": "product/bounded-claude-context",
-  "pr": "43",
+  "base_sha": "8082598bf04f62575d23ddbb0eefdb48c00cbc76",
+  "branch": "product/safe-context-correlation",
+  "pr": "44",
   "allowed_operations": [
     "branch",
     "edit",
@@ -33,7 +33,8 @@
     "command-center/.claude/runtime/context_orchestrator.py",
     "command-center/.claude/tests/test_context_orchestrator.py",
     "command-center/.claude/architecture/inbound_intelligence.py",
-    "command-center/.claude/architecture/execution_surface.py"
+    "command-center/.claude/architecture/execution_surface.py",
+    "command-center/.claude/skills/commitments.py"
   ],
   "prohibited_operations": [
     "external_write",
