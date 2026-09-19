@@ -20,6 +20,8 @@
     "regenerate_artifacts"
   ],
   "allowed_paths": [
+    ".github/engineering-authority.json",
+    ".github/workflows/house-net-ci.yml",
     "command-center/deputy.py",
     "command-center/product_api.py",
     "command-center/document_exports.py",
