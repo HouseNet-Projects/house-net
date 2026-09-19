@@ -93,7 +93,10 @@ def _human(result, understood, context, mission_id):
             if summary: lines.append(f"- {step.get('skill')}: {str(summary)[:320]}")
     if result.get("status") in ("BLOCKED", "PARTIAL"):
         lines += ["", "BLOCKED / NEEDS REVIEW"]
-        for b in result.get("blocked", [])[:6]: lines.append(f"- {b.get('code', b.get('reason', 'unavailable'))}")
+        labels = {"NO_APPLICABLE_SKILL": "Deputy used general governed analysis; no dedicated workflow was needed."}
+        for b in result.get("blocked", [])[:6]:
+            code = b.get("code", b.get("reason", "unavailable"))
+            lines.append(f"- {labels.get(code, code)}")
     lines += ["", "AUTHORITY", "- Analysis and preparation may proceed; material external changes remain Action Runtime + exact Gev approval.",
               "", "FOLLOW-THROUGH", f"- Resume with: deputy resume {mission_id}"]
     return "\n".join(lines)
@@ -135,7 +138,7 @@ def operator_response(payload, language="hy"):
     def _limitation(item):
         code = item.get("code", item.get("reason", "unavailable")) if isinstance(item, dict) else str(item)
         labels = {
-            "NO_APPLICABLE_SKILL": "No dedicated skill matched; Deputy used general governed analysis.",
+            "NO_APPLICABLE_SKILL": ("Deputy used general governed analysis." if language != "hy" else "Deputy-ը օգտագործեց ընդհանուր կառավարվող վերլուծություն։"),
             "SOURCE_UNAVAILABLE": "A required source is currently unavailable.",
         }
         return labels.get(code, code)

@@ -167,6 +167,17 @@ class BehavioralProductTests(unittest.TestCase):
         self.assertIn('evidence', out)
         self.assertNotIn('raw', out)
 
+    def test_open_ended_fallback_hides_internal_skill_router_code(self):
+        import deputy
+        out = deputy.operator_response({
+            'completion_state': 'PREPARED',
+            'provider': {'status': 'OK', 'answer': 'General analysis'},
+            'runtime': {'status': 'PARTIAL', 'blocked': [{'code': 'NO_APPLICABLE_SKILL'}]},
+            'context': {}, 'understanding': {}, 'work_graph': {}
+        }, 'en')
+        self.assertNotIn('NO_APPLICABLE_SKILL', ' '.join(out['limitations']))
+        self.assertIn('general governed analysis', ' '.join(out['limitations']))
+
     def test_partial_business_data_is_not_reported_as_full_product_block(self):
         import deputy
         out = deputy.operator_response({
