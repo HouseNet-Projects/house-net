@@ -7,7 +7,7 @@
   "repository": "HouseNet-Projects/house-net",
   "base_sha": "a492d81463e83fd93806e43172dcdde74bd80861",
   "branch": "feature/governed-internal-preparation",
-  "pr": "TBD",
+  "pr": "57",
   "allowed_operations": [
     "branch",
     "edit",
@@ -36,8 +36,8 @@
     "command-center/.claude/architecture/execution_surface.py",
     "command-center/.claude/skills/commitments.py",
     "command-center/.claude/runtime/ai_provider.py",
-    "command-center/.claude/tests/test_agent_loop.py"
-    ,"command-center/.claude/tests/test_context_tools.py"
+    "command-center/.claude/tests/test_agent_loop.py",
+    "command-center/.claude/tests/test_context_tools.py"
   ],
   "prohibited_operations": [
     "external_write",
@@ -56,6 +56,10 @@
     {
       "event": "GEV_EXPLICIT_MISSION_AUTHORIZATION",
       "reference": "conversation-mission-pr6"
+    },
+    {
+      "event": "PR_OPENED",
+      "reference": "pr-57"
     }
   ],
   "consumed": false
