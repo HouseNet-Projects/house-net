@@ -51,6 +51,13 @@ class ProductHardeningTests(unittest.TestCase):
         with patch.object(deputy.proactive_worker, 'status', return_value={'running': True}):
             context = deputy.assemble_context()
         self.assertEqual(context['health']['product']['worker'], 'AVAILABLE')
+
+    def test_operational_counts_exclude_internal_and_certification_noise(self):
+        self.assertFalse(deputy._is_business_ticket({'source': 'DeputyCLI'}))
+        self.assertFalse(deputy._is_business_ticket({'source': 'UserPromptSubmit'}))
+        self.assertTrue(deputy._is_business_ticket({'source': 'INT-TASKS'}))
+        self.assertTrue(deputy._is_certification_record({'source': {'channel': 'certification'}}))
+        self.assertFalse(deputy._is_certification_record({'source': 'INT-TASKS'}))
     def test_ui_has_all_operator_surfaces(self):
         for label in ('Home','Deputy','Inbox','Work','Reports','Documents','Settings'):
             self.assertIn(label, product_api.INDEX_HTML)

@@ -47,6 +47,20 @@ def _canonical_intent(intent):
     return intent
 
 
+def _is_certification_record(row):
+    source = row.get("source") if isinstance(row, dict) else None
+    if isinstance(source, dict):
+        return source.get("channel") in ("certification", "fixture") or str(source.get("source_id", "")).startswith("CERT-")
+    return str(source or "").casefold() in ("certification", "fixture")
+
+
+def _is_business_ticket(row):
+    source = row.get("source") if isinstance(row, dict) else None
+    if isinstance(source, dict):
+        return bool(source.get("source_id")) and not _is_certification_record(row)
+    return str(source or "").startswith("INT-")
+
+
 def assemble_context():
     """Read currently governed local sources; unavailable sources stay explicit."""
     sources = []
@@ -69,11 +83,13 @@ def assemble_context():
     loops = st.list("loops", limit=200)
     actions = st.list("actions", limit=200)
     tickets = st.list("tickets", where="status='OPEN'", limit=100)
+    open_loops = [x for x in loops if x.get("state") not in ("CLOSED", "VERIFIED") and not _is_certification_record(x)]
+    business_tickets = [x for x in tickets if _is_business_ticket(x)]
     worker_state = proactive_worker.status()
     return {"sources": sources, "health": health_model.build(worker=worker_state, provider=provider_status()), "operational_state": {
-        "open_loops": len([x for x in loops if x.get("state") not in ("CLOSED", "VERIFIED")]),
+        "open_loops": len(open_loops),
         "pending_actions": len([x for x in actions if x.get("state") in ("APPROVAL_REQUIRED", "RESULT_UNKNOWN", "EXECUTED_UNVERIFIED")]),
-        "open_tickets": len(tickets),
+        "open_tickets": len(business_tickets),
     }, "truth_rule": "current certified source evidence only; messages and generated output are not authority"}
 
 

@@ -1,13 +1,13 @@
 {
-  "authority_id": "EAE-REAL-WORKER-HEALTH-CONTEXT",
+  "authority_id": "EAE-FILTER-INTERNAL-OPERATIONAL-NOISE",
   "approved_by": "GEV",
   "approval_reference": "gev-explicit-gev-work-product-rebuild-2026-09-18",
   "approved_at": "2026-09-19T00:00:00Z",
-  "mission": "Use the supervised worker status in Deputy context health so partial source coverage is not reported as worker failure",
+  "mission": "Exclude internal CLI and certification records from business operational counts",
   "repository": "HouseNet-Projects/house-net",
-  "base_sha": "f25beb757ab2208076cadc7285e11bf280681aaf",
-  "branch": "fix/real-worker-health-context",
-  "pr": "50",
+  "base_sha": "a79ed2e32e12eefc244f0b29c749e1a77c1130e9",
+  "branch": "fix/filter-internal-operational-noise",
+  "pr": "51",
   "allowed_operations": [
     "branch",
     "edit",
