@@ -1,13 +1,13 @@
 {
-  "authority_id": "EAE-PROACTIVE-COMMITMENT-INGEST",
+  "authority_id": "EAE-COMMITMENT-FOLLOW-THROUGH",
   "approved_by": "GEV",
   "approval_reference": "gev-explicit-gev-work-product-rebuild-2026-09-18",
   "approved_at": "2026-09-18T00:00:00Z",
-  "mission": "Persist confidence-aware commitment records from safe proactive inbound observations through the canonical Store",
+  "mission": "Surface durable overdue and due-soon commitment follow-up through the proactive worker",
   "repository": "HouseNet-Projects/house-net",
-  "base_sha": "8082598bf04f62575d23ddbb0eefdb48c00cbc76",
-  "branch": "product/safe-context-correlation",
-  "pr": "44",
+  "base_sha": "8057240da2da5551e9d011c1cb4cc7303a86adf0",
+  "branch": "product/commitment-follow-through",
+  "pr": "45",
   "allowed_operations": [
     "branch",
     "edit",

@@ -37,6 +37,25 @@ class ProactiveInboundTests(unittest.TestCase):
             finally:
                 proactive._st = original
 
+    def test_overdue_commitment_creates_deduplicated_follow_up_loop(self):
+        with tempfile.TemporaryDirectory() as td:
+            original = proactive._st
+            store = Store(td)
+            proactive._st = lambda: store
+            try:
+                store.record('commitments', 'CMT-overdue', {
+                    'op_id': 'CMT-overdue', 'who': 'Arman', 'what': 'Send the proposal',
+                    'due': '2020-01-01', 'state': 'OPEN', 'evidence': [{'record_id': 'mail-1'}],
+                    'source': {'channel': 'fixture'}
+                })
+                first = proactive.run_cycle()
+                second = proactive.run_cycle()
+                self.assertTrue(any(e.get('event_type') == 'COMMITMENT_OVERDUE' for e in first['events']))
+                self.assertEqual(len([e for e in second['events'] if e.get('event_type') == 'COMMITMENT_OVERDUE']), 1)
+                self.assertEqual(len([r for r in store.list('loops') if r.get('loop_id') == 'followup:CMT-overdue']), 1)
+            finally:
+                proactive._st = original
+
 
 if __name__ == '__main__':
     unittest.main()
