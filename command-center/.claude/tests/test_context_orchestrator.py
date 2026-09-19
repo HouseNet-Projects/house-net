@@ -1,6 +1,6 @@
 import tempfile, unittest
 from store import Store
-from context_orchestrator import retrieve, _compact_value
+from context_orchestrator import retrieve, _compact_value, correlate
 
 
 class ContextOrchestratorTests(unittest.TestCase):
@@ -21,6 +21,16 @@ class ContextOrchestratorTests(unittest.TestCase):
         self.assertEqual(compact['summary'], 'ok')
         self.assertNotIn('parameters', compact)
         self.assertNotIn('history', compact)
+
+    def test_cross_source_context_links_only_exact_evidence(self):
+        grouped = correlate({
+            'search_work': [{'op_id': 'W-1', 'conversation_id': 'thread-7'}],
+            'search_observations': [{'event_id': 'E-1', 'conversation_id': 'thread-7'}],
+            'search_approvals': [{'action_id': 'A-1', 'conversation_id': 'different'}],
+        })
+        self.assertEqual(len(grouped), 1)
+        self.assertEqual(grouped[0]['basis'], 'conversation_id')
+        self.assertEqual(grouped[0]['confidence'], 'OBSERVED_EXACT')
 
 
 if __name__=='__main__': unittest.main()
