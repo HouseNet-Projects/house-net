@@ -78,9 +78,9 @@ def _match_existing(cand, rows):
         if ov >= 0.6: return r
     return None
 
-def ingest(cands, *, origin="EXTERNAL"):
+def ingest(cands, *, origin="EXTERNAL", store=None):
     """Candidates → durable commitments (STRONG) or candidates list (WEAK stays UNVERIFIED candidate, never a commitment). Idempotent; merges evidence across channels."""
-    st = _st(); rows = st.list("commitments"); new, merged, weak = [], [], []
+    st = store or _st(); rows = st.list("commitments"); new, merged, weak = [], [], []
     for c in cands:
         if c["strength"] != "STRONG": weak.append(c); continue
         ex = _match_existing(c, rows)
@@ -92,6 +92,7 @@ def ingest(cands, *, origin="EXTERNAL"):
         oid = _key(c["who"], c["what"])
         rec = {"op_id": oid, "text": c["what"], "what": c["what"], "who": c["who"], "owner": c["who"], "to_whom": c["to_whom"], "due": c["due"], "condition": None, "state": "OPEN", "strength": "STRONG", "confidence": c["confidence"], "origin": origin,
                "source": c["source"], "evidence": c["evidence"], "created_at": _now(), "last_seen": _now(), "fulfilled_at": None, "fulfilment_evidence": None, "trusted": c.get("trusted", True)}
+        if c.get("direction"): rec["direction"] = c["direction"]
         r = st.record("commitments", oid, rec)
         if r["status"] == "RECORDED": new.append(oid); rows.append(rec)
         else: merged.append(oid)

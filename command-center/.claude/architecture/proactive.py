@@ -8,6 +8,7 @@ import datetime as dt, hashlib, json
 import intelligence
 import engine
 import inbound_intelligence
+import commitments
 
 def _now(): return dt.datetime.now().isoformat(timespec="seconds")
 def _st(): return engine._store()
@@ -54,11 +55,21 @@ def run_cycle(*, persist=True):
         inbound_intelligence.assert_safe(ev)
         _st().record("checkpoints", "observation:" + ev["id"], ev)
         if "COMMITMENT" in ev["event_classes"] or "ACTION" in ev["event_classes"] or "DEADLINE" in ev["event_classes"]:
+            commitment_result = {"new": [], "merged": [], "weak_candidates": []}
+            if "COMMITMENT" in ev["event_classes"] or ev.get("commitment"):
+                candidates = commitments.extract(ev["text"], speaker=ev.get("sender") or "UNKNOWN",
+                    channel=ev["channel"], record_id=ev["id"], received=ev["provenance"].get("retrieved_at"),
+                    trusted=False)
+                direction = (ev.get("commitment") or {}).get("kind")
+                for candidate in candidates:
+                    candidate["direction"] = direction
+                commitment_result = commitments.ingest(candidates, origin="PROACTIVE_INBOUND", store=_st())
             _st().upsert("loops", "inbound:" + ev["id"], {
                 "loop_id": "inbound:" + ev["id"], "kind": "PREPARED_INBOUND_WORK",
                 "summary": ev["text"][:240], "state": "OPEN", "source": ev["provenance"],
                 "event_classes": ev["event_classes"], "commitment": ev.get("commitment"), "confidence": "CANDIDATE",
                 "authority": "INTERNAL_ONLY", "next_action": "Review and prepare governed follow-up",
+                "commitment_result": commitment_result,
             })
             out.append(_event("INBOUND_WORK_DETECTED", ev["channel"], ev["id"], "MEDIUM",
                               ev["provenance"], "Review prepared follow-up", requires_attention=True))
