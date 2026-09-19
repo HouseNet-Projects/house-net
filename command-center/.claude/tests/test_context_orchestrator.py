@@ -15,12 +15,18 @@ class ContextOrchestratorTests(unittest.TestCase):
             self.assertLessEqual(len(out['records']['search_open_loops']),1)
 
     def test_context_rows_are_projected_and_bounded(self):
-        row = {'id': 'x', 'parameters': {'secret': 'hidden'}, 'history': list(range(100)), 'summary': 'ok'}
+        row = {'id': 'x', 'parameters': {'secret': 'hidden'}, 'history': list(range(100)), 'provider': {'answer': 'stale generated answer'}, 'runtime': {'status': 'PARTIAL'}, 'summary': 'ok'}
         compact = _compact_value(row)
         self.assertEqual(compact['id'], 'x')
         self.assertEqual(compact['summary'], 'ok')
         self.assertNotIn('parameters', compact)
         self.assertNotIn('history', compact)
+        self.assertNotIn('provider', compact)
+        self.assertNotIn('runtime', compact)
+
+    def test_generated_answers_cannot_become_current_source_evidence(self):
+        compact = _compact_value({'mission_id': 'm-1', 'provider': {'answer': 'worker is degraded'}, 'answer': 'old answer', 'summary': 'historical work'})
+        self.assertEqual(compact, {'mission_id': 'm-1', 'summary': 'historical work'})
 
     def test_cross_source_context_links_only_exact_evidence(self):
         grouped = correlate({

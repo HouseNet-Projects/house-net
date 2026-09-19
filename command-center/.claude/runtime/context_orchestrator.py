@@ -26,7 +26,11 @@ def _compact_value(value, *, depth=0, max_chars=900):
     if isinstance(value, dict):
         out = {}
         for key, item in list(value.items())[:32]:
-            if str(key).lower() in {"parameters", "payload", "source_context", "business_context", "history"}:
+            # Generated Deputy/provider output is historical context, never
+            # current source truth. Keep the context projection focused on
+            # durable work metadata so stale answers cannot be repeated as
+            # present facts (for example, an old worker-health claim).
+            if str(key).lower() in {"parameters", "payload", "source_context", "business_context", "history", "provider", "answer", "raw_answer", "result", "runtime"}:
                 continue
             out[str(key)] = _compact_value(item, depth=depth + 1, max_chars=max_chars)
         return out
