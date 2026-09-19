@@ -46,6 +46,11 @@ class ProductHardeningTests(unittest.TestCase):
         prompt = deputy._provider_prompt('status', {'health': {'product': {'worker': 'AVAILABLE'}}}, {}, {'status': 'PARTIAL_SUCCESS'}, {}, {}, 'en')
         self.assertIn('partial business-source coverage', prompt)
         self.assertIn('Do not describe the worker as degraded', prompt)
+
+    def test_assembled_context_uses_real_worker_health(self):
+        with patch.object(deputy.proactive_worker, 'status', return_value={'running': True}):
+            context = deputy.assemble_context()
+        self.assertEqual(context['health']['product']['worker'], 'AVAILABLE')
     def test_ui_has_all_operator_surfaces(self):
         for label in ('Home','Deputy','Inbox','Work','Reports','Documents','Settings'):
             self.assertIn(label, product_api.INDEX_HTML)

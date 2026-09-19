@@ -22,6 +22,7 @@ import company_cockpit
 import execution_surface
 import proactive
 import health_model
+import worker as proactive_worker
 from ai_provider import status as provider_status, ask as provider_ask
 from context_orchestrator import retrieve as retrieve_context
 
@@ -68,7 +69,8 @@ def assemble_context():
     loops = st.list("loops", limit=200)
     actions = st.list("actions", limit=200)
     tickets = st.list("tickets", where="status='OPEN'", limit=100)
-    return {"sources": sources, "health": health_model.build(provider=provider_status()), "operational_state": {
+    worker_state = proactive_worker.status()
+    return {"sources": sources, "health": health_model.build(worker=worker_state, provider=provider_status()), "operational_state": {
         "open_loops": len([x for x in loops if x.get("state") not in ("CLOSED", "VERIFIED")]),
         "pending_actions": len([x for x in actions if x.get("state") in ("APPROVAL_REQUIRED", "RESULT_UNKNOWN", "EXECUTED_UNVERIFIED")]),
         "open_tickets": len(tickets),
