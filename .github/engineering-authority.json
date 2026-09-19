@@ -7,7 +7,7 @@
   "repository": "HouseNet-Projects/house-net",
   "base_sha": "da7b550e414a5569181ee6613ce658d27ca88420",
   "branch": "fix/design-system-dark-contrast",
-  "pr": "TBD",
+  "pr": "58",
   "allowed_operations": [
     "branch",
     "edit",
@@ -41,6 +41,10 @@
     {
       "event": "GEV_EXPLICIT_MISSION_AUTHORIZATION",
       "reference": "conversation-ui-contrast-fix"
+    },
+    {
+      "event": "PR_OPENED",
+      "reference": "pr-58"
     }
   ],
   "consumed": false
