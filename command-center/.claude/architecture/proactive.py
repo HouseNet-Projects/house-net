@@ -4,7 +4,7 @@ Runs on demand or from an external scheduler; it persists schedules/events in
 the existing Store and never performs an external mutation.
 """
 from __future__ import annotations
-import datetime as dt, hashlib, json
+import datetime as dt, hashlib, json, os
 import intelligence
 import engine
 import inbound_intelligence
@@ -32,6 +32,38 @@ def _event(kind, source, ref, severity, evidence, response, *, domain="operation
        "severity":severity,"impact":severity,"evidence":evidence,"previous_state":None,"current_state":"OPEN","dedupe_key":dedupe,
        "requires_attention":requires_attention,"recommended_response":response,"authority_requirement":"PREPARE_ONLY","state":state,"occurrences":1}
     _st().upsert("alerts",dedupe,e); return e
+
+
+def _claude_prepare_inbound(ev, commitment_result):
+    """Use Claude for bounded internal preparation after deterministic triage.
+
+    This function is deliberately opt-in and has no write connector. It only
+    stores a short analysis/trace checkpoint and can propose follow-up work;
+    any external action remains an Action Runtime candidate requiring approval.
+    """
+    if os.environ.get("DEPUTY_USE_CLAUDE") != "1":
+        return None
+    try:
+        from ai_provider import ask_agent
+        from context_orchestrator import run_tool
+        prompt = ("You are Deputy's proactive operating analyst. Review this governed inbound observation. "
+                  "Explain why it matters, identify the internal work or commitment to track, and recommend the next preparation step. "
+                  "Do not send messages, mutate external systems, or invent facts. Return a concise operator summary.\n\n" +
+                  json.dumps({"observation": {k: ev.get(k) for k in ("id", "text", "channel", "event_classes", "commitment", "provenance")},
+                              "commitment_result": commitment_result, "authority": "INTERNAL_PREPARE_ONLY"}, ensure_ascii=False, default=str))
+        result = ask_agent(prompt, context={"sources": [{"source": ev.get("provenance", {}).get("source_id", ev.get("channel")), "state": "VERIFIED_READ"}]},
+                           tool_executor=lambda request: run_tool(request, store=_st()), max_iterations=3)
+        analysis = {"status": result.get("status"), "provider": result.get("provider"),
+                    "provider_state": result.get("provider_state"),
+                    "summary": (result.get("answer") or "")[:2400],
+                    "agent_trace": result.get("agent_trace", []), "iterations": result.get("agent_iterations"),
+                    "recorded_at": _now(), "authority": "INTERNAL_PREPARE_ONLY"}
+        _st().upsert("checkpoints", "proactive:analysis:" + str(ev.get("id")), analysis)
+        return analysis
+    except Exception as exc:
+        failure = {"status": "UNAVAILABLE", "reason": type(exc).__name__, "recorded_at": _now(), "authority": "INTERNAL_PREPARE_ONLY"}
+        _st().upsert("checkpoints", "proactive:analysis:" + str(ev.get("id")), failure)
+        return failure
 
 def run_cycle(*, persist=True):
     state=intelligence.current_state({}); exc=intelligence.exceptions(state); queue=intelligence.gev_queue(state,exc); out=[]
@@ -93,8 +125,13 @@ def run_cycle(*, persist=True):
                 "authority": "INTERNAL_ONLY", "next_action": "Review and prepare governed follow-up",
                 "commitment_result": commitment_result,
             })
-            out.append(_event("INBOUND_WORK_DETECTED", ev["channel"], ev["id"], "MEDIUM",
-                              ev["provenance"], "Review prepared follow-up", requires_attention=True))
+            analysis = _claude_prepare_inbound(ev, commitment_result)
+            alert = _event("INBOUND_WORK_DETECTED", ev["channel"], ev["id"], "MEDIUM",
+                            ev["provenance"], "Review prepared follow-up", requires_attention=True)
+            if analysis:
+                alert["claude_preparation"] = {k: analysis.get(k) for k in ("status", "summary", "iterations", "agent_trace")}
+                _st().upsert("alerts", alert.get("dedupe_key"), alert)
+            out.append(alert)
         obs["processed_at"] = _now(); _st().upsert("channel_events", obs.get("op_id") or ev["id"], obs)
     if persist: _st().upsert("checkpoints","proactive:last_cycle",{"at":_now(),"events":len(out),"truth_mode":state.get("truth_mode")})
     return {"status":"PARTIAL_SUCCESS" if state.get("unavailable") else "CURRENT","at":state.get("at"),"events":out,"attention":queue,"state":state}
