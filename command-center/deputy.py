@@ -119,7 +119,7 @@ def _provider_prompt(intent, context, understood, runtime, routing, graph, langu
     prompt = ("You are Deputy's reasoning layer. Answer the user's question using only the governed context below. "
             "State unavailable or stale data honestly; do not invent facts. Do not expose chain-of-thought, secrets, "
             "raw credentials, or internal implementation noise. Return a concise human answer in the requested language (Armenian when language is 'hy'; English when language is 'en') with priorities, "
-            "recommended next actions, limitations, and evidence references.\n\n" +
+            "recommended next actions, limitations, and evidence references. A PARTIAL_SUCCESS runtime result means the operating cycle completed with partial business-source coverage; use the health.product.worker state to judge whether the worker process is actually available. Do not describe the worker as degraded solely because an optional source is unavailable. A dedicated skill is optional; never tell the user that a reasonable analytical question failed because no skill matched.\n\n" +
             json.dumps(compact, ensure_ascii=False, default=str, indent=2))
     # Claude Code is invoked through argv; keep governed context below a
     # deterministic ceiling so broad searches cannot fail with E2BIG.

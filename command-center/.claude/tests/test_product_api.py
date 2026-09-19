@@ -41,6 +41,11 @@ class ProductHardeningTests(unittest.TestCase):
         prompt = deputy._provider_prompt('status', context, {}, {}, {}, {}, 'en')
         self.assertLessEqual(len(prompt), 60080)
         self.assertIn('Context truncated', prompt)
+
+    def test_provider_prompt_distinguishes_partial_sources_from_worker_failure(self):
+        prompt = deputy._provider_prompt('status', {'health': {'product': {'worker': 'AVAILABLE'}}}, {}, {'status': 'PARTIAL_SUCCESS'}, {}, {}, 'en')
+        self.assertIn('partial business-source coverage', prompt)
+        self.assertIn('Do not describe the worker as degraded', prompt)
     def test_ui_has_all_operator_surfaces(self):
         for label in ('Home','Deputy','Inbox','Work','Reports','Documents','Settings'):
             self.assertIn(label, product_api.INDEX_HTML)
