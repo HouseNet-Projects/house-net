@@ -52,6 +52,16 @@ class ProductHardeningTests(unittest.TestCase):
         self.assertIn('never expose INT-* identifiers', prompt)
         self.assertIn('keep exact technical values only in evidence/details', prompt)
 
+    def test_provider_prompt_receives_humanized_source_projection(self):
+        context = {
+            'sources': [{'source': 'INT-B24', 'state': 'NEEDS_SETUP', 'freshness': 'NOT VERIFIED'}],
+            'health': {'business_data': {'state': 'PARTIAL', 'sources': [{'source_id': 'INT-B24', 'name': 'Bitrix24 CRM', 'state': 'NEEDS_SETUP'}]}},
+        }
+        prompt = deputy._provider_prompt('self-audit', context, {}, {}, {}, {}, 'hy')
+        self.assertIn('Bitrix24 CRM', prompt)
+        self.assertIn('needs connection', prompt)
+        self.assertNotIn('"source_id": "INT-B24"', prompt)
+
     def test_assembled_context_uses_real_worker_health(self):
         with patch.object(deputy.proactive_worker, 'status', return_value={'running': True}):
             context = deputy.assemble_context()

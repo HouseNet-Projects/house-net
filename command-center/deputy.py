@@ -121,9 +121,41 @@ def _human(result, understood, context, mission_id):
 
 def _provider_prompt(intent, context, understood, runtime, routing, graph, language="hy"):
     """Bounded, sanitized context for the reasoning provider; never grants write authority."""
+    state_labels = {
+        "AVAILABLE": "available",
+        "VERIFIED_READ": "available",
+        "PARTIAL": "partially connected",
+        "NEEDS_SETUP": "needs connection",
+        "DEFERRED_BY_GEV": "deferred by Gev",
+        "UNAVAILABLE": "unavailable",
+        "NOT_CONFIGURED": "not configured",
+    }
+    source_rows = []
+    for row in context.get("sources", []):
+        if not isinstance(row, dict):
+            continue
+        source_rows.append({
+            "name": row.get("name") or {"INT-TASKS": "Task register", "INT-OL-MAIL": "Outlook mail", "INT-OL-CAL": "Outlook calendar", "INT-TG": "Telegram", "INT-B24": "Bitrix24 CRM", "INT-MB": "MikroBill"}.get(row.get("source"), "Registered HouseNet source"),
+            "state": state_labels.get(row.get("state"), "available" if row.get("state") else "unknown"),
+            "freshness": row.get("freshness"),
+            "limitation": row.get("limitation"),
+        })
+    health = context.get("health", {})
+    provider_health = dict(health) if isinstance(health, dict) else {}
+    business = provider_health.get("business_data")
+    if isinstance(business, dict):
+        business = dict(business)
+        business["state"] = state_labels.get(business.get("state"), business.get("state"))
+        business["sources"] = [{
+            "name": row.get("name"),
+            "state": state_labels.get(row.get("state"), "unknown"),
+            "freshness": row.get("freshness"),
+            "limitation": row.get("limitation"),
+        } for row in business.get("sources", []) if isinstance(row, dict)]
+        provider_health["business_data"] = business
     compact = {
         "language": language, "intent": intent, "understanding": understood,
-        "sources": context.get("sources", []), "health": context.get("health", {}), "operational_state": context.get("operational_state", {}),
+        "sources": source_rows, "health": provider_health, "operational_state": context.get("operational_state", {}),
         "conversation": context.get("conversation", []),
         "tool_trace": context.get("tool_trace", {}),
         "truth_rule": context.get("truth_rule"),
