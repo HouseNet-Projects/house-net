@@ -134,15 +134,15 @@ def lifecycle_state(r, today):
     if due <= (datetime.date.fromisoformat(today) + datetime.timedelta(days=2)).isoformat(): return "DUE_SOON"
     return "OPEN"
 
-def all_rows(today=None):
+def all_rows(today=None, store=None):
     today = today or datetime.date.today().isoformat()
     out = []
-    for r in _st().list("commitments"):
+    for r in (store or _st()).list("commitments"):
         d = dict(r); d.setdefault("who", r.get("owner")); d.setdefault("what", r.get("text")); d.setdefault("evidence", []); d.setdefault("strength", "STRONG"); d.setdefault("origin", "GEV")
         d["lifecycle"] = lifecycle_state(d, today); d["due_display"] = d.get("due") or "UNKNOWN"; out.append(d)
     return out
 
-def open_rows(today=None): return [r for r in all_rows(today) if r["lifecycle"] in ("OPEN", "DUE_SOON", "OVERDUE")]
+def open_rows(today=None, store=None): return [r for r in all_rows(today, store=store) if r["lifecycle"] in ("OPEN", "DUE_SOON", "OVERDUE")]
 
 def fulfil(op_id, evidence, by="Gev"):
     """Close on evidence only (what was delivered, where seen). No evidence → stays open."""

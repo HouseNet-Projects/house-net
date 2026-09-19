@@ -43,6 +43,28 @@ def run_cycle(*, persist=True):
     for iid,v in state.get("visibility",{}).items():
         if v.get("state") in ("STALE","UNAVAILABLE","NOT_CONFIGURED") and iid not in ("INT-MB",):
             out.append(_event("SOURCE_GAP",iid,iid,"MEDIUM",v,f"restore or certify {iid}",requires_attention=False))
+    # Keep durable commitments alive after their source event was processed.
+    # This is preparation only: a follow-up draft may be created later, but no
+    # external message is sent by the watcher.
+    today = dt.date.today().isoformat()
+    for commitment in commitments.open_rows(today, store=_st()):
+        lifecycle = commitment.get("lifecycle")
+        if lifecycle not in ("OVERDUE", "DUE_SOON"):
+            continue
+        op_id = commitment.get("op_id") or commitment.get("id")
+        severity = "HIGH" if lifecycle == "OVERDUE" else "MEDIUM"
+        response = "Prepare a follow-up for Gev's review; sending requires exact approval"
+        out.append(_event("COMMITMENT_OVERDUE" if lifecycle == "OVERDUE" else "COMMITMENT_DUE_SOON",
+                          "commitments", op_id, severity,
+                          {"op_id": op_id, "who": commitment.get("who"), "what": commitment.get("what"),
+                           "due": commitment.get("due"), "evidence": commitment.get("evidence", [])}, response,
+                          requires_attention=True))
+        _st().upsert("loops", "followup:" + str(op_id), {
+            "loop_id": "followup:" + str(op_id), "kind": "PREPARED_COMMITMENT_FOLLOW_UP",
+            "summary": commitment.get("what") or commitment.get("text"), "state": "OPEN",
+            "source": commitment.get("source"), "commitment_id": op_id, "lifecycle": lifecycle,
+            "next_action": response, "authority": "INTERNAL_ONLY", "evidence": commitment.get("evidence", []),
+        })
     # Process normalized inbound observations already written by a certified
     # adapter.  This is internal preparation only: inbound content remains
     # evidence and can never grant approval or perform an external write.
