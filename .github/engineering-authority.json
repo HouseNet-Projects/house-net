@@ -1,13 +1,13 @@
 {
-  "authority_id": "EAE-GOVERNED-CLAUDE-AGENT-LOOP",
+  "authority_id": "EAE-PROACTIVE-CLAUDE-PREPARE",
   "approved_by": "GEV",
   "approval_reference": "gev-explicit-gev-work-product-rebuild-2026-09-18",
   "approved_at": "2026-09-19T00:00:00Z",
-  "mission": "Add bounded read-only Claude tool loop to Deputy provider reasoning",
+  "mission": "Add bounded Claude preparation to meaningful proactive inbound events without external mutation authority",
   "repository": "HouseNet-Projects/house-net",
-  "base_sha": "63361396410a105d5a1a175d86ab277a6cbfc654",
-  "branch": "feature/governed-claude-agent-loop",
-  "pr": "55",
+  "base_sha": "811d4592824c1a7213302b118df2fb60eba37fb4",
+  "branch": "feature/proactive-claude-preparation",
+  "pr": "56",
   "allowed_operations": [
     "branch",
     "edit",

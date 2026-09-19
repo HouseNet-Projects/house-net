@@ -1,4 +1,5 @@
 import tempfile, unittest
+from unittest.mock import patch
 
 from store import Store
 import proactive
@@ -53,6 +54,28 @@ class ProactiveInboundTests(unittest.TestCase):
                 self.assertTrue(any(e.get('event_type') == 'COMMITMENT_OVERDUE' for e in first['events']))
                 self.assertEqual(len([e for e in second['events'] if e.get('event_type') == 'COMMITMENT_OVERDUE']), 1)
                 self.assertEqual(len([r for r in store.list('loops') if r.get('loop_id') == 'followup:CMT-overdue']), 1)
+            finally:
+                proactive._st = original
+
+    def test_meaningful_inbound_event_gets_bounded_claude_preparation(self):
+        with tempfile.TemporaryDirectory() as td:
+            original = proactive._st
+            store = Store(td)
+            proactive._st = lambda: store
+            try:
+                store.record('channel_events', 'signal-claude', {
+                    'kind': 'INBOUND_SIGNAL', 'channel': 'fixture', 'source_id': 'fixture-claude',
+                    'retrieved_at': '2026-09-18T00:00:00',
+                    'text': "Please send me the proposal by Friday.", 'sender': 'customer@example.test'
+                })
+                fake = {'status': 'OK', 'provider': 'claude-code-max', 'provider_state': 'READY',
+                        'answer': 'Prepare a proposal follow-up for review.', 'agent_trace': [], 'agent_iterations': 1}
+                with patch.dict('os.environ', {'DEPUTY_USE_CLAUDE': '1'}), patch('ai_provider.ask_agent', return_value=fake):
+                    result = proactive.run_cycle()
+                checkpoint = store.get('checkpoints', 'proactive:analysis:' + event('Please send me the proposal by Friday.', channel='fixture', source_id='fixture-claude', retrieved_at='2026-09-18T00:00:00', sender='customer@example.test')['id'])
+                self.assertIsNotNone(checkpoint)
+                self.assertEqual(checkpoint['status'], 'OK')
+                self.assertTrue(any(e.get('claude_preparation', {}).get('status') == 'OK' for e in result['events']))
             finally:
                 proactive._st = original
 
