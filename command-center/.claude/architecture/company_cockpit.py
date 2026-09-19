@@ -26,7 +26,7 @@ def _source_health():
                          "authority": registry.get(iid).get("authority", {}).get("name"),
                          "read_state": state, "write_state": "NONE" if not registry.get(iid).get("write_ops") else "GOVERNED",
                          "certification": r.get("read"), "freshness": freshness,
-                         "current_limitation": r.get("unblock") or r.get("deferred", {}).get("note")})
+                         "current_limitation": r.get("unblock") or (r.get("deferred") or {}).get("note")})
         except Exception as exc:
             rows.append({"source_id": iid, "read_state": "ERROR", "freshness": "UNKNOWN", "error": type(exc).__name__})
     return rows
