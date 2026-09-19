@@ -5,7 +5,7 @@ not from the Python process (CO_E_SERVER_EXEC_FAILURE); the reader is integrity-
 write call, so the read-only boundary is structural: Python can only pass validated parameters to fixed operations.
 Failure mapping: pwsh missing → TOOL_UNAVAILABLE · reader modified → READ_ONLY_VIOLATION · COM not reachable → UNAVAILABLE ·
 access denied → PERMISSION_DENIED · non-JSON → MALFORMED_RESPONSE · missing keys → SCHEMA_CHANGED · other mailbox → WRONG_TENANT."""
-import sys, pathlib, json, subprocess, shutil, hashlib, datetime, os, re
+import sys, pathlib, json, subprocess, shutil, hashlib, datetime, os, re, urllib.request, urllib.error
 HERE = pathlib.Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 from contracts import IntegrationError, ReadOnlyViolation
@@ -38,6 +38,9 @@ def _iso_or_raise(v, name):
     return v if "T" in v else v + "T00:00:00"
 
 def _run(args, timeout=90):
+    bridge = os.environ.get("DEPUTY_OUTLOOK_BRIDGE_URL", "").strip().rstrip("/")
+    if bridge:
+        return _run_bridge(args, bridge, timeout)
     ps = pwsh()
     if not ps: raise IntegrationError("TOOL_UNAVAILABLE", "PowerShell (pwsh/powershell) not found — the Outlook reader cannot run")
     rp = reader_problems()
@@ -59,6 +62,38 @@ def _run(args, timeout=90):
         low = msg.lower()
         if "access denied" in low or "0x80070005" in low or "e_accessdenied" in low: raise IntegrationError("PERMISSION_DENIED", f"Outlook refused access: {msg[:160]}")
         raise IntegrationError("UNAVAILABLE", f"Outlook desktop not reachable (COM): {msg[:160]}", detail=d.get("hresult"), retryable=True)
+    return d
+
+def _run_bridge(args, base, timeout=30):
+    """Read through the localhost-only Windows Outlook bridge.
+
+    The bridge exists for the supported deployment topology where Deputy runs on
+    Linux and Classic Outlook/MAPI runs in Gev's Windows desktop session.  It is
+    deliberately read-only and only accepts the fixed operations below.
+    """
+    if not (base.startswith("http://127.0.0.1:") or base.startswith("http://localhost:")):
+        raise IntegrationError("NOT_CONFIGURED", "Outlook bridge must be an HTTP localhost endpoint")
+    op = None
+    vals = {}
+    it = iter(args)
+    for token in it:
+        if token == "-Op": op = next(it, None)
+        elif token.startswith("-"): vals[token[1:].lower()] = next(it, None)
+    paths = {"probe": "/probe", "calendar": "/calendar", "mail": "/mail"}
+    if op not in paths:
+        raise IntegrationError("UNKNOWN_OPERATION", f"bridge does not support {op or 'unknown'}")
+    try:
+        with urllib.request.urlopen(base + paths[op], timeout=timeout) as resp:
+            raw = resp.read(2_000_000)
+        d = json.loads(raw.decode("utf-8"))
+    except urllib.error.HTTPError as e:
+        raise IntegrationError("UNAVAILABLE", f"Outlook Windows bridge returned HTTP {e.code}", retryable=True)
+    except (urllib.error.URLError, TimeoutError) as e:
+        raise IntegrationError("UNAVAILABLE", f"Outlook Windows bridge unavailable: {e}", retryable=True)
+    except (ValueError, UnicodeError) as e:
+        raise IntegrationError("MALFORMED_RESPONSE", f"Outlook Windows bridge returned invalid JSON: {e}")
+    if not isinstance(d, dict) or not d.get("ok"):
+        raise IntegrationError("UNAVAILABLE", str((d or {}).get("error") or "Outlook bridge refused request"), retryable=True)
     return d
 
 def _identity(d, iid):
@@ -91,6 +126,8 @@ def read(op, params=None, cfg=None, integration_id=None):
     if op == "calendar.events":
         f = _iso_or_raise(params.get("from"), "from"); t = _iso_or_raise(params.get("to"), "to")
         d = _run(["-Op", "calendar", "-From", f, "-To", t, "-Limit", str(limit), "-PreviewChars", "400"])
+        if os.environ.get("DEPUTY_OUTLOOK_BRIDGE_URL"):
+            d["records"] = [r for r in d.get("records", []) if (not r.get("start") or r.get("start") >= f) and (not r.get("start") or r.get("start") <= t)][:limit]
         kind = "meeting"; norm = normalize.meeting
     else:
         folder = params.get("folder") or "Inbox"
@@ -103,6 +140,18 @@ def read(op, params=None, cfg=None, integration_id=None):
             if not q: raise IntegrationError("BAD_PARAMS", "query missing")
             args += ["-Search", q[:120]]
         d = _run(args); kind = "message"; norm = normalize.message
+        if os.environ.get("DEPUTY_OUTLOOK_BRIDGE_URL"):
+            records = d.get("records", [])
+            if folder != "Inbox":
+                raise IntegrationError("UNAVAILABLE", "Windows Outlook bridge currently exposes Inbox only", retryable=True)
+            if params.get("since"):
+                records = [r for r in records if (r.get("received") or "") >= params["since"]]
+            if params.get("unread_only"):
+                records = [r for r in records if r.get("unread")]
+            if op == "mail.search":
+                q = str(params.get("query") or "").lower()
+                records = [r for r in records if q in (str(r.get("subject") or "") + " " + str(r.get("preview") or "")).lower()]
+            d["records"] = records[:limit]
     if "records" not in d or not isinstance(d["records"], list): raise IntegrationError("SCHEMA_CHANGED", "reader envelope lacks records[]")
     ident = _identity(d, iid)
     recs = []
