@@ -112,3 +112,22 @@ def retrieve(intent, *, store=None, limit=8):
             tools.append({"tool": name, "status": "UNAVAILABLE", "reason": type(exc).__name__})
     return {"query": intent, "tools": tools, "records": selected, "correlations": correlate(selected),
             "authority": "READ_ONLY_EVIDENCE", "result_limit": limit}
+
+
+def run_tool(request, *, store=None):
+    """Execute one registered read-only Deputy tool for the agent loop."""
+    request = request if isinstance(request, dict) else {}
+    name = request.get("tool")
+    if name not in {"search_work", "search_open_loops", "search_observations", "search_approvals", "search_context"}:
+        raise ValueError("unregistered Deputy read tool")
+    query = str(request.get("query") or "").strip()
+    if not query:
+        raise ValueError("tool query is required")
+    limit = max(1, min(int(request.get("limit", 8)), 12))
+    result = retrieve(query, store=store, limit=limit)
+    if name == "search_context":
+        records = result.get("records", {})
+    else:
+        records = result.get("records", {}).get(name, [])
+    return {"tool": name, "query": query, "records": records, "correlations": result.get("correlations", []),
+            "authority": "READ_ONLY_EVIDENCE", "result_limit": limit}

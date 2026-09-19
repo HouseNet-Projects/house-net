@@ -23,8 +23,8 @@ import execution_surface
 import proactive
 import health_model
 import worker as proactive_worker
-from ai_provider import status as provider_status, ask as provider_ask
-from context_orchestrator import retrieve as retrieve_context
+from ai_provider import status as provider_status, ask as provider_ask, ask_agent as provider_ask_agent
+from context_orchestrator import retrieve as retrieve_context, run_tool as run_context_tool
 
 
 def _mission_id(intent):
@@ -273,7 +273,9 @@ def run(intent, *, inputs=None, as_json=False):
     except Exception as exc:
         graph = {"status": "BLOCKED", "reason": type(exc).__name__}
     language = (inputs or {}).get("language", "hy")
-    provider = provider_ask(_provider_prompt(intent, context, understood, result, routing, graph, language), context=context) if os.environ.get("DEPUTY_USE_CLAUDE") == "1" else {"status": "NOT_INVOKED", "provider": "claude-code-max", "reason": "Claude Code invocation is opt-in; canonical runtime remains provider-neutral."}
+    provider = provider_ask_agent(_provider_prompt(intent, context, understood, result, routing, graph, language),
+                                  context=context,
+                                  tool_executor=lambda request: run_context_tool(request, store=engine._store())) if os.environ.get("DEPUTY_USE_CLAUDE") == "1" else {"status": "NOT_INVOKED", "provider": "claude-code-max", "reason": "Claude Code invocation is opt-in; canonical runtime remains provider-neutral."}
     payload = {"mission_id": mission_id, "request": intent, "understanding": {"raw_intent": intent, "outcome": understood,
         "scope": "current HouseNet operating state", "constraints": ["no external mutation without Action Runtime approval"],
         "completion_criteria": ["facts have provenance", "prepared actions are separated", "verification state is honest"]},
