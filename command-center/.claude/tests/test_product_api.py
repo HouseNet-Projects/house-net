@@ -47,6 +47,11 @@ class ProductHardeningTests(unittest.TestCase):
         self.assertIn('partial business-source coverage', prompt)
         self.assertIn('Do not describe the worker as degraded', prompt)
 
+    def test_provider_prompt_humanizes_health_codes_for_normal_answers(self):
+        prompt = deputy._provider_prompt('self-audit', {'health': {}, 'sources': []}, {}, {}, {}, {}, 'hy')
+        self.assertIn('never expose INT-* identifiers', prompt)
+        self.assertIn('keep exact technical values only in evidence/details', prompt)
+
     def test_assembled_context_uses_real_worker_health(self):
         with patch.object(deputy.proactive_worker, 'status', return_value={'running': True}):
             context = deputy.assemble_context()
