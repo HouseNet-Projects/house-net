@@ -45,6 +45,7 @@
     "design-system/AGENTS.md",
     "design-system/CLAUDE.md",
     "design-system/README.md",
+    "docs/document-index.json",
     "docs/governance/data-classification.json",
     "docs/governance/historical/nested-workflows/command-center-backbone-ci.yml",
     "docs/governance/historical/nested-workflows/command-center-command-center-ci.yml",
