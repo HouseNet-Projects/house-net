@@ -13,6 +13,7 @@ SENSITIVE=(' .github/'.strip(), 'CODEOWNERS', 'house-net-control.json', 'control
  'tools/secret_scan.py', 'vault/bin/validate-vault', 'command-center/.claude/skills/actions.py')
 def sh(*args): return subprocess.check_output(args,cwd=ROOT,text=True).strip()
 def ancestor(older,newer): return subprocess.run(['git','merge-base','--is-ancestor',older,newer],cwd=ROOT).returncode==0
+def is_sensitive(paths): return any(any(p==s or p.startswith(s) for s in SENSITIVE) for p in paths)
 def main():
  # PRs carry the bounded envelope. Push builds have no PR context; their
  # merged commit is covered by the remaining mandatory validation jobs.
@@ -30,7 +31,7 @@ def main():
  # PR; sensitive-path changes then fall through to the owner-review boundary.
  if envelope and envelope.get('pr') and str(envelope['pr']) != os.environ.get('GITHUB_EVENT_PULL_REQUEST_NUMBER',''):
   envelope=None
- sensitive=any(any(p==s or p.startswith(s) for s in SENSITIVE) for p in paths)
+ sensitive=is_sensitive(paths)
  if envelope:
   if envelope.get('base_sha') and not ancestor(envelope['base_sha'],base): return fail('envelope base is not ancestor of PR base')
   if envelope.get('branch') and envelope['branch'] != os.environ.get('GITHUB_HEAD_REF',''): return fail('branch binding mismatch')
@@ -41,7 +42,10 @@ def main():
    if not ok: return fail(f'path {p}: {reason}')
   print(json.dumps({'ok':True,'mode':'ENVELOPE_BOUND','changed_paths':len(paths)})); return 0
  if sensitive:
-  print(json.dumps({'ok':True,'mode':'OWNER_REVIEW_REQUIRED','changed_paths':len(paths),'owner_principal':'PENDING'})); return 0
+  # A review note is not an authorization.  Protected branch review remains
+  # useful, but this required check must fail closed until a bounded envelope
+  # is present and bound to the exact PR/base/path set.
+  return fail('sensitive change requires an EngineeringAuthorityEnvelope bound to this PR')
  return fail('ordinary PR requires EngineeringAuthorityEnvelope')
 def fail(msg): print('FAIL — '+msg); return 2
 if __name__=='__main__': sys.exit(main())

@@ -1,4 +1,5 @@
 import os, subprocess, unittest
+import engineering_authority_gate as gate
 ROOT=os.path.dirname(os.path.dirname(__file__))
 class GateTests(unittest.TestCase):
  def test_gate_requires_envelope_for_ordinary_change(self):
@@ -10,4 +11,10 @@ class GateTests(unittest.TestCase):
   )
   p=subprocess.run(['python3','tools/engineering_authority_gate.py'],cwd=ROOT,env=env,text=True,capture_output=True)
   self.assertNotEqual(p.returncode,0)
+ def test_gate_fails_closed_for_sensitive_change_without_envelope(self):
+  env=os.environ.copy(); env.update(
+   GITHUB_BASE_SHA='HEAD', GITHUB_SHA='HEAD',
+   GITHUB_EVENT_NAME='pull_request', GITHUB_EVENT_PULL_REQUEST_NUMBER='', GITHUB_HEAD_REF='')
+  self.assertTrue(gate.is_sensitive(['.github/workflows/house-net-ci.yml']))
+  self.assertFalse(gate.is_sensitive(['command-center/README.md']))
 if __name__=='__main__': unittest.main()

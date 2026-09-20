@@ -5,16 +5,16 @@
   "rules": [
     {
       "classification": "MACHINE_ENFORCED",
-      "rationale": "objective repository invariant enforced by root validator and required CI",
+      "rationale": "Explicit mapping to the named enforcement boundary; no ordinal fallback.",
       "artifacts": [
-        "tools/validate_house_net.py"
+        ".github/workflows/house-net-ci.yml"
       ],
-      "enforcement_type": "validator+CI",
+      "enforcement_type": "workflow_validator",
       "tests": [
-        "root_validator"
+        "workflow_policy_negative"
       ],
       "ci_check": "monorepo-governance",
-      "boundary": "repository/CI",
+      "boundary": "runtime/repository/CI",
       "fail_closed": true,
       "source_policy": "control-plane/policy/actions.json",
       "rule_id": "HN-PERMISSIONS",
@@ -22,84 +22,75 @@
     },
     {
       "classification": "MACHINE_ENFORCED",
-      "rationale": "objective repository invariant enforced by root validator and required CI",
+      "rationale": "Explicit mapping to the named enforcement boundary; no ordinal fallback.",
       "artifacts": [
-        "tools/validate_house_net.py"
+        ".github/workflows/house-net-ci.yml"
       ],
-      "enforcement_type": "validator+CI",
+      "enforcement_type": "workflow_validator",
       "tests": [
-        "root_validator"
+        "workflow_policy_negative"
       ],
       "ci_check": "monorepo-governance",
-      "boundary": "repository/CI",
+      "boundary": "runtime/repository/CI",
       "fail_closed": true,
       "source_policy": "control-plane/policy/actions.json",
       "rule_id": "HN-SOURCES",
       "source_index": 1
     },
     {
-      "classification": "MACHINE_ENFORCED",
-      "rationale": "objective repository invariant enforced by root validator and required CI",
-      "artifacts": [
-        "tools/validate_house_net.py"
-      ],
-      "enforcement_type": "validator+CI",
-      "tests": [
-        "root_validator"
-      ],
+      "classification": "HUMAN_DECISION_REQUIRED",
+      "rationale": "requires an owner or business judgment that automation cannot safely infer",
+      "artifacts": [],
+      "enforcement_type": "owner decision",
+      "tests": [],
       "ci_check": "monorepo-governance",
-      "boundary": "repository/CI",
+      "boundary": "owner decision",
       "fail_closed": true,
+      "human_decision_reason": "Scope, risk, or business intent requires Gev decision.",
       "source_policy": "control-plane/policy/actions.json",
       "rule_id": "HN-CI",
       "source_index": 2
     },
     {
-      "classification": "MACHINE_ENFORCED",
-      "rationale": "objective repository invariant enforced by root validator and required CI",
-      "artifacts": [
-        "tools/validate_house_net.py"
-      ],
-      "enforcement_type": "validator+CI",
-      "tests": [
-        "root_validator"
-      ],
+      "classification": "HUMAN_DECISION_REQUIRED",
+      "rationale": "requires an owner or business judgment that automation cannot safely infer",
+      "artifacts": [],
+      "enforcement_type": "owner decision",
+      "tests": [],
       "ci_check": "monorepo-governance",
-      "boundary": "repository/CI",
+      "boundary": "owner decision",
       "fail_closed": true,
+      "human_decision_reason": "Scope, risk, or business intent requires Gev decision.",
       "source_policy": "control-plane/policy/actions.json",
       "rule_id": "HN-DEPLOYMENT",
       "source_index": 3
     },
     {
-      "classification": "MACHINE_ENFORCED",
-      "rationale": "objective repository invariant enforced by root validator and required CI",
-      "artifacts": [
-        "tools/validate_house_net.py"
-      ],
-      "enforcement_type": "validator+CI",
-      "tests": [
-        "root_validator"
-      ],
+      "classification": "HUMAN_DECISION_REQUIRED",
+      "rationale": "requires an owner or business judgment that automation cannot safely infer",
+      "artifacts": [],
+      "enforcement_type": "owner decision",
+      "tests": [],
       "ci_check": "monorepo-governance",
-      "boundary": "repository/CI",
+      "boundary": "owner decision",
       "fail_closed": true,
+      "human_decision_reason": "Scope, risk, or business intent requires Gev decision.",
       "source_policy": "control-plane/policy/authority.json",
       "rule_id": "HN-PURPOSE",
       "source_index": 0
     },
     {
       "classification": "MACHINE_ENFORCED",
-      "rationale": "objective repository invariant enforced by root validator and required CI",
+      "rationale": "Explicit mapping to the named enforcement boundary; no ordinal fallback.",
       "artifacts": [
-        "tools/validate_house_net.py"
+        "control-plane/bin/validate-control-plane"
       ],
-      "enforcement_type": "validator+CI",
+      "enforcement_type": "preflight",
       "tests": [
-        "root_validator"
+        "preflight_identity_negative"
       ],
-      "ci_check": "monorepo-governance",
-      "boundary": "repository/CI",
+      "ci_check": "control-plane",
+      "boundary": "runtime/repository/CI",
       "fail_closed": true,
       "source_policy": "control-plane/policy/authority.json",
       "rule_id": "HN-IDENTITY",
@@ -107,237 +98,207 @@
     },
     {
       "classification": "MACHINE_ENFORCED",
-      "rationale": "objective repository invariant enforced by root validator and required CI",
+      "rationale": "Explicit mapping to the named enforcement boundary; no ordinal fallback.",
       "artifacts": [
-        "tools/validate_house_net.py"
+        "control-plane/bin/validate-control-plane"
       ],
-      "enforcement_type": "validator+CI",
+      "enforcement_type": "repository_validator",
       "tests": [
-        "root_validator"
+        "control_plane_negative"
       ],
-      "ci_check": "monorepo-governance",
-      "boundary": "repository/CI",
+      "ci_check": "control-plane",
+      "boundary": "runtime/repository/CI",
       "fail_closed": true,
       "source_policy": "control-plane/policy/authority.json",
       "rule_id": "HN-NAMESPACE",
       "source_index": 2
     },
     {
-      "classification": "MACHINE_ENFORCED",
-      "rationale": "objective repository invariant enforced by root validator and required CI",
-      "artifacts": [
-        "tools/validate_house_net.py"
-      ],
-      "enforcement_type": "validator+CI",
-      "tests": [
-        "root_validator"
-      ],
+      "classification": "HUMAN_DECISION_REQUIRED",
+      "rationale": "requires an owner or business judgment that automation cannot safely infer",
+      "artifacts": [],
+      "enforcement_type": "owner decision",
+      "tests": [],
       "ci_check": "monorepo-governance",
-      "boundary": "repository/CI",
+      "boundary": "owner decision",
       "fail_closed": true,
+      "human_decision_reason": "Scope, risk, or business intent requires Gev decision.",
       "source_policy": "control-plane/policy/authority.json",
       "rule_id": "HN-CREATION",
       "source_index": 3
     },
     {
-      "classification": "MACHINE_ENFORCED",
-      "rationale": "objective repository invariant enforced by root validator and required CI",
-      "artifacts": [
-        "tools/validate_house_net.py"
-      ],
-      "enforcement_type": "validator+CI",
-      "tests": [
-        "root_validator"
-      ],
+      "classification": "HUMAN_DECISION_REQUIRED",
+      "rationale": "requires an owner or business judgment that automation cannot safely infer",
+      "artifacts": [],
+      "enforcement_type": "owner decision",
+      "tests": [],
       "ci_check": "monorepo-governance",
-      "boundary": "repository/CI",
+      "boundary": "owner decision",
       "fail_closed": true,
+      "human_decision_reason": "Scope, risk, or business intent requires Gev decision.",
       "source_policy": "control-plane/policy/authority.json",
       "rule_id": "HN-CONFIGURATION",
       "source_index": 4
     },
     {
-      "classification": "MACHINE_ENFORCED",
-      "rationale": "objective repository invariant enforced by root validator and required CI",
-      "artifacts": [
-        "tools/validate_house_net.py"
-      ],
-      "enforcement_type": "validator+CI",
-      "tests": [
-        "root_validator"
-      ],
+      "classification": "HUMAN_DECISION_REQUIRED",
+      "rationale": "requires an owner or business judgment that automation cannot safely infer",
+      "artifacts": [],
+      "enforcement_type": "owner decision",
+      "tests": [],
       "ci_check": "monorepo-governance",
-      "boundary": "repository/CI",
+      "boundary": "owner decision",
       "fail_closed": true,
+      "human_decision_reason": "Scope, risk, or business intent requires Gev decision.",
       "source_policy": "control-plane/policy/authority.json",
       "rule_id": "HN-DESTRUCTIVE",
       "source_index": 5
     },
     {
-      "classification": "MACHINE_ENFORCED",
-      "rationale": "objective repository invariant enforced by root validator and required CI",
-      "artifacts": [
-        "tools/validate_house_net.py"
-      ],
-      "enforcement_type": "validator+CI",
-      "tests": [
-        "root_validator"
-      ],
+      "classification": "HUMAN_DECISION_REQUIRED",
+      "rationale": "requires an owner or business judgment that automation cannot safely infer",
+      "artifacts": [],
+      "enforcement_type": "owner decision",
+      "tests": [],
       "ci_check": "monorepo-governance",
-      "boundary": "repository/CI",
+      "boundary": "owner decision",
       "fail_closed": true,
+      "human_decision_reason": "Scope, risk, or business intent requires Gev decision.",
       "source_policy": "control-plane/policy/authority.json",
       "rule_id": "HN-SCOPE",
       "source_index": 6
     },
     {
       "classification": "MACHINE_ENFORCED",
-      "rationale": "objective repository invariant enforced by root validator and required CI",
+      "rationale": "Explicit mapping to the named enforcement boundary; no ordinal fallback.",
       "artifacts": [
-        "tools/validate_house_net.py"
+        "control-plane/bin/validate-control-plane"
       ],
-      "enforcement_type": "validator+CI",
+      "enforcement_type": "schema_validator",
       "tests": [
-        "root_validator"
+        "control_plane_negative"
       ],
-      "ci_check": "monorepo-governance",
-      "boundary": "repository/CI",
+      "ci_check": "control-plane",
+      "boundary": "runtime/repository/CI",
       "fail_closed": true,
       "source_policy": "control-plane/policy/authority.json",
       "rule_id": "HN-LEVELS",
       "source_index": 7
     },
     {
-      "classification": "MACHINE_ENFORCED",
-      "rationale": "objective repository invariant enforced by root validator and required CI",
-      "artifacts": [
-        "tools/validate_house_net.py"
-      ],
-      "enforcement_type": "validator+CI",
-      "tests": [
-        "root_validator"
-      ],
+      "classification": "HUMAN_DECISION_REQUIRED",
+      "rationale": "requires an owner or business judgment that automation cannot safely infer",
+      "artifacts": [],
+      "enforcement_type": "owner decision",
+      "tests": [],
       "ci_check": "monorepo-governance",
-      "boundary": "repository/CI",
+      "boundary": "owner decision",
       "fail_closed": true,
+      "human_decision_reason": "Scope, risk, or business intent requires Gev decision.",
       "source_policy": "control-plane/policy/authority.json",
       "rule_id": "HN-OPERATING-FLOW",
       "source_index": 8
     },
     {
-      "classification": "MACHINE_ENFORCED",
-      "rationale": "objective repository invariant enforced by root validator and required CI",
-      "artifacts": [
-        "tools/validate_house_net.py"
-      ],
-      "enforcement_type": "validator+CI",
-      "tests": [
-        "root_validator"
-      ],
+      "classification": "HUMAN_DECISION_REQUIRED",
+      "rationale": "requires an owner or business judgment that automation cannot safely infer",
+      "artifacts": [],
+      "enforcement_type": "owner decision",
+      "tests": [],
       "ci_check": "monorepo-governance",
-      "boundary": "repository/CI",
+      "boundary": "owner decision",
       "fail_closed": true,
+      "human_decision_reason": "Scope, risk, or business intent requires Gev decision.",
       "source_policy": "control-plane/policy/authority.json",
       "rule_id": "HN-OUT-OF-SCOPE",
       "source_index": 9
     },
     {
-      "classification": "MACHINE_ENFORCED",
-      "rationale": "objective repository invariant enforced by root validator and required CI",
-      "artifacts": [
-        "tools/validate_house_net.py"
-      ],
-      "enforcement_type": "validator+CI",
-      "tests": [
-        "root_validator"
-      ],
+      "classification": "HUMAN_DECISION_REQUIRED",
+      "rationale": "requires an owner or business judgment that automation cannot safely infer",
+      "artifacts": [],
+      "enforcement_type": "owner decision",
+      "tests": [],
       "ci_check": "monorepo-governance",
-      "boundary": "repository/CI",
+      "boundary": "owner decision",
       "fail_closed": true,
+      "human_decision_reason": "Scope, risk, or business intent requires Gev decision.",
       "source_policy": "control-plane/policy/authority.json",
       "rule_id": "HN-PROPORTIONALITY",
       "source_index": 10
     },
     {
       "classification": "MACHINE_ENFORCED",
-      "rationale": "objective repository invariant enforced by root validator and required CI",
+      "rationale": "Explicit mapping to the named enforcement boundary; no ordinal fallback.",
       "artifacts": [
-        "tools/validate_house_net.py"
+        "control-plane/bin/validate-control-plane"
       ],
-      "enforcement_type": "validator+CI",
+      "enforcement_type": "registration_schema_and_target_validator",
       "tests": [
-        "root_validator"
+        "control_plane_negative"
       ],
-      "ci_check": "monorepo-governance",
-      "boundary": "repository/CI",
+      "ci_check": "control-plane",
+      "boundary": "runtime/repository/CI",
       "fail_closed": true,
       "source_policy": "control-plane/policy/authority.json",
       "rule_id": "HN-PERSON-INDEPENDENT-AUTHORITY",
       "source_index": 11
     },
     {
-      "classification": "MACHINE_ENFORCED",
-      "rationale": "objective repository invariant enforced by root validator and required CI",
-      "artifacts": [
-        "tools/validate_house_net.py"
-      ],
-      "enforcement_type": "validator+CI",
-      "tests": [
-        "root_validator"
-      ],
+      "classification": "HUMAN_DECISION_REQUIRED",
+      "rationale": "requires an owner or business judgment that automation cannot safely infer",
+      "artifacts": [],
+      "enforcement_type": "owner decision",
+      "tests": [],
       "ci_check": "monorepo-governance",
-      "boundary": "repository/CI",
+      "boundary": "owner decision",
       "fail_closed": true,
+      "human_decision_reason": "Scope, risk, or business intent requires Gev decision.",
       "source_policy": "control-plane/policy/git.json",
       "rule_id": "HN-BRANCH",
       "source_index": 0
     },
     {
-      "classification": "MACHINE_ENFORCED",
-      "rationale": "objective repository invariant enforced by root validator and required CI",
-      "artifacts": [
-        "tools/validate_house_net.py"
-      ],
-      "enforcement_type": "validator+CI",
-      "tests": [
-        "root_validator"
-      ],
+      "classification": "HUMAN_DECISION_REQUIRED",
+      "rationale": "requires an owner or business judgment that automation cannot safely infer",
+      "artifacts": [],
+      "enforcement_type": "owner decision",
+      "tests": [],
       "ci_check": "monorepo-governance",
-      "boundary": "repository/CI",
+      "boundary": "owner decision",
       "fail_closed": true,
+      "human_decision_reason": "Scope, risk, or business intent requires Gev decision.",
       "source_policy": "control-plane/policy/git.json",
       "rule_id": "HN-DEVELOPMENT",
       "source_index": 1
     },
     {
-      "classification": "MACHINE_ENFORCED",
-      "rationale": "objective repository invariant enforced by root validator and required CI",
-      "artifacts": [
-        "tools/validate_house_net.py"
-      ],
-      "enforcement_type": "validator+CI",
-      "tests": [
-        "root_validator"
-      ],
+      "classification": "HUMAN_DECISION_REQUIRED",
+      "rationale": "requires an owner or business judgment that automation cannot safely infer",
+      "artifacts": [],
+      "enforcement_type": "owner decision",
+      "tests": [],
       "ci_check": "monorepo-governance",
-      "boundary": "repository/CI",
+      "boundary": "owner decision",
       "fail_closed": true,
+      "human_decision_reason": "Scope, risk, or business intent requires Gev decision.",
       "source_policy": "control-plane/policy/git.json",
       "rule_id": "HN-BRANCH-NAMES",
       "source_index": 2
     },
     {
       "classification": "MACHINE_ENFORCED",
-      "rationale": "objective repository invariant enforced by root validator and required CI",
+      "rationale": "Explicit mapping to the named enforcement boundary; no ordinal fallback.",
       "artifacts": [
-        "tools/validate_house_net.py"
+        "control-plane/bin/validate-control-plane"
       ],
-      "enforcement_type": "validator+CI",
+      "enforcement_type": "preflight",
       "tests": [
-        "root_validator"
+        "preflight_identity_negative"
       ],
-      "ci_check": "monorepo-governance",
-      "boundary": "repository/CI",
+      "ci_check": "control-plane",
+      "boundary": "runtime/repository/CI",
       "fail_closed": true,
       "source_policy": "control-plane/policy/git.json",
       "rule_id": "HN-AUTHOR-NAME",
@@ -345,16 +306,16 @@
     },
     {
       "classification": "MACHINE_ENFORCED",
-      "rationale": "objective repository invariant enforced by root validator and required CI",
+      "rationale": "Explicit mapping to the named enforcement boundary; no ordinal fallback.",
       "artifacts": [
-        "tools/validate_house_net.py"
+        "control-plane/bin/validate-control-plane"
       ],
-      "enforcement_type": "validator+CI",
+      "enforcement_type": "preflight",
       "tests": [
-        "root_validator"
+        "preflight_identity_negative"
       ],
-      "ci_check": "monorepo-governance",
-      "boundary": "repository/CI",
+      "ci_check": "control-plane",
+      "boundary": "runtime/repository/CI",
       "fail_closed": true,
       "source_policy": "control-plane/policy/git.json",
       "rule_id": "HN-AUTHOR-EMAIL",
@@ -362,16 +323,16 @@
     },
     {
       "classification": "MACHINE_ENFORCED",
-      "rationale": "objective repository invariant enforced by root validator and required CI",
+      "rationale": "Explicit mapping to the named enforcement boundary; no ordinal fallback.",
       "artifacts": [
-        "tools/validate_house_net.py"
+        "control-plane/bin/validate-control-plane"
       ],
-      "enforcement_type": "validator+CI",
+      "enforcement_type": "preflight",
       "tests": [
-        "root_validator"
+        "preflight_identity_negative"
       ],
-      "ci_check": "monorepo-governance",
-      "boundary": "repository/CI",
+      "ci_check": "control-plane",
+      "boundary": "runtime/repository/CI",
       "fail_closed": true,
       "source_policy": "control-plane/policy/git.json",
       "rule_id": "HN-INIT-BRANCH",
@@ -379,16 +340,16 @@
     },
     {
       "classification": "MACHINE_ENFORCED",
-      "rationale": "objective repository invariant enforced by root validator and required CI",
+      "rationale": "Explicit mapping to the named enforcement boundary; no ordinal fallback.",
       "artifacts": [
-        "tools/validate_house_net.py"
+        "control-plane/bin/validate-control-plane"
       ],
-      "enforcement_type": "validator+CI",
+      "enforcement_type": "preflight",
       "tests": [
-        "root_validator"
+        "preflight_identity_negative"
       ],
-      "ci_check": "monorepo-governance",
-      "boundary": "repository/CI",
+      "ci_check": "control-plane",
+      "boundary": "runtime/repository/CI",
       "fail_closed": true,
       "source_policy": "control-plane/policy/git.json",
       "rule_id": "HN-EXPLICIT-IDENTITY",
@@ -396,102 +357,87 @@
     },
     {
       "classification": "MACHINE_ENFORCED",
-      "rationale": "objective repository invariant enforced by root validator and required CI",
+      "rationale": "Explicit mapping to the named enforcement boundary; no ordinal fallback.",
       "artifacts": [
-        "tools/validate_house_net.py"
+        "control-plane/bin/validate-control-plane"
       ],
-      "enforcement_type": "validator+CI",
+      "enforcement_type": "preflight",
       "tests": [
-        "root_validator"
+        "preflight_identity_negative"
       ],
-      "ci_check": "monorepo-governance",
-      "boundary": "repository/CI",
+      "ci_check": "control-plane",
+      "boundary": "runtime/repository/CI",
       "fail_closed": true,
       "source_policy": "control-plane/policy/git.json",
       "rule_id": "HN-PULL",
       "source_index": 7
     },
     {
-      "classification": "MACHINE_ENFORCED",
-      "rationale": "objective repository invariant enforced by root validator and required CI",
-      "artifacts": [
-        "tools/validate_house_net.py"
-      ],
-      "enforcement_type": "validator+CI",
-      "tests": [
-        "root_validator"
-      ],
+      "classification": "HUMAN_DECISION_REQUIRED",
+      "rationale": "requires an owner or business judgment that automation cannot safely infer",
+      "artifacts": [],
+      "enforcement_type": "owner decision",
+      "tests": [],
       "ci_check": "monorepo-governance",
-      "boundary": "repository/CI",
+      "boundary": "owner decision",
       "fail_closed": true,
+      "human_decision_reason": "Scope, risk, or business intent requires Gev decision.",
       "source_policy": "control-plane/policy/git.json",
       "rule_id": "HN-COMMITS",
       "source_index": 8
     },
     {
-      "classification": "MACHINE_ENFORCED",
-      "rationale": "objective repository invariant enforced by root validator and required CI",
-      "artifacts": [
-        "tools/validate_house_net.py"
-      ],
-      "enforcement_type": "validator+CI",
-      "tests": [
-        "root_validator"
-      ],
+      "classification": "HUMAN_DECISION_REQUIRED",
+      "rationale": "requires an owner or business judgment that automation cannot safely infer",
+      "artifacts": [],
+      "enforcement_type": "owner decision",
+      "tests": [],
       "ci_check": "monorepo-governance",
-      "boundary": "repository/CI",
+      "boundary": "owner decision",
       "fail_closed": true,
+      "human_decision_reason": "Scope, risk, or business intent requires Gev decision.",
       "source_policy": "control-plane/policy/merge.json",
       "rule_id": "HN-PROTECTION",
       "source_index": 0
     },
     {
-      "classification": "MACHINE_ENFORCED",
-      "rationale": "objective repository invariant enforced by root validator and required CI",
-      "artifacts": [
-        "tools/validate_house_net.py"
-      ],
-      "enforcement_type": "validator+CI",
-      "tests": [
-        "root_validator"
-      ],
+      "classification": "HUMAN_DECISION_REQUIRED",
+      "rationale": "requires an owner or business judgment that automation cannot safely infer",
+      "artifacts": [],
+      "enforcement_type": "owner decision",
+      "tests": [],
       "ci_check": "monorepo-governance",
-      "boundary": "repository/CI",
+      "boundary": "owner decision",
       "fail_closed": true,
+      "human_decision_reason": "Scope, risk, or business intent requires Gev decision.",
       "source_policy": "control-plane/policy/merge.json",
       "rule_id": "HN-REVIEW",
       "source_index": 1
     },
     {
-      "classification": "MACHINE_ENFORCED",
-      "rationale": "objective repository invariant enforced by root validator and required CI",
-      "artifacts": [
-        "tools/validate_house_net.py"
-      ],
-      "enforcement_type": "validator+CI",
-      "tests": [
-        "root_validator"
-      ],
+      "classification": "HUMAN_DECISION_REQUIRED",
+      "rationale": "requires an owner or business judgment that automation cannot safely infer",
+      "artifacts": [],
+      "enforcement_type": "owner decision",
+      "tests": [],
       "ci_check": "monorepo-governance",
-      "boundary": "repository/CI",
+      "boundary": "owner decision",
       "fail_closed": true,
+      "human_decision_reason": "Scope, risk, or business intent requires Gev decision.",
       "source_policy": "control-plane/policy/merge.json",
       "rule_id": "HN-METHODS",
       "source_index": 2
     },
     {
-      "classification": "MACHINE_ENFORCED",
-      "rationale": "objective repository invariant enforced by root validator and required CI",
-      "artifacts": [
-        "tools/validate_house_net.py"
-      ],
-      "enforcement_type": "validator+CI",
-      "tests": [
-        "root_validator"
-      ],
+      "classification": "HUMAN_DECISION_REQUIRED",
+      "rationale": "requires an owner or business judgment that automation cannot safely infer",
+      "artifacts": [],
+      "enforcement_type": "owner decision",
+      "tests": [],
       "ci_check": "monorepo-governance",
-      "boundary": "repository/CI",
+      "boundary": "owner decision",
       "fail_closed": true,
+      "human_decision_reason": "Scope, risk, or business intent requires Gev decision.",
       "source_policy": "control-plane/policy/notifications.json",
       "rule_id": "HN-SIGNAL",
       "source_index": 0
@@ -511,15 +457,18 @@
       "source_index": 0
     },
     {
-      "classification": "HUMAN_DECISION_REQUIRED",
-      "rationale": "requires an owner or business judgment that automation cannot safely infer",
-      "artifacts": [],
-      "enforcement_type": "owner decision",
-      "tests": [],
-      "ci_check": "monorepo-governance",
-      "boundary": "owner decision",
+      "classification": "MACHINE_ENFORCED",
+      "rationale": "Explicit mapping to the named enforcement boundary; no ordinal fallback.",
+      "artifacts": [
+        "control-plane/bin/validate-control-plane"
+      ],
+      "enforcement_type": "repository_validator",
+      "tests": [
+        "control_plane_negative"
+      ],
+      "ci_check": "control-plane",
+      "boundary": "runtime/repository/CI",
       "fail_closed": true,
-      "human_decision_reason": "Scope, risk, or business intent requires Gev decision.",
       "source_policy": "control-plane/policy/repository-baseline.json",
       "rule_id": "HN-CLASSIFICATION",
       "source_index": 1
@@ -539,29 +488,35 @@
       "source_index": 2
     },
     {
-      "classification": "HUMAN_DECISION_REQUIRED",
-      "rationale": "requires an owner or business judgment that automation cannot safely infer",
-      "artifacts": [],
-      "enforcement_type": "owner decision",
-      "tests": [],
-      "ci_check": "monorepo-governance",
-      "boundary": "owner decision",
+      "classification": "MACHINE_ENFORCED",
+      "rationale": "Explicit mapping to the named enforcement boundary; no ordinal fallback.",
+      "artifacts": [
+        "control-plane/bin/validate-control-plane"
+      ],
+      "enforcement_type": "repository_registration_schema_and_validator",
+      "tests": [
+        "control_plane_negative"
+      ],
+      "ci_check": "control-plane",
+      "boundary": "runtime/repository/CI",
       "fail_closed": true,
-      "human_decision_reason": "Scope, risk, or business intent requires Gev decision.",
       "source_policy": "control-plane/policy/repository-baseline.json",
       "rule_id": "HN-NAMING",
       "source_index": 3
     },
     {
-      "classification": "HUMAN_DECISION_REQUIRED",
-      "rationale": "requires an owner or business judgment that automation cannot safely infer",
-      "artifacts": [],
-      "enforcement_type": "owner decision",
-      "tests": [],
-      "ci_check": "monorepo-governance",
-      "boundary": "owner decision",
+      "classification": "MACHINE_ENFORCED",
+      "rationale": "Explicit mapping to the named enforcement boundary; no ordinal fallback.",
+      "artifacts": [
+        "control-plane/bin/validate-control-plane"
+      ],
+      "enforcement_type": "repository_validator",
+      "tests": [
+        "control_plane_negative"
+      ],
+      "ci_check": "control-plane",
+      "boundary": "runtime/repository/CI",
       "fail_closed": true,
-      "human_decision_reason": "Scope, risk, or business intent requires Gev decision.",
       "source_policy": "control-plane/policy/repository-baseline.json",
       "rule_id": "HN-FILES",
       "source_index": 4
@@ -581,15 +536,18 @@
       "source_index": 5
     },
     {
-      "classification": "HUMAN_DECISION_REQUIRED",
-      "rationale": "requires an owner or business judgment that automation cannot safely infer",
-      "artifacts": [],
-      "enforcement_type": "owner decision",
-      "tests": [],
-      "ci_check": "monorepo-governance",
-      "boundary": "owner decision",
+      "classification": "MACHINE_ENFORCED",
+      "rationale": "Explicit mapping to the named enforcement boundary; no ordinal fallback.",
+      "artifacts": [
+        "control-plane/bin/validate-control-plane"
+      ],
+      "enforcement_type": "repository_validator",
+      "tests": [
+        "control_plane_negative"
+      ],
+      "ci_check": "control-plane",
+      "boundary": "runtime/repository/CI",
       "fail_closed": true,
-      "human_decision_reason": "Scope, risk, or business intent requires Gev decision.",
       "source_policy": "control-plane/policy/repository-baseline.json",
       "rule_id": "HN-LICENSE",
       "source_index": 6
@@ -637,57 +595,69 @@
       "source_index": 9
     },
     {
-      "classification": "HUMAN_DECISION_REQUIRED",
-      "rationale": "requires an owner or business judgment that automation cannot safely infer",
-      "artifacts": [],
-      "enforcement_type": "owner decision",
-      "tests": [],
+      "classification": "MACHINE_ENFORCED",
+      "rationale": "Explicit mapping to the named enforcement boundary; no ordinal fallback.",
+      "artifacts": [
+        "tools/validate_house_net.py"
+      ],
+      "enforcement_type": "bilingual_document_validator",
+      "tests": [
+        "bilingual_document_negative"
+      ],
       "ci_check": "monorepo-governance",
-      "boundary": "owner decision",
+      "boundary": "runtime/repository/CI",
       "fail_closed": true,
-      "human_decision_reason": "Scope, risk, or business intent requires Gev decision.",
       "source_policy": "control-plane/policy/repository-baseline.json",
       "rule_id": "HN-DOC-HUMAN-VISIBLE-BILINGUAL",
       "source_index": 10
     },
     {
-      "classification": "HUMAN_DECISION_REQUIRED",
-      "rationale": "requires an owner or business judgment that automation cannot safely infer",
-      "artifacts": [],
-      "enforcement_type": "owner decision",
-      "tests": [],
+      "classification": "MACHINE_ENFORCED",
+      "rationale": "Explicit mapping to the named enforcement boundary; no ordinal fallback.",
+      "artifacts": [
+        "tools/validate_house_net.py"
+      ],
+      "enforcement_type": "repository_validator_and_ci",
+      "tests": [
+        "root_validator_negative"
+      ],
       "ci_check": "monorepo-governance",
-      "boundary": "owner decision",
+      "boundary": "runtime/repository/CI",
       "fail_closed": true,
-      "human_decision_reason": "Scope, risk, or business intent requires Gev decision.",
       "source_policy": "control-plane/policy/repository-baseline.json",
       "rule_id": "HN-VERSION-SINGLE-SOURCE",
       "source_index": 11
     },
     {
-      "classification": "HUMAN_DECISION_REQUIRED",
-      "rationale": "requires an owner or business judgment that automation cannot safely infer",
-      "artifacts": [],
-      "enforcement_type": "owner decision",
-      "tests": [],
-      "ci_check": "monorepo-governance",
-      "boundary": "owner decision",
+      "classification": "MACHINE_ENFORCED",
+      "rationale": "Explicit mapping to the named enforcement boundary; no ordinal fallback.",
+      "artifacts": [
+        "control-plane/bin/check-version-consistency"
+      ],
+      "enforcement_type": "dependency_registry_and_deterministic_gate",
+      "tests": [
+        "version_consistency_negative"
+      ],
+      "ci_check": "control-plane",
+      "boundary": "runtime/repository/CI",
       "fail_closed": true,
-      "human_decision_reason": "Scope, risk, or business intent requires Gev decision.",
       "source_policy": "control-plane/policy/repository-baseline.json",
       "rule_id": "HN-ARCH-AI-PROVIDER-INDEPENDENCE",
       "source_index": 12
     },
     {
-      "classification": "HUMAN_DECISION_REQUIRED",
-      "rationale": "requires an owner or business judgment that automation cannot safely infer",
-      "artifacts": [],
-      "enforcement_type": "owner decision",
-      "tests": [],
-      "ci_check": "monorepo-governance",
-      "boundary": "owner decision",
+      "classification": "MACHINE_ENFORCED",
+      "rationale": "Explicit mapping to the named enforcement boundary; no ordinal fallback.",
+      "artifacts": [
+        "control-plane/bin/housenet-import"
+      ],
+      "enforcement_type": "migration_registry_and_import_validator",
+      "tests": [
+        "migration_import_negative"
+      ],
+      "ci_check": "control-plane",
+      "boundary": "runtime/repository/CI",
       "fail_closed": true,
-      "human_decision_reason": "Scope, risk, or business intent requires Gev decision.",
       "source_policy": "control-plane/policy/repository-baseline.json",
       "rule_id": "HN-MIGRATION-STAGED-ADOPTION",
       "source_index": 13
@@ -707,85 +677,103 @@
       "source_index": 14
     },
     {
-      "classification": "HUMAN_DECISION_REQUIRED",
-      "rationale": "requires an owner or business judgment that automation cannot safely infer",
-      "artifacts": [],
-      "enforcement_type": "owner decision",
-      "tests": [],
-      "ci_check": "monorepo-governance",
-      "boundary": "owner decision",
+      "classification": "MACHINE_ENFORCED",
+      "rationale": "Explicit mapping to the named enforcement boundary; no ordinal fallback.",
+      "artifacts": [
+        "control-plane/bin/validate-control-plane"
+      ],
+      "enforcement_type": "migration_evidence_and_validator",
+      "tests": [
+        "control_plane_negative"
+      ],
+      "ci_check": "control-plane",
+      "boundary": "runtime/repository/CI",
       "fail_closed": true,
-      "human_decision_reason": "Scope, risk, or business intent requires Gev decision.",
       "source_policy": "control-plane/policy/repository-baseline.json",
       "rule_id": "HN-SOURCE-OF-TRUTH",
       "source_index": 15
     },
     {
-      "classification": "HUMAN_DECISION_REQUIRED",
-      "rationale": "requires an owner or business judgment that automation cannot safely infer",
-      "artifacts": [],
-      "enforcement_type": "owner decision",
-      "tests": [],
-      "ci_check": "monorepo-governance",
-      "boundary": "owner decision",
+      "classification": "MACHINE_ENFORCED",
+      "rationale": "Explicit mapping to the named enforcement boundary; no ordinal fallback.",
+      "artifacts": [
+        "control-plane/bin/validate-control-plane"
+      ],
+      "enforcement_type": "registration_schema_and_repository_validator",
+      "tests": [
+        "control_plane_negative"
+      ],
+      "ci_check": "control-plane",
+      "boundary": "runtime/repository/CI",
       "fail_closed": true,
-      "human_decision_reason": "Scope, risk, or business intent requires Gev decision.",
       "source_policy": "control-plane/policy/repository-baseline.json",
       "rule_id": "HN-DESIGN-SYSTEM-ADOPTION",
       "source_index": 16
     },
     {
-      "classification": "HUMAN_DECISION_REQUIRED",
-      "rationale": "requires an owner or business judgment that automation cannot safely infer",
-      "artifacts": [],
-      "enforcement_type": "owner decision",
-      "tests": [],
-      "ci_check": "monorepo-governance",
-      "boundary": "owner decision",
+      "classification": "MACHINE_ENFORCED",
+      "rationale": "Explicit mapping to the named enforcement boundary; no ordinal fallback.",
+      "artifacts": [
+        "control-plane/bin/validate-control-plane"
+      ],
+      "enforcement_type": "repository_validator",
+      "tests": [
+        "control_plane_negative"
+      ],
+      "ci_check": "control-plane",
+      "boundary": "runtime/repository/CI",
       "fail_closed": true,
-      "human_decision_reason": "Scope, risk, or business intent requires Gev decision.",
       "source_policy": "control-plane/policy/repository-classes.json",
       "rule_id": "HN-CLASS-A",
       "source_index": 0
     },
     {
-      "classification": "HUMAN_DECISION_REQUIRED",
-      "rationale": "requires an owner or business judgment that automation cannot safely infer",
-      "artifacts": [],
-      "enforcement_type": "owner decision",
-      "tests": [],
-      "ci_check": "monorepo-governance",
-      "boundary": "owner decision",
+      "classification": "MACHINE_ENFORCED",
+      "rationale": "Explicit mapping to the named enforcement boundary; no ordinal fallback.",
+      "artifacts": [
+        "control-plane/bin/validate-control-plane"
+      ],
+      "enforcement_type": "repository_validator",
+      "tests": [
+        "control_plane_negative"
+      ],
+      "ci_check": "control-plane",
+      "boundary": "runtime/repository/CI",
       "fail_closed": true,
-      "human_decision_reason": "Scope, risk, or business intent requires Gev decision.",
       "source_policy": "control-plane/policy/repository-classes.json",
       "rule_id": "HN-CLASS-B",
       "source_index": 1
     },
     {
-      "classification": "HUMAN_DECISION_REQUIRED",
-      "rationale": "requires an owner or business judgment that automation cannot safely infer",
-      "artifacts": [],
-      "enforcement_type": "owner decision",
-      "tests": [],
-      "ci_check": "monorepo-governance",
-      "boundary": "owner decision",
+      "classification": "MACHINE_ENFORCED",
+      "rationale": "Explicit mapping to the named enforcement boundary; no ordinal fallback.",
+      "artifacts": [
+        "control-plane/bin/validate-control-plane"
+      ],
+      "enforcement_type": "repository_validator",
+      "tests": [
+        "control_plane_negative"
+      ],
+      "ci_check": "control-plane",
+      "boundary": "runtime/repository/CI",
       "fail_closed": true,
-      "human_decision_reason": "Scope, risk, or business intent requires Gev decision.",
       "source_policy": "control-plane/policy/repository-classes.json",
       "rule_id": "HN-CLASS-C",
       "source_index": 2
     },
     {
-      "classification": "HUMAN_DECISION_REQUIRED",
-      "rationale": "requires an owner or business judgment that automation cannot safely infer",
-      "artifacts": [],
-      "enforcement_type": "owner decision",
-      "tests": [],
-      "ci_check": "monorepo-governance",
-      "boundary": "owner decision",
+      "classification": "MACHINE_ENFORCED",
+      "rationale": "Explicit mapping to the named enforcement boundary; no ordinal fallback.",
+      "artifacts": [
+        "control-plane/bin/validate-control-plane"
+      ],
+      "enforcement_type": "repository_validator",
+      "tests": [
+        "control_plane_negative"
+      ],
+      "ci_check": "control-plane",
+      "boundary": "runtime/repository/CI",
       "fail_closed": true,
-      "human_decision_reason": "Scope, risk, or business intent requires Gev decision.",
       "source_policy": "control-plane/policy/security.json",
       "rule_id": "HN-DEPENDENCIES",
       "source_index": 0

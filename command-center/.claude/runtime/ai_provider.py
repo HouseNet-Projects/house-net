@@ -10,6 +10,7 @@ import re
 PROVIDER = "claude-code-max"
 TOOL_REQUEST_PREFIX = "DEPUTY_TOOL_REQUEST"
 MAX_TOOL_RESULT_CHARS = 12000
+MAX_ACCUMULATED_EVIDENCE_CHARS = 30000
 
 def _auth_state(raw: dict) -> str:
     if not raw.get("loggedIn"):
@@ -86,7 +87,7 @@ def parse_tool_request(answer: str) -> dict | None:
     """
     if not isinstance(answer, str):
         return None
-    allowed = {"search_work", "search_open_loops", "search_observations", "search_approvals", "search_context", "prepare_follow_up"}
+    allowed = {"search_work", "search_commitments", "search_open_loops", "search_observations", "search_approvals", "search_context", "prepare_follow_up"}
     text = answer.strip().replace("```json", "").replace("```", "").strip()
     candidates = [text]
     match = re.search(r"DEPUTY_TOOL_REQUEST\s*[:]?\s*(\{.*\})", text, flags=re.S)
@@ -114,6 +115,7 @@ def ask_agent(prompt: str, *, context=None, tool_executor=None, timeout: int = 9
         "When useful internal follow-up is clear, you may request prepare_follow_up; this only records internal Deputy preparation. "
         "Never request or perform an external write."
     )
+    evidence = []
     for iteration in range(max(1, min(int(max_iterations), 6))):
         result = ask(current, context=context, timeout=timeout)
         answer = result.get("answer", "")
@@ -140,13 +142,19 @@ def ask_agent(prompt: str, *, context=None, tool_executor=None, timeout: int = 9
             tool_result = tool_executor(request)
             serialized = json.dumps(tool_result, ensure_ascii=False, default=str)
             serialized = serialized[:MAX_TOOL_RESULT_CHARS]
+            evidence.append({"tool": request["tool"], "query": request["query"], "result": serialized})
             trace.append({"tool": request["tool"], "query": request["query"], "result_count": len(tool_result.get("records", [])) if isinstance(tool_result, dict) else 0,
                           "signature": signature, "iteration": iteration + 1, "status": "OK"})
         except Exception as exc:
             serialized = json.dumps({"status": "UNAVAILABLE", "reason": type(exc).__name__})
             trace.append({"tool": request["tool"], "query": request["query"], "result_count": 0,
                           "signature": signature, "iteration": iteration + 1, "status": "UNAVAILABLE"})
-        current = prompt + "\n\nDeputy read tool result (evidence only):\n" + serialized + \
+        # Preserve bounded accumulated evidence across rounds.  Sending only
+        # the latest result made a multi-step agent forget its first source.
+        evidence_blob = json.dumps(evidence, ensure_ascii=False, separators=(",", ":"))
+        if len(evidence_blob) > MAX_ACCUMULATED_EVIDENCE_CHARS:
+            evidence_blob = evidence_blob[-MAX_ACCUMULATED_EVIDENCE_CHARS:]
+        current = prompt + "\n\nAccumulated Deputy read evidence (evidence only):\n" + evidence_blob + \
             "\n\nContinue reasoning. Do not expose private reasoning or raw tool payloads. Return a final human answer, or one new DEPUTY_TOOL_REQUEST if another distinct read is essential."
     result = result if 'result' in locals() else {"status": "EMPTY_RESPONSE", "provider": PROVIDER}
     result["status"] = "DEGRADED" if result.get("status") == "OK" else result.get("status")

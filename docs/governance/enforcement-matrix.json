@@ -217,6 +217,481 @@
         "root_validator"
       ],
       "documentation_reference": "docs/README.md"
+    },
+    {
+      "requirement_id": "HN-CLASS-A",
+      "title": "classification.A",
+      "canonical_owner": "Control Plane",
+      "severity": "CRITICAL",
+      "enforcement_type": "repository_validator",
+      "enforcement_location": "control-plane/bin/validate-control-plane",
+      "validation_command": "execute control-plane/bin/validate-control-plane",
+      "CI_check": "control-plane",
+      "fail_closed": true,
+      "source_policy": "control-plane/policy/repository-classes.json",
+      "scope": "repository",
+      "runtime_gate": "control-plane/bin/validate-control-plane",
+      "test_ids": [
+        "control_plane_negative"
+      ],
+      "documentation_reference": "docs/README.md",
+      "rationale": "Explicit mapping to the named enforcement boundary; no ordinal fallback."
+    },
+    {
+      "requirement_id": "HN-CLASS-B",
+      "title": "classification.B",
+      "canonical_owner": "Control Plane",
+      "severity": "CRITICAL",
+      "enforcement_type": "repository_validator",
+      "enforcement_location": "control-plane/bin/validate-control-plane",
+      "validation_command": "execute control-plane/bin/validate-control-plane",
+      "CI_check": "control-plane",
+      "fail_closed": true,
+      "source_policy": "control-plane/policy/repository-classes.json",
+      "scope": "repository",
+      "runtime_gate": "control-plane/bin/validate-control-plane",
+      "test_ids": [
+        "control_plane_negative"
+      ],
+      "documentation_reference": "docs/README.md",
+      "rationale": "Explicit mapping to the named enforcement boundary; no ordinal fallback."
+    },
+    {
+      "requirement_id": "HN-CLASS-C",
+      "title": "classification.C",
+      "canonical_owner": "Control Plane",
+      "severity": "CRITICAL",
+      "enforcement_type": "repository_validator",
+      "enforcement_location": "control-plane/bin/validate-control-plane",
+      "validation_command": "execute control-plane/bin/validate-control-plane",
+      "CI_check": "control-plane",
+      "fail_closed": true,
+      "source_policy": "control-plane/policy/repository-classes.json",
+      "scope": "repository",
+      "runtime_gate": "control-plane/bin/validate-control-plane",
+      "test_ids": [
+        "control_plane_negative"
+      ],
+      "documentation_reference": "docs/README.md",
+      "rationale": "Explicit mapping to the named enforcement boundary; no ordinal fallback."
+    },
+    {
+      "requirement_id": "HN-DEPENDENCIES",
+      "title": "security.dependencies",
+      "canonical_owner": "Control Plane",
+      "severity": "CRITICAL",
+      "enforcement_type": "repository_validator",
+      "enforcement_location": "control-plane/bin/validate-control-plane",
+      "validation_command": "execute control-plane/bin/validate-control-plane",
+      "CI_check": "control-plane",
+      "fail_closed": true,
+      "source_policy": "control-plane/policy/security.json",
+      "scope": "repository",
+      "runtime_gate": "control-plane/bin/validate-control-plane",
+      "test_ids": [
+        "control_plane_negative"
+      ],
+      "documentation_reference": "docs/README.md",
+      "rationale": "Explicit mapping to the named enforcement boundary; no ordinal fallback."
+    },
+    {
+      "requirement_id": "HN-PERMISSIONS",
+      "title": "actions.permissions",
+      "canonical_owner": "Control Plane",
+      "severity": "CRITICAL",
+      "enforcement_type": "workflow_validator",
+      "enforcement_location": ".github/workflows/house-net-ci.yml",
+      "validation_command": "execute .github/workflows/house-net-ci.yml",
+      "CI_check": "monorepo-governance",
+      "fail_closed": true,
+      "source_policy": "control-plane/policy/actions.json",
+      "scope": "repository",
+      "runtime_gate": ".github/workflows/house-net-ci.yml",
+      "test_ids": [
+        "workflow_policy_negative"
+      ],
+      "documentation_reference": "docs/README.md",
+      "rationale": "Explicit mapping to the named enforcement boundary; no ordinal fallback."
+    },
+    {
+      "requirement_id": "HN-SOURCES",
+      "title": "actions.sources",
+      "canonical_owner": "Control Plane",
+      "severity": "CRITICAL",
+      "enforcement_type": "workflow_validator",
+      "enforcement_location": ".github/workflows/house-net-ci.yml",
+      "validation_command": "execute .github/workflows/house-net-ci.yml",
+      "CI_check": "monorepo-governance",
+      "fail_closed": true,
+      "source_policy": "control-plane/policy/actions.json",
+      "scope": "repository",
+      "runtime_gate": ".github/workflows/house-net-ci.yml",
+      "test_ids": [
+        "workflow_policy_negative"
+      ],
+      "documentation_reference": "docs/README.md",
+      "rationale": "Explicit mapping to the named enforcement boundary; no ordinal fallback."
+    },
+    {
+      "requirement_id": "HN-AUTHOR-NAME",
+      "title": "git.user.name",
+      "canonical_owner": "Control Plane",
+      "severity": "CRITICAL",
+      "enforcement_type": "preflight",
+      "enforcement_location": "control-plane/bin/validate-control-plane",
+      "validation_command": "execute control-plane/bin/validate-control-plane",
+      "CI_check": "control-plane",
+      "fail_closed": true,
+      "source_policy": "control-plane/policy/git.json",
+      "scope": "environment",
+      "runtime_gate": "control-plane/bin/validate-control-plane",
+      "test_ids": [
+        "preflight_identity_negative"
+      ],
+      "documentation_reference": "docs/README.md",
+      "rationale": "Explicit mapping to the named enforcement boundary; no ordinal fallback."
+    },
+    {
+      "requirement_id": "HN-AUTHOR-EMAIL",
+      "title": "git.user.email",
+      "canonical_owner": "Control Plane",
+      "severity": "CRITICAL",
+      "enforcement_type": "preflight",
+      "enforcement_location": "control-plane/bin/validate-control-plane",
+      "validation_command": "execute control-plane/bin/validate-control-plane",
+      "CI_check": "control-plane",
+      "fail_closed": true,
+      "source_policy": "control-plane/policy/git.json",
+      "scope": "environment",
+      "runtime_gate": "control-plane/bin/validate-control-plane",
+      "test_ids": [
+        "preflight_identity_negative"
+      ],
+      "documentation_reference": "docs/README.md",
+      "rationale": "Explicit mapping to the named enforcement boundary; no ordinal fallback."
+    },
+    {
+      "requirement_id": "HN-INIT-BRANCH",
+      "title": "git.init.defaultBranch",
+      "canonical_owner": "Control Plane",
+      "severity": "CRITICAL",
+      "enforcement_type": "preflight",
+      "enforcement_location": "control-plane/bin/validate-control-plane",
+      "validation_command": "execute control-plane/bin/validate-control-plane",
+      "CI_check": "control-plane",
+      "fail_closed": true,
+      "source_policy": "control-plane/policy/git.json",
+      "scope": "environment",
+      "runtime_gate": "control-plane/bin/validate-control-plane",
+      "test_ids": [
+        "preflight_identity_negative"
+      ],
+      "documentation_reference": "docs/README.md",
+      "rationale": "Explicit mapping to the named enforcement boundary; no ordinal fallback."
+    },
+    {
+      "requirement_id": "HN-EXPLICIT-IDENTITY",
+      "title": "git.user.useConfigOnly",
+      "canonical_owner": "Control Plane",
+      "severity": "CRITICAL",
+      "enforcement_type": "preflight",
+      "enforcement_location": "control-plane/bin/validate-control-plane",
+      "validation_command": "execute control-plane/bin/validate-control-plane",
+      "CI_check": "control-plane",
+      "fail_closed": true,
+      "source_policy": "control-plane/policy/git.json",
+      "scope": "environment",
+      "runtime_gate": "control-plane/bin/validate-control-plane",
+      "test_ids": [
+        "preflight_identity_negative"
+      ],
+      "documentation_reference": "docs/README.md",
+      "rationale": "Explicit mapping to the named enforcement boundary; no ordinal fallback."
+    },
+    {
+      "requirement_id": "HN-PULL",
+      "title": "git.pull.ff",
+      "canonical_owner": "Control Plane",
+      "severity": "CRITICAL",
+      "enforcement_type": "preflight",
+      "enforcement_location": "control-plane/bin/validate-control-plane",
+      "validation_command": "execute control-plane/bin/validate-control-plane",
+      "CI_check": "control-plane",
+      "fail_closed": true,
+      "source_policy": "control-plane/policy/git.json",
+      "scope": "environment",
+      "runtime_gate": "control-plane/bin/validate-control-plane",
+      "test_ids": [
+        "preflight_identity_negative"
+      ],
+      "documentation_reference": "docs/README.md",
+      "rationale": "Explicit mapping to the named enforcement boundary; no ordinal fallback."
+    },
+    {
+      "requirement_id": "HN-IDENTITY",
+      "title": "github.identity",
+      "canonical_owner": "Control Plane",
+      "severity": "CRITICAL",
+      "enforcement_type": "preflight",
+      "enforcement_location": "control-plane/bin/validate-control-plane",
+      "validation_command": "execute control-plane/bin/validate-control-plane",
+      "CI_check": "control-plane",
+      "fail_closed": true,
+      "source_policy": "control-plane/policy/authority.json",
+      "scope": "environment",
+      "runtime_gate": "control-plane/bin/validate-control-plane",
+      "test_ids": [
+        "preflight_identity_negative"
+      ],
+      "documentation_reference": "docs/README.md",
+      "rationale": "Explicit mapping to the named enforcement boundary; no ordinal fallback."
+    },
+    {
+      "requirement_id": "HN-NAMESPACE",
+      "title": "github.namespace",
+      "canonical_owner": "Control Plane",
+      "severity": "CRITICAL",
+      "enforcement_type": "repository_validator",
+      "enforcement_location": "control-plane/bin/validate-control-plane",
+      "validation_command": "execute control-plane/bin/validate-control-plane",
+      "CI_check": "control-plane",
+      "fail_closed": true,
+      "source_policy": "control-plane/policy/authority.json",
+      "scope": "repository",
+      "runtime_gate": "control-plane/bin/validate-control-plane",
+      "test_ids": [
+        "control_plane_negative"
+      ],
+      "documentation_reference": "docs/README.md",
+      "rationale": "Explicit mapping to the named enforcement boundary; no ordinal fallback."
+    },
+    {
+      "requirement_id": "HN-LEVELS",
+      "title": "policy.levels",
+      "canonical_owner": "Control Plane",
+      "severity": "CRITICAL",
+      "enforcement_type": "schema_validator",
+      "enforcement_location": "control-plane/bin/validate-control-plane",
+      "validation_command": "execute control-plane/bin/validate-control-plane",
+      "CI_check": "control-plane",
+      "fail_closed": true,
+      "source_policy": "control-plane/policy/authority.json",
+      "scope": "control_plane",
+      "runtime_gate": "control-plane/bin/validate-control-plane",
+      "test_ids": [
+        "control_plane_negative"
+      ],
+      "documentation_reference": "docs/README.md",
+      "rationale": "Explicit mapping to the named enforcement boundary; no ordinal fallback."
+    },
+    {
+      "requirement_id": "HN-PERSON-INDEPENDENT-AUTHORITY",
+      "title": "architecture.person_independent_authority",
+      "canonical_owner": "Control Plane",
+      "severity": "CRITICAL",
+      "enforcement_type": "registration_schema_and_target_validator",
+      "enforcement_location": "control-plane/bin/validate-control-plane",
+      "validation_command": "execute control-plane/bin/validate-control-plane",
+      "CI_check": "control-plane",
+      "fail_closed": true,
+      "source_policy": "control-plane/policy/authority.json",
+      "scope": "repository",
+      "runtime_gate": "control-plane/bin/validate-control-plane",
+      "test_ids": [
+        "control_plane_negative"
+      ],
+      "documentation_reference": "docs/README.md",
+      "rationale": "Explicit mapping to the named enforcement boundary; no ordinal fallback."
+    },
+    {
+      "requirement_id": "HN-CLASSIFICATION",
+      "title": "repository.classification",
+      "canonical_owner": "Control Plane",
+      "severity": "CRITICAL",
+      "enforcement_type": "repository_validator",
+      "enforcement_location": "control-plane/bin/validate-control-plane",
+      "validation_command": "execute control-plane/bin/validate-control-plane",
+      "CI_check": "control-plane",
+      "fail_closed": true,
+      "source_policy": "control-plane/policy/repository-baseline.json",
+      "scope": "repository",
+      "runtime_gate": "control-plane/bin/validate-control-plane",
+      "test_ids": [
+        "control_plane_negative"
+      ],
+      "documentation_reference": "docs/README.md",
+      "rationale": "Explicit mapping to the named enforcement boundary; no ordinal fallback."
+    },
+    {
+      "requirement_id": "HN-NAMING",
+      "title": "repository.naming",
+      "canonical_owner": "Control Plane",
+      "severity": "CRITICAL",
+      "enforcement_type": "repository_registration_schema_and_validator",
+      "enforcement_location": "control-plane/bin/validate-control-plane",
+      "validation_command": "execute control-plane/bin/validate-control-plane",
+      "CI_check": "control-plane",
+      "fail_closed": true,
+      "source_policy": "control-plane/policy/repository-baseline.json",
+      "scope": "repository",
+      "runtime_gate": "control-plane/bin/validate-control-plane",
+      "test_ids": [
+        "control_plane_negative"
+      ],
+      "documentation_reference": "docs/README.md",
+      "rationale": "Explicit mapping to the named enforcement boundary; no ordinal fallback."
+    },
+    {
+      "requirement_id": "HN-FILES",
+      "title": "repository.files",
+      "canonical_owner": "Control Plane",
+      "severity": "HIGH",
+      "enforcement_type": "repository_validator",
+      "enforcement_location": "control-plane/bin/validate-control-plane",
+      "validation_command": "execute control-plane/bin/validate-control-plane",
+      "CI_check": "control-plane",
+      "fail_closed": true,
+      "source_policy": "control-plane/policy/repository-baseline.json",
+      "scope": "repository",
+      "runtime_gate": "control-plane/bin/validate-control-plane",
+      "test_ids": [
+        "control_plane_negative"
+      ],
+      "documentation_reference": "docs/README.md",
+      "rationale": "Explicit mapping to the named enforcement boundary; no ordinal fallback."
+    },
+    {
+      "requirement_id": "HN-LICENSE",
+      "title": "repository.license",
+      "canonical_owner": "Control Plane",
+      "severity": "CRITICAL",
+      "enforcement_type": "repository_validator",
+      "enforcement_location": "control-plane/bin/validate-control-plane",
+      "validation_command": "execute control-plane/bin/validate-control-plane",
+      "CI_check": "control-plane",
+      "fail_closed": true,
+      "source_policy": "control-plane/policy/repository-baseline.json",
+      "scope": "repository",
+      "runtime_gate": "control-plane/bin/validate-control-plane",
+      "test_ids": [
+        "control_plane_negative"
+      ],
+      "documentation_reference": "docs/README.md",
+      "rationale": "Explicit mapping to the named enforcement boundary; no ordinal fallback."
+    },
+    {
+      "requirement_id": "HN-DOC-HUMAN-VISIBLE-BILINGUAL",
+      "title": "documentation.human_visible_bilingual",
+      "canonical_owner": "Control Plane",
+      "severity": "CRITICAL",
+      "enforcement_type": "bilingual_document_validator",
+      "enforcement_location": "tools/validate_house_net.py",
+      "validation_command": "execute tools/validate_house_net.py",
+      "CI_check": "monorepo-governance",
+      "fail_closed": true,
+      "source_policy": "control-plane/policy/repository-baseline.json",
+      "scope": "repository",
+      "runtime_gate": "tools/validate_house_net.py",
+      "test_ids": [
+        "bilingual_document_negative"
+      ],
+      "documentation_reference": "docs/README.md",
+      "rationale": "Explicit mapping to the named enforcement boundary; no ordinal fallback."
+    },
+    {
+      "requirement_id": "HN-VERSION-SINGLE-SOURCE",
+      "title": "repository.version_single_source",
+      "canonical_owner": "Control Plane",
+      "severity": "CRITICAL",
+      "enforcement_type": "repository_validator_and_ci",
+      "enforcement_location": "tools/validate_house_net.py",
+      "validation_command": "execute tools/validate_house_net.py",
+      "CI_check": "monorepo-governance",
+      "fail_closed": true,
+      "source_policy": "control-plane/policy/repository-baseline.json",
+      "scope": "repository",
+      "runtime_gate": "tools/validate_house_net.py",
+      "test_ids": [
+        "root_validator_negative"
+      ],
+      "documentation_reference": "docs/README.md",
+      "rationale": "Explicit mapping to the named enforcement boundary; no ordinal fallback."
+    },
+    {
+      "requirement_id": "HN-ARCH-AI-PROVIDER-INDEPENDENCE",
+      "title": "architecture.ai_provider_independence",
+      "canonical_owner": "Control Plane",
+      "severity": "CRITICAL",
+      "enforcement_type": "dependency_registry_and_deterministic_gate",
+      "enforcement_location": "control-plane/bin/check-version-consistency",
+      "validation_command": "execute control-plane/bin/check-version-consistency",
+      "CI_check": "control-plane",
+      "fail_closed": true,
+      "source_policy": "control-plane/policy/repository-baseline.json",
+      "scope": "repository",
+      "runtime_gate": "control-plane/bin/check-version-consistency",
+      "test_ids": [
+        "version_consistency_negative"
+      ],
+      "documentation_reference": "docs/README.md",
+      "rationale": "Explicit mapping to the named enforcement boundary; no ordinal fallback."
+    },
+    {
+      "requirement_id": "HN-MIGRATION-STAGED-ADOPTION",
+      "title": "migration.lifecycle",
+      "canonical_owner": "Control Plane",
+      "severity": "CRITICAL",
+      "enforcement_type": "migration_registry_and_import_validator",
+      "enforcement_location": "control-plane/bin/housenet-import",
+      "validation_command": "execute control-plane/bin/housenet-import",
+      "CI_check": "control-plane",
+      "fail_closed": true,
+      "source_policy": "control-plane/policy/repository-baseline.json",
+      "scope": "repository",
+      "runtime_gate": "control-plane/bin/housenet-import",
+      "test_ids": [
+        "migration_import_negative"
+      ],
+      "documentation_reference": "docs/README.md",
+      "rationale": "Explicit mapping to the named enforcement boundary; no ordinal fallback."
+    },
+    {
+      "requirement_id": "HN-SOURCE-OF-TRUTH",
+      "title": "migration.source_of_truth",
+      "canonical_owner": "Control Plane",
+      "severity": "CRITICAL",
+      "enforcement_type": "migration_evidence_and_validator",
+      "enforcement_location": "control-plane/bin/validate-control-plane",
+      "validation_command": "execute control-plane/bin/validate-control-plane",
+      "CI_check": "control-plane",
+      "fail_closed": true,
+      "source_policy": "control-plane/policy/repository-baseline.json",
+      "scope": "repository",
+      "runtime_gate": "control-plane/bin/validate-control-plane",
+      "test_ids": [
+        "control_plane_negative"
+      ],
+      "documentation_reference": "docs/README.md",
+      "rationale": "Explicit mapping to the named enforcement boundary; no ordinal fallback."
+    },
+    {
+      "requirement_id": "HN-DESIGN-SYSTEM-ADOPTION",
+      "title": "repository.design_system_adoption",
+      "canonical_owner": "Control Plane",
+      "severity": "CRITICAL",
+      "enforcement_type": "registration_schema_and_repository_validator",
+      "enforcement_location": "control-plane/bin/validate-control-plane",
+      "validation_command": "execute control-plane/bin/validate-control-plane",
+      "CI_check": "control-plane",
+      "fail_closed": true,
+      "source_policy": "control-plane/policy/repository-baseline.json",
+      "scope": "repository",
+      "runtime_gate": "control-plane/bin/validate-control-plane",
+      "test_ids": [
+        "control_plane_negative"
+      ],
+      "documentation_reference": "docs/README.md",
+      "rationale": "Explicit mapping to the named enforcement boundary; no ordinal fallback."
     }
   ]
 }
