@@ -19,8 +19,11 @@ class ProductApiTests(unittest.TestCase):
 class ProductHardeningTests(unittest.TestCase):
     def test_chat_workspace_contract(self):
         js = product_api.APP_JS
-        for token in ('chat-thread', 'deputy-conversation', 'new-chat', 'Shift+Enter' if False else 'requestSubmit'):
+        for token in ('chat-thread', 'conversation-list', 'new-chat', 'requestSubmit'):
             self.assertIn(token, js)
+        # The canonical conversation store is authoritative; browser storage may
+        # hold locale/theme preferences but must not become chat state.
+        self.assertNotIn("localStorage.setItem('deputy-conversation'", js)
 
     def test_health_model_separates_product_and_business_data(self):
         import health_model
