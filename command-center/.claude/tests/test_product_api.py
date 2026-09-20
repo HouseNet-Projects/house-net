@@ -19,8 +19,11 @@ class ProductApiTests(unittest.TestCase):
 class ProductHardeningTests(unittest.TestCase):
     def test_chat_workspace_contract(self):
         js = product_api.APP_JS
-        for token in ('chat-thread', 'deputy-conversation', 'new-chat', 'Shift+Enter' if False else 'requestSubmit'):
+        for token in ('chat-thread', 'conversation-list', 'new-chat', 'requestSubmit'):
             self.assertIn(token, js)
+        # The canonical conversation store is authoritative; browser storage may
+        # hold locale/theme preferences but must not become chat state.
+        self.assertNotIn("localStorage.setItem('deputy-conversation'", js)
 
     def test_health_model_separates_product_and_business_data(self):
         import health_model
@@ -33,7 +36,12 @@ class ProductHardeningTests(unittest.TestCase):
     def test_provider_prompt_binds_requested_language(self):
         prompt = deputy._provider_prompt('status', {}, {}, {}, {}, {}, 'en')
         self.assertIn("English when language is 'en'", prompt)
+        self.assertIn('requested response language is authoritative', prompt)
         self.assertIn('"language": "en"', prompt)
+
+    def test_operator_response_hides_developer_diagnostics(self):
+        out = deputy.operator_response({'provider': {'answer': 'Useful answer.\nworkspace rules and GitHub sync details.'}}, language='en')
+        self.assertEqual(out['answer'], 'Useful answer.')
 
     def test_provider_prompt_has_argv_safe_context_ceiling(self):
         context = {'sources': [], 'health': {}, 'operational_state': {},

@@ -1,13 +1,13 @@
 {
-  "authority_id": "EAE-MONOREPO-RUNTIME-IDENTITY",
+  "authority_id": "EAE-SERVER-AUTHORITATIVE-CHAT-2026-09-20",
   "approved_by": "GEV",
-  "approval_reference": "gev-explicit-monorepo-runtime-identity-2026-09-20",
+  "approval_reference": "gev-explicit-full-remediation-chat-persistence-2026-09-20",
   "approved_at": "2026-09-20T00:00:00Z",
-  "mission": "Normalize active Deputy runtime ownership metadata to the HouseNet monorepo canonical repository identity.",
+  "mission": "Make Deputy browser chat server-authoritative using the canonical Store; remove browser-local conversation authority.",
   "repository": "HouseNet-Projects/house-net",
-  "base_sha": "8d06d11e4b262014efc85e8fe3c67abd1d310826",
-  "branch": "remediation/monorepo-runtime-identity",
-  "pr": "62",
+  "base_sha": "ef3b2888a5ae051436e3b7570be16d34e085d8ca",
+  "branch": "fix/server-authoritative-chat-ui",
+  "pr": "63",
   "allowed_operations": [
     "branch",
     "edit",
@@ -21,9 +21,11 @@
   ],
   "allowed_paths": [
     ".github/engineering-authority.json",
-    "command-center/.claude/architecture/deputy_architecture.json",
-    "command-center/.claude/policy/workspace_policy.json",
-    "command-center/bootstrap.py"
+    "command-center/product_api.py",
+    "command-center/.claude/tests/test_product_api.py",
+    "command-center/.claude/runtime/state_snapshot.py",
+    "command-center/.claude/tests/test_state_snapshot.py",
+    "command-center/deputy.py"
   ],
   "prohibited_operations": [
     "external_write",
@@ -36,7 +38,7 @@
     "action_runtime_bypass"
   ],
   "risk_ceiling": "LOW",
-  "expires_at": "2026-10-18T00:00:00Z",
+  "expires_at": "2026-10-20T00:00:00Z",
   "status": "ACTIVE",
   "audit_trail": [
     {
