@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """COMMAND-CENTER BOOTSTRAP — the one canonical recovery entry point.  GitHub + recovery key → complete Command-center.
 
-    git clone https://github.com/HouseNet-Projects/house-net-command-center.git
+    git clone https://github.com/HouseNet-Projects/house-net.git
     cd Command-center
     python bootstrap.py                 (or: py -3 bootstrap.py on Windows)
 
