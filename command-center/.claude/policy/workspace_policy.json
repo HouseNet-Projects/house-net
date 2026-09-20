@@ -844,7 +844,7 @@
  },
  "durability": {
   "law": "No important local-only durable truth. Everything Deputy or Gev needs tomorrow is (1) versioned directly, (2) versioned as an encrypted recovery artifact, or (3) deterministically reproducible from versioned content. Only ephemeral or machine-specific data stays local.",
-  "canonical_repository": "HouseNet-Projects/house-net-command-center (branch main)",
+  "canonical_repository": "HouseNet-Projects/house-net (branch main)",
   "bootstrap": "python bootstrap.py",
   "tree_manifest": ".claude/policy/workspace_tree_manifest.json (generated from this policy by tree_manifest.py; validator checks both)",
   "checksums": ".claude/policy/durable_checksums.json (sha256 of durable files; refreshed by release/bootstrap)",
