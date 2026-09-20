@@ -7,7 +7,7 @@
   "repository": "HouseNet-Projects/house-net",
   "base_sha": "bcfd21745e35275f848dac9a2215d26338b7a3e4",
   "branch": "fix/github-asset-theme-contrast",
-  "pr": "PENDING",
+  "pr": "67",
   "allowed_operations": [
     "branch",
     "edit",
