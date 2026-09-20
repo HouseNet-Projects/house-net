@@ -1,13 +1,13 @@
 {
-  "authority_id": "EAE-GITHUB-ASSET-CONTRAST-2026-09-20",
-  "approved_by": "GEV",
-  "approval_reference": "gev-explicit-browser-ui-remediation-2026-09-20",
-  "approved_at": "2026-09-20T00:00:00Z",
-  "mission": "Correct GitHub What Deputy theme assets so light and dark variants retain readable HouseNet token contrast.",
+  "authority_id": "EAE-ZERO-TRUST-SECRET-SCAN-2026-09-21",
+  "approved_by": "HouseNet-Projects",
+  "approval_reference": "owner-explicit-zero-trust-full-repository-audit-2026-09-21",
+  "approved_at": "2026-09-21T00:00:00Z",
+  "mission": "Harden repository secret scanning for compressed Office/ZIP content, bounded history scanning and exact historical provenance allowlisting.",
   "repository": "HouseNet-Projects/house-net",
-  "base_sha": "bcfd21745e35275f848dac9a2215d26338b7a3e4",
-  "branch": "fix/github-asset-theme-contrast",
-  "pr": "67",
+  "base_sha": "c5559b534fac9c9a41b8c3cea53b71fbef38df69",
+  "branch": "remediation/zero-trust-audit-20260921",
+  "pr": "68",
   "allowed_operations": [
     "branch",
     "edit",
@@ -21,9 +21,9 @@
   ],
   "allowed_paths": [
     ".github/engineering-authority.json",
-    "design-system/assets/github/what-deputy.svg",
-    "design-system/assets/github/what-deputy-dark.svg",
-    "design-system/tests/test_design_system.py"
+    "tools/secret_scan.py",
+    "tools/test_secret_scan.py",
+    "tools/secret-scan-allowlist.json"
   ],
   "prohibited_operations": [
     "external_write",
@@ -35,13 +35,13 @@
     "permission_escalation",
     "action_runtime_bypass"
   ],
-  "risk_ceiling": "LOW",
-  "expires_at": "2026-10-20T00:00:00Z",
+  "risk_ceiling": "MEDIUM",
+  "expires_at": "2026-10-21T00:00:00Z",
   "status": "ACTIVE",
   "audit_trail": [
     {
       "event": "GEV_EXPLICIT_MISSION_AUTHORIZATION",
-      "reference": "full-repository-remediation-2026-09-20"
+      "reference": "zero-trust-full-repository-audit-remediation"
     }
   ],
   "consumed": false
