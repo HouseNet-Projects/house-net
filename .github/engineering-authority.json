@@ -1,6 +1,6 @@
 {
   "authority_id": "EAE-ZERO-TRUST-SECRET-SCAN-2026-09-21",
-  "approved_by": "HouseNet-Projects",
+  "approved_by": "GEV",
   "approval_reference": "owner-explicit-zero-trust-full-repository-audit-2026-09-21",
   "approved_at": "2026-09-21T00:00:00Z",
   "mission": "Harden repository secret scanning for compressed Office/ZIP content, bounded history scanning and exact historical provenance allowlisting.",
