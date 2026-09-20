@@ -1141,13 +1141,17 @@ def action_runtime(inputs, skill=None, reg=None):
 # ───────────────────────── output validation ─────────────────────────
 def validate_output(skill_id, result):
     if not isinstance(result, dict) or "status" not in result: return False, "result must be dict with status"
-    if result["status"] not in ("EXECUTED","VERIFIED","RECORDED","DUPLICATE","BLOCKED","ASSISTED","ATTEMPTED"):
+    # A brief assembled with usable internal data but an unavailable optional
+    # integration is a valid product result.  It must remain distinguishable
+    # from a hard execution failure, rather than being rejected as an unknown
+    # status by the generic validator.
+    if result["status"] not in ("EXECUTED","VERIFIED","RECORDED","DUPLICATE","BLOCKED","ASSISTED","ATTEMPTED","PARTIAL_DATA"):
         return False, f"bad status {result['status']}"
     if result["status"] == "BLOCKED" and not (result.get("reason") or result.get("code")): return False, "BLOCKED without reason"
     checks = {
         "executive_prioritization": lambda r: all(x.get("P") in ("P1","P2","P3","P4") for x in r.get("ranked", [])) and r.get("p1_count", 0) <= 5,
         "deadline_management": lambda r: set(r.get("buckets", {})) == {"overdue","today","tomorrow","upcoming","no_deadline"},
-        "daily_briefing": lambda r: all(k in r for k in ("top_priorities","overdue","deadlines_today","waiting_for","counts","sections","live")) and all(s.get("items") for s in r.get("sections", [])) and (r["live"].get("available") is False or not (set(r["live"].get("critical_unavailable", [])) - {x["text"].split(" ")[0] for x in r.get("risks", []) if x.get("kind") == "INTEGRATION_DOWN"})),
+        "daily_briefing": lambda r: all(k in r for k in ("top_priorities","overdue","deadlines_today","waiting_for","counts","sections","live")) and ((r["live"].get("available") is False) or (all(s.get("items") for s in r.get("sections", [])) and not (set(r["live"].get("critical_unavailable", [])) - {x["text"].split(" ")[0] for x in r.get("risks", []) if x.get("kind") == "INTEGRATION_DOWN"}))),
         "task_management": lambda r: "tasks" in r or "task" in r,
         "commitment_tracking": lambda r: "op_id" in r and "scheduler_available" in r,
         "reminder_intelligence": lambda r: r.get("scheduler_available") is False and "plan" in r,

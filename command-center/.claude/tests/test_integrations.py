@@ -72,6 +72,9 @@ class I01_Registry(unittest.TestCase):
         old = adapter_outlook.READER; adapter_outlook.READER = tmp
         try:
             probs = adapter_outlook.reader_problems(); self.assertTrue(any("integrity pin" in p for p in probs))
+            # Integrity failure wins even when this Linux runner has no
+            # PowerShell executable.  The security boundary must not be
+            # masked by a dependency-availability diagnostic.
             with self.assertRaises(C.ReadOnlyViolation): adapter_outlook._run(["-Op", "probe"])
         finally: adapter_outlook.READER = old
     @covers(*GOV, kinds=("unit",))

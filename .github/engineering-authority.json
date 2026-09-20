@@ -1,13 +1,13 @@
 {
-  "authority_id": "EAE-ZERO-TRUST-SECRET-SCAN-2026-09-21",
+  "authority_id": "EAE-ZERO-TRUST-CLOSURE-2026-09-21",
   "approved_by": "GEV",
-  "approval_reference": "owner-explicit-zero-trust-full-repository-audit-2026-09-21",
+  "approval_reference": "owner-explicit-zero-trust-closure-matrix-2026-09-21",
   "approved_at": "2026-09-21T00:00:00Z",
-  "mission": "Harden repository secret scanning for compressed Office/ZIP content, bounded history scanning and exact historical provenance allowlisting.",
+  "mission": "Fix verified Outlook integrity precedence and partial Daily Brief output validation defects discovered during zero-trust closure testing.",
   "repository": "HouseNet-Projects/house-net",
-  "base_sha": "c5559b534fac9c9a41b8c3cea53b71fbef38df69",
-  "branch": "remediation/zero-trust-audit-20260921",
-  "pr": "68",
+  "base_sha": "c63c86df0fc25ca88125dfc84fb446d9cfa2f9fa",
+  "branch": "remediation/zero-trust-closure-20260921",
+  "pr": "69",
   "allowed_operations": [
     "branch",
     "edit",
@@ -21,9 +21,9 @@
   ],
   "allowed_paths": [
     ".github/engineering-authority.json",
-    "tools/secret_scan.py",
-    "tools/test_secret_scan.py",
-    "tools/secret-scan-allowlist.json"
+    "command-center/.claude/integrations/adapter_outlook.py",
+    "command-center/.claude/skills/executors.py",
+    "command-center/.claude/tests/test_integrations.py"
   ],
   "prohibited_operations": [
     "external_write",
@@ -41,7 +41,7 @@
   "audit_trail": [
     {
       "event": "GEV_EXPLICIT_MISSION_AUTHORIZATION",
-      "reference": "zero-trust-full-repository-audit-remediation"
+      "reference": "zero-trust-closure-matrix-2026-09-21"
     }
   ],
   "consumed": false

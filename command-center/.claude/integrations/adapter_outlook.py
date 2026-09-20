@@ -41,10 +41,14 @@ def _run(args, timeout=90):
     bridge = os.environ.get("DEPUTY_OUTLOOK_BRIDGE_URL", "").strip().rstrip("/")
     if bridge:
         return _run_bridge(args, bridge, timeout)
-    ps = pwsh()
-    if not ps: raise IntegrationError("TOOL_UNAVAILABLE", "PowerShell (pwsh/powershell) not found — the Outlook reader cannot run")
+    # Integrity is a security boundary and must be checked before dependency
+    # discovery.  A tampered reader must fail as READ_ONLY_VIOLATION even on
+    # hosts where PowerShell is unavailable; otherwise the diagnostic masks
+    # the actual security defect.
     rp = reader_problems()
     if rp: raise ReadOnlyViolation("; ".join(rp))
+    ps = pwsh()
+    if not ps: raise IntegrationError("TOOL_UNAVAILABLE", "PowerShell (pwsh/powershell) not found — the Outlook reader cannot run")
     try:
         p = subprocess.run([ps, "-NoProfile", "-NonInteractive", "-ExecutionPolicy", "Bypass", "-File", str(READER), *args], capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=timeout)
     except subprocess.TimeoutExpired:
