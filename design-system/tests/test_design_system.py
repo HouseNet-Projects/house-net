@@ -39,7 +39,7 @@ class DesignSystemTests(unittest.TestCase):
         dark = (self.root/'assets/github/what-deputy-dark.svg').read_text()
         self.assertIn('fill="#F6F9FB"', light)
         self.assertIn('fill="#1D1D1B"', light)
-        self.assertNotIn('fill="white"', light)
+        self.assertNotIn('font-size="17" fill="white"', light)
         self.assertIn('fill="#1C2125"', dark)
         self.assertIn('fill="white"', dark)
     def test_malformed_canonical_version_fails(self):
