@@ -1,13 +1,13 @@
 {
-  "authority_id": "EAE-COMPANY-COCKPIT-SOURCE-HEALTH",
+  "authority_id": "EAE-FULL-REMEDIATION-P0",
   "approved_by": "GEV",
-  "approval_reference": "gev-explicit-company-cockpit-health-fix-2026-09-19",
-  "approved_at": "2026-09-19T19:35:00Z",
-  "mission": "Fix Company Cockpit source-health rendering when optional integration certification has no deferred object",
+  "approval_reference": "gev-explicit-full-repository-remediation-2026-09-20",
+  "approved_at": "2026-09-20T00:00:00Z",
+  "mission": "Complete repository-wide Deputy remediation: explicit enforcement, fail-closed authority, LFS deployment preflight, governed agent evidence semantics and dependency lock hardening.",
   "repository": "HouseNet-Projects/house-net",
-  "base_sha": "f8c6fb1f283a7d2c5a8b2f8c7dbfd3788d47c705",
-  "branch": "fix/company-cockpit-source-health",
-  "pr": "60",
+  "base_sha": "5d8013207f7203a2184827d7df671513b0757dc2",
+  "branch": "remediation/p0-enforcement-and-deploy-hardening",
+  "pr": "61",
   "allowed_operations": [
     "branch",
     "edit",
@@ -21,8 +21,19 @@
   ],
   "allowed_paths": [
     ".github/engineering-authority.json",
-    "command-center/.claude/architecture/company_cockpit.py",
-    "command-center/.claude/tests/test_deputy_e2e.py"
+    ".github/workflows/house-net-ci.yml",
+    "deploy/install.sh",
+    "deploy/test_install.py",
+    "docs/governance/enforcement-matrix.json",
+    "docs/governance/policy-coverage.json",
+    "command-center/.claude/runtime/ai_provider.py",
+    "command-center/.claude/runtime/context_orchestrator.py",
+    "command-center/.claude/tests/test_agent_loop.py",
+    "command-center/.claude/tests/test_context_tools.py",
+    "tools/engineering_authority_gate.py",
+    "tools/policy_coverage.py",
+    "tools/test_engineering_authority_gate.py",
+    "tools/test_policy_coverage.py"
   ],
   "prohibited_operations": [
     "external_write",
@@ -34,17 +45,13 @@
     "permission_escalation",
     "action_runtime_bypass"
   ],
-  "risk_ceiling": "LOW",
+  "risk_ceiling": "MEDIUM",
   "expires_at": "2026-10-18T00:00:00Z",
   "status": "ACTIVE",
   "audit_trail": [
     {
       "event": "GEV_EXPLICIT_MISSION_AUTHORIZATION",
-      "reference": "company-cockpit-health"
-    },
-    {
-      "event": "PR_OPENED",
-      "reference": "pr-60"
+      "reference": "full-repository-remediation-2026-09-20"
     }
   ],
   "consumed": false

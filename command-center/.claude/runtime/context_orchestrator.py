@@ -102,7 +102,10 @@ def retrieve(intent, *, store=None, limit=8):
     terms = _terms(intent)
     tools = []
     selected = {}
-    for name, table in (("search_work", "commitments"), ("search_open_loops", "loops"), ("search_observations", "channel_events"), ("search_approvals", "actions")):
+    # Work is represented by the canonical durable open-loop/work records;
+    # commitments remain a distinct source.  Keep tool names truthful so a
+    # model asking for Work does not accidentally receive only commitments.
+    for name, table in (("search_work", "loops"), ("search_commitments", "commitments"), ("search_open_loops", "loops"), ("search_observations", "channel_events"), ("search_approvals", "actions")):
         try:
             rows = [r for r in store.list(table, limit=200) if _matches(r, terms)]
             rows = rows[-limit:]
@@ -119,7 +122,7 @@ def run_tool(request, *, store=None):
     """Execute one registered read-only Deputy tool for the agent loop."""
     request = request if isinstance(request, dict) else {}
     name = request.get("tool")
-    if name not in {"search_work", "search_open_loops", "search_observations", "search_approvals", "search_context", "prepare_follow_up"}:
+    if name not in {"search_work", "search_commitments", "search_open_loops", "search_observations", "search_approvals", "search_context", "prepare_follow_up"}:
         raise ValueError("unregistered Deputy read tool")
     query = str(request.get("query") or "").strip()
     if not query:

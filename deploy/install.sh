@@ -9,6 +9,40 @@ BACKUP_DIR=${DEPUTY_BACKUP_DIR:-$ROOT_DIR/command-center/.secure/backups}
 OUT=${DEPUTY_UNIT_DIR:-/etc/systemd/system}; ENV_FILE=${DEPUTY_ENV_FILE:-/etc/house-net/deputy.env}
 for x in "$ROOT_DIR" "$VENV"; do test -d "$x" || { echo "missing directory: $x" >&2; exit 2; }; done
 case "$BIND" in *[!a-zA-Z0-9:._-]*) echo 'invalid bind address' >&2; exit 2;; esac
+
+# Materialize and validate governed LFS inputs before touching running services.
+# A pointer or corrupt workbook must fail deployment before a restart can take
+# a healthy Deputy offline.
+preflight_lfs_inputs(){
+  if [ -f "$ROOT_DIR/.gitattributes" ] && grep -q 'filter=lfs' "$ROOT_DIR/.gitattributes"; then
+    command -v git-lfs >/dev/null 2>&1 || { echo 'git-lfs is required for this deployment' >&2; exit 2; }
+    git -C "$ROOT_DIR" lfs pull >/dev/null
+    while IFS= read -r rel; do
+      [ -n "$rel" ] || continue
+      file="$ROOT_DIR/$rel"
+      [ -f "$file" ] || { echo "missing LFS input: $rel" >&2; exit 2; }
+      if head -c 64 "$file" | grep -q 'version https://git-lfs.github.com/spec/v1'; then
+        echo "LFS pointer was not materialized: $rel" >&2; exit 2
+      fi
+      case "$rel" in
+        *.xlsx|*.xlsm)
+          python3 - "$file" <<'PY'
+import sys, zipfile
+p=sys.argv[1]
+try:
+    with zipfile.ZipFile(p) as z:
+        required={"[Content_Types].xml","xl/workbook.xml"}
+        missing=required-set(z.namelist())
+        if missing: raise ValueError("missing XLSX members: " + ",".join(sorted(missing)))
+except Exception as e:
+    raise SystemExit(f"invalid XLSX input {p}: {e}")
+PY
+          ;;
+      esac
+    done < <(git -C "$ROOT_DIR" lfs ls-files --name-only)
+  fi
+}
+preflight_lfs_inputs
 if [ "$(id -u)" -eq 0 ]; then
   # Services run as USER_NAME; keep the backup target writable without broad permissions.
   install -d -o "$USER_NAME" -g "$(id -gn "$USER_NAME")" -m 0750 "$BACKUP_DIR"

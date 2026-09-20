@@ -1,5 +1,9 @@
 import unittest
+import sys
+from pathlib import Path
 from unittest.mock import patch
+
+sys.path.insert(0, str(Path(__file__).parents[1] / "runtime"))
 
 from ai_provider import ask_agent, parse_tool_request
 
@@ -25,6 +29,23 @@ class AgentLoopTests(unittest.TestCase):
         self.assertEqual(out["status"], "OK")
         self.assertEqual(calls, ["search_work", "search_open_loops"])
         self.assertEqual(len(out["agent_trace"]), 2)
+
+    def test_accumulated_evidence_is_retained_for_later_rounds(self):
+        prompts = []
+        responses = [
+            {"status": "OK", "provider": "claude-code-max", "answer": 'DEPUTY_TOOL_REQUEST {"type":"tool_request","tool":"search_work","query":"sales"}'},
+            {"status": "OK", "provider": "claude-code-max", "answer": 'DEPUTY_TOOL_REQUEST {"type":"tool_request","tool":"search_commitments","query":"sales"}'},
+            {"status": "OK", "provider": "claude-code-max", "answer": "Combined answer."},
+        ]
+        def fake_ask(prompt, **kwargs):
+            prompts.append(prompt)
+            return responses.pop(0)
+        with patch("ai_provider.ask", side_effect=fake_ask):
+            out = ask_agent("question", tool_executor=lambda req: {"records": [{"source": req["tool"]}]}, max_iterations=4)
+        self.assertEqual(out["status"], "OK")
+        self.assertIn('search_work', prompts[1])
+        self.assertIn('search_work', prompts[2])
+        self.assertIn('search_commitments', prompts[2])
 
     def test_tool_loop_stops_at_bound_without_mutation(self):
         responses = [
