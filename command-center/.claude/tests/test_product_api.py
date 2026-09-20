@@ -30,6 +30,11 @@ class ProductHardeningTests(unittest.TestCase):
         self.assertIn('button,input,select,textarea{font:inherit;color:var(--text)}', html)
         self.assertIn('[data-theme="dark"] input,[data-theme="dark"] select,[data-theme="dark"] textarea', html)
 
+    def test_runtime_labels_have_armenian_and_english_localization(self):
+        js = product_api.APP_JS
+        for token in ('label.tasks', 'label.outlookMail', 'status.APPROVAL_REQUIRED'):
+            self.assertIn(token, js)
+
     def test_health_model_separates_product_and_business_data(self):
         import health_model
         h = health_model.build(store_state='READY', action_runtime_state='READY', worker={'running': True}, provider={'state': 'READY'})
