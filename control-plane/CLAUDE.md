@@ -1,6 +1,6 @@
 # HouseNet agent map
 
-This repository is governed by `HouseNet-Projects/house-net-control-plane`.
+This repository is governed by `HouseNet-Projects/house-net`.
 Read `house-net-control.json` for the approved classification and immutable policy lock.
 Load `/home/gevorg/house-net-control-plane` and run its `bin/housenet-preflight --json` before HouseNet work. Stop on any mandatory failure.
 Read current `policy/manifest.json`, `policy/authority.json`, `policy/repository-classes.json` and the applicable domain rules. Never substitute remembered policy for current authority.

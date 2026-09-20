@@ -4,7 +4,7 @@
 
 <p align="center"><strong>HOUSE NET · DESIGN SYSTEM</strong><br>Reusable visual and document authority for HouseNet products, interfaces and documents.</p>
 
-<p align="center"><a href="https://github.com/HouseNet-Projects/house-net-design-system/actions/workflows/ci.yml"><img alt="Design system CI" src="https://github.com/HouseNet-Projects/house-net-design-system/actions/workflows/ci.yml/badge.svg?branch=main"></a> <a href="house-net-control.json">CLASS B · PUBLIC</a> <a href="docs/VERSION.md">VERSION 1.1.0</a></p>
+<p align="center"><a href="https://github.com/HouseNet-Projects/house-net/actions/workflows/ci.yml"><img alt="Design system CI" src="https://github.com/HouseNet-Projects/house-net/actions/workflows/ci.yml/badge.svg?branch=main"></a> <a href="house-net-control.json">CLASS B · PUBLIC</a> <a href="docs/VERSION.md">VERSION 1.1.0</a></p>
 
 <!-- housenet-generated: design-status:start -->
 | STATUS | VERSION | CLASS | CONTROL PLANE | LANGUAGE |

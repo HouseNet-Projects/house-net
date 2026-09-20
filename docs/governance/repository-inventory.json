@@ -1,0 +1,2630 @@
+{
+  "schema": "housenet.repository.inventory.v1",
+  "repository": "HouseNet-Projects/house-net",
+  "source": "git ls-files",
+  "tracked_count": 655,
+  "unknown_purpose": [],
+  "entries": [
+    {
+      "path": ".gitattributes",
+      "purpose": "repository_metadata"
+    },
+    {
+      "path": ".github/CODEOWNERS",
+      "purpose": "ci"
+    },
+    {
+      "path": ".github/engineering-authority.json",
+      "purpose": "ci"
+    },
+    {
+      "path": ".github/workflows/house-net-ci.yml",
+      "purpose": "ci"
+    },
+    {
+      "path": "AGENTS.md",
+      "purpose": "documentation"
+    },
+    {
+      "path": "README.md",
+      "purpose": "documentation"
+    },
+    {
+      "path": "command-center/.claude/architecture/capability_registry.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/architecture/capability_router.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/architecture/company_cockpit.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/architecture/deputy_architecture.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/architecture/execution_surface.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/architecture/inbound_intelligence.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/architecture/proactive.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/architecture/runtime_integration.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/architecture/strategy_lifecycle.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/architecture/work_orchestrator.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/business/bm_company.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/business/bm_governance.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/business/bm_kpis.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/business/bm_playbooks.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/business/bm_processes.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/business/bm_schema.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/business/bm_sources.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/business/bm_targets.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/business/build_business_model.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/business/certify_business.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/business/overlay/ov_commercials.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/business/overlay/ov_compensation.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/business/overlay/ov_evidence.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/business/overlay/ov_people.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/certifications/deputy_e2e.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/docs/Activation-inputs.md",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/docs/Job-description.md",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/docs/Migration-log-2026-09-10.md",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/docs/Registry-audit-2026-09-10.md",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/docs/Role.md",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/docs/legacy/CLAUDE-command-center-original.md",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/docs/legacy/README-command-center-original.md",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/hooks/brief.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/hooks/gate.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/hooks/workspace_guard.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/integrations/adapter_bitrix24.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/integrations/adapter_bitrix24_write.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/integrations/adapter_mikrobill.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/integrations/adapter_outlook.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/integrations/adapter_outlook_write.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/integrations/adapter_tasks.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/integrations/adapter_tasks_write.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/integrations/adapter_telegram.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/integrations/adapter_telegram_write.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/integrations/adapter_whatsapp.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/integrations/adapter_whatsapp_write.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/integrations/capabilities.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/integrations/certify_integrations.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/integrations/contracts.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/integrations/health.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/integrations/int_secrets.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/integrations/integration.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/integrations/layer.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/integrations/normalize.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/integrations/outlook_read.ps1",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/integrations/outlook_write.ps1",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/integrations/readiness.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/integrations/reconcile.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/integrations/registry.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/integrations/whatsapp_webhook.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/policy/approval_rule.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/policy/data_classification.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/policy/durable_checksums.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/policy/paths.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/policy/scope.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/policy/sensitive_scan.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/policy/tree_manifest.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/policy/validate_workspace.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/policy/workspace_policy.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/policy/workspace_tree_manifest.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/runtime/ai_provider.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/runtime/context_orchestrator.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/runtime/conversation_store.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/runtime/data_sync.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/runtime/digital_memory.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/runtime/health_model.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/runtime/hook.sh",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/runtime/python_runtime.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/runtime/requirements.lock",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/runtime/requirements.txt",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/runtime/secure_recovery.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/runtime/state_snapshot.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/settings.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/actions.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/alerts.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/build_registry.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/business.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/certifications/action_runtime.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/certifications/alert_review.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/certifications/approval_management.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/certifications/audit_logging.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/certifications/authority_checking.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/certifications/automation_opportunity_detection.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/certifications/backlog_management.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/certifications/bottleneck_detection.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/certifications/business_model_query.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/certifications/campaign_performance_analysis.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/certifications/change_review.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/certifications/channel_intelligence.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/certifications/channel_performance_analysis.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/certifications/churn_analysis.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/certifications/commitment_memory.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/certifications/commitment_tracking.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/certifications/communication_quality_checking.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/certifications/completion_verification.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/certifications/confidence_handling.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/certifications/customer_acquisition_analysis.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/certifications/customer_complaint_pattern_analysis.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/certifications/daily_briefing.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/certifications/data_analysis.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/certifications/data_sensitivity_awareness.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/certifications/deadline_management.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/certifications/decision_logging.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/certifications/decision_memory.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/certifications/decision_queue.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/certifications/decision_support.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/certifications/delegation_design.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/certifications/end_of_day_control.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/certifications/escalation_management.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/certifications/exception_review.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/certifications/executive_prioritization.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/certifications/executive_reporting.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/certifications/executive_summarization.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/certifications/failure_rework_analysis.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/certifications/follow_up_management.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/certifications/information_classification.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/certifications/information_retrieval.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/certifications/kpi_intelligence.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/certifications/lost_opportunity_analysis.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/certifications/management_communication.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/certifications/management_snapshot.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/certifications/meeting_notes.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/certifications/meeting_preparation.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/certifications/open_loop_memory.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/certifications/operational_incident_management.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/certifications/operational_risk_detection.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/certifications/operations_kpi_monitoring.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/certifications/people_resolver.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/certifications/performance_gap_diagnosis.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/certifications/pipeline_management.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/certifications/pricing_performance_analysis.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/certifications/process_improvement.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/certifications/process_mapping.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/certifications/reminder_intelligence.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/certifications/revenue_leakage_detection.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/certifications/risk_classification.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/certifications/root_cause_analysis.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/certifications/sales_forecasting.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/certifications/sales_funnel_analysis.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/certifications/sales_kpi_monitoring.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/certifications/source_reconciliation.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/certifications/source_verification.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/certifications/structured_data_extraction.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/certifications/target_vs_actual.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/certifications/task_management.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/certifications/upsell_analysis.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/certifications/waiting_for_tracking.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/certifications/weekly_executive_review.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/certifications/workload_analysis.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/certify.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/channels.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/commitments.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/decisions.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/documents.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/engine.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/executors.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/intelligence.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/kpis.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/people.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/registry.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/routines.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/skill.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/store.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/skills/untrusted.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/state/durable/.gitkeep",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/state/durable/actions.jsonl",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/state/durable/alerts.jsonl",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/state/durable/audit.jsonl",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/state/durable/business_observations.jsonl",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/state/durable/checkpoints.jsonl",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/state/durable/commitments.jsonl",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/state/durable/decisions.jsonl",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/state/durable/loops.jsonl",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/state/durable/write_certifications.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/tests/evals.py",
+      "purpose": "test"
+    },
+    {
+      "path": "command-center/.claude/tests/test_actions.py",
+      "purpose": "test"
+    },
+    {
+      "path": "command-center/.claude/tests/test_agent_loop.py",
+      "purpose": "test"
+    },
+    {
+      "path": "command-center/.claude/tests/test_architecture.py",
+      "purpose": "test"
+    },
+    {
+      "path": "command-center/.claude/tests/test_boundary.py",
+      "purpose": "test"
+    },
+    {
+      "path": "command-center/.claude/tests/test_business.py",
+      "purpose": "test"
+    },
+    {
+      "path": "command-center/.claude/tests/test_channels.py",
+      "purpose": "test"
+    },
+    {
+      "path": "command-center/.claude/tests/test_context_orchestrator.py",
+      "purpose": "test"
+    },
+    {
+      "path": "command-center/.claude/tests/test_context_tools.py",
+      "purpose": "test"
+    },
+    {
+      "path": "command-center/.claude/tests/test_deputy_e2e.py",
+      "purpose": "test"
+    },
+    {
+      "path": "command-center/.claude/tests/test_digital_memory.py",
+      "purpose": "test"
+    },
+    {
+      "path": "command-center/.claude/tests/test_enforcement.py",
+      "purpose": "test"
+    },
+    {
+      "path": "command-center/.claude/tests/test_execution_surface.py",
+      "purpose": "test"
+    },
+    {
+      "path": "command-center/.claude/tests/test_failclosed.py",
+      "purpose": "test"
+    },
+    {
+      "path": "command-center/.claude/tests/test_hardening.py",
+      "purpose": "test"
+    },
+    {
+      "path": "command-center/.claude/tests/test_integrations.py",
+      "purpose": "test"
+    },
+    {
+      "path": "command-center/.claude/tests/test_intelligence.py",
+      "purpose": "test"
+    },
+    {
+      "path": "command-center/.claude/tests/test_live_data.py",
+      "purpose": "test"
+    },
+    {
+      "path": "command-center/.claude/tests/test_operating_layer.py",
+      "purpose": "test"
+    },
+    {
+      "path": "command-center/.claude/tests/test_operational_completion.py",
+      "purpose": "test"
+    },
+    {
+      "path": "command-center/.claude/tests/test_outlook_bridge.py",
+      "purpose": "test"
+    },
+    {
+      "path": "command-center/.claude/tests/test_outlook_write.py",
+      "purpose": "test"
+    },
+    {
+      "path": "command-center/.claude/tests/test_portability.py",
+      "purpose": "test"
+    },
+    {
+      "path": "command-center/.claude/tests/test_proactive_inbound.py",
+      "purpose": "test"
+    },
+    {
+      "path": "command-center/.claude/tests/test_product_api.py",
+      "purpose": "test"
+    },
+    {
+      "path": "command-center/.claude/tests/test_runtime.py",
+      "purpose": "test"
+    },
+    {
+      "path": "command-center/.claude/tests/test_runtime_integration.py",
+      "purpose": "test"
+    },
+    {
+      "path": "command-center/.claude/tests/test_scope.py",
+      "purpose": "test"
+    },
+    {
+      "path": "command-center/.claude/tests/test_skills.py",
+      "purpose": "test"
+    },
+    {
+      "path": "command-center/.claude/tests/test_state_snapshot.py",
+      "purpose": "test"
+    },
+    {
+      "path": "command-center/.claude/tests/test_store.py",
+      "purpose": "test"
+    },
+    {
+      "path": "command-center/.claude/tests/test_workspace.py",
+      "purpose": "test"
+    },
+    {
+      "path": "command-center/.claude/tests/testing.py",
+      "purpose": "test"
+    },
+    {
+      "path": "command-center/.claude/tools/build_delivery_schedule.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/tools/build_requirements_workbook.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/tools/build_task_workbook.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/tools/requirements_data.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/tools/task_registry_data.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.claude/tools/xlsx_style.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.gitattributes",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.github/dependabot.yml",
+      "purpose": "ci"
+    },
+    {
+      "path": "command-center/.github/workflows/backbone-ci.yml",
+      "purpose": "ci"
+    },
+    {
+      "path": "command-center/.github/workflows/command-center-ci.yml",
+      "purpose": "ci"
+    },
+    {
+      "path": "command-center/.gitignore",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.secure/.gitkeep",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.secure/README.md",
+      "purpose": "documentation"
+    },
+    {
+      "path": "command-center/.secure/credentials.gpg",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/.secure/manifest.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/AGENTS.md",
+      "purpose": "documentation"
+    },
+    {
+      "path": "command-center/CLAUDE.md",
+      "purpose": "documentation"
+    },
+    {
+      "path": "command-center/OPERATIONS.md",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/README.md",
+      "purpose": "documentation"
+    },
+    {
+      "path": "command-center/WORKSPACE/00_Inbox/Input.md",
+      "purpose": "business_source"
+    },
+    {
+      "path": "command-center/WORKSPACE/01_Active/Operations/.gitkeep",
+      "purpose": "business_source"
+    },
+    {
+      "path": "command-center/WORKSPACE/01_Active/Operations/Activation-suspension-reconnection-2026-09-07.docx",
+      "purpose": "business_source"
+    },
+    {
+      "path": "command-center/WORKSPACE/01_Active/Operations/Inspector-list-2026-09-10.docx",
+      "purpose": "business_source"
+    },
+    {
+      "path": "command-center/WORKSPACE/01_Active/Operations/Open-questions.md",
+      "purpose": "business_source"
+    },
+    {
+      "path": "command-center/WORKSPACE/01_Active/People/.gitkeep",
+      "purpose": "business_source"
+    },
+    {
+      "path": "command-center/WORKSPACE/01_Active/People/Job-descriptions-v1.1-2026-09-05.docx",
+      "purpose": "business_source"
+    },
+    {
+      "path": "command-center/WORKSPACE/01_Active/Sales/.gitkeep",
+      "purpose": "business_source"
+    },
+    {
+      "path": "command-center/WORKSPACE/01_Active/Sales/Churn-save-list-2026-09-09.xlsx",
+      "purpose": "business_source"
+    },
+    {
+      "path": "command-center/WORKSPACE/01_Active/Sales/June-sales-bonus-2026-09-09.xlsx",
+      "purpose": "business_source"
+    },
+    {
+      "path": "command-center/WORKSPACE/01_Active/Sales/Sales-strategy-2026-09-09.docx",
+      "purpose": "business_source"
+    },
+    {
+      "path": "command-center/WORKSPACE/01_Active/Sales/Sales-strategy-hy-2026-09-10.pptx",
+      "purpose": "business_source"
+    },
+    {
+      "path": "command-center/WORKSPACE/01_Active/Sales/Sales-strategy-qa-script-2026-09-10.docx",
+      "purpose": "business_source"
+    },
+    {
+      "path": "command-center/WORKSPACE/01_Active/Systems/.gitkeep",
+      "purpose": "business_source"
+    },
+    {
+      "path": "command-center/WORKSPACE/01_Active/Systems/Billing-analysis-may-august-2026-09-10.xlsx",
+      "purpose": "business_source"
+    },
+    {
+      "path": "command-center/WORKSPACE/01_Active/Systems/Billing-roadmap-v2-2026-09-07.docx",
+      "purpose": "business_source"
+    },
+    {
+      "path": "command-center/WORKSPACE/02_Reference/Operations/.gitkeep",
+      "purpose": "business_source"
+    },
+    {
+      "path": "command-center/WORKSPACE/02_Reference/Operations/Call-center-kpi-2026-08-31.xlsx",
+      "purpose": "business_source"
+    },
+    {
+      "path": "command-center/WORKSPACE/02_Reference/People/.gitkeep",
+      "purpose": "business_source"
+    },
+    {
+      "path": "command-center/WORKSPACE/02_Reference/People/Job-descriptions-qualifications-2026-09-05.docx",
+      "purpose": "business_source"
+    },
+    {
+      "path": "command-center/WORKSPACE/02_Reference/People/Staffing-plan-2026-09-07.xlsx",
+      "purpose": "business_source"
+    },
+    {
+      "path": "command-center/WORKSPACE/02_Reference/Sales/.gitkeep",
+      "purpose": "business_source"
+    },
+    {
+      "path": "command-center/WORKSPACE/02_Reference/Systems/.gitkeep",
+      "purpose": "business_source"
+    },
+    {
+      "path": "command-center/WORKSPACE/02_Reference/Systems/Mikrobill-help-en-2026-09-08.docx",
+      "purpose": "business_source"
+    },
+    {
+      "path": "command-center/WORKSPACE/02_Reference/Systems/Mikrobill-help-hy-2026-09-08.docx",
+      "purpose": "business_source"
+    },
+    {
+      "path": "command-center/WORKSPACE/03_Completed/.gitkeep",
+      "purpose": "business_source"
+    },
+    {
+      "path": "command-center/WORKSPACE/03_Completed/Day-off-request-2026-08-11.docx",
+      "purpose": "business_source"
+    },
+    {
+      "path": "command-center/WORKSPACE/03_Completed/Day-off-request-v2-2026-08-13.docx",
+      "purpose": "business_source"
+    },
+    {
+      "path": "command-center/WORKSPACE/03_Completed/Delivery-schedule-2026-09-09.xlsx",
+      "purpose": "business_source"
+    },
+    {
+      "path": "command-center/WORKSPACE/03_Completed/Delivery-schedule-whatsapp-2026-09-09.txt",
+      "purpose": "business_source"
+    },
+    {
+      "path": "command-center/WORKSPACE/03_Completed/Leave-request-2026-08-11.docx",
+      "purpose": "business_source"
+    },
+    {
+      "path": "command-center/WORKSPACE/03_Completed/Leave-request-v2-2026-09-08.docx",
+      "purpose": "business_source"
+    },
+    {
+      "path": "command-center/WORKSPACE/04_Sources/Imports/.gitkeep",
+      "purpose": "business_source"
+    },
+    {
+      "path": "command-center/WORKSPACE/04_Sources/Imports/Brand-assets-2026-08-29/HouseNet-logo-horizontal-CMYK.png",
+      "purpose": "business_source"
+    },
+    {
+      "path": "command-center/WORKSPACE/04_Sources/Imports/Brand-assets-2026-08-29/HouseNet-logo-transparent.png",
+      "purpose": "business_source"
+    },
+    {
+      "path": "command-center/WORKSPACE/04_Sources/Imports/Brand-assets-2026-08-29/HouseNet-logo-vertical-CMYK.png",
+      "purpose": "business_source"
+    },
+    {
+      "path": "command-center/WORKSPACE/04_Sources/Imports/Brand-assets-2026-08-29/HouseNet-signature-Richard-Khachaturyan.zip",
+      "purpose": "business_source"
+    },
+    {
+      "path": "command-center/WORKSPACE/04_Sources/Imports/Brand-assets-2026-08-29/housenet-icon-options.html",
+      "purpose": "business_source"
+    },
+    {
+      "path": "command-center/WORKSPACE/04_Sources/Imports/Brand-assets-2026-08-29/housenet-signature-designs.html",
+      "purpose": "business_source"
+    },
+    {
+      "path": "command-center/WORKSPACE/04_Sources/Imports/Brand-assets-2026-08-29/housenet-signature.html",
+      "purpose": "business_source"
+    },
+    {
+      "path": "command-center/WORKSPACE/04_Sources/Imports/Brand-assets-2026-08-29/signature-housenet-approved.html",
+      "purpose": "business_source"
+    },
+    {
+      "path": "command-center/WORKSPACE/04_Sources/Imports/Brand-assets-2026-08-29/signature-housenet-inline-b.html",
+      "purpose": "business_source"
+    },
+    {
+      "path": "command-center/WORKSPACE/04_Sources/Imports/Brand-assets-2026-08-29/signature-housenet-inline-selection.png",
+      "purpose": "business_source"
+    },
+    {
+      "path": "command-center/WORKSPACE/04_Sources/Imports/Brand-assets-2026-08-29/signature-housenet-inline.html",
+      "purpose": "business_source"
+    },
+    {
+      "path": "command-center/WORKSPACE/04_Sources/Imports/Brand-assets-2026-08-29/signature-housenet-v2-paste.html",
+      "purpose": "business_source"
+    },
+    {
+      "path": "command-center/WORKSPACE/04_Sources/Imports/Brand-assets-2026-08-29/signature-housenet.html",
+      "purpose": "business_source"
+    },
+    {
+      "path": "command-center/WORKSPACE/04_Sources/Imports/Brand-assets-2026-08-29/signature-housenet.png",
+      "purpose": "business_source"
+    },
+    {
+      "path": "command-center/WORKSPACE/04_Sources/Imports/Dispatcher-flow-2026-07-09/DISPATCHER_AGENT_FLOW.html",
+      "purpose": "business_source"
+    },
+    {
+      "path": "command-center/WORKSPACE/04_Sources/Screenshots/.gitkeep",
+      "purpose": "business_source"
+    },
+    {
+      "path": "command-center/WORKSPACE/04_Sources/Screenshots/Churn-risk-signals-2026-09-09.jpeg",
+      "purpose": "business_source"
+    },
+    {
+      "path": "command-center/WORKSPACE/04_Sources/Screenshots/Whatsapp-image-2026-08-28.jpeg",
+      "purpose": "business_source"
+    },
+    {
+      "path": "command-center/WORKSPACE/04_Sources/Whatsapp/.gitkeep",
+      "purpose": "business_source"
+    },
+    {
+      "path": "command-center/WORKSPACE/04_Sources/Whatsapp/Principal-2026-09-09-afternoon/Principal.zip",
+      "purpose": "business_source"
+    },
+    {
+      "path": "command-center/WORKSPACE/04_Sources/Whatsapp/Principal-2026-09-09-afternoon/chat.md",
+      "purpose": "business_source"
+    },
+    {
+      "path": "command-center/WORKSPACE/04_Sources/Whatsapp/Principal-2026-09-09-afternoon/chat.txt",
+      "purpose": "business_source"
+    },
+    {
+      "path": "command-center/WORKSPACE/04_Sources/Whatsapp/Principal-2026-09-09/Principal.zip",
+      "purpose": "business_source"
+    },
+    {
+      "path": "command-center/WORKSPACE/04_Sources/Whatsapp/Principal-2026-09-09/chat.md",
+      "purpose": "business_source"
+    },
+    {
+      "path": "command-center/WORKSPACE/04_Sources/Whatsapp/Principal-2026-09-09/chat.txt",
+      "purpose": "business_source"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/.gitkeep",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Billing-2026-07-09/Billing-reports-v2-2026-07-09.xlsx",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Billing-2026-07-09/Paid-services-2026-07-09.docx",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Deputy-charter-2026-09-10/Deputy-charter-draft-2026-09-10.md",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Deputy-handoff-2026-09-14/Deputy-project-handoff-2026-09-12.md",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Deputy-handoff-2026-09-14/Deputy-session-handoff-2026-09-14.md",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Drafts-2026-09-09/Principal-requirements-2026-09-09.md",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Drafts-2026-09-09/Principal-requirements-annotated-2026-09-09.xlsx",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Drafts-2026-09-09/Schedule-questions-2026-09-09.md",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Drafts-2026-09-09/Task-workbook-8-sheet-2026-09-09.xlsx",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Drafts-2026-09-09/run.py",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Drafts-2026-09-09/update.bat",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Isp-sales-ops-2026-08-24/Isp-sales-ops-model-2026-08-24.xlsx",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Isp-sales-ops-2026-08-24/Isp-sales-ops-packages-2026-08-24.docx",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Job-description-drafts-2026-09-05/Billing-collections-specialist-2026-09-05.docx",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Job-description-drafts-2026-09-05/Billing-revenue-head-2026-09-05.docx",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Job-description-drafts-2026-09-05/Call-center-job-descriptions-2026-09-05.docx",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Job-description-drafts-2026-09-05/Housenet-job-description-2026-09-05.docx",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Job-description-drafts-2026-09-05/Job-descriptions-2026-08-31.docx",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Job-description-drafts-2026-09-05/Job-descriptions-book-2026-09-02.docx",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Job-description-drafts-2026-09-05/Job-descriptions-chapter1-technical-2026-09-02.docx",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Job-description-drafts-2026-09-05/Marketing-job-descriptions-2026-09-05.docx",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Job-description-drafts-2026-09-05/Profile-2026-09-01.docx",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Job-description-drafts-2026-09-05/Technical-department-job-descriptions-2026-09-02.docx",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Job-description-drafts-2026-09-05/Technical-profile-2026-08-31.docx",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Legacy-whatsapp-2026-09-09/Whatsapp-readme-2026-09-09.md",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Migration-2026-09-14/Migration-manifest-2026-09-14.json",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Migration-2026-09-14/Migration-manifest-2026-09-14.md",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Migration-2026-09-14/Staging-inventory-2026-09-11.md",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Migration-2026-09-14/Staging-move-log-2026-09-11.json",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Previous-projects/BroPS-OS-handoff-2026-07/IMPLEMENTATION.patch",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Previous-projects/BroPS-OS-handoff-2026-07/MASTER_EXECUTION_ROADMAP.md",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Previous-projects/BroPS-OS-handoff-2026-07/OS_PARTIAL_HANDOFF_2026-07-26.zip",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Previous-projects/BroPS-OS-handoff-2026-07/OS_PARTIAL_HANDOFF_2026-07-26.zip.sha256",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Previous-projects/BroPS-OS-handoff-2026-07/PARTIAL_HANDOFF.md",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Previous-projects/BroPS-OS-handoff-2026-07/brand.svg",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Previous-projects/BroPS-OS-handoff-2026-07/logo.svg",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Previous-projects/Daily check.zip",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Previous-projects/GAAhex-archives/GAAHEX_CHECKPOINT_14_RELEASE_SNAPSHOT.json",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Previous-projects/GAAhex-archives/GAAHEX_CHECKPOINT_14_TEST_REMEDIATION_STATUS_2026-09-09.md",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Previous-projects/GAAhex-archives/GAAHEX_CHECKPOINT_15_RELEASE_SNAPSHOT.json",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Previous-projects/GAAhex-archives/GAAHEX_CHECKPOINT_15_ZERO_FAIL_STATUS_2026-09-09.md",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Previous-projects/GAAhex-archives/GAAHEX_CHECKPOINT_17_FINAL.zip",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Previous-projects/GAAhex-archives/GAAHEX_CP18_PAGE07_SOURCE_SEALED_2026-09-10.git.bundle",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Previous-projects/GAAhex-archives/GAAHEX_CP18_PAGE07_SOURCE_SEALED_2026-09-10.zip",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Previous-projects/GAAhex-archives/GAAHEX_CP18_PAGE07_SOURCE_SEALED_OHANYAN_GEVORG.git.bundle",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Previous-projects/GAAhex-archives/GAAHEX_INTERIM_FULL_2026-09-10.zip",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Previous-projects/GAAhex-archives/GAAHEX_MASTER_CLEANUP_CHECKPOINT_14_FULL_TEST_REMEDIATION_2026-09-09.zip",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Previous-projects/GAAhex-archives/GAAHEX_MASTER_CLEANUP_CHECKPOINT_14_FULL_TEST_REMEDIATION_2026-09-09.zip.sha256",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Previous-projects/GAAhex-archives/GAAHEX_MASTER_CLEANUP_CHECKPOINT_15_FULL_ZERO_FAIL_GATE_2026-09-09.zip",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Previous-projects/GAAhex-archives/GAAHEX_MASTER_CLEANUP_CHECKPOINT_15_FULL_ZERO_FAIL_GATE_2026-09-09.zip.sha256",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Previous-projects/GAAhex-archives/GAAHEX_MASTER_CLEANUP_HISTORY_THROUGH_CHECKPOINT_14_2026-09-09.md",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Previous-projects/GAAhex-archives/GAAHEX_MASTER_CLEANUP_HISTORY_THROUGH_CHECKPOINT_15_2026-09-09.md",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Previous-projects/GAAhex-archives/GAAHEX_PROJECT_FULL_CURRENT_CP18_PAGE07_2026-09-10.zip",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Previous-projects/GAAhex-archives/GAAHEX_PROJECT_FULL_EVERYTHING_CP18_PAGE07_2026-09-10.zip",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Previous-projects/GAAhex-archives/GAAHEX_PROJECT_FULL_EVERYTHING_CP18_PAGE08_2026-09-10.zip",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Previous-projects/Housenet_OS/README.md",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Previous-projects/Housenet_OS/config/org.yaml",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Previous-projects/Housenet_OS/config/playbooks/care.yaml",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Previous-projects/Housenet_OS/config/playbooks/exec.yaml",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Previous-projects/Housenet_OS/config/playbooks/field.yaml",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Previous-projects/Housenet_OS/config/playbooks/finance.yaml",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Previous-projects/Housenet_OS/config/playbooks/hr.yaml",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Previous-projects/Housenet_OS/config/playbooks/it.yaml",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Previous-projects/Housenet_OS/config/playbooks/legal.yaml",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Previous-projects/Housenet_OS/config/playbooks/marketing.yaml",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Previous-projects/Housenet_OS/config/playbooks/network.yaml",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Previous-projects/Housenet_OS/config/playbooks/sales.yaml",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Previous-projects/Housenet_OS/config/playbooks/telesales.yaml",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Previous-projects/Housenet_OS/config/playbooks/warehouse.yaml",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Previous-projects/Housenet_OS/config/targets.yaml",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Previous-projects/Housenet_OS/data/metrics.json",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Previous-projects/Housenet_OS/data/state.json",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Previous-projects/Housenet_OS/housenet_os/__init__.py",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Previous-projects/Housenet_OS/housenet_os/brief.py",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Previous-projects/Housenet_OS/housenet_os/calendar_out.py",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Previous-projects/Housenet_OS/housenet_os/cli.py",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Previous-projects/Housenet_OS/housenet_os/config.py",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Previous-projects/Housenet_OS/housenet_os/controls.py",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Previous-projects/Housenet_OS/housenet_os/model.py",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Previous-projects/Housenet_OS/housenet_os/planner.py",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Previous-projects/Housenet_OS/housenet_os/schedule.py",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Previous-projects/Housenet_OS/housenet_os/store.py",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Previous-projects/Housenet_OS/housenet_os/tracker.py",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Previous-projects/Housenet_OS/out/brief-2026-08-24-care.md",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Previous-projects/Housenet_OS/out/brief-2026-08-24-exec.md",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Previous-projects/Housenet_OS/out/brief-2026-08-24-field.md",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Previous-projects/Housenet_OS/out/brief-2026-08-24-finance.md",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Previous-projects/Housenet_OS/out/brief-2026-08-24-hr.md",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Previous-projects/Housenet_OS/out/brief-2026-08-24-it.md",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Previous-projects/Housenet_OS/out/brief-2026-08-24-legal.md",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Previous-projects/Housenet_OS/out/brief-2026-08-24-marketing.md",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Previous-projects/Housenet_OS/out/brief-2026-08-24-network.md",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Previous-projects/Housenet_OS/out/brief-2026-08-24-sales.md",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Previous-projects/Housenet_OS/out/brief-2026-08-24-telesales.md",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Previous-projects/Housenet_OS/out/brief-2026-08-24-warehouse.md",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Previous-projects/Housenet_OS/out/brief-2026-08-24.md",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Previous-projects/Housenet_OS/out/housenet.ics",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Sales-strategy-2026-09-10/Sales-strategy-branded-2026-09-10.pptx",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Sales-strategy-2026-09-10/Sales-strategy-branded-repaired-2026-09-10.pptx",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Sales-strategy-2026-09-10/Sales-strategy-phase1-2026-09-08.docx",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Skill-registry-v1-2026-09-10/registry_132_2026-09-10.json",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Staff-planning-2026-08-28/Staff-planning-salary-bonus-a-2026-08-28.xlsx",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Staff-planning-2026-08-28/Staff-planning-salary-bonus-b-2026-08-28.xlsx",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Staff-planning-2026-08-28/Staff-planning-salary-bonus-c-2026-08-28.xlsx",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Staff-planning-2026-08-28/Staff-planning-salary-bonus-d-2026-08-28.xlsx",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Staffing-plan-2026-09-05/Staffing-plan-corrected-2026-09-07.xlsx",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Staffing-plan-2026-09-05/Staffing-plan-v2-2026-08-28.xlsx",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Staffing-plan-2026-09-05/Staffing-plan-v2-desktop-2026-08-28.xlsx",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/05_Archive/Staffing-plan-2026-09-05/Staffing-plan-v3-2026-09-05.xlsx",
+      "purpose": "historical"
+    },
+    {
+      "path": "command-center/WORKSPACE/Actions.md",
+      "purpose": "business_source"
+    },
+    {
+      "path": "command-center/WORKSPACE/Journal.md",
+      "purpose": "business_source"
+    },
+    {
+      "path": "command-center/WORKSPACE/Tasks.xlsx",
+      "purpose": "business_source"
+    },
+    {
+      "path": "command-center/assets/brand/README.md",
+      "purpose": "documentation"
+    },
+    {
+      "path": "command-center/assets/brand/housenet-footer-logo.svg",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/assets/command-center-hero.svg",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/backup_ops.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/bootstrap.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/bootstrap/backbone-manifest.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/bootstrap/backbone.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/deputy.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/document_exports.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/house-net-control.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/policy-dependencies.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/policy-snapshot.json",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/product_api.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "command-center/tests/backbone/test_backbone.py",
+      "purpose": "test"
+    },
+    {
+      "path": "command-center/worker.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "control-plane/.editorconfig",
+      "purpose": "repository_metadata"
+    },
+    {
+      "path": "control-plane/.gitattributes",
+      "purpose": "repository_metadata"
+    },
+    {
+      "path": "control-plane/.github/dependabot.yml",
+      "purpose": "ci"
+    },
+    {
+      "path": "control-plane/.github/workflows/control-plane-ci.yml",
+      "purpose": "ci"
+    },
+    {
+      "path": "control-plane/.github/workflows/reusable-policy-gate.yml",
+      "purpose": "ci"
+    },
+    {
+      "path": "control-plane/.gitignore",
+      "purpose": "repository_metadata"
+    },
+    {
+      "path": "control-plane/AGENTS.md",
+      "purpose": "documentation"
+    },
+    {
+      "path": "control-plane/CHANGELOG.md",
+      "purpose": "documentation"
+    },
+    {
+      "path": "control-plane/CLAUDE.md",
+      "purpose": "documentation"
+    },
+    {
+      "path": "control-plane/README.md",
+      "purpose": "documentation"
+    },
+    {
+      "path": "control-plane/action.yml",
+      "purpose": "canonical_config"
+    },
+    {
+      "path": "control-plane/assets/brand/BRAND.md",
+      "purpose": "documentation"
+    },
+    {
+      "path": "control-plane/assets/brand/brand-tokens.json",
+      "purpose": "canonical_config"
+    },
+    {
+      "path": "control-plane/assets/brand/housenet-footer-logo.svg",
+      "purpose": "product_asset"
+    },
+    {
+      "path": "control-plane/assets/brand/housenet-main-logo.svg",
+      "purpose": "product_asset"
+    },
+    {
+      "path": "control-plane/assets/control-plane-hero-dark.svg",
+      "purpose": "product_asset"
+    },
+    {
+      "path": "control-plane/assets/control-plane-hero-light.svg",
+      "purpose": "product_asset"
+    },
+    {
+      "path": "control-plane/audit/VERIFICATION.md",
+      "purpose": "documentation"
+    },
+    {
+      "path": "control-plane/audit/enforcement-hardening/2026-09-16/ENFORCEMENT-HARDENING.md",
+      "purpose": "documentation"
+    },
+    {
+      "path": "control-plane/audit/enforcement-hardening/2026-09-16/evidence-matrix.json",
+      "purpose": "canonical_config"
+    },
+    {
+      "path": "control-plane/audit/zero-trust/2026-09-15/ZERO-TRUST-AUDIT.md",
+      "purpose": "documentation"
+    },
+    {
+      "path": "control-plane/audit/zero-trust/2026-09-15/evidence-matrix.json",
+      "purpose": "canonical_config"
+    },
+    {
+      "path": "control-plane/bin/check-syntax",
+      "purpose": "governance_tool"
+    },
+    {
+      "path": "control-plane/bin/check-version-consistency",
+      "purpose": "governance_tool"
+    },
+    {
+      "path": "control-plane/bin/generate-control-plane-status",
+      "purpose": "governance_tool"
+    },
+    {
+      "path": "control-plane/bin/housenet-import",
+      "purpose": "governance_tool"
+    },
+    {
+      "path": "control-plane/bin/housenet-preflight",
+      "purpose": "governance_tool"
+    },
+    {
+      "path": "control-plane/bin/housenet-version",
+      "purpose": "governance_tool"
+    },
+    {
+      "path": "control-plane/bin/install-codex-bootstrap",
+      "purpose": "governance_tool"
+    },
+    {
+      "path": "control-plane/bin/validate-control-plane",
+      "purpose": "governance_tool"
+    },
+    {
+      "path": "control-plane/bin/validate-repository",
+      "purpose": "governance_tool"
+    },
+    {
+      "path": "control-plane/docs/AGENT-BOOTSTRAP.md",
+      "purpose": "documentation"
+    },
+    {
+      "path": "control-plane/docs/AGENT-CONTRACT.md",
+      "purpose": "documentation"
+    },
+    {
+      "path": "control-plane/docs/ARCHITECTURE.md",
+      "purpose": "documentation"
+    },
+    {
+      "path": "control-plane/docs/ENFORCEMENT.md",
+      "purpose": "documentation"
+    },
+    {
+      "path": "control-plane/docs/MIGRATION-LIFECYCLE.md",
+      "purpose": "documentation"
+    },
+    {
+      "path": "control-plane/docs/POLICY.md",
+      "purpose": "documentation"
+    },
+    {
+      "path": "control-plane/docs/REPOSITORY-LIFECYCLE.md",
+      "purpose": "documentation"
+    },
+    {
+      "path": "control-plane/docs/source/HouseNet-GitHub-Policy-v1.0.md",
+      "purpose": "documentation"
+    },
+    {
+      "path": "control-plane/house-net-control.json",
+      "purpose": "canonical_config"
+    },
+    {
+      "path": "control-plane/housenet/__init__.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "control-plane/housenet/control.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "control-plane/housenet/versioning.py",
+      "purpose": "runtime"
+    },
+    {
+      "path": "control-plane/policy-dependencies.json",
+      "purpose": "canonical_config"
+    },
+    {
+      "path": "control-plane/policy-snapshot.json",
+      "purpose": "canonical_config"
+    },
+    {
+      "path": "control-plane/policy/actions.json",
+      "purpose": "canonical_config"
+    },
+    {
+      "path": "control-plane/policy/authority.json",
+      "purpose": "canonical_config"
+    },
+    {
+      "path": "control-plane/policy/git.json",
+      "purpose": "canonical_config"
+    },
+    {
+      "path": "control-plane/policy/manifest.json",
+      "purpose": "canonical_config"
+    },
+    {
+      "path": "control-plane/policy/merge.json",
+      "purpose": "canonical_config"
+    },
+    {
+      "path": "control-plane/policy/notifications.json",
+      "purpose": "canonical_config"
+    },
+    {
+      "path": "control-plane/policy/repository-baseline.json",
+      "purpose": "canonical_config"
+    },
+    {
+      "path": "control-plane/policy/repository-classes.json",
+      "purpose": "canonical_config"
+    },
+    {
+      "path": "control-plane/policy/security.json",
+      "purpose": "canonical_config"
+    },
+    {
+      "path": "control-plane/registry/repositories.json",
+      "purpose": "canonical_config"
+    },
+    {
+      "path": "control-plane/release/manifest.json",
+      "purpose": "canonical_config"
+    },
+    {
+      "path": "control-plane/requirements.txt",
+      "purpose": "documentation"
+    },
+    {
+      "path": "control-plane/schemas/authority.schema.json",
+      "purpose": "canonical_config"
+    },
+    {
+      "path": "control-plane/schemas/manifest.schema.json",
+      "purpose": "canonical_config"
+    },
+    {
+      "path": "control-plane/schemas/policy.schema.json",
+      "purpose": "canonical_config"
+    },
+    {
+      "path": "control-plane/schemas/registry.schema.json",
+      "purpose": "canonical_config"
+    },
+    {
+      "path": "control-plane/schemas/release-manifest.schema.json",
+      "purpose": "canonical_config"
+    },
+    {
+      "path": "control-plane/schemas/repository-class.schema.json",
+      "purpose": "canonical_config"
+    },
+    {
+      "path": "control-plane/schemas/repository-lock.schema.json",
+      "purpose": "canonical_config"
+    },
+    {
+      "path": "control-plane/schemas/repository-registration.schema.json",
+      "purpose": "canonical_config"
+    },
+    {
+      "path": "control-plane/templates/AGENTS.md",
+      "purpose": "documentation"
+    },
+    {
+      "path": "control-plane/templates/CLAUDE.md",
+      "purpose": "documentation"
+    },
+    {
+      "path": "control-plane/templates/house-net-control.json",
+      "purpose": "canonical_config"
+    },
+    {
+      "path": "control-plane/templates/house-net-policy-gate.yml",
+      "purpose": "canonical_config"
+    },
+    {
+      "path": "control-plane/tests/test_bootstrap.py",
+      "purpose": "test"
+    },
+    {
+      "path": "control-plane/tests/test_control.py",
+      "purpose": "test"
+    },
+    {
+      "path": "control-plane/tests/test_migration.py",
+      "purpose": "test"
+    },
+    {
+      "path": "deploy/deputy-api.service",
+      "purpose": "deployment"
+    },
+    {
+      "path": "deploy/deputy-backup.service",
+      "purpose": "deployment"
+    },
+    {
+      "path": "deploy/deputy-backup.timer",
+      "purpose": "deployment"
+    },
+    {
+      "path": "deploy/deputy-worker.service",
+      "purpose": "deployment"
+    },
+    {
+      "path": "deploy/install.sh",
+      "purpose": "deployment"
+    },
+    {
+      "path": "deploy/test_install.py",
+      "purpose": "deployment"
+    },
+    {
+      "path": "design-system/.editorconfig",
+      "purpose": "design_system"
+    },
+    {
+      "path": "design-system/.gitattributes",
+      "purpose": "design_system"
+    },
+    {
+      "path": "design-system/.github/dependabot.yml",
+      "purpose": "ci"
+    },
+    {
+      "path": "design-system/.github/workflows/ci.yml",
+      "purpose": "ci"
+    },
+    {
+      "path": "design-system/.gitignore",
+      "purpose": "design_system"
+    },
+    {
+      "path": "design-system/AGENTS.md",
+      "purpose": "design_system"
+    },
+    {
+      "path": "design-system/CHANGELOG.md",
+      "purpose": "design_system"
+    },
+    {
+      "path": "design-system/CLAUDE.md",
+      "purpose": "design_system"
+    },
+    {
+      "path": "design-system/README.md",
+      "purpose": "design_system"
+    },
+    {
+      "path": "design-system/assets/brand/BRAND.md",
+      "purpose": "design_system"
+    },
+    {
+      "path": "design-system/assets/brand/derived/design-system-hero-dark.svg",
+      "purpose": "design_system"
+    },
+    {
+      "path": "design-system/assets/brand/derived/design-system-hero-light.svg",
+      "purpose": "design_system"
+    },
+    {
+      "path": "design-system/assets/brand/original/housenet-footer-logo.svg",
+      "purpose": "design_system"
+    },
+    {
+      "path": "design-system/assets/brand/original/housenet-main-logo.svg",
+      "purpose": "design_system"
+    },
+    {
+      "path": "design-system/assets/github/canonical-dark.svg",
+      "purpose": "design_system"
+    },
+    {
+      "path": "design-system/assets/github/canonical-light.svg",
+      "purpose": "design_system"
+    },
+    {
+      "path": "design-system/assets/github/canonical.svg",
+      "purpose": "design_system"
+    },
+    {
+      "path": "design-system/assets/github/capabilities-dark.svg",
+      "purpose": "design_system"
+    },
+    {
+      "path": "design-system/assets/github/capabilities.svg",
+      "purpose": "design_system"
+    },
+    {
+      "path": "design-system/assets/github/deputy-flow-dark.svg",
+      "purpose": "design_system"
+    },
+    {
+      "path": "design-system/assets/github/deputy-flow.svg",
+      "purpose": "design_system"
+    },
+    {
+      "path": "design-system/assets/github/hero-dark.svg",
+      "purpose": "design_system"
+    },
+    {
+      "path": "design-system/assets/github/hero-light.svg",
+      "purpose": "design_system"
+    },
+    {
+      "path": "design-system/assets/github/product-dark.svg",
+      "purpose": "design_system"
+    },
+    {
+      "path": "design-system/assets/github/product.svg",
+      "purpose": "design_system"
+    },
+    {
+      "path": "design-system/assets/github/repo-map-dark.svg",
+      "purpose": "design_system"
+    },
+    {
+      "path": "design-system/assets/github/repo-map-light.svg",
+      "purpose": "design_system"
+    },
+    {
+      "path": "design-system/assets/github/validate-docs-dark.svg",
+      "purpose": "design_system"
+    },
+    {
+      "path": "design-system/assets/github/validate-docs.svg",
+      "purpose": "design_system"
+    },
+    {
+      "path": "design-system/assets/github/what-deputy-dark.svg",
+      "purpose": "design_system"
+    },
+    {
+      "path": "design-system/assets/github/what-deputy.svg",
+      "purpose": "design_system"
+    },
+    {
+      "path": "design-system/assets/profile/housenet-avatar.svg",
+      "purpose": "design_system"
+    },
+    {
+      "path": "design-system/assets/social/command-center.svg",
+      "purpose": "design_system"
+    },
+    {
+      "path": "design-system/assets/social/control-plane.svg",
+      "purpose": "design_system"
+    },
+    {
+      "path": "design-system/assets/social/design-system.svg",
+      "purpose": "design_system"
+    },
+    {
+      "path": "design-system/assets/upload/command-center.png",
+      "purpose": "design_system"
+    },
+    {
+      "path": "design-system/assets/upload/control-plane.png",
+      "purpose": "design_system"
+    },
+    {
+      "path": "design-system/assets/upload/design-system.png",
+      "purpose": "design_system"
+    },
+    {
+      "path": "design-system/assets/upload/housenet-avatar.png",
+      "purpose": "design_system"
+    },
+    {
+      "path": "design-system/assets/upload/manifest.json",
+      "purpose": "design_system"
+    },
+    {
+      "path": "design-system/bin/check-version-consistency",
+      "purpose": "design_system"
+    },
+    {
+      "path": "design-system/bin/generate-design-status",
+      "purpose": "design_system"
+    },
+    {
+      "path": "design-system/bin/housenet-version",
+      "purpose": "design_system"
+    },
+    {
+      "path": "design-system/docs/ACCESSIBILITY.md",
+      "purpose": "design_system"
+    },
+    {
+      "path": "design-system/docs/ARCHITECTURE.md",
+      "purpose": "design_system"
+    },
+    {
+      "path": "design-system/docs/DESIGN-LANGUAGE.md",
+      "purpose": "design_system"
+    },
+    {
+      "path": "design-system/docs/ENFORCEMENT.md",
+      "purpose": "design_system"
+    },
+    {
+      "path": "design-system/docs/TOKENS.md",
+      "purpose": "design_system"
+    },
+    {
+      "path": "design-system/docs/UI-SYSTEM.md",
+      "purpose": "design_system"
+    },
+    {
+      "path": "design-system/docs/USAGE.md",
+      "purpose": "design_system"
+    },
+    {
+      "path": "design-system/docs/VERSION.md",
+      "purpose": "design_system"
+    },
+    {
+      "path": "design-system/documents/README.md",
+      "purpose": "design_system"
+    },
+    {
+      "path": "design-system/documents/generators/README.md",
+      "purpose": "design_system"
+    },
+    {
+      "path": "design-system/documents/memo/README.md",
+      "purpose": "design_system"
+    },
+    {
+      "path": "design-system/documents/operational-review/README.md",
+      "purpose": "design_system"
+    },
+    {
+      "path": "design-system/documents/policy/README.md",
+      "purpose": "design_system"
+    },
+    {
+      "path": "design-system/documents/procedure/README.md",
+      "purpose": "design_system"
+    },
+    {
+      "path": "design-system/documents/proposal/README.md",
+      "purpose": "design_system"
+    },
+    {
+      "path": "design-system/documents/report/README.md",
+      "purpose": "design_system"
+    },
+    {
+      "path": "design-system/documents/schemas/document-metadata.schema.json",
+      "purpose": "design_system"
+    },
+    {
+      "path": "design-system/documents/templates/excel/dashboard.json",
+      "purpose": "design_system"
+    },
+    {
+      "path": "design-system/documents/templates/powerpoint/executive.json",
+      "purpose": "design_system"
+    },
+    {
+      "path": "design-system/documents/templates/template-manifest.json",
+      "purpose": "design_system"
+    },
+    {
+      "path": "design-system/documents/templates/word/general.md",
+      "purpose": "design_system"
+    },
+    {
+      "path": "design-system/documents/templates/word/policy.md",
+      "purpose": "design_system"
+    },
+    {
+      "path": "design-system/documents/templates/word/report.md",
+      "purpose": "design_system"
+    },
+    {
+      "path": "design-system/examples/ui/card.css",
+      "purpose": "design_system"
+    },
+    {
+      "path": "design-system/examples/ui/card.html",
+      "purpose": "design_system"
+    },
+    {
+      "path": "design-system/house-net-control.json",
+      "purpose": "design_system"
+    },
+    {
+      "path": "design-system/release/manifest.json",
+      "purpose": "design_system"
+    },
+    {
+      "path": "design-system/schemas/design-tokens.schema.json",
+      "purpose": "design_system"
+    },
+    {
+      "path": "design-system/tests/test_design_system.py",
+      "purpose": "test"
+    },
+    {
+      "path": "design-system/tokens/brand-tokens.json",
+      "purpose": "design_system"
+    },
+    {
+      "path": "design-system/tokens/document-tokens.json",
+      "purpose": "design_system"
+    },
+    {
+      "path": "design-system/validators/validate_design_system.py",
+      "purpose": "design_system"
+    },
+    {
+      "path": "design-system/versioning.py",
+      "purpose": "design_system"
+    },
+    {
+      "path": "docs/README.md",
+      "purpose": "documentation"
+    },
+    {
+      "path": "docs/document-index.json",
+      "purpose": "documentation"
+    },
+    {
+      "path": "docs/governance/MONOREPO_MIGRATION_MANIFEST.md",
+      "purpose": "documentation"
+    },
+    {
+      "path": "docs/governance/PUBLIC_AUDIT.md",
+      "purpose": "documentation"
+    },
+    {
+      "path": "docs/governance/data-classification.json",
+      "purpose": "documentation"
+    },
+    {
+      "path": "docs/governance/enforcement-matrix.json",
+      "purpose": "documentation"
+    },
+    {
+      "path": "docs/governance/engineering-authority.schema.json",
+      "purpose": "documentation"
+    },
+    {
+      "path": "docs/governance/historical/nested-workflows/command-center-backbone-ci.yml",
+      "purpose": "historical"
+    },
+    {
+      "path": "docs/governance/historical/nested-workflows/command-center-command-center-ci.yml",
+      "purpose": "historical"
+    },
+    {
+      "path": "docs/governance/historical/nested-workflows/control-plane-control-plane-ci.yml",
+      "purpose": "historical"
+    },
+    {
+      "path": "docs/governance/historical/nested-workflows/control-plane-reusable-policy-gate.yml",
+      "purpose": "historical"
+    },
+    {
+      "path": "docs/governance/historical/nested-workflows/design-system-ci.yml",
+      "purpose": "historical"
+    },
+    {
+      "path": "docs/governance/historical/nested-workflows/knowledge-knowledge-ci.yml",
+      "purpose": "historical"
+    },
+    {
+      "path": "docs/governance/historical/nested-workflows/vault-vault-ci.yml",
+      "purpose": "historical"
+    },
+    {
+      "path": "docs/governance/historical/overlay_backup.py",
+      "purpose": "historical"
+    },
+    {
+      "path": "docs/governance/ownership-map.json",
+      "purpose": "documentation"
+    },
+    {
+      "path": "docs/governance/policy-coverage.json",
+      "purpose": "documentation"
+    },
+    {
+      "path": "docs/governance/repository-inventory.json",
+      "purpose": "documentation"
+    },
+    {
+      "path": "house-net-control.json",
+      "purpose": "canonical_config"
+    },
+    {
+      "path": "knowledge/.editorconfig",
+      "purpose": "knowledge"
+    },
+    {
+      "path": "knowledge/.gitattributes",
+      "purpose": "knowledge"
+    },
+    {
+      "path": "knowledge/.github/workflows/knowledge-ci.yml",
+      "purpose": "ci"
+    },
+    {
+      "path": "knowledge/.gitignore",
+      "purpose": "knowledge"
+    },
+    {
+      "path": "knowledge/AGENTS.md",
+      "purpose": "knowledge"
+    },
+    {
+      "path": "knowledge/README.md",
+      "purpose": "knowledge"
+    },
+    {
+      "path": "knowledge/bin/validate-knowledge",
+      "purpose": "knowledge"
+    },
+    {
+      "path": "knowledge/house-net-control.json",
+      "purpose": "knowledge"
+    },
+    {
+      "path": "knowledge/knowledge/archive/.gitkeep",
+      "purpose": "knowledge"
+    },
+    {
+      "path": "knowledge/knowledge/canonical/.gitkeep",
+      "purpose": "knowledge"
+    },
+    {
+      "path": "knowledge/knowledge/canonical/HN-KNOW-DEPUTY-IDENTITY.json",
+      "purpose": "knowledge"
+    },
+    {
+      "path": "knowledge/knowledge/index/catalog.json",
+      "purpose": "knowledge"
+    },
+    {
+      "path": "knowledge/knowledge/intake/.gitkeep",
+      "purpose": "knowledge"
+    },
+    {
+      "path": "knowledge/knowledge/intake/inventory/OWNER-DECISIONS.md",
+      "purpose": "knowledge"
+    },
+    {
+      "path": "knowledge/knowledge/intake/inventory/REPORT.md",
+      "purpose": "knowledge"
+    },
+    {
+      "path": "knowledge/knowledge/intake/inventory/ledger.json",
+      "purpose": "knowledge"
+    },
+    {
+      "path": "knowledge/knowledge/intake/inventory/manifest.json",
+      "purpose": "knowledge"
+    },
+    {
+      "path": "knowledge/policy-snapshot.json",
+      "purpose": "knowledge"
+    },
+    {
+      "path": "knowledge/requirements.txt",
+      "purpose": "knowledge"
+    },
+    {
+      "path": "knowledge/schemas/knowledge-item.schema.json",
+      "purpose": "knowledge"
+    },
+    {
+      "path": "knowledge/tests/test_knowledge.py",
+      "purpose": "test"
+    },
+    {
+      "path": "tools/__pycache__/policy_coverage.cpython-314.pyc",
+      "purpose": "governance_tool"
+    },
+    {
+      "path": "tools/__pycache__/secret_scan.cpython-314.pyc",
+      "purpose": "governance_tool"
+    },
+    {
+      "path": "tools/__pycache__/test_data_classification.cpython-314.pyc",
+      "purpose": "governance_tool"
+    },
+    {
+      "path": "tools/__pycache__/test_policy_coverage.cpython-314.pyc",
+      "purpose": "governance_tool"
+    },
+    {
+      "path": "tools/__pycache__/test_repository_inventory.cpython-314.pyc",
+      "purpose": "governance_tool"
+    },
+    {
+      "path": "tools/__pycache__/test_secret_scan.cpython-314.pyc",
+      "purpose": "governance_tool"
+    },
+    {
+      "path": "tools/engineering_authority.py",
+      "purpose": "governance_tool"
+    },
+    {
+      "path": "tools/engineering_authority_gate.py",
+      "purpose": "governance_tool"
+    },
+    {
+      "path": "tools/policy_coverage.py",
+      "purpose": "governance_tool"
+    },
+    {
+      "path": "tools/repository_inventory.py",
+      "purpose": "governance_tool"
+    },
+    {
+      "path": "tools/secret-scan-allowlist.json",
+      "purpose": "governance_tool"
+    },
+    {
+      "path": "tools/secret_scan.py",
+      "purpose": "governance_tool"
+    },
+    {
+      "path": "tools/test_data_classification.py",
+      "purpose": "governance_tool"
+    },
+    {
+      "path": "tools/test_engineering_authority.py",
+      "purpose": "governance_tool"
+    },
+    {
+      "path": "tools/test_engineering_authority_gate.py",
+      "purpose": "governance_tool"
+    },
+    {
+      "path": "tools/test_policy_coverage.py",
+      "purpose": "governance_tool"
+    },
+    {
+      "path": "tools/test_repository_inventory.py",
+      "purpose": "governance_tool"
+    },
+    {
+      "path": "tools/test_secret_scan.py",
+      "purpose": "governance_tool"
+    },
+    {
+      "path": "tools/validate_house_net.py",
+      "purpose": "governance_tool"
+    },
+    {
+      "path": "vault/.editorconfig",
+      "purpose": "vault"
+    },
+    {
+      "path": "vault/.gitattributes",
+      "purpose": "vault"
+    },
+    {
+      "path": "vault/.github/workflows/vault-ci.yml",
+      "purpose": "ci"
+    },
+    {
+      "path": "vault/.gitignore",
+      "purpose": "vault"
+    },
+    {
+      "path": "vault/AGENTS.md",
+      "purpose": "vault"
+    },
+    {
+      "path": "vault/README.md",
+      "purpose": "vault"
+    },
+    {
+      "path": "vault/bin/validate-vault",
+      "purpose": "vault"
+    },
+    {
+      "path": "vault/house-net-control.json",
+      "purpose": "vault"
+    },
+    {
+      "path": "vault/policy-snapshot.json",
+      "purpose": "vault"
+    },
+    {
+      "path": "vault/requirements.txt",
+      "purpose": "vault"
+    },
+    {
+      "path": "vault/schemas/vault-reference.schema.json",
+      "purpose": "vault"
+    },
+    {
+      "path": "vault/tests/test_vault.py",
+      "purpose": "test"
+    },
+    {
+      "path": "vault/vault/index.json",
+      "purpose": "vault"
+    },
+    {
+      "path": "vault/vault/references/example-recovery-reference.json",
+      "purpose": "vault"
+    }
+  ],
+  "ok": true
+}

@@ -11,9 +11,9 @@
 <p align="center"><strong>HOUSE NET · ENGINEERING CONTROL PLANE</strong><br>Canonical policy, classification and agent authority for HouseNet engineering.</p>
 
 <p align="center">
-  <a href="https://github.com/HouseNet-Projects/house-net-control-plane/actions/workflows/control-plane-ci.yml"><img alt="Control plane CI" src="https://github.com/HouseNet-Projects/house-net-control-plane/actions/workflows/control-plane-ci.yml/badge.svg?branch=main"></a>
-  <a href="https://github.com/HouseNet-Projects/house-net-control-plane/blob/main/docs/POLICY.md">Policy authority</a>
-  <a href="https://github.com/HouseNet-Projects/house-net-control-plane/blob/main/docs/ENFORCEMENT.md">Enforcement map</a>
+  <a href="https://github.com/HouseNet-Projects/house-net/actions/workflows/control-plane-ci.yml"><img alt="Control plane CI" src="https://github.com/HouseNet-Projects/house-net/actions/workflows/control-plane-ci.yml/badge.svg?branch=main"></a>
+  <a href="https://github.com/HouseNet-Projects/house-net/blob/main/docs/POLICY.md">Policy authority</a>
+  <a href="https://github.com/HouseNet-Projects/house-net/blob/main/docs/ENFORCEMENT.md">Enforcement map</a>
 </p>
 
 ## Control plane status

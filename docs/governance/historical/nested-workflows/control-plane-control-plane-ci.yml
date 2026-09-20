@@ -1,0 +1,39 @@
+name: Control plane CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: control-plane-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  integrity:
+    name: Policy integrity and tests
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: '3.12'
+      - name: Install verified validator dependencies
+        run: python -m pip install --require-hashes --no-deps -r requirements.txt
+      - name: Validate policy and self-registration
+        run: |
+          bin/validate-control-plane --json
+          bin/generate-control-plane-status .
+          git diff --exit-code -- README.md
+          bin/check-version-consistency .
+      - name: Test real failure modes
+        env:
+          PYTHONDONTWRITEBYTECODE: '1'
+        run: python -m unittest discover -s tests -v
+      - name: Check Python and shell syntax
+        run: python bin/check-syntax

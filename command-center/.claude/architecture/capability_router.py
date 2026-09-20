@@ -1,16 +1,16 @@
-"""Deterministic multi-brain routing inside the single Deputy identity."""
+"""Deterministic capability selection inside the single Claude-powered Deputy."""
 import json,re
 from pathlib import Path
 ROOT=Path(__file__).resolve().parent
 
-def load_registry(path=None):
-    p=Path(path or ROOT/'professional_brains.json')
+def load_capability_registry(path=None):
+    p=Path(path or ROOT/'capability_registry.json')
     return json.loads(p.read_text(encoding='utf-8'))
 
 def route(request, registry=None):
     text=str(request or '').casefold().strip()
     if not text: raise ValueError('request is required')
-    reg=registry or load_registry(); selected=[]
+    reg=registry or load_capability_registry(); selected=[]
     for brain in reg['brains']:
         hits=[t for t in brain['triggers'] if t.casefold() in text]
         if hits: selected.append({'brain_id':brain['id'],'reason':'trigger:'+hits[0],'matched_triggers':hits,'collaboration':brain['collaboration']})

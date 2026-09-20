@@ -1,6 +1,6 @@
 # HouseNet Deputy adapter
 
-This repository is governed by `HouseNet-Projects/house-net-control-plane`.
+This repository is governed by `HouseNet-Projects/house-net`.
 
 Before HouseNet work:
 
