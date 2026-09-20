@@ -4,7 +4,7 @@ Levels: DECLARED (spec only) · IMPLEMENTED (adapter code exists) · CONFIGURED 
 VERIFIED_READ (integration certification) · VERIFIED_WRITE (a Gev-approved live write was executed and read back) · UNAVAILABLE (cannot work here).
 Theoretical code is never a live capability: VERIFIED_WRITE comes only from .claude/state/durable/write_certifications.json, written by the Action Runtime
 after an approved, verified live action. Every write requires Gev approval (approval_rule.json) — risk class changes scrutiny, never autonomy."""
-import sys, json, pathlib, datetime
+import sys, json, pathlib, datetime, platform, shutil, hashlib
 HERE = pathlib.Path(__file__).resolve().parent
 ROOT = HERE.parent.parent
 sys.path.insert(0, str(HERE))
@@ -59,13 +59,40 @@ def _write_certs():
 
 def record_write_certification(iid, op, action_id, evidence):
     """Called by the Action Runtime after a Gev-approved, VERIFIED live write flagged as certification. Durable (versioned) evidence."""
-    d = _write_certs(); d.setdefault(iid, {})[op] = {"action_id": action_id, "verified_at": datetime.datetime.now().isoformat(timespec="seconds"), "evidence": evidence}
+    spec = registry.get(iid) or {}; adapter = (WRITE_OPS.get(iid, {}).get(op) or {}).get("adapter")
+    adapter_path = HERE / (str(adapter) + ".py") if adapter else None
+    d = _write_certs(); d.setdefault(iid, {})[op] = {"action_id": action_id, "verified_at": datetime.datetime.now().isoformat(timespec="seconds"), "evidence": evidence,
+        "provider": iid, "operation": op, "executor": adapter, "platform": platform.system(),
+        "runtime_requirements": spec.get("machine_dependency"),
+        "implementation_sha256": hashlib.sha256(adapter_path.read_bytes()).hexdigest() if adapter_path and adapter_path.exists() else None}
     WRITE_CERTS.parent.mkdir(parents=True, exist_ok=True); WRITE_CERTS.write_text(json.dumps(d, ensure_ascii=False, indent=1) + "\n", encoding="utf-8"); return d[iid][op]
 
 def _read_cert(iid):
     p = HERE / "certification.json"
     try: return (json.loads(p.read_text(encoding="utf-8")).get("integrations", {}) if p.exists() else {}).get(iid, {})
     except ValueError: return {}
+
+def _host_runtime(iid, spec):
+    """Return whether this process can actually execute the operation on this host."""
+    dep = str(spec.get("machine_dependency") or "").lower()
+    if "windows" in dep or "outlook" in dep or "powershell" in dep or iid in ("INT-OL-CAL", "INT-OL-MAIL"):
+        if platform.system().lower() != "windows":
+            return {"available": False, "reason": "Outlook desktop/PowerShell executor requires Windows", "platform": platform.system(), "executor": "adapter_outlook_write"}
+        if not (shutil.which("pwsh") or shutil.which("powershell")):
+            return {"available": False, "reason": "PowerShell executor is unavailable", "platform": platform.system(), "executor": "adapter_outlook_write"}
+    return {"available": True, "reason": None, "platform": platform.system(), "executor": (WRITE_OPS.get(iid, {}).get(next(iter(WRITE_OPS.get(iid, {})), {})) or {}).get("adapter")}
+
+def _cert_usable(cert, iid, op, spec):
+    """Historical records without execution provenance are evidence only, never current certification."""
+    if not cert or cert.get("provider") != iid or cert.get("operation") != op or not cert.get("executor"):
+        return False
+    if cert.get("platform") and cert.get("platform") != platform.system():
+        return False
+    adapter_path = HERE / (str(cert.get("executor")) + ".py")
+    if cert.get("implementation_sha256") and adapter_path.exists() and cert["implementation_sha256"] != hashlib.sha256(adapter_path.read_bytes()).hexdigest():
+        return False
+    dep = str(spec.get("machine_dependency") or "")
+    return cert.get("runtime_requirements") == spec.get("machine_dependency")
 
 def capability(iid, op):
     """One honest capability row for (integration, operation)."""
@@ -76,8 +103,10 @@ def capability(iid, op):
     secrets = spec.get("auth", {}).get("secrets", [])
     configured = bool(spec) and (not secrets or (spec.get("adapter") != "adapter_mikrobill" and all(_secrets.load_config(iid).get(s) for s in secrets)))
     connected = bool(h.get("last_success")) and h.get("status") in ("AVAILABLE", "DEGRADED")
+    host = _host_runtime(iid, spec); cert_valid = _cert_usable(wc, iid, op, spec)
     row = {"integration_id": iid, "operation": op, "read_or_write": "read" if read else "write", "implemented": implemented, "configured": configured, "connected": connected,
-           "runtime_available": implemented and configured and connected, "risk_class": (w or {}).get("risk_class", "R0"), "gev_approval_required": bool(w), "authority_required": (w or {}).get("authority_required", "READ"),
+           "runtime_available": implemented and configured and connected and host["available"], "current_host_executable": host["available"], "executor": host.get("executor"), "runtime_reason": host.get("reason"), "certification_provenance_valid": cert_valid,
+           "risk_class": (w or {}).get("risk_class", "R0"), "gev_approval_required": bool(w), "authority_required": (w or {}).get("authority_required", "READ"),
            "idempotency_method": (w or {}).get("idempotency_method", "n/a (read)"), "verification_method": (w or {}).get("verification_method", "n/a (read)"), "machine_dependency": spec.get("machine_dependency"),
            "system": spec.get("system"), "unblock": spec.get("unblock"), "note": (w or {}).get("note"), "category": (w or {}).get("category", "READ" if read else "SAFE_WRITE" if (w or {}).get("risk_class") == "R1" else "MATERIAL_WRITE"),
            "retry_safe_when_absent": (w or {}).get("retry_safe_when_absent", False), "last_verified_at": (wc or {}).get("verified_at") if w else (rc.get("health") or {}).get("last_success")}
@@ -85,8 +114,9 @@ def capability(iid, op):
     if spec.get("deferred"): row["level"] = "DEFERRED"; row["note"] = spec["deferred"].get("note")
     elif not implemented: row["level"] = "UNAVAILABLE" if (w and not w.get("adapter")) else "DECLARED"
     elif not configured: row["level"] = "IMPLEMENTED"
+    elif w and not host["available"]: row["level"] = "NOT_EXECUTABLE"
     elif not connected: row["level"] = "CONFIGURED"
-    elif w: row["level"] = "VERIFIED_WRITE" if wc else "CONNECTED"
+    elif w: row["level"] = "VERIFIED_WRITE" if cert_valid else "CONNECTED"
     else: row["level"] = "VERIFIED_READ" if rc.get("state") in ("VERIFIED_READ", "RELIABLE_READ") else "CONNECTED"
     row["certification_status"] = row["level"]
     return row

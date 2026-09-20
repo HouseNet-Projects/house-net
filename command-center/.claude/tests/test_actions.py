@@ -15,9 +15,10 @@ TMP = pathlib.Path(tempfile.mkdtemp(prefix="cchands_")); engine.STATE_DIR = TMP 
 # HARD GUARD: this suite must never touch the real register — every Tasks.xlsx write is redirected to a temp copy, and the suite verifies
 # at the end that the canonical file is byte-identical to what it was at import time.
 import hashlib as _hl
+_FIXTURE = HERE / 'fixtures' / 'Tasks.xlsx'
 _REAL = ROOT / "Tasks.xlsx"; _REAL_SHA = _hl.sha256(_REAL.read_bytes()).hexdigest() if _REAL.exists() else None
 _GUARD = TMP / "Tasks-guard.xlsx"
-if _REAL.exists(): shutil.copy(_REAL, _GUARD)
+shutil.copy(_FIXTURE, _GUARD)
 os.environ["COMMAND_CENTER_TASKS_XLSX"] = str(_GUARD)
 def tearDownModule():
     import registry; registry.INTEGRATIONS.pop("INT-FAKE", None); CAP.WRITE_OPS.pop("INT-FAKE", None); A.PROVIDER_OVERRIDES.pop("INT-FAKE", None)   # never leak the fake integration into other suites
@@ -182,8 +183,7 @@ class H03_Verification(unittest.TestCase):
 class H04_TasksWriteAdapter(unittest.TestCase):
     """The real Tasks.xlsx write path on a TEMP COPY of the register."""
     def setUp(self):
-        if not (ROOT / "Tasks.xlsx").exists(): self.skipTest("Tasks.xlsx absent")
-        self.xlsx = TMP / f"Tasks-{self._testMethodName}.xlsx"; shutil.copy(ROOT / "Tasks.xlsx", self.xlsx); A.PROVIDER_OVERRIDES.pop("INT-TASKS", None)
+        self.xlsx = TMP / f"Tasks-{self._testMethodName}.xlsx"; shutil.copy(_FIXTURE, self.xlsx); A.PROVIDER_OVERRIDES.pop("INT-TASKS", None)
     def _r(self, op, params, oid=None): return A.build_request(skill_id=AR, business_intent=f"{op} test", business_domain="A_EXECUTIVE_CONTROL", target_system="INT-TASKS", target_operation=op, target_object_type="task", target_object_id=oid, parameters={**params, "register_path": str(self.xlsx)}, expected_effect="row", expected_postcondition="read-back")
     @covers(AR, "task_management", "deadline_management", *GOV, kinds=("unit", "completion", "failure"))
     def test_create_assign_close_reopen_with_readback(self):
@@ -225,7 +225,7 @@ class H05_CapabilityAndSkill(unittest.TestCase):
             c = certs.get(k[0], {}).get(k[1])
             if r["level"] == "VERIFIED_WRITE":                      # only a durable, Gev-approved, VERIFIED live write may certify — never a test or a code path
                 self.assertIsNotNone(c, f"{k}: VERIFIED_WRITE without durable certification evidence"); self.assertTrue(c.get("action_id", "").startswith("ACT-"), k); self.assertEqual(c["evidence"].get("approved_by"), "Gev", k)
-            else: self.assertFalse(c and r["runtime_available"], f"{k}: certification recorded and runtime available, yet level is {r['level']}")   # (in this suite health lives in a temp state dir → not connected)
+            else: self.assertFalse(c and r["runtime_available"] and r.get("certification_provenance_valid"), f"{k}: usable certification and runtime available, yet level is {r['level']}")
         import adapter_outlook_write as W; self.assertEqual(W.writer_problems(), [])
     @covers(AR, *GOV, kinds=("routing", "unit"))
     def test_routing_and_executor_boundaries(self):
