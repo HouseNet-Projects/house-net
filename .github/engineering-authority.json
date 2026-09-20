@@ -1,13 +1,13 @@
 {
-  "authority_id": "EAE-UI-TOKEN-SOURCE-2026-09-20",
+  "authority_id": "EAE-GITHUB-ASSET-CONTRAST-2026-09-20",
   "approved_by": "GEV",
-  "approval_reference": "gev-explicit-ui-remediation-2026-09-20",
+  "approval_reference": "gev-explicit-browser-ui-remediation-2026-09-20",
   "approved_at": "2026-09-20T00:00:00Z",
-  "mission": "Derive operator shell design tokens from the canonical HouseNet Design System and prevent untranslated initial shell flash.",
+  "mission": "Correct GitHub What Deputy theme assets so light and dark variants retain readable HouseNet token contrast.",
   "repository": "HouseNet-Projects/house-net",
-  "base_sha": "954a33759e0efdd46e0b4a06352663738e7a3d8c",
-  "branch": "fix/ui-token-source-and-locale-flash",
-  "pr": "66",
+  "base_sha": "bcfd21745e35275f848dac9a2215d26338b7a3e4",
+  "branch": "fix/github-asset-theme-contrast",
+  "pr": "67",
   "allowed_operations": [
     "branch",
     "edit",
@@ -21,8 +21,9 @@
   ],
   "allowed_paths": [
     ".github/engineering-authority.json",
-    "command-center/product_api.py",
-    "command-center/.claude/tests/test_product_api.py"
+    "design-system/assets/github/what-deputy.svg",
+    "design-system/assets/github/what-deputy-dark.svg",
+    "design-system/tests/test_design_system.py"
   ],
   "prohibited_operations": [
     "external_write",

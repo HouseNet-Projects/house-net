@@ -33,6 +33,15 @@ class DesignSystemTests(unittest.TestCase):
     def test_static_hero_rejects_volatile_version(self):
         p=self.root/'assets/brand/derived/design-system-hero-dark.svg'; p.write_text(p.read_text() + '<!-- 1.0.124 -->')
         with self.assertRaisesRegex(Invalid,'Volatile version embedded'): validate(self.root)
+
+    def test_github_deputy_theme_assets_keep_text_contrast(self):
+        light = (self.root/'assets/github/what-deputy.svg').read_text()
+        dark = (self.root/'assets/github/what-deputy-dark.svg').read_text()
+        self.assertIn('fill="#F6F9FB"', light)
+        self.assertIn('fill="#1D1D1B"', light)
+        self.assertNotIn('font-size="17" fill="white"', light)
+        self.assertIn('fill="#1C2125"', dark)
+        self.assertIn('fill="white"', dark)
     def test_malformed_canonical_version_fails(self):
         p=self.root/'release/manifest.json'; d=json.loads(p.read_text()); d['version']='1.0.x'; p.write_text(json.dumps(d))
         with self.assertRaisesRegex(ValueError,'Invalid canonical'): check(self.root)
