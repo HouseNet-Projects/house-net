@@ -25,6 +25,11 @@ class ProductHardeningTests(unittest.TestCase):
         # hold locale/theme preferences but must not become chat state.
         self.assertNotIn("localStorage.setItem('deputy-conversation'", js)
 
+    def test_operator_controls_keep_readable_theme_foreground(self):
+        html = product_api.INDEX_HTML
+        self.assertIn('button,input,select,textarea{font:inherit;color:var(--text)}', html)
+        self.assertIn('[data-theme="dark"] input,[data-theme="dark"] select,[data-theme="dark"] textarea', html)
+
     def test_health_model_separates_product_and_business_data(self):
         import health_model
         h = health_model.build(store_state='READY', action_runtime_state='READY', worker={'running': True}, provider={'state': 'READY'})
