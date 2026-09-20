@@ -23,6 +23,17 @@ def _status(row):
 def _write_status(**kw):
     current=proactive._st().get('checkpoints','worker:status') or {}; current.update(kw); proactive._st().upsert('checkpoints','worker:status',current); return current
 
+def _installation_truth():
+    """Installation is measured from executable runtime facts, never a constant."""
+    runtime = pathlib.Path(__file__).is_file()
+    try:
+        import proactive as _p
+        runtime = runtime and callable(_p.run_cycle)
+    except Exception:
+        runtime = False
+    unit = pathlib.Path(os.environ.get('DEPUTY_WORKER_UNIT', '/etc/systemd/system/deputy-worker.service'))
+    return {'runtime_available': runtime, 'supervisor_present': unit.exists(), 'installed': runtime}
+
 def run_once():
     lock=_lock(); lock.parent.mkdir(parents=True,exist_ok=True)
     try:
@@ -51,7 +62,7 @@ def status():
     s=_status(proactive._st().get('checkpoints','worker:status')); last=proactive._st().get('checkpoints','worker:last_run');
     # A supervised daemon remains running between cycles; expose process liveness, not only cycle activity.
     if s.get('pid') and _pid_alive(s.get('pid')): s['running']=True
-    return {'installed':True,**s,'last_run':last or s.get('last_run'),'last_success':s.get('last_success'),'last_failure':s.get('last_failure')}
+    return {**_installation_truth(),**s,'last_run':last or s.get('last_run'),'last_success':s.get('last_success'),'last_failure':s.get('last_failure')}
 
 def serve(interval=None):
     global STOP
