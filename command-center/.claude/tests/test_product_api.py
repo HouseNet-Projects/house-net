@@ -111,6 +111,14 @@ class OperatorPresentationTests(unittest.TestCase):
         css = product_api.INDEX_HTML
         for token in ('#E4003A', '#1C2125', '#F6F9FB', '#EDF3F6', '#D1DCE2', '#78AD57', 'Inter', 'Noto Sans Armenian', '1180px'):
             self.assertIn(token, css)
+
+    def test_shell_consumes_canonical_brand_token_source(self):
+        css = product_api.INDEX_HTML
+        self.assertEqual(product_api.BRAND_TOKENS["primary"], "#E4003A")
+        self.assertEqual(product_api.BRAND_TOKENS["secondary"], "#1C2125")
+        self.assertEqual(product_api.BRAND_TOKENS["font"], "Inter, Noto Sans Armenian, Arial, sans-serif")
+        self.assertIn('data-i18n="home.title"', product_api.INDEX_HTML)
+        self.assertIn('data-i18n="home.subtitle"', product_api.INDEX_HTML)
         self.assertNotIn('--blue', css)
 
     def test_screen_specific_adapters_and_safe_diagnostic_boundary(self):
