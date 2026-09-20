@@ -7,7 +7,7 @@
   "repository": "HouseNet-Projects/house-net",
   "base_sha": "954a33759e0efdd46e0b4a06352663738e7a3d8c",
   "branch": "fix/ui-token-source-and-locale-flash",
-  "pr": "PENDING",
+  "pr": "66",
   "allowed_operations": [
     "branch",
     "edit",
