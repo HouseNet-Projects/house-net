@@ -168,7 +168,7 @@ def _provider_prompt(intent, context, understood, runtime, routing, graph, langu
     }
     prompt = ("You are Deputy's reasoning layer. Answer the user's question using only the governed context below. "
             "State unavailable or stale data honestly; do not invent facts. Do not expose chain-of-thought, secrets, "
-            "raw credentials, or internal implementation noise. Return a concise human answer in the requested language (Armenian when language is 'hy'; English when language is 'en') with priorities, "
+            "raw credentials, or internal implementation noise. The requested response language is authoritative for this turn: write the complete answer in that language (Armenian when language is 'hy'; English when language is 'en'), even if workspace defaults or prior messages use another language. Return a concise human answer with priorities, "
             "recommended next actions, limitations, and evidence references. A PARTIAL_SUCCESS runtime result means the operating cycle completed with partial business-source coverage; use the health.product.worker state to judge whether the worker process is actually available. Do not describe the worker as degraded solely because an optional source is unavailable. A dedicated skill is optional; never tell the user that a reasonable analytical question failed because no skill matched. For the normal answer, humanize source names and states: never expose INT-* identifiers, PARTIAL/NEEDS_SETUP/DEFERRED_BY_GEV codes, loop/ticket/runtime jargon, PIDs, raw JSON, or internal implementation names. Say for example that a source is unavailable, needs connection, or is intentionally deferred; keep exact technical values only in evidence/details.\n\n" +
             json.dumps(compact, ensure_ascii=False, default=str, indent=2))
     # Claude Code is invoked through argv; keep governed context below a
@@ -182,6 +182,15 @@ def operator_response(payload, language="hy"):
     provider = payload.get("provider") or {}
     runtime = payload.get("runtime") or {}
     answer = provider.get("answer") or payload.get("understanding", {}).get("outcome") or "Deputy prepared the current governed context."
+    # Provider output is untrusted presentation text. Keep developer/workspace
+    # diagnostics out of the normal operator answer; those remain available in
+    # the explicit evidence/details contract.
+    diagnostic_markers = ("workspace rules", "safe.directory", "scope contract", "pycache", "mcp authorization",
+                          "github sync", "certification internals", "ticket scope")
+    if isinstance(answer, str):
+        visible = [line for line in answer.splitlines()
+                   if not any(marker in line.casefold() for marker in diagnostic_markers)]
+        answer = "\n".join(visible).strip() or ("Կառավարվող պատասխանը պատրաստ չէ։" if language == "hy" else "The governed answer is not available yet.")
     limitations = []
     if provider.get("status") not in ("OK", "NOT_INVOKED"):
         limitations.append(provider.get("reason") or "The reasoning provider is unavailable.")

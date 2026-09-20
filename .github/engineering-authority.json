@@ -24,7 +24,8 @@
     "command-center/product_api.py",
     "command-center/.claude/tests/test_product_api.py",
     "command-center/.claude/architecture/state_snapshot.py",
-    "command-center/.claude/tests/test_state_snapshot.py"
+    "command-center/.claude/tests/test_state_snapshot.py",
+    "command-center/deputy.py"
   ],
   "prohibited_operations": [
     "external_write",
