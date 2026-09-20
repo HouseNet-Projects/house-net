@@ -436,7 +436,7 @@ def run_deputy_request(reg, intent, inputs=None, *, action_level="ANALYZE", appr
         arch = pathlib.Path(ROOT) / ".claude" / "architecture"
         import sys as _sys
         if str(arch) not in _sys.path: _sys.path.insert(0, str(arch))
-        from brain_router import route as _route
+        from capability_router import route as _route
         brain_evidence = _route(intent)
     except Exception as exc:
         return {"status":"BLOCKED", "blocked":[{"code":"BRAIN_ROUTER_UNAVAILABLE", "reason":str(exc)}], "ticket_id":ticket["ticket_id"]}

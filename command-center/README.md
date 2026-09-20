@@ -2,7 +2,7 @@
 
 <p align="center"><strong>HOUSE NET · COMMAND CENTER</strong><br>Deputy’s governed operations, intelligence and action workspace.</p>
 
-<p align="center"><a href="https://github.com/HouseNet-Projects/house-net-command-center/actions/workflows/command-center-ci.yml"><img alt="Command Center CI" src="https://github.com/HouseNet-Projects/house-net-command-center/actions/workflows/command-center-ci.yml/badge.svg?branch=main"></a> <strong>CLASS A · PUBLIC</strong> · <a href="https://github.com/HouseNet-Projects/house-net-control-plane">CONTROL PLANE</a></p>
+<p align="center"><a href="https://github.com/HouseNet-Projects/house-net/actions/workflows/command-center-ci.yml"><img alt="Command Center CI" src="https://github.com/HouseNet-Projects/house-net/actions/workflows/command-center-ci.yml/badge.svg?branch=main"></a> <strong>CLASS A · PUBLIC</strong> · <a href="https://github.com/HouseNet-Projects/house-net">CONTROL PLANE</a></p>
 
 ## English
 

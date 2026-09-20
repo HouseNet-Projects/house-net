@@ -25,6 +25,21 @@ class ProductHardeningTests(unittest.TestCase):
         # hold locale/theme preferences but must not become chat state.
         self.assertNotIn("localStorage.setItem('deputy-conversation'", js)
 
+    def test_chat_markdown_renderer_is_escaped_and_protocol_bounded(self):
+        js = product_api.APP_JS
+        self.assertIn('const renderMarkdown=raw=>', js)
+        self.assertIn("esc(String(raw??''))", js)
+        self.assertIn('safeMarkdownUrl', js)
+        self.assertIn('/^(https?:|mailto:)/i', js)
+        self.assertIn('rel="noopener noreferrer"', js)
+        self.assertNotIn('innerHTML=m.content', js)
+
+    def test_markdown_adversarial_inputs_are_bounded_by_renderer_contract(self):
+        js = product_api.APP_JS
+        for payload in ('<script>alert(1)</script>', '" onerror="alert(1)', 'javascript:alert(1)', '<img src=x onerror=alert(1)>'):
+            self.assertNotIn(payload, js)
+        self.assertIn(":'#'", js)
+
     def test_operator_controls_keep_readable_theme_foreground(self):
         html = product_api.INDEX_HTML
         self.assertIn('button,input,select,textarea{font:inherit;color:var(--text)}', html)
@@ -48,6 +63,14 @@ class ProductHardeningTests(unittest.TestCase):
         self.assertIn("English when language is 'en'", prompt)
         self.assertIn('requested response language is authoritative', prompt)
         self.assertIn('"language": "en"', prompt)
+
+    def test_provider_prompt_states_epistemic_contract(self):
+        prompt = deputy._provider_prompt('analysis', {}, {}, {}, {}, {}, 'en')
+        self.assertIn('CONFIRMED FACT', prompt)
+        self.assertIn('INFERENCE', prompt)
+        self.assertIn('RECOMMENDATION', prompt)
+        self.assertIn('UNKNOWN/MISSING', prompt)
+        self.assertIn('full general knowledge', prompt)
 
     def test_operator_response_hides_developer_diagnostics(self):
         out = deputy.operator_response({'provider': {'answer': 'Useful answer.\nworkspace rules and GitHub sync details.'}}, language='en')
@@ -267,6 +290,13 @@ class BehavioralProductTests(unittest.TestCase):
         self.assertIn('function renderAskResponse', product_api.APP_JS)
         self.assertIn("data-execute", product_api.APP_JS)
         self.assertIn("/actions/'+encodeURIComponent(b.dataset.execute)+'/execute", product_api.APP_JS)
+
+    def test_chat_markdown_renderer_is_escaped_and_protocol_bounded(self):
+        self.assertIn('const renderMarkdown=', product_api.APP_JS)
+        self.assertIn("safeMarkdownUrl=u=>/^(https?:|mailto:)/i", product_api.APP_JS)
+        self.assertIn("esc(String(raw??''))", product_api.APP_JS)
+        self.assertIn('rel="noopener noreferrer"', product_api.APP_JS)
+        self.assertNotIn('innerHTML=m.content', product_api.APP_JS)
 
     def test_human_work_product_navigation_and_documents(self):
         for view in ('home','deputy','inbox','work','reports','documents','settings'):

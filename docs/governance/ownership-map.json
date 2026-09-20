@@ -1,0 +1,25 @@
+{
+  "schema": "housenet.ownership.map.v1",
+  "repository": "HouseNet-Projects/house-net",
+  "owners": {
+    "policy": "control-plane/policy",
+    "repository_identity": "house-net-control.json",
+    "claude_provider": "command-center/.claude/runtime/ai_provider.py",
+    "store": "command-center/.claude/skills/store.py",
+    "conversations": "command-center/.claude/runtime/conversation_store.py",
+    "identities": "command-center/.claude/skills/store.py",
+    "work": "command-center/.claude/architecture/work_orchestrator.py",
+    "commitments": "command-center/.claude/skills/commitments.py",
+    "proactive_scheduler": "command-center/.claude/architecture/proactive.py",
+    "integrations": "command-center/.claude/integrations/registry.py",
+    "integration_health": "command-center/.claude/integrations/health.py",
+    "approvals": "command-center/.claude/skills/actions.py",
+    "action_runtime": "command-center/.claude/skills/actions.py",
+    "verification": "command-center/.claude/skills/actions.py",
+    "audit": "command-center/.claude/skills/store.py",
+    "artifacts": "command-center/document_exports.py",
+    "document_design": "design-system/tokens/brand-tokens.json",
+    "backup_recovery": "command-center/backup_ops.py",
+    "deployment": "deploy/install.sh"
+  }
+}

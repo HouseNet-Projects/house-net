@@ -8,10 +8,10 @@ from __future__ import annotations
 import hashlib, json, sys, datetime
 from pathlib import Path
 try:
-    from .brain_router import route
+    from .capability_router import route
     from .work_orchestrator import create_node, validate_graph
 except ImportError:
-    from brain_router import route
+    from capability_router import route
     from work_orchestrator import create_node, validate_graph
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -115,7 +115,8 @@ class DeputyRuntime:
 
     def plan(self, request, *, owner="GEV", source=None, events=None):
         routing = route(request)
-        if any(x["brain_id"] not in {b["id"] for b in json.loads((Path(__file__).parent / "professional_brains.json").read_text())["brains"]} for x in routing["selected_brains"]):
+        registry = json.loads((Path(__file__).parent / "capability_registry.json").read_text())
+        if any(x["brain_id"] not in {b["id"] for b in registry["brains"]} for x in routing["selected_brains"]):
             raise RuntimeBlocked("UNSUPPORTED_BRAIN")
         graph = [create_node("ACTION_PLAN", request, owner=owner, brains=[x["brain_id"] for x in routing["selected_brains"]], source=source, approval="NOT_REQUIRED")]
         errors = validate_graph(graph)

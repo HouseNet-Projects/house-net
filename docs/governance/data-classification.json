@@ -1,0 +1,15 @@
+{
+  "schema": "housenet.data-classification.v1",
+  "repository": "HouseNet-Projects/house-net",
+  "classes": {
+    "PUBLIC": {"git": "allowed", "raw_operational_payload": false},
+    "INTERNAL": {"git": "allowed_when_non_sensitive", "raw_operational_payload": false},
+    "CONFIDENTIAL": {"git": "forbidden", "raw_operational_payload": false},
+    "RESTRICTED": {"git": "forbidden", "raw_operational_payload": false}
+  },
+  "rules": {
+    "CONFIDENTIAL": ["people", "customer", "compensation", "conversation", "business_document", "operational_state"],
+    "RESTRICTED": ["credential", "token", "private_key", "oauth", "cookie", "recovery_key"]
+  },
+  "authority": "This file is the single semantic classification contract; secret scanning and repository validators enforce its Git boundary."
+}

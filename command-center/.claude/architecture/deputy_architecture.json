@@ -7,8 +7,8 @@
   "canonical_state": ".claude/skills/store.py",
   "canonical_memory_boundary": ".claude/runtime/digital_memory.py",
   "authority": "OWNER_APPROVAL_REQUIRED_FOR_MATERIAL_MUTATION",
-  "professional_brains": "architecture/professional_brains.json",
-  "router": "architecture/brain_router.py",
+  "capability_registry": "architecture/capability_registry.json",
+  "capability_router": "architecture/capability_router.py",
   "work_orchestrator": "architecture/work_orchestrator.py",
   "ownership": {
     "governance": "HouseNet-Projects/house-net",
@@ -18,5 +18,5 @@
     "runtime": "HouseNet-Projects/house-net"
   },
   "forbidden_duplicates": ["DEPUTY_IDENTITY", "ACTION_RUNTIME", "SKILL_SYSTEM", "STORE", "APPROVAL_SYSTEM", "MEMORY_SYSTEM"],
-  "pipeline": ["UNDERSTAND", "ROUTE_BRAINS", "SYNTHESIZE", "ORCHESTRATE", "RESOLVE_SKILLS", "PRECONDITIONS", "AUTHORITY", "EXECUTE", "VALIDATE", "VERIFY", "AUDIT", "MEMORY", "FOLLOW_THROUGH"]
+  "pipeline": ["UNDERSTAND", "SELECT_CAPABILITIES", "SYNTHESIZE", "ORCHESTRATE", "RESOLVE_SKILLS", "PRECONDITIONS", "AUTHORITY", "EXECUTE", "VALIDATE", "VERIFY", "AUDIT", "MEMORY", "FOLLOW_THROUGH"]
 }
