@@ -1,4 +1,5 @@
 import json, os, tempfile, unittest
+from unittest import mock
 from pathlib import Path
 import sys
 ROOT=Path(__file__).parents[2]
@@ -15,7 +16,16 @@ class OperationalCompletionTests(unittest.TestCase):
     def test_worker_once_is_restart_safe_and_prepare_only(self):
         result=worker.run_once()
         self.assertIn(result['status'], ('COMPLETED','SKIPPED_OVERLAP'))
-        self.assertEqual(worker.status()['installed'], True)
+        with tempfile.TemporaryDirectory() as td:
+            with mock.patch.dict(os.environ, {'DEPUTY_WORKER_UNIT': str(Path(td) / 'missing.service')}, clear=False):
+                absent=worker.status()
+            self.assertFalse(absent['supervisor_present'])
+            self.assertFalse(absent['installed'])
+            unit=Path(td) / 'deputy-worker.service'; unit.write_text('[Unit]\n')
+            with mock.patch.dict(os.environ, {'DEPUTY_WORKER_UNIT': str(unit)}, clear=False):
+                present=worker.status()
+            self.assertTrue(present['supervisor_present'])
+            self.assertEqual(present['installed'], present['runtime_available'])
 
     def test_schedule_and_event_dedupe(self):
         proactive.create_schedule('test-cycle','test','1h')

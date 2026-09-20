@@ -32,7 +32,8 @@ def _installation_truth():
     except Exception:
         runtime = False
     unit = pathlib.Path(os.environ.get('DEPUTY_WORKER_UNIT', '/etc/systemd/system/deputy-worker.service'))
-    return {'runtime_available': runtime, 'supervisor_present': unit.exists(), 'installed': runtime}
+    supervisor = unit.exists()
+    return {'runtime_available': runtime, 'supervisor_present': supervisor, 'installed': runtime and supervisor}
 
 def run_once():
     lock=_lock(); lock.parent.mkdir(parents=True,exist_ok=True)

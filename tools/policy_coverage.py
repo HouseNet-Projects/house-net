@@ -25,13 +25,20 @@ def evidence_for(rule):
 def verify(entry,workflow):
  if entry['classification']=='HUMAN_DECISION_REQUIRED': return bool(entry.get('human_decision_reason'))
  return bool(entry.get('artifacts')) and all((ROOT/a).exists() for a in entry['artifacts']) and bool(entry.get('tests')) and entry.get('ci_check') in workflow and entry.get('fail_closed') is True
-def main():
+def main(argv=None):
+ argv = list(argv or sys.argv[1:])
+ check = '--check' in argv
  rules=[]
  for path in sorted((ROOT/'control-plane/policy').glob('*.json')):
   for i,rule in enumerate(json.loads(path.read_text()).get('rules',[])):
    rid=rule.get('id',f'{path.stem}:{i}'); e=evidence_for(rule); e.update({'source_policy':path.relative_to(ROOT).as_posix(),'rule_id':rid,'source_index':i}); rules.append(e)
  workflow=(ROOT/'.github/workflows/house-net-ci.yml').read_text(); invalid=[r['rule_id'] for r in rules if not verify(r,workflow)]
  invalid += [r['rule_id'] for r in rules if r['classification']=='UNMAPPED_MACHINE_ENFORCEMENT']
- out={'schema_version':'2.0','total_rules':len(rules),'unmapped_rules':sorted(set(invalid)),'rules':rules}; (ROOT/'docs/governance/policy-coverage.json').write_text(json.dumps(out,indent=2)+'\n')
- print(json.dumps({'ok':not invalid,'total_rules':len(rules),'machine_enforced':sum(r['classification']=='MACHINE_ENFORCED' for r in rules),'human_decision_required':sum(r['classification']=='HUMAN_DECISION_REQUIRED' for r in rules),'invalid':len(invalid)})); return 0 if not invalid else 2
+ out={'schema_version':'2.0','total_rules':len(rules),'unmapped_rules':sorted(set(invalid)),'rules':rules}
+ target=ROOT/'docs/governance/policy-coverage.json'; rendered=json.dumps(out,indent=2)+'\n'
+ matches=target.exists() and target.read_text(encoding='utf-8') == rendered
+ if not check:
+  target.write_text(rendered, encoding='utf-8'); matches=True
+ ok=not invalid and (matches if check else True)
+ print(json.dumps({'ok':ok,'mode':'check' if check else 'write','matches':matches,'total_rules':len(rules),'machine_enforced':sum(r['classification']=='MACHINE_ENFORCED' for r in rules),'human_decision_required':sum(r['classification']=='HUMAN_DECISION_REQUIRED' for r in rules),'invalid':len(invalid)})); return 0 if ok else 2
 if __name__=='__main__': sys.exit(main())

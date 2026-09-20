@@ -1,4 +1,4 @@
-import json, subprocess, unittest
+import json, subprocess, unittest, sys
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 class RepositoryInventoryTests(unittest.TestCase):
@@ -15,3 +15,10 @@ class RepositoryInventoryTests(unittest.TestCase):
         for name,artifact in data['owners'].items():
             self.assertTrue(artifact,name)
             self.assertTrue((ROOT/artifact).exists(),artifact)
+    def test_check_mode_is_read_only_and_matches(self):
+        import hashlib, subprocess
+        target = ROOT/'docs/governance/repository-inventory.json'
+        before = hashlib.sha256(target.read_bytes()).hexdigest()
+        r = subprocess.run([sys.executable, 'tools/repository_inventory.py', '--check'], cwd=ROOT, capture_output=True, text=True)
+        self.assertEqual(r.returncode, 0, r.stdout+r.stderr)
+        self.assertEqual(before, hashlib.sha256(target.read_bytes()).hexdigest())
