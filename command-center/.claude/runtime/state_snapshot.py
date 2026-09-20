@@ -15,9 +15,15 @@ ROOT = HERE.parent.parent
 sys.path.insert(0, str(HERE)); import python_runtime; python_runtime.ensure()
 sys.path.insert(0, str(ROOT / ".claude" / "skills"))
 
-DURABLE_TABLES = ("commitments", "decisions", "audit", "actions", "checkpoints", "loops", "alerts")
-MUTABLE_TABLES = ("actions", "loops", "alerts", "commitments", "decisions")     # rows that change state in place (upsert): the export restores the latest exported state
-# LOCAL-ONLY tables (never exported): channel_events (chat evidence excerpts), identities (confirmed external identity links), tickets, meta
+# Conversation turns and confirmed identity links are part of Deputy's
+# operating continuity.  They remain in the canonical Store (there is no
+# second chat or people database), but must travel with an encrypted/private
+# backup so a host-loss restore does not erase the context Deputy relies on.
+DURABLE_TABLES = ("commitments", "decisions", "audit", "actions", "checkpoints", "loops", "alerts", "channel_events", "identities")
+MUTABLE_TABLES = ("actions", "loops", "alerts", "commitments", "decisions", "channel_events", "identities")     # rows that change state in place (upsert): the export restores the latest exported state
+# LOCAL-ONLY tables (never exported): tickets, meta.  Conversation evidence and
+# confirmed identity links are confidential, but are included in the encrypted
+# durable snapshot for continuity and are never committed as raw Git state.
 EXTRA_COLS = {"audit": ("execution_id", "skill_id", "result_status"), "actions": ("status", "fingerprint", "idempotency_key", "session_id", "batch_id")}
 
 def _index_cols(t, payload):
