@@ -39,10 +39,16 @@ def build() -> dict:
             'entries': entries, 'ok': not unknown}
 
 def main(argv=None):
+    argv = list(argv or sys.argv[1:])
+    check = '--check' in argv
     data = build(); target = ROOT / 'docs' / 'governance' / 'repository-inventory.json'
-    target.parent.mkdir(parents=True, exist_ok=True)
-    target.write_text(json.dumps(data, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
-    print(json.dumps({'ok': data['ok'], 'tracked_count': data['tracked_count'], 'unknown_purpose': len(data['unknown_purpose'])}))
-    return 0 if data['ok'] else 1
+    rendered = json.dumps(data, ensure_ascii=False, indent=2) + '\n'
+    matches = target.exists() and target.read_text(encoding='utf-8') == rendered
+    if not check:
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text(rendered, encoding='utf-8')
+        matches = True
+    print(json.dumps({'ok': data['ok'] and (matches if check else True), 'mode': 'check' if check else 'write', 'matches': matches, 'tracked_count': data['tracked_count'], 'unknown_purpose': len(data['unknown_purpose'])}))
+    return 0 if data['ok'] and (matches if check else True) else 1
 
 if __name__ == '__main__': sys.exit(main())

@@ -26,13 +26,23 @@ class CertificationTruthTests(unittest.TestCase):
             finally: cap.WRITE_CERTS=old
 
     def test_worker_truth_is_structured_and_not_constant(self):
-        r=worker._installation_truth()
-        self.assertIn('runtime_available',r); self.assertIn('supervisor_present',r); self.assertEqual(r['installed'],r['runtime_available'])
-        self.assertNotIn("'installed':True", open(worker.__file__,encoding='utf-8').read())
+        with tempfile.TemporaryDirectory() as d:
+            missing=pathlib.Path(d)/'missing.service'
+            with patch.dict(os.environ, {'DEPUTY_WORKER_UNIT': str(missing)}, clear=False):
+                absent=worker._installation_truth()
+            self.assertFalse(absent['supervisor_present'])
+            self.assertFalse(absent['installed'])
+            present_path=pathlib.Path(d)/'deputy-worker.service'; present_path.write_text('[Unit]\n')
+            with patch.dict(os.environ, {'DEPUTY_WORKER_UNIT': str(present_path)}, clear=False):
+                present=worker._installation_truth()
+            self.assertTrue(present['supervisor_present'])
+            self.assertTrue(present['installed'])
+            self.assertEqual(present['installed'], present['runtime_available'])
+        source=pathlib.Path(worker.__file__).read_text(encoding='utf-8')
+        self.assertNotIn("'installed':runtime", source)
 
     def test_active_product_language_is_role_based(self):
         product = (ROOT / 'product_api.py').read_text(encoding='utf-8')
-        for forbidden in ('Gev Attention', 'Needs Gev', 'Waiting for Gev', 'Rejected by Gev', 'Գևի ուշադրություն', 'Պահանջում է Գևի ուշադրությունը'):
-            self.assertNotIn(forbidden, product)
+        self.assertNotRegex(product, r'Gev|Գև')
 
 if __name__=='__main__': unittest.main()
