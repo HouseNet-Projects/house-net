@@ -304,4 +304,16 @@ class BehavioralProductTests(unittest.TestCase):
         self.assertIn("/documents/generate", __import__('inspect').getsource(product_api.Handler.do_POST))
         self.assertIn('function renderDocuments', product_api.APP_JS)
 
+    def test_every_human_view_binds_heading_to_its_i18n_key(self):
+        expected = {
+            'home': 'home.title', 'deputy': 'deputy.title', 'inbox': 'inbox.title',
+            'work': 'work.title', 'reports': 'reports.title', 'documents': 'documents.title',
+            'settings': 'settings.title',
+        }
+        for view, key in expected.items():
+            self.assertIn(key, product_api.APP_JS, view)
+        self.assertIn("function setPageHeading(sub,label)", product_api.APP_JS)
+        self.assertIn("setPageHeading(sub,label)", product_api.APP_JS)
+        self.assertIn("setPageHeading('documents.subtitle','documents.title')", product_api.APP_JS)
+
 if __name__=='__main__': unittest.main()

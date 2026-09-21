@@ -1,13 +1,13 @@
 {
-  "authority_id": "EAE-F4-F7-TRUTH-2026-09-21",
+  "authority_id": "EAE-TITLE-TRUTH-2026-09-21",
   "approved_by": "GEV",
   "approval_reference": "owner-explicit-zero-trust-final-remediation-2026-09-21",
   "approved_at": "2026-09-21T00:00:00Z",
-  "mission": "Close independent audit findings F4/F7 and make repository inventory/policy coverage audits read-only under --check.",
+  "mission": "Correct human-view page headings and add regression coverage for all seven product surfaces.",
   "repository": "HouseNet-Projects/house-net",
-  "base_sha": "f2011b9dbcd7435ac2c53193f14def9ad5512bd1",
-  "branch": "remediation/f4-f7-audit-safe-20260921",
-  "pr": "72",
+  "base_sha": "5f44de865707ff0ad4ad17ae70e5d5136fd3aa8e",
+  "branch": "remediation/human-view-title-20260921",
+  "pr": "73",
   "allowed_operations": [
     "branch",
     "edit",
