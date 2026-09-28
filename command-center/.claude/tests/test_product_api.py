@@ -1,10 +1,12 @@
 import unittest
 from unittest.mock import patch
 from pathlib import Path
+import tempfile
 import sys
 sys.path.insert(0,str(Path(__file__).parents[2]))
 import product_api
 import deputy
+import document_exports
 
 class ProductApiTests(unittest.TestCase):
     def test_health_and_auth_contract(self):
@@ -14,6 +16,25 @@ class ProductApiTests(unittest.TestCase):
     def test_operator_api_exposes_one_runtime_surface(self):
         self.assertTrue(hasattr(product_api, 'serve'))
         self.assertTrue(hasattr(product_api, 'Handler'))
+
+    def test_artifact_identity_is_exact_and_download_safe(self):
+        with tempfile.TemporaryDirectory() as d:
+            old = document_exports.ARTIFACTS
+            try:
+                document_exports.ARTIFACTS = Path(d)
+                created = document_exports.create('pdf', 'Weekly Review', {'ok': 'yes'})
+                listed = document_exports.list_artifacts()
+                self.assertIn(created['id'], {item['id'] for item in listed})
+                self.assertEqual(document_exports.artifact_path(created['id']).name, f"{created['id']}.pdf")
+                self.assertNotIn('path', created)
+                self.assertEqual(document_exports.artifact_path('../' + created['id']), None)
+                # A prefix collision must never return the first similarly named file.
+                collision = Path(d) / f"prefix-{created['id']}.pdf"
+                collision.write_bytes(b'wrong')
+                self.assertEqual(document_exports.artifact_path(created['id']).read_bytes()[:4], b'%PDF')
+                self.assertIsNone(document_exports.artifact_path('missing-artifact'))
+            finally:
+                document_exports.ARTIFACTS = old
 
 
 class ProductHardeningTests(unittest.TestCase):

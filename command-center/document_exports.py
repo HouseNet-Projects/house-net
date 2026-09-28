@@ -27,7 +27,47 @@ def _write_pdf(path,title,data):
  out=b'%PDF-1.4\n'; offs=[]
  for i,o in enumerate(objs,1): offs.append(len(out)); out+=f'{i} 0 obj\n{o}\nendobj\n'.encode()
  x=len(out); out+=f'xref\n0 {len(objs)+1}\n0000000000 65535 f \n'.encode()+b''.join(f'{n:010d} 00000 n \n'.encode() for n in offs)+f'trailer << /Size {len(objs)+1} /Root 1 0 R >>\nstartxref\n{x}\n%%EOF'.encode(); path.write_bytes(out)
+def _artifact_id(path: pathlib.Path) -> str:
+ """Return the stable public identity for one generated artifact.
+
+ The complete filename stem is the identity.  A timestamp by itself is not
+ enough because the title is part of the persisted filename and because
+ prefix/substring matching can return a different artifact.
+ """
+ return path.stem
+
+def _valid_id(artifact_id: str) -> bool:
+ return bool(re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9._-]{0,220}', str(artifact_id or '')))
+
+def artifact_path(artifact_id: str):
+ """Resolve an artifact by exact canonical ID, never by substring/path input."""
+ if not _valid_id(artifact_id):
+  return None
+ candidate = ARTIFACTS / f'{artifact_id}'
+ for path in ARTIFACTS.iterdir():
+  if path.is_file() and path.stem == str(artifact_id):
+   candidate = path
+   break
+ else:
+  return None
+ try:
+  if candidate.resolve().parent != ARTIFACTS.resolve():
+   return None
+ except OSError:
+  return None
+ return candidate
+
 def create(kind,title,data):
- ext={'xlsx':'xlsx','docx':'docx','pdf':'pdf'}[kind]; aid=datetime.datetime.now().strftime('%Y%m%d%H%M%S%f'); p=ARTIFACTS/f'{_safe(title)}-{aid}.{ext}'; {'xlsx':_write_xlsx,'docx':_write_docx,'pdf':_write_pdf}[kind](p,title,data); return {'id':aid,'title':title,'kind':kind,'path':str(p),'created_at':datetime.datetime.now().isoformat(timespec='seconds')}
+ ext={'xlsx':'xlsx','docx':'docx','pdf':'pdf'}[kind]
+ timestamp=datetime.datetime.now().strftime('%Y%m%d%H%M%S%f')
+ p=ARTIFACTS/f'{_safe(title)}-{timestamp}.{ext}'
+ {'xlsx':_write_xlsx,'docx':_write_docx,'pdf':_write_pdf}[kind](p,title,data)
+ # The filesystem path is deliberately not part of the operator/API contract.
+ return {'id':_artifact_id(p),'title':title,'kind':kind,
+         'download_url':f'/documents/{_artifact_id(p)}',
+         'created_at':datetime.datetime.now().isoformat(timespec='seconds')}
 def list_artifacts():
- return [{'id':p.stem,'title':p.stem.rsplit('-',1)[0],'kind':p.suffix[1:],'created_at':datetime.datetime.fromtimestamp(p.stat().st_mtime).isoformat(timespec='seconds'),'size':p.stat().st_size} for p in sorted(ARTIFACTS.iterdir()) if p.is_file()]
+ return [{'id':_artifact_id(p),'title':p.stem.rsplit('-',1)[0],'kind':p.suffix[1:],
+          'download_url':f'/documents/{_artifact_id(p)}',
+          'created_at':datetime.datetime.fromtimestamp(p.stat().st_mtime).isoformat(timespec='seconds'),
+          'size':p.stat().st_size} for p in sorted(ARTIFACTS.iterdir()) if p.is_file()]
