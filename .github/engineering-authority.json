@@ -65,7 +65,8 @@
     "tools/test_policy_coverage.py",
     "tools/test_repository_inventory.py",
     "vault/AGENTS.md",
-    "command-center/document_exports.py"
+    "command-center/document_exports.py",
+    "command-center/.claude/policy/sensitive_scan.py"
   ],
   "prohibited_operations": [
     "external_write",
