@@ -1,13 +1,13 @@
 {
-  "authority_id": "EAE-TITLE-TRUTH-2026-09-21",
+  "authority_id": "ARTIFACT-ID-SAFETY-2026-09-28",
   "approved_by": "GEV",
-  "approval_reference": "owner-explicit-zero-trust-final-remediation-2026-09-21",
+  "approval_reference": "owner-explicit-full-audit-remediation-2026-09-28",
   "approved_at": "2026-09-21T00:00:00Z",
-  "mission": "Correct human-view page headings and add regression coverage for all seven product surfaces.",
+  "mission": "Fix generated artifact identity, exact download resolution, and path-safe artifact API contract.",
   "repository": "HouseNet-Projects/house-net",
-  "base_sha": "5f44de865707ff0ad4ad17ae70e5d5136fd3aa8e",
-  "branch": "remediation/human-view-title-20260921",
-  "pr": "73",
+  "base_sha": "e4ff7183f92e4962880237c779599dba3de2287a",
+  "branch": "remediation/artifact-identity-audit-20260928",
+  "pr": "74",
   "allowed_operations": [
     "branch",
     "edit",
@@ -64,7 +64,8 @@
     "tools/test_data_classification.py",
     "tools/test_policy_coverage.py",
     "tools/test_repository_inventory.py",
-    "vault/AGENTS.md"
+    "vault/AGENTS.md",
+    "command-center/document_exports.py"
   ],
   "prohibited_operations": [
     "external_write",

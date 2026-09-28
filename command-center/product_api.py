@@ -170,9 +170,9 @@ class Handler(BaseHTTPRequestHandler):
             if path.startswith('/conversations/') and path.count('/')==2:
                 return self._json(200, conversation_store.get(path.split('/')[2]))
             if path.startswith('/documents/') and path.count('/')==2:
-                aid=path.split('/')[2]; matches=[p for p in document_exports.ARTIFACTS.iterdir() if aid in p.stem]
-                if not matches:return self._json(404,{'status':'NOT_FOUND'})
-                raw=matches[0].read_bytes(); self.send_response(200); self.send_header('Content-Type','application/octet-stream'); self.send_header('Content-Length',str(len(raw))); self.end_headers(); self.wfile.write(raw); return
+                aid=urllib.parse.unquote(path.split('/')[2]); artifact=document_exports.artifact_path(aid)
+                if artifact is None:return self._json(404,{'status':'NOT_FOUND'})
+                raw=artifact.read_bytes(); self.send_response(200); self.send_header('Content-Type','application/octet-stream'); self.send_header('Content-Disposition',f'attachment; filename="{artifact.name}"'); self.send_header('Content-Length',str(len(raw))); self.end_headers(); self.wfile.write(raw); return
             if path=='/capabilities':return self._json(200,execution_surface.capability_matrix())
             if path=='/missions':return self._json(200,deputy.engine._store().list('commitments',limit=200))
             if path=='/history':return self._json(200,deputy.engine._store().list('audit',limit=200))
