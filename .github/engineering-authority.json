@@ -1,13 +1,13 @@
 {
-  "authority_id": "ARTIFACT-ID-SAFETY-2026-09-28",
+  "authority_id": "HOOK-INTERPRETER-FIX-2026-09-28",
   "approved_by": "GEV",
   "approval_reference": "owner-explicit-full-audit-remediation-2026-09-28",
-  "approved_at": "2026-09-21T00:00:00Z",
-  "mission": "Fix generated artifact identity, exact download resolution, and path-safe artifact API contract.",
+  "approved_at": "2026-09-28T00:00:00Z",
+  "mission": "Make generated Git hooks use the canonical project interpreter in the monorepo.",
   "repository": "HouseNet-Projects/house-net",
-  "base_sha": "e4ff7183f92e4962880237c779599dba3de2287a",
-  "branch": "remediation/artifact-identity-audit-20260928",
-  "pr": "74",
+  "base_sha": "83b7a999d07b75c0e0b1af050e3539df4db65385",
+  "branch": "remediation/runtime-hook-fallback",
+  "pr": "75",
   "allowed_operations": [
     "branch",
     "edit",
@@ -78,7 +78,7 @@
     "action_runtime_bypass"
   ],
   "risk_ceiling": "MEDIUM",
-  "expires_at": "2026-10-21T00:00:00Z",
+  "expires_at": "2026-10-28T00:00:00Z",
   "status": "ACTIVE",
   "audit_trail": [
     {
