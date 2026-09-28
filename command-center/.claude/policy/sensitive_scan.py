@@ -119,7 +119,7 @@ HOOK_PRE_COMMIT = """#!/usr/bin/env bash
 #                 one out-of-scope path = HARD FAIL, so a change Gev did not ask for cannot reach a commit, a push or a PR.
 # Installed by sensitive_scan.py --install-hooks.
 R="$(git rev-parse --show-toplevel)"
-P="$R/.venv/Scripts/python.exe"; [ -x "$P" ] || P="$R/.venv/bin/python"; [ -x "$P" ] || P=python
+P="$R/.venv/Scripts/python.exe"; [ -x "$P" ] || P="$R/.venv/bin/python"; [ -x "$P" ] || P="$R/command-center/.venv/bin/python"; [ -x "$P" ] || P=python3
 "$P" "$R/.claude/policy/sensitive_scan.py" --staged || exit $?
 # The scope gate applies where the scope engine lives. Its EXISTENCE in this repository is guaranteed by the tree manifest
 # (workspace_policy.json -> scope_lock.enforcement_files), so a missing file here means "not a Command-center clone", not "skip the rule".
@@ -132,7 +132,7 @@ HOOK_PRE_PUSH = """#!/usr/bin/env bash
 # loop would swallow them and git-lfs would silently upload nothing, leaving the remote full of pointers without content.
 # Order matters: the boundary scan runs first and decides; LFS only runs when the scan is clean.
 R="$(git rev-parse --show-toplevel)"
-P="$R/.venv/Scripts/python.exe"; [ -x "$P" ] || P="$R/.venv/bin/python"; [ -x "$P" ] || P=python
+P="$R/.venv/Scripts/python.exe"; [ -x "$P" ] || P="$R/.venv/bin/python"; [ -x "$P" ] || P="$R/command-center/.venv/bin/python"; [ -x "$P" ] || P=python3
 REFS="$(cat)"
 rc=0
 while read local_ref local_sha remote_ref remote_sha; do
