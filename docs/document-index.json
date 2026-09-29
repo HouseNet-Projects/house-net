@@ -1420,5 +1420,41 @@
     "purpose": "deterministic synthetic Tasks write-adapter fixture",
     "machine_consumed": true,
     "current": true
+  },
+  {
+    "path": "docs/DEPUTY_PRODUCT_BIBLE.md",
+    "category": "CANONICAL_PRODUCT",
+    "owner": "command-center",
+    "authoritative": true,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "definitive business-first Deputy product definition and current-state boundary"
+  },
+  {
+    "path": "docs/DEPUTY_PRODUCT_ONE_PAGE.md",
+    "category": "CANONICAL_PRODUCT",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "one-page management explanation of Deputy"
+  },
+  {
+    "path": "docs/DEPUTY_PRODUCT_MAP.md",
+    "category": "CANONICAL_PRODUCT",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "conceptual Deputy product maps and governed flows"
+  },
+  {
+    "path": "docs/DEPUTY_CAPABILITY_MATRIX.md",
+    "category": "CANONICAL_PRODUCT",
+    "owner": "command-center",
+    "authoritative": false,
+    "current": true,
+    "machine_consumed": false,
+    "purpose": "evidence-based Deputy capability status matrix"
   }
 ]
