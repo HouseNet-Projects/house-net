@@ -32,7 +32,8 @@
     "docs/DEPUTY_CAPABILITY_MATRIX.md",
     "docs/DEPUTY_PRODUCT_BIBLE.md",
     "docs/DEPUTY_PRODUCT_MAP.md",
-    "docs/DEPUTY_PRODUCT_ONE_PAGE.md"
+    "docs/DEPUTY_PRODUCT_ONE_PAGE.md",
+    "command-center/.claude/tests/test_live_data.py"
   ],
   "prohibited_operations": [
     "external_write",
