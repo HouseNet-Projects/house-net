@@ -1,13 +1,13 @@
 {
-  "authority_id": "ACTION-CERTIFICATION-HARDENING-2026-09-29-PR77",
+  "authority_id": "CERTIFICATION-DISCOVERY-TASK-FIXTURE-2026-09-29-PR78",
   "approved_by": "GEV",
-  "approval_reference": "owner-explicit-action-certification-hardening-pr77",
+  "approval_reference": "owner-explicit-certification-discovery-task-fixture-pr78",
   "approved_at": "2026-09-29T00:00:00Z",
-  "mission": "Harden Action Runtime fixture provenance and audit evidence without changing external business authority.",
+  "mission": "Make certification discovery fail closed and exercise integration safeguards with a synthetic task fixture.",
   "repository": "HouseNet-Projects/house-net",
-  "base_sha": "f481e019fd31cd0f528ae1dc01a21438af3860f0",
-  "branch": "harden-action-certification-pr-a",
-  "pr": "77",
+  "base_sha": "eb82f430160f9fffb30d5c78331d3732f3cabc43",
+  "branch": "harden-action-certification-pr-b",
+  "pr": "78",
   "allowed_operations": [
     "branch",
     "edit",
@@ -21,9 +21,10 @@
   ],
   "allowed_paths": [
     ".github/engineering-authority.json",
-    "command-center/.claude/skills/actions.py",
-    "command-center/.claude/tests/test_actions.py",
-    ".github/engineering-authority.json"
+    ".github/workflows/house-net-ci.yml",
+    "command-center/.claude/skills/certify.py",
+    "command-center/.claude/tests/test_certify_guards.py",
+    "command-center/.claude/tests/test_integrations.py"
   ],
   "prohibited_operations": [
     "external_write",
@@ -38,6 +39,6 @@
   "risk_ceiling": "MEDIUM",
   "expires_at": "2026-10-28T00:00:00Z",
   "status": "ACTIVE",
-  "audit_trail": [{"event": "OWNER_EXPLICIT_MISSION_AUTHORIZATION", "reference": "action-certification-hardening-2026-09-29"}],
+  "audit_trail": [{"event": "OWNER_EXPLICIT_MISSION_AUTHORIZATION", "reference": "certification-discovery-task-fixture-2026-09-29"}],
   "consumed": false
 }
