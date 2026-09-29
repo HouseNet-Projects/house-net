@@ -55,6 +55,9 @@ def _audit(rec, required=True):
                 rec.setdefault("non_production", bool(existing["non_production"]))
         except Exception:
             pass
+    # Every forensic row carries an explicit boolean, including failures that
+    # occur before an action record can be loaded.
+    rec.setdefault("non_production", False)
     try:
         aid = hashlib.sha256((_now() + uuid.uuid4().hex).encode()).hexdigest()[:16]
         out = engine.audit({"audit_id": aid, "skill_id": "<action_runtime>", **rec})
@@ -428,7 +431,8 @@ def execute_batch(batch_id, *, ticket_id=None):
     states = [r["state"] for r in results]; overall = "VERIFIED" if all(s == "VERIFIED" for s in states) else ("PARTIAL" if any(s == "VERIFIED" for s in states) else "FAILED")
     summary = {"batch_id": batch_id, "state": overall, "approved": len(acts), "started": len([r for r in results if r["state"] not in ("APPROVED",)]), "verified": states.count("VERIFIED"), "steps": results,
                "rollback": "none performed — a rollback is a mutation and needs its own approval", "user_decision_required": overall != "VERIFIED"}
-    _audit({"execution_id": batch_id, "ticket_id": ticket_id, "result_status": f"BATCH_{overall}", "steps": results}, required=False); return summary
+    _audit({"execution_id": batch_id, "ticket_id": ticket_id, "result_status": f"BATCH_{overall}", "steps": results,
+            "non_production": any(bool((get(action.get("action_id")) or {}).get("non_production")) for action in acts)}, required=False); return summary
 
 # ───────────────────────── REPORT ─────────────────────────
 def report(a):
