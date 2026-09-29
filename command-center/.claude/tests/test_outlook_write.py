@@ -129,7 +129,11 @@ class O02_DraftGovernance(unittest.TestCase):
         p = fake(); d3 = A.prepare(req(cert=True, params={"body": DRAFT["body"] + " (certification run)"}), session_id="o6c"); A.approve("GO", action_id=d3["action_id"]); r3 = A.execute(d3["action_id"])
         self.assertEqual(r3["state"], "VERIFIED"); c = CAP._write_certs()["INT-OL-MAIL"]["mail.draft"]; self.assertEqual(c["action_id"], d3["action_id"]); self.assertEqual(A.get(d3["action_id"])["certification"]["action_id"], d3["action_id"])
         self.assertNotIn("mail.send", CAP._write_certs()["INT-OL-MAIL"], "send certification needs its own separate verified evidence")
-        self.assertEqual(CAP.capability("INT-OL-MAIL", "mail.draft")["level"], "VERIFIED_WRITE"); self.assertEqual(CAP.capability("INT-OL-MAIL", "mail.send")["level"], "CONNECTED")
+        # The fake run proves historical certification evidence only.  Current
+        # executability still depends on the host executor: Linux must remain
+        # NOT_EXECUTABLE for the Windows Outlook bridge.
+        expected_level = "VERIFIED_WRITE" if CAP._host_runtime("INT-OL-MAIL", registry.get("INT-OL-MAIL"))["available"] else "NOT_EXECUTABLE"
+        self.assertEqual(CAP.capability("INT-OL-MAIL", "mail.draft")["level"], expected_level); self.assertEqual(CAP.capability("INT-OL-MAIL", "mail.send")["level"], "CONNECTED" if expected_level == "VERIFIED_WRITE" else "NOT_EXECUTABLE")
         real = json.loads(REAL_CERTS.read_text(encoding="utf-8")) if REAL_CERTS.exists() else {}
         self.assertNotIn("mail.draft", real.get("INT-OL-MAIL", {}), "the durable certification file is untouched by tests") if "INT-OL-MAIL" not in real else None
 

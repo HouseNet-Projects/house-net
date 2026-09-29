@@ -14,10 +14,19 @@ import sys, os, re, json, pathlib, subprocess, fnmatch
 try: sys.stdout.reconfigure(encoding="utf-8")
 except Exception: pass
 HERE = pathlib.Path(__file__).resolve().parent
-ROOT = HERE.parent.parent
-sys.path.insert(0, str(ROOT / ".claude" / "runtime")); import python_runtime; python_runtime.ensure()
+
+def _repository_root():
+    """Find the actual Git root for both the monorepo and isolated test repos."""
+    for candidate in (HERE, *HERE.parents):
+        if (candidate / ".git").exists():
+            return candidate
+    return HERE.parent.parent
+
+ROOT = _repository_root()
+COMPONENT_ROOT = HERE.parent.parent
+sys.path.insert(0, str(COMPONENT_ROOT / ".claude" / "runtime")); import python_runtime; python_runtime.ensure()
 POLICY = HERE / "data_classification.json"
-OVERLAY_JSON = ROOT / ".claude" / "business" / "overlay.json"
+OVERLAY_JSON = COMPONENT_ROOT / ".claude" / "business" / "overlay.json"
 TEXT_EXT = {".py", ".json", ".md", ".txt", ".sh", ".yml", ".yaml", ".toml", ".cfg", ".ini", ".lock", ".csv", ".gitignore", ".gitattributes", ""}
 
 def load_policy(path=POLICY):
@@ -50,7 +59,11 @@ def classify_path(rel, pol):
     return "PUBLIC", "no path rule"
 
 def _allowed_path(rel, pol):
-    return any(re.search(p, rel.replace("\\", "/")) for a in pol.get("allow_rules", []) for p in a.get("paths", []))
+    normalized = rel.replace("\\", "/")
+    candidates = [normalized]
+    if normalized.startswith("command-center/"):
+        candidates.append(normalized[len("command-center/"):])
+    return any(re.search(p, candidate) for candidate in candidates for a in pol.get("allow_rules", []) for p in a.get("paths", []))
 
 def scan_content(rel, text, pol, names=()):
     """Return list of findings {rule, class, line, sample}."""
@@ -120,11 +133,12 @@ HOOK_PRE_COMMIT = """#!/usr/bin/env bash
 # Installed by sensitive_scan.py --install-hooks.
 R="$(git rev-parse --show-toplevel)"
 P="$R/.venv/Scripts/python.exe"; [ -x "$P" ] || P="$R/.venv/bin/python"; [ -x "$P" ] || P="$R/command-center/.venv/bin/python"; [ -x "$P" ] || P=python3
-"$P" "$R/.claude/policy/sensitive_scan.py" --staged || exit $?
+C="$R/.claude"; [ -f "$C/policy/sensitive_scan.py" ] || C="$R/command-center/.claude"
+"$P" "$C/policy/sensitive_scan.py" --staged || exit $?
 # The scope gate applies where the scope engine lives. Its EXISTENCE in this repository is guaranteed by the tree manifest
 # (workspace_policy.json -> scope_lock.enforcement_files), so a missing file here means "not a Command-center clone", not "skip the rule".
-[ -f "$R/.claude/policy/scope.py" ] || exit 0
-exec "$P" "$R/.claude/policy/scope.py" --staged
+[ -f "$C/policy/scope.py" ] || exit 0
+exec "$P" "$C/policy/scope.py" --staged
 """
 HOOK_PRE_PUSH = """#!/usr/bin/env bash
 # Command-center boundary (pre-push): scan every commit about to leave this machine, then hand the SAME ref list to Git LFS so the
@@ -133,12 +147,13 @@ HOOK_PRE_PUSH = """#!/usr/bin/env bash
 # Order matters: the boundary scan runs first and decides; LFS only runs when the scan is clean.
 R="$(git rev-parse --show-toplevel)"
 P="$R/.venv/Scripts/python.exe"; [ -x "$P" ] || P="$R/.venv/bin/python"; [ -x "$P" ] || P="$R/command-center/.venv/bin/python"; [ -x "$P" ] || P=python3
+C="$R/.claude"; [ -f "$C/policy/sensitive_scan.py" ] || C="$R/command-center/.claude"
 REFS="$(cat)"
 rc=0
 while read local_ref local_sha remote_ref remote_sha; do
   [ -z "$local_sha" ] && continue
   if [ "$remote_sha" = "0000000000000000000000000000000000000000" ] || [ -z "$remote_sha" ]; then range="$local_sha"; else range="$remote_sha..$local_sha"; fi
-  "$P" "$R/.claude/policy/sensitive_scan.py" --range "$range" || rc=1
+  "$P" "$C/policy/sensitive_scan.py" --range "$range" || rc=1
 done <<REFLIST
 $REFS
 REFLIST
@@ -164,6 +179,10 @@ def install_hooks(root=ROOT):
 def hooks_installed(root=ROOT):
     """Both gates must be installed: the credential boundary on commit and push, and the scope-diff gate on commit."""
     hooks = pathlib.Path(root) / ".git" / "hooks"
+    if not hooks.is_dir() and ROOT != pathlib.Path(root):
+        # Callers inside the command-center component historically pass that
+        # component root; the hooks belong to the enclosing monorepo Git root.
+        hooks = ROOT / ".git" / "hooks"
     if not all((hooks / n).exists() and "sensitive_scan.py" in (hooks / n).read_text(encoding="utf-8", errors="replace") for n in ("pre-commit", "pre-push")): return False
     return "scope.py" in (hooks / "pre-commit").read_text(encoding="utf-8", errors="replace")
 

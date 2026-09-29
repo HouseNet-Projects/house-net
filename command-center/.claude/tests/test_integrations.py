@@ -17,8 +17,15 @@ import contracts as C, registry, layer, health, int_secrets as _secrets, reconci
 # CI uses a deterministic synthetic register.  It exercises the real task
 # adapter/cache/audit path without requiring confidential production data.
 TASK_FIXTURE = HERE / "fixtures" / "Tasks.xlsx"
-executors.XLSX = TASK_FIXTURE
+REAL_TASKS_XLSX = executors.XLSX
+def setUpModule():
+    executors.XLSX = TASK_FIXTURE
 def _tasks_available(): return pathlib.Path(executors.XLSX).exists()
+
+def tearDownModule():
+    # The synthetic register is scoped to this module.  Restore the canonical
+    # resolver before later suites exercise completion/runtime semantics.
+    executors.XLSX = REAL_TASKS_XLSX
 
 TMP = pathlib.Path(tempfile.mkdtemp(prefix="skillint_")); engine.STATE_DIR = TMP / "state"; store.reset()
 REG = engine.load_registry()

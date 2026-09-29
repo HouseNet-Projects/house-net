@@ -23,8 +23,12 @@
     ".github/engineering-authority.json",
     ".github/workflows/house-net-ci.yml",
     "command-center/.claude/skills/certify.py",
+    "command-center/.claude/policy/sensitive_scan.py",
+    "command-center/.claude/policy/workspace_policy.json",
     "command-center/.claude/tests/test_certify_guards.py",
-    "command-center/.claude/tests/test_integrations.py"
+    "command-center/.claude/tests/test_boundary.py",
+    "command-center/.claude/tests/test_integrations.py",
+    "command-center/.claude/tests/test_outlook_write.py"
   ],
   "prohibited_operations": [
     "external_write",

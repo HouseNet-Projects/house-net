@@ -100,6 +100,9 @@ jobs:
       - name: Build and certify business model
         run: python .claude/business/build_business_model.py --allow-missing-sources
         working-directory: command-center
+      - name: Install repository boundary hooks for governance tests
+        run: python ../policy/sensitive_scan.py --install-hooks
+        working-directory: command-center/.claude/tests
       - name: Run canonical Deputy and governance suites
         run: python -m unittest discover -s . -p "test_*.py" -t . -v
         working-directory: command-center/.claude/tests
