@@ -52,6 +52,7 @@ Observe → Understand → Correlate → Remember → Prioritise → Prepare
 - WhatsApp: requires Meta Cloud API credentials and HTTPS webhook;
 - MikroBILL: explicitly deferred and unavailable;
 - Outlook/CRM/Telegram external writes: governed paths exist, but each live write requires its own safe certification;
+- write certification is split into immutable historical proof (`certified_once`) and current host/configuration readiness (`executable_now`); historical proof alone is not live executability;
 - full OCI browser walkthrough and destructive restore certification remain evidence gaps.
 
 ## What it must never do / Ինչ երբեք չպետք է անի

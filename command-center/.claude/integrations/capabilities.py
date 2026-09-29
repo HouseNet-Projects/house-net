@@ -53,18 +53,43 @@ WRITE_OPS["INT-WA"] = {
  "chat.send_template": {"risk_class": "R2", "authority_required": "EXECUTE_EXTERNAL", "idempotency_method": "runtime key + outbound log (wamid)", "verification_method": "provider delivery status events via the verified webhook — async, reconcile first", "adapter": "adapter_whatsapp_write", "retry_safe_when_absent": False, "category": "MATERIAL_WRITE", "note": "approved template + exact variables; never substituted for a text message"},
 }
 
+def _normalise_cert(entry):
+    """Return the split historical/current shape without trusting current state.
+
+    Older records are preserved as immutable ``certified_once`` evidence.  A
+    runtime check must never promote an old record to currently executable.
+    """
+    if not isinstance(entry, dict):
+        return {"certified_once": None, "executable_now": {"state": "UNKNOWN", "reason": "invalid certification record", "checked_at": None}}
+    if "certified_once" in entry:
+        once = entry.get("certified_once")
+    else:
+        once = {k: v for k, v in entry.items() if k != "executable_now"}
+    current = entry.get("executable_now")
+    if not isinstance(current, dict) or current.get("state") not in {"AVAILABLE", "NOT_EXECUTABLE", "UNKNOWN"}:
+        current = {"state": "UNKNOWN", "reason": "not assessed on this host", "checked_at": None}
+    return {"certified_once": once, "executable_now": current}
+
 def _write_certs():
-    try: return json.loads(WRITE_CERTS.read_text(encoding="utf-8")) if WRITE_CERTS.exists() else {}
-    except ValueError: return {}
+    try:
+        raw = json.loads(WRITE_CERTS.read_text(encoding="utf-8")) if WRITE_CERTS.exists() else {}
+    except (ValueError, OSError):
+        return {}
+    return {iid: {op: _normalise_cert(entry) for op, entry in ops.items()}
+            for iid, ops in raw.items() if isinstance(ops, dict)}
 
 def record_write_certification(iid, op, action_id, evidence):
     """Called by the Action Runtime after a Gev-approved, VERIFIED live write flagged as certification. Durable (versioned) evidence."""
     spec = registry.get(iid) or {}; adapter = (WRITE_OPS.get(iid, {}).get(op) or {}).get("adapter")
     adapter_path = HERE / (str(adapter) + ".py") if adapter else None
-    d = _write_certs(); d.setdefault(iid, {})[op] = {"action_id": action_id, "verified_at": datetime.datetime.now().isoformat(timespec="seconds"), "evidence": evidence,
+    d = _write_certs(); existing = d.setdefault(iid, {}).get(op)
+    if existing and existing.get("certified_once"):
+        return existing
+    once = {"action_id": action_id, "verified_at": datetime.datetime.now().isoformat(timespec="seconds"), "evidence": evidence,
         "provider": iid, "operation": op, "executor": adapter, "platform": platform.system(),
         "runtime_requirements": spec.get("machine_dependency"),
         "implementation_sha256": hashlib.sha256(adapter_path.read_bytes()).hexdigest() if adapter_path and adapter_path.exists() else None}
+    d[iid][op] = {"certified_once": once, "executable_now": {"state": "UNKNOWN", "reason": "not assessed on this host", "checked_at": None}}
     WRITE_CERTS.parent.mkdir(parents=True, exist_ok=True); WRITE_CERTS.write_text(json.dumps(d, ensure_ascii=False, indent=1) + "\n", encoding="utf-8"); return d[iid][op]
 
 def _read_cert(iid):
@@ -84,6 +109,7 @@ def _host_runtime(iid, spec):
 
 def _cert_usable(cert, iid, op, spec):
     """Historical records without execution provenance are evidence only, never current certification."""
+    cert = (cert or {}).get("certified_once") if isinstance(cert, dict) else None
     if not cert or cert.get("provider") != iid or cert.get("operation") != op or not cert.get("executor"):
         return False
     if cert.get("platform") and cert.get("platform") != platform.system():
@@ -97,6 +123,7 @@ def _cert_usable(cert, iid, op, spec):
 def capability(iid, op):
     """One honest capability row for (integration, operation)."""
     spec = registry.get(iid) or {}; h = health.get(iid) or {}; rc = _read_cert(iid); wc = _write_certs().get(iid, {}).get(op)
+    once = (wc or {}).get("certified_once") if isinstance(wc, dict) else None
     read = op in (spec.get("read_ops") or {}); w = WRITE_OPS.get(iid, {}).get(op)
     if not read and not w: return {"integration_id": iid, "operation": op, "read_or_write": "unknown", "implemented": False, "configured": False, "connected": False, "runtime_available": False, "level": "UNAVAILABLE", "note": "operation not declared"}
     implemented = bool(read) or bool(w and w.get("adapter"))
@@ -104,8 +131,15 @@ def capability(iid, op):
     configured = bool(spec) and (not secrets or (spec.get("adapter") != "adapter_mikrobill" and all(_secrets.load_config(iid).get(s) for s in secrets)))
     connected = bool(h.get("last_success")) and h.get("status") in ("AVAILABLE", "DEGRADED")
     host = _host_runtime(iid, spec); cert_valid = _cert_usable(wc, iid, op, spec)
+    executable_state = "UNKNOWN"
+    executable_reason = "provider configuration or live connection has not been assessed"
+    if w and not host["available"]:
+        executable_state, executable_reason = "NOT_EXECUTABLE", host["reason"]
+    elif w and configured and connected and cert_valid:
+        executable_state, executable_reason = "AVAILABLE", None
     row = {"integration_id": iid, "operation": op, "read_or_write": "read" if read else "write", "implemented": implemented, "configured": configured, "connected": connected,
            "runtime_available": implemented and configured and connected and host["available"], "current_host_executable": host["available"], "executor": host.get("executor"), "runtime_reason": host.get("reason"), "certification_provenance_valid": cert_valid,
+           "certified_once": once, "executable_now": {"state": executable_state, "reason": executable_reason, "checked_at": datetime.datetime.now().isoformat(timespec="seconds")},
            "risk_class": (w or {}).get("risk_class", "R0"), "gev_approval_required": bool(w), "authority_required": (w or {}).get("authority_required", "READ"),
            "idempotency_method": (w or {}).get("idempotency_method", "n/a (read)"), "verification_method": (w or {}).get("verification_method", "n/a (read)"), "machine_dependency": spec.get("machine_dependency"),
            "system": spec.get("system"), "unblock": spec.get("unblock"), "note": (w or {}).get("note"), "category": (w or {}).get("category", "READ" if read else "SAFE_WRITE" if (w or {}).get("risk_class") == "R1" else "MATERIAL_WRITE"),
@@ -116,7 +150,7 @@ def capability(iid, op):
     elif not configured: row["level"] = "IMPLEMENTED"
     elif w and not host["available"]: row["level"] = "NOT_EXECUTABLE"
     elif not connected: row["level"] = "CONFIGURED"
-    elif w: row["level"] = "VERIFIED_WRITE" if cert_valid else "CONNECTED"
+    elif w: row["level"] = "VERIFIED_WRITE" if cert_valid and executable_state == "AVAILABLE" else "CONNECTED"
     else: row["level"] = "VERIFIED_READ" if rc.get("state") in ("VERIFIED_READ", "RELIABLE_READ") else "CONNECTED"
     row["certification_status"] = row["level"]
     return row

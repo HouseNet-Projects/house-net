@@ -36,10 +36,10 @@ def row(iid):
     if deferred: ident = "DEFERRED"
     read_state = cert.get("state") or ("DEFERRED" if deferred else ("CONFIGURED" if configured else ("IMPLEMENTED" if implemented else "DECLARED")))
     if deferred: read_state = "DEFERRED"
-    wc = C._write_certs().get(iid, {}); writes = {op: ("VERIFIED_WRITE" if wc.get(op) else C.capability(iid, op)["level"]) for op in C.WRITE_OPS.get(iid, {})}     # a Gev-approved live certification stands even when the provider is not reachable right now
+    writes = {op: C.capability(iid, op) for op in C.WRITE_OPS.get(iid, {})}
     out = {"integration_id": iid, "system": spec.get("system"), "implementation": ("READY" if implemented else "MISSING") if not deferred else "DEFERRED", "configuration": "DEFERRED" if deferred else ("OK" if configured else "MISSING"),
            "missing": [] if deferred else missing, "optional": af["optional"], "live_identity": ident, "read": read_state if read_state in ("VERIFIED_READ", "RELIABLE_READ") else ("NOT CERTIFIED" if not deferred else "DEFERRED"),
-           "read_state": read_state, "write": {op: ("CERTIFIED" if lvl == "VERIFIED_WRITE" else "NOT CERTIFIED") for op, lvl in writes.items()} or None, "deferred": deferred,
+           "read_state": read_state, "write": {op: {"status": ("CERTIFIED" if row["level"] == "VERIFIED_WRITE" else "NOT CERTIFIED"), "certified_once": bool(row.get("certified_once")), "executable_now": row.get("executable_now")} for op, row in writes.items()} or None, "deferred": deferred,
            "expected_identity": spec.get("expected_identity"), "unblock": None if configured or deferred else spec.get("unblock")}
     if iid == "INT-WA": out["callback"] = f"VERIFIED (handshake {h['callback_verified_at'][:16]})" if h.get("callback_verified_at") else "NOT VERIFIED"
     if iid == "INT-B24": out["portal_expected"] = (spec.get("expected_identity") or {}).get("portal_domain")

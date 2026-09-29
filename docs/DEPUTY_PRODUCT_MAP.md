@@ -64,6 +64,8 @@ flowchart LR
 
 Հայերեն՝ ներքին պատրաստումը հաստատում չի պահանջում։ Հաստատումը սկսվում է այն պահին, երբ Deputy-ը պատրաստվում է նյութական արտաքին փոփոխություն կատարել։
 
+External-write truth has two parts: immutable `certified_once` evidence and current `executable_now` readiness. The durable write-certification registry is authoritative; a historical proof never overrides current host or configuration limits.
+
 ## 3. User → Deputy → business systems
 
 ```mermaid

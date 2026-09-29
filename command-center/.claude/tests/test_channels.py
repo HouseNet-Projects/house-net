@@ -155,7 +155,7 @@ class C02_TelegramWrite(unittest.TestCase):
         self.assertEqual(v["evidence"]["second_source"]["confirmed_by"], "Gev"); self.assertTrue(v["evidence"]["provider_message_id"])
         self.assertEqual(v["evidence"]["approved_by"], "Gev"); self.assertTrue(v["evidence"]["approval_token"])
         self.assertEqual(CAP.capability("INT-TG", "chat.send")["level"], "VERIFIED_WRITE")
-        self.assertEqual(CAP._write_certs()["INT-TG"]["chat.send"]["action_id"], a["action_id"])
+        self.assertEqual(CAP._write_certs()["INT-TG"]["chat.send"]["certified_once"]["action_id"], a["action_id"])
         with self.assertRaises(A.ActionError) as cm: A.confirm_second_source(a["action_id"], confirmed_by="Gev", evidence_note="again")
         self.assertEqual(cm.exception.code, "NOT_APPLICABLE")                                        # not repeatable once VERIFIED
     @covers(AR, *GOV, kinds=("authority", "failure", "adversarial"))
