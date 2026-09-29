@@ -12,6 +12,7 @@ def validate(e,operation,path=''):
   if expires.tzinfo is None: expires=expires.replace(tzinfo=timezone.utc)
   if expires <= datetime.now(timezone.utc): return False,'ENVELOPE_EXPIRED'
  except (KeyError,ValueError): return False,'INVALID_EXPIRATION'
+ if path == '.github/engineering-authority.json': return False,'AUTHORITY_SELF_REFERENCE'
  if path and not any(fnmatch.fnmatch(path,p) or path.startswith(p.rstrip('/')+'/') for p in e.get('allowed_paths',[])): return False,'PATH_OUT_OF_SCOPE'
  return True,'AUTHORIZED'
 def load(path): return json.loads(pathlib.Path(path).read_text())

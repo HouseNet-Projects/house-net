@@ -1228,6 +1228,7 @@
     "paths": [
      ".claude/policy/**",
      "command-center/.claude/policy/**",
+     "tools/**",
      ".github/engineering-authority.json"
     ],
     "systems": [],
