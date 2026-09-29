@@ -44,6 +44,27 @@ def _store():
 def _audit(rec, required=True):
     """Governed audit through the hardened core store; a required audit that cannot be persisted fails the action closed."""
     import engine
+    rec = dict(rec)
+    # Keep fixture execution provenance on every audit row.  A FakeProvider is
+    # useful for deterministic tests, but it is never evidence of a live write.
+    execution_id = rec.get("execution_id")
+    provenance_source = "not_applicable"
+    if execution_id:
+        try:
+            existing = engine._store().get("actions", execution_id)
+            if existing and "non_production" in existing:
+                rec.setdefault("non_production", bool(existing["non_production"]))
+                provenance_source = "action_record"
+        except Exception:
+            # Never turn an unreadable action record into a claim that the
+            # audit row represents a live production action.  UNKNOWN is
+            # deliberately truthy so cards/batches remain conservative.
+            rec["non_production"] = "UNKNOWN"
+            provenance_source = "lookup_failed"
+    # Every forensic row carries an explicit boolean, including failures that
+    # occur before an action record can be loaded.
+    rec.setdefault("non_production", False)
+    rec.setdefault("non_production_source", provenance_source)
     try:
         aid = hashlib.sha256((_now() + uuid.uuid4().hex).encode()).hexdigest()[:16]
         out = engine.audit({"audit_id": aid, "skill_id": "<action_runtime>", **rec})
@@ -62,6 +83,8 @@ def capability(iid, op):
 def provider(iid):
     if iid in PROVIDER_OVERRIDES: return PROVIDER_OVERRIDES[iid]
     fx = os.environ.get("COMMAND_CENTER_ACTIONS_FIXTURE")
+    if fx and os.environ.get("COMMAND_CENTER_TEST_MODE") != "1":
+        raise ActionError("FIXTURE_WITHOUT_TEST_MODE", "a provider fixture is configured but COMMAND_CENTER_TEST_MODE is not 1; refusing to fake a live action")
     if fx:
         data = json.loads(pathlib.Path(fx).read_text(encoding="utf-8")) if pathlib.Path(fx).exists() else {}
         if iid in data: return FakeProvider(data[iid])
@@ -125,8 +148,10 @@ def idempotency_key(req):
     return hashlib.sha256(_canon({"s": req["target_system"], "o": req["target_operation"], "t": req["target_object_type"], "id": req.get("target_object_id"), "p": p}).encode("utf-8")).hexdigest()[:24]
 
 # ───────────────────────── human presentation ─────────────────────────
-def render_card(req, precondition=None, diff=None, batch=None):
+def render_card(req, precondition=None, diff=None, batch=None, non_production=False):
     p = req["parameters"]; lines = ["**READY FOR YOUR APPROVAL**", ""]
+    if non_production:
+        lines += ["**NON-PRODUCTION TEST ACTION — no real external system will be changed.**", ""]
     if batch: lines.append(f"Batch {batch['batch_id']} — step {batch['index']}/{batch['size']}"); lines.append("")
     lines += [f"WHAT: {req['target_operation']} — {req['business_intent']}", f"WHERE: {req['target_system']} ({capability(req['target_system'], req['target_operation']).get('system', req['target_system'])})",
               f"TARGET: {req['target_object_type']}" + (f" {req['target_object_id']}" if req.get("target_object_id") else " (new)")]
@@ -159,7 +184,7 @@ def prepare(req, *, session_id=None, ticket_id=None, batch=None, reg=None):
     cap = capability(req["target_system"], req["target_operation"]); a["capability"] = {k: cap.get(k) for k in ("level", "implemented", "configured", "connected", "runtime_available", "risk_class", "gev_approval_required", "machine_dependency", "certification_status")}
     def deny(code, reason):
         a["state"] = "DENIED"; a["codes"].append(code); a["history"].append({"at": _now(), "state": "DENIED", "code": code, "reason": reason}); a["reason"] = reason
-        _audit({"execution_id": req["action_id"], "ticket_id": ticket_id, "result_status": "DENIED", "code": code, "reason": reason, "action": _summary(req)}, required=False); return _save(a)
+        _audit({"execution_id": req["action_id"], "ticket_id": ticket_id, "result_status": "DENIED", "code": code, "reason": reason, "action": _summary(req), "non_production": a.get("non_production", False)}, required=False); return _save(a)
     # HARD SCOPE LOCK: a system Gev did not ask about in THIS task is not proposed at all (workspace_policy.json -> scope_lock)
     ok_scope, why_scope = engine.scope_allows_system(engine.get_ticket(ticket_id) if ticket_id else None, req["target_system"])
     if not ok_scope: return deny("OUT_OF_SCOPE", f"{why_scope} — Gev did not ask for this in the current task; nothing prepared")
@@ -172,15 +197,16 @@ def prepare(req, *, session_id=None, ticket_id=None, batch=None, reg=None):
     if dup:
         d = dup[0]; return deny("DUPLICATE", f"the same business action already exists as {d['action_id']} ({d['state']}) — reconcile/inspect it instead of creating a second one")
     try:
-        prov = provider(req["target_system"]); pre = prov.precondition(req["target_operation"], dict(req["parameters"], target_object_id=req.get("target_object_id")))
+        prov = provider(req["target_system"]); a["non_production"] = isinstance(prov, FakeProvider)
+        pre = prov.precondition(req["target_operation"], dict(req["parameters"], target_object_id=req.get("target_object_id")))
         existing = prov.find_existing(req["target_operation"], dict(req["parameters"], _idem_key=req["idempotency_key"], target_object_id=req.get("target_object_id")))
     except ActionError as e: return deny(e.code, e.reason)
     except Exception as e: return deny("PRECONDITION_UNREADABLE", f"could not read the current state before proposing: {type(e).__name__}: {e}")
     if existing: return deny("ALREADY_EXISTS", f"the intended postcondition already exists ({existing.get('id')}) — nothing to do; no duplicate proposed")
     if req.get("target_object_id") and not pre.get("exists"): return deny("TARGET_NOT_FOUND", f"{req['target_object_type']} {req['target_object_id']} does not exist in {req['target_system']}")
     a["precondition"] = pre; a["diff"] = _diff(pre.get("object") or {}, req["parameters"]) if pre.get("object") else None
-    a["card"] = render_card(req, pre, a["diff"], batch); a["state"] = "APPROVAL_REQUIRED"; a["history"].append({"at": _now(), "state": "APPROVAL_REQUIRED"})
-    _audit({"execution_id": req["action_id"], "ticket_id": ticket_id, "result_status": "APPROVAL_REQUIRED", "action": _summary(req), "fingerprint": req["action_fingerprint"], "idempotency_key": req["idempotency_key"], "capability": a["capability"], "authority": auth, "card_sha": hashlib.sha256(a["card"].encode()).hexdigest()[:16]})
+    a["card"] = render_card(req, pre, a["diff"], batch, a.get("non_production", False)); a["state"] = "APPROVAL_REQUIRED"; a["history"].append({"at": _now(), "state": "APPROVAL_REQUIRED"})
+    _audit({"execution_id": req["action_id"], "ticket_id": ticket_id, "result_status": "APPROVAL_REQUIRED", "action": _summary(req), "fingerprint": req["action_fingerprint"], "idempotency_key": req["idempotency_key"], "capability": a["capability"], "authority": auth, "card_sha": hashlib.sha256(a["card"].encode()).hexdigest()[:16], "non_production": a.get("non_production", False)})
     return _save(a)
 
 def _diff(current, proposed):
@@ -412,7 +438,8 @@ def execute_batch(batch_id, *, ticket_id=None):
     states = [r["state"] for r in results]; overall = "VERIFIED" if all(s == "VERIFIED" for s in states) else ("PARTIAL" if any(s == "VERIFIED" for s in states) else "FAILED")
     summary = {"batch_id": batch_id, "state": overall, "approved": len(acts), "started": len([r for r in results if r["state"] not in ("APPROVED",)]), "verified": states.count("VERIFIED"), "steps": results,
                "rollback": "none performed — a rollback is a mutation and needs its own approval", "user_decision_required": overall != "VERIFIED"}
-    _audit({"execution_id": batch_id, "ticket_id": ticket_id, "result_status": f"BATCH_{overall}", "steps": results}, required=False); return summary
+    _audit({"execution_id": batch_id, "ticket_id": ticket_id, "result_status": f"BATCH_{overall}", "steps": results,
+            "non_production": any(bool((get(action.get("action_id")) or {}).get("non_production")) for action in acts)}, required=False); return summary
 
 # ───────────────────────── REPORT ─────────────────────────
 def report(a):
