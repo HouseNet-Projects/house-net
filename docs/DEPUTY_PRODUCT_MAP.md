@@ -160,3 +160,7 @@ flowchart LR
 - **PARTIAL:** usable with a declared limitation.
 - **BLOCKED / NEEDS SETUP:** external credential, callback or runtime dependency is missing.
 - **FUTURE / PROPOSED:** not represented as current capability.
+
+## Integration count / Ինտեգրացիաների հաշվարկ
+
+The canonical runtime denominator is six registered sources: Tasks, Outlook Mail, Outlook Calendar, Telegram, Bitrix24 and MikroBILL. Outlook Mail and Calendar have separate source IDs but share one bridge. WhatsApp is shown separately as **BLOCKED / NEEDS SETUP**, not counted in the six because it is not in the runtime registered-source tuple.

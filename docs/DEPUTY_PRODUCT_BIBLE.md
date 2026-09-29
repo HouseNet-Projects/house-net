@@ -372,7 +372,7 @@ An integration is not “a file exists”. It has configuration, authentication,
 | Telegram | **CONFIRMED / LIVE** | Official Bot API identity/messages read certified | Exact outbound messages remain approval-gated |
 | Bitrix24 | **CONFIRMED / LIVE** | Read-scoped webhook; identity, deals, stages and task context | CRM writes require approval and verification |
 | WhatsApp Business | **BLOCKED / NEEDS SETUP** | Adapter/contract exists | Missing Meta credentials, phone configuration and public HTTPS callback |
-| MikroBILL | **PARTIAL / DEFERRED** | Registered intended billing source, no active interface | Owner deferral; no billing claims |
+| MikroBILL | **PARTIAL (Owner-deferred; unavailable)** | Registered intended billing source, no active interface | Owner deferral; no billing claims |
 
 The repository’s committed `command-center/.claude/integrations/certification.json` is a historical/local snapshot and must not be read as current OCI truth. Current readiness comes from host-generated evidence.
 
@@ -698,3 +698,7 @@ This is the target state. The current product has the core governed spine and se
 ---
 
 **Document note / Փաստաթղթի նշում:** This Bible is a product definition informed by current repository and runtime evidence. It is not a promise that every designed behavior is live-certified today.
+
+### Integration counting model
+
+The runtime health model has **six canonical registered business-source IDs**: `INT-TASKS`, `INT-OL-MAIL`, `INT-OL-CAL`, `INT-TG`, `INT-B24` and `INT-MB`. Outlook Mail and Outlook Calendar are therefore counted as two registered sources even though they share one Windows bridge. The aggregate OCI evidence captured on 29 September 2026 reported **4 of 6 available**; `INT-B24` was separately reported as connected/read-capable and `INT-MB` as Owner-deferred, so the aggregate must not be reverse-engineered into a different source count. WhatsApp is deliberately **outside the six-source health denominator** because it is not present in `health_model.REGISTERED`; it is documented separately as **BLOCKED / NEEDS SETUP** until the official Cloud API configuration exists.

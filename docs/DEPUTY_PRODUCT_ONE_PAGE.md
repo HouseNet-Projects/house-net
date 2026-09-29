@@ -47,7 +47,7 @@ Observe → Understand → Correlate → Remember → Prioritise → Prepare
 - persistent conversations, Work/commitment state and document generation;
 - exact approval/fingerprint protection and fail-closed action states.
 
-**PARTIAL / NEEDS SETUP:**
+**PARTIAL (needs setup):**
 
 - WhatsApp: requires Meta Cloud API credentials and HTTPS webhook;
 - MikroBILL: explicitly deferred and unavailable;
@@ -75,4 +75,6 @@ Observe → Understand → Correlate → Remember → Prioritise → Prepare
 
 ## Current readiness / Ներկա readiness
 
-Repository main and OCI deployed SHA: `b4157bae72b84c3af4ba30a9ff59fc3ccc836027`. OCI `/readiness`: **READY**. Product runtime: **AVAILABLE**. Business data: **4 of 6 available**; WhatsApp needs setup and MikroBILL is deferred. Public-repository confidential-data exposure is intentionally outside this product document’s remediation scope.
+Repository main and OCI deployed SHA: `b4157bae72b84c3af4ba30a9ff59fc3ccc836027`. OCI `/readiness`: **READY**. Product runtime: **AVAILABLE**. Business data: **4 of 6 available**; WhatsApp needs setup and MikroBILL is PARTIAL (Owner-deferred; unavailable). Public-repository confidential-data exposure is intentionally outside this product document’s remediation scope.
+
+**Counting note / Հաշվարկի նշում:** The runtime denominator is six registered IDs: Tasks, Outlook Mail, Outlook Calendar, Telegram, Bitrix24 and MikroBILL. Mail and Calendar are separate sources sharing one bridge. WhatsApp is not in that denominator because it is not registered in the runtime health model; it remains **BLOCKED / NEEDS SETUP** separately. The captured OCI aggregate was **4 of 6 available**; per-source state and qualifiers remain authoritative.
