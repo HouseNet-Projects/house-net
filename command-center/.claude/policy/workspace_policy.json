@@ -1201,7 +1201,8 @@
    "enforcement_hooks": {
     "purpose": "The mechanical hooks: session brief, skill gate, workspace guard.",
     "paths": [
-     ".claude/hooks/**"
+     ".claude/hooks/**",
+     ".github/workflows/**"
     ],
     "systems": [],
     "evidence": [
@@ -1225,7 +1226,9 @@
    "workspace_policy": {
     "purpose": "The machine-readable governance: workspace policy, validator, tree manifest, scope engine, path resolver.",
     "paths": [
-     ".claude/policy/**"
+     ".claude/policy/**",
+     "command-center/.claude/policy/**",
+     ".github/engineering-authority.json"
     ],
     "systems": [],
     "evidence": [
@@ -1248,7 +1251,8 @@
    "tests": {
     "purpose": "The test and evaluation suites.",
     "paths": [
-     ".claude/tests/**"
+     ".claude/tests/**",
+     "command-center/.claude/tests/**"
     ],
     "systems": [],
     "evidence": [
@@ -1364,6 +1368,7 @@
     "paths": [
      ".secure/**",
      ".claude/policy/sensitive_scan.py",
+     "command-center/.claude/policy/sensitive_scan.py",
      ".claude/policy/data_classification.json"
     ],
     "systems": [],

@@ -14,6 +14,19 @@ from testing import covers
 import engine, executors, store
 import contracts as C, registry, layer, health, int_secrets as _secrets, reconcile, adapter_outlook, adapter_bitrix24, adapter_tasks, adapter_mikrobill, certify_integrations
 
+# CI uses a deterministic synthetic register.  It exercises the real task
+# adapter/cache/audit path without requiring confidential production data.
+TASK_FIXTURE = HERE / "fixtures" / "Tasks.xlsx"
+REAL_TASKS_XLSX = executors.XLSX
+def setUpModule():
+    executors.XLSX = TASK_FIXTURE
+def _tasks_available(): return pathlib.Path(executors.XLSX).exists()
+
+def tearDownModule():
+    # The synthetic register is scoped to this module.  Restore the canonical
+    # resolver before later suites exercise completion/runtime semantics.
+    executors.XLSX = REAL_TASKS_XLSX
+
 TMP = pathlib.Path(tempfile.mkdtemp(prefix="skillint_")); engine.STATE_DIR = TMP / "state"; store.reset()
 REG = engine.load_registry()
 GOV = ("authority_checking", "approval_management", "completion_verification", "audit_logging")
@@ -122,14 +135,14 @@ class I03_Envelope(unittest.TestCase):
             h = health.get("INT-OL-CAL"); self.assertEqual(h["success_count"], h0.get("success_count", 0)); self.assertEqual(h["last_success"], h0.get("last_success")); self.assertEqual(h["fixture_reads"], h0.get("fixture_reads", 0) + 1)   # fixture ≠ real evidence
             e2 = layer.query("INT-OL-CAL", "calendar.events", {"from": f"{T}T00:00:00", "to": f"{T}T23:59:59"}, use_cache=True)
             self.assertEqual(e2["freshness"], "LIVE"); self.assertFalse(layer._cache_path().exists())          # fixtures are never cached
-        if (ROOT / "Tasks.xlsx").exists():                                                                      # real source: second read within ttl is CACHED and says so
+        if _tasks_available():                                                                                  # synthetic source: second read within ttl is CACHED and says so
             r1 = layer.query("INT-TASKS", "tasks.list", {"open_only": True}, use_cache=True); r2 = layer.query("INT-TASKS", "tasks.list", {"open_only": True}, use_cache=True)
             self.assertEqual((r1["freshness"], r2["freshness"], r2["mode"]), ("LIVE", "CACHED", "REAL")); self.assertIsNotNone(r2["cache_age_seconds"]); self.assertEqual(r1["count"], r2["count"]); self.assertTrue(any("cache" in n for n in r2["notes"]))
         env = layer.query("INT-MB", "anything", {}); self.assertEqual(env["code"], "UNKNOWN_OPERATION")
         env = layer.query("INT-NOPE", "x", {}); self.assertEqual(env["code"], "NOT_REGISTERED")
     @covers("daily_briefing", *GOV, kinds=("failure", "failure_injection"))
     def test_failure_keeps_stale_cache_explicit_never_as_current(self):
-        if not (ROOT / "Tasks.xlsx").exists(): self.skipTest("Tasks.xlsx absent")
+        if not _tasks_available(): self.skipTest("synthetic Tasks.xlsx fixture absent")
         _clear_cache()
         ok = layer.query("INT-TASKS", "tasks.list", {"open_only": True}, use_cache=True); self.assertEqual((ok["status"], ok["mode"]), ("OK", "REAL"))
         with Fixture({"INT-TASKS": {"error": "UNAVAILABLE", "reason": "register locked"}}):
@@ -242,7 +255,7 @@ class I06_Secrets(unittest.TestCase):
 class I07_HealthAndTasks(unittest.TestCase):
     @covers("task_management", "deadline_management", *GOV, kinds=("unit", "completion"))
     def test_task_register_real_read_records_real_health(self):
-        if not (ROOT / "Tasks.xlsx").exists(): self.skipTest("Tasks.xlsx absent")
+        if not _tasks_available(): self.skipTest("synthetic Tasks.xlsx fixture absent")
         _clear_cache(); before = (health.get("INT-TASKS") or {}).get("success_count", 0)
         e = layer.query("INT-TASKS", "tasks.list", {"open_only": True}, use_cache=False)
         self.assertEqual(e["status"], "OK"); self.assertEqual(e["mode"], "REAL"); self.assertEqual(C.check_records("task", e["records"]), []); self.assertTrue(all(r["open"] for r in e["records"]))
@@ -381,7 +394,7 @@ class I12_AuditAndPrivacy(unittest.TestCase):
         self.assertNotIn("retention flow", json.dumps(a, ensure_ascii=False)); self.assertNotIn("maga@", json.dumps(a, ensure_ascii=False))
     @covers("data_sensitivity_awareness", *GOV, kinds=("unit",))
     def test_cache_is_minimal_and_in_state_dir(self):
-        if not (ROOT / "Tasks.xlsx").exists(): self.skipTest("Tasks.xlsx absent")
+        if not _tasks_available(): self.skipTest("synthetic Tasks.xlsx fixture absent")
         _clear_cache(); layer.query("INT-TASKS", "tasks.list", {"open_only": True}, use_cache=True)
         p = layer._cache_path(); self.assertTrue(str(p).startswith(str(engine.STATE_DIR))); d = json.loads(p.read_text(encoding="utf-8")); self.assertEqual(len(d), 1)
         self.assertEqual(set(next(iter(d.values()))), {"retrieved_at", "records", "source_updated_at", "identity", "mode", "expires_at"})       # minimal: last result only, hard expiry, no history
@@ -421,7 +434,7 @@ class A01_ConfidentialCache(unittest.TestCase):
         e = layer.query("INT-OL-MAIL", "mail.list", {"folder": "Inbox"}, use_cache=True) if False else None   # (no live call needed)
     @covers("task_management", *GOV, kinds=("unit", "failure_injection"))
     def test_persistent_register_cache_has_hard_expiry_on_startup(self):
-        if not (ROOT / "Tasks.xlsx").exists(): self.skipTest("Tasks.xlsx absent")
+        if not _tasks_available(): self.skipTest("synthetic Tasks.xlsx fixture absent")
         _clear_cache()
         layer.query("INT-TASKS", "tasks.list", {"open_only": True}, use_cache=True)
         p = layer._cache_path(); d = json.loads(p.read_text(encoding="utf-8")); k = next(iter(d)); self.assertTrue(d[k]["expires_at"] > d[k]["retrieved_at"])
@@ -445,7 +458,7 @@ class A02_AuditFailClosed(unittest.TestCase):
             else: engine._store().get = orig
     @covers("audit_logging", "completion_verification", "task_management", *GOV, kinds=("failure", "failure_injection", "enforcement"))
     def test_real_read_withheld_when_audit_cannot_be_persisted_or_reread(self):
-        if not (ROOT / "Tasks.xlsx").exists(): self.skipTest("Tasks.xlsx absent")
+        if not _tasks_available(): self.skipTest("synthetic Tasks.xlsx fixture absent")
         _clear_cache(); before = (health.get("INT-TASKS") or {}).get("success_count", 0); before_af = (health.get("INT-TASKS") or {}).get("audit_failures", 0)
         for how in ("raise", "reread"):
             e = self._with_broken_audit(lambda: layer.query("INT-TASKS", "tasks.list", {"open_only": True}, use_cache=False), how)
@@ -463,7 +476,7 @@ class A02_AuditFailClosed(unittest.TestCase):
             self.assertEqual((e["status"], e["code"]), ("FAILED", "AUDIT_UNAVAILABLE")); self.assertEqual(e["records"], [])
             r = self._with_broken_audit(lambda: executors.daily_briefing({"today": T}), "raise")
         self.assertEqual(r["live"]["critical_unavailable"], ["INT-OL-CAL"]); self.assertTrue(any("AUDIT_UNAVAILABLE" in x["text"] for x in r["risks"]))
-        if (ROOT / "Tasks.xlsx").exists():
+        if _tasks_available():
             layer.query("INT-TASKS", "tasks.list", {"open_only": True}, use_cache=True)
             c = self._with_broken_audit(lambda: layer.query("INT-TASKS", "tasks.list", {"open_only": True}, use_cache=True), "raise")
             self.assertEqual((c["status"], c["code"], c["records"]), ("FAILED", "AUDIT_UNAVAILABLE", []))          # even a cache hit needs its audit
@@ -513,7 +526,7 @@ class A04_CertificationScope(unittest.TestCase):
             self.assertIn("required_certification_ops", spec, iid); self.assertTrue(set(spec["required_certification_ops"]) <= set(spec["read_ops"]), iid)
             if spec["read_ops"]: self.assertTrue(spec["required_certification_ops"], iid)
         self.assertEqual(registry.INTEGRATIONS["INT-OL-MAIL"]["required_certification_ops"], ["mail.list", "mail.search"]); self.assertGreaterEqual(len(registry.INTEGRATIONS["INT-B24"]["required_certification_ops"]), 3)
-        if not (ROOT / "Tasks.xlsx").exists(): self.skipTest("Tasks.xlsx absent")
+        if not _tasks_available(): self.skipTest("synthetic Tasks.xlsx fixture absent")
         _clear_cache(); spec = registry.INTEGRATIONS["INT-TASKS"]; saved = list(spec["required_certification_ops"]); saved_ops = dict(spec["read_ops"])
         spec["read_ops"]["tasks.history"] = {"kind": "task", "params": []}; spec["required_certification_ops"] = ["tasks.list", "tasks.history"]      # second scope exists but cannot be read for real
         out = TMP / "cert_scope.json"
@@ -548,7 +561,7 @@ class A05_Concurrency(unittest.TestCase):
         self.assertFalse(list(engine.STATE_DIR.glob("integrations_health.json.*.tmp")))
     @covers("task_management", *GOV, kinds=("concurrency",))
     def test_parallel_register_reads_keep_cache_and_health_consistent(self):
-        if not (ROOT / "Tasks.xlsx").exists(): self.skipTest("Tasks.xlsx absent")
+        if not _tasks_available(): self.skipTest("synthetic Tasks.xlsx fixture absent")
         import concurrent.futures
         _clear_cache(); base = (health.get("INT-TASKS") or {}).get("success_count", 0)
         with concurrent.futures.ThreadPoolExecutor(8) as ex:
