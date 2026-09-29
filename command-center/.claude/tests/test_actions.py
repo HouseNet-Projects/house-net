@@ -49,6 +49,37 @@ def fresh(behaviour=None):
     p = A.FakeProvider(behaviour); A.PROVIDER_OVERRIDES["INT-FAKE"] = p; return p
 
 class H01_Governance(unittest.TestCase):
+    @covers(AR, kinds=("adversarial", "failure"))
+    def test_fixture_provider_fails_closed_without_test_mode(self):
+        old_fixture = os.environ.get("COMMAND_CENTER_ACTIONS_FIXTURE")
+        old_mode = os.environ.get("COMMAND_CENTER_TEST_MODE")
+        fixture = TMP / "actions-provider-fixture.json"
+        fixture.write_text(json.dumps({"INT-FAKE": {"tasks.create": "ok"}}), encoding="utf-8")
+        try:
+            os.environ["COMMAND_CENTER_ACTIONS_FIXTURE"] = str(fixture)
+            os.environ.pop("COMMAND_CENTER_TEST_MODE", None)
+            A.PROVIDER_OVERRIDES.pop("INT-FIXTURE-ONLY", None)
+            with self.assertRaises(A.ActionError) as cm:
+                A.provider("INT-FIXTURE-ONLY")
+            self.assertEqual(cm.exception.code, "FIXTURE_WITHOUT_TEST_MODE")
+        finally:
+            if old_fixture is None: os.environ.pop("COMMAND_CENTER_ACTIONS_FIXTURE", None)
+            else: os.environ["COMMAND_CENTER_ACTIONS_FIXTURE"] = old_fixture
+            if old_mode is None: os.environ.pop("COMMAND_CENTER_TEST_MODE", None)
+            else: os.environ["COMMAND_CENTER_TEST_MODE"] = old_mode
+
+    @covers(AR, "audit_logging", kinds=("adversarial", "unit"))
+    def test_fake_provider_provenance_is_on_action_card_and_audit(self):
+        fresh()
+        a = A.prepare(_req(params={"title": "Fixture-only action", "owner": "Arman"}), session_id="fixture-provenance")
+        self.assertTrue(a["non_production"])
+        self.assertIn("NON-PRODUCTION TEST ACTION", a["card"])
+        A.approve("GO", action_id=a["action_id"])
+        A.execute(a["action_id"])
+        recs = [r for r in engine.read_audit(200) if r.get("execution_id") == a["action_id"]]
+        self.assertTrue(recs)
+        self.assertTrue(all(r.get("non_production") is True for r in recs), recs)
+
     @covers(AR, *GOV, kinds=("authority", "failure", "unit"))
     def test_no_approval_no_execution_and_reads_stay_free(self):
         p = fresh(); a = A.prepare(_req(), session_id="s1")

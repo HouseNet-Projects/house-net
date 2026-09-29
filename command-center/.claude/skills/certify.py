@@ -21,7 +21,18 @@ sys.path.insert(0, str(HERE.parent / "runtime")); import python_runtime; python_
 sys.path.insert(0, str(HERE)); sys.path.insert(0, str(TESTS))
 import engine
 
-SUITES = ["test_skills", "test_store", "test_failclosed", "test_hardening", "test_enforcement", "test_workspace", "test_scope", "test_runtime", "test_business", "test_boundary", "test_integrations", "test_portability", "test_actions", "test_live_data", "test_intelligence", "test_outlook_write", "test_channels", "test_operating_layer"]
+DISCOVERY_PATTERN = "test_*.py"
+
+def discovered_suites():
+    """Return the same test modules selected by CI's unittest discover command."""
+    return sorted(p.stem for p in TESTS.glob(DISCOVERY_PATTERN) if p.is_file())
+
+SUITES = discovered_suites()
+
+def evaluations_pass(ev_res):
+    """Empty evaluation evidence is a failure, never vacuous success."""
+    rows = [r for values in ev_res.values() for r in values]
+    return bool(rows) and all(r["pass"] for r in rows)
 KIND_FIELD = {"unit": "tests", "failure": "failure_tests", "adversarial": "hardening_cases", "failure_injection": "hardening_cases",
               "authority": "authority_tests", "completion": "completion_verification", "concurrency": "concurrency_tests",
               "enforcement": "enforcement_tests", "routing": "routing_evals"}
@@ -62,10 +73,19 @@ def main():
         n_fail = len(res.failures) + len(res.errors)
         print(f"{name:18} ran={res.testsRun:3} failed={n_fail}")
         if n_fail: suite_ok = False; print(log[-2500:])
+    if not suite_ok:
+        print("CERTIFY ABORTED — suite failed; NO certification record written, registry untouched")
+        return 1
     import evals
     ev_res = evals.run_all()
-    ev_pass = all(r["pass"] for k in ev_res for r in ev_res[k]); n_ev = sum(len(v) for v in ev_res.values())
+    eval_rows = [r for values in ev_res.values() for r in values]
+    ev_pass = evaluations_pass(ev_res); n_ev = len(eval_rows)
     print(f"{'evals':18} ran={n_ev:3} failed={sum(1 for k in ev_res for r in ev_res[k] if not r['pass'])}")
+    # Never write or mutate certification records after an incomplete evidence run.
+    # A failed suite or an empty/failed evaluation set is not certification evidence.
+    if not ev_pass:
+        print("CERTIFY ABORTED — evaluations failed or were empty; NO certification record written, registry untouched")
+        return 1
     # per-skill evidence
     evidence = {sid: {f: [] for f in set(KIND_FIELD.values()) | {"evals", "adversarial", "failure_injection"}} | {"any_failed": False, "failed_tests": []} for sid in all_ids}
     for t in all_tests:
