@@ -1,13 +1,13 @@
 {
-  "authority_id": "DEPUTY-PRODUCT-DOCS-2026-09-29",
+  "authority_id": "ACTION-CERTIFICATION-HARDENING-2026-09-29-PR77",
   "approved_by": "GEV",
-  "approval_reference": "owner-explicit-deputy-product-documentation-hardening-pr76",
+  "approval_reference": "owner-explicit-action-certification-hardening-pr77",
   "approved_at": "2026-09-29T00:00:00Z",
-  "mission": "Finalize and govern the definitive Deputy product documentation without changing runtime or product behavior.",
+  "mission": "Harden Action Runtime fixture provenance and audit evidence without changing external business authority.",
   "repository": "HouseNet-Projects/house-net",
-  "base_sha": "b4157bae72b84c3af4ba30a9ff59fc3ccc836027",
-  "branch": "docs/deputy-product-bible",
-  "pr": "76",
+  "base_sha": "f481e019fd31cd0f528ae1dc01a21438af3860f0",
+  "branch": "harden-action-certification-pr-a",
+  "pr": "77",
   "allowed_operations": [
     "branch",
     "edit",
@@ -21,12 +21,9 @@
   ],
   "allowed_paths": [
     ".github/engineering-authority.json",
-    "docs/DEPUTY_CAPABILITY_MATRIX.md",
-    "docs/DEPUTY_PRODUCT_BIBLE.md",
-    "docs/DEPUTY_PRODUCT_MAP.md",
-    "docs/DEPUTY_PRODUCT_ONE_PAGE.md",
-    "docs/document-index.json",
-    "docs/governance/repository-inventory.json"
+    "command-center/.claude/skills/actions.py",
+    "command-center/.claude/tests/test_actions.py",
+    ".github/engineering-authority.json"
   ],
   "prohibited_operations": [
     "external_write",
@@ -41,11 +38,6 @@
   "risk_ceiling": "MEDIUM",
   "expires_at": "2026-10-28T00:00:00Z",
   "status": "ACTIVE",
-  "audit_trail": [
-    {
-      "event": "GEV_EXPLICIT_MISSION_AUTHORIZATION",
-      "reference": "deputy-product-documentation-hardening-2026-09-29"
-    }
-  ],
+  "audit_trail": [{"event": "OWNER_EXPLICIT_MISSION_AUTHORIZATION", "reference": "action-certification-hardening-2026-09-29"}],
   "consumed": false
 }
