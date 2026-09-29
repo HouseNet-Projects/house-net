@@ -2,7 +2,7 @@
   "schema": "housenet.repository.inventory.v1",
   "repository": "HouseNet-Projects/house-net",
   "source": "git ls-files",
-  "tracked_count": 651,
+  "tracked_count": 655,
   "unknown_purpose": [],
   "entries": [
     {
@@ -2344,6 +2344,22 @@
     {
       "path": "design-system/versioning.py",
       "purpose": "design_system"
+    },
+    {
+      "path": "docs/DEPUTY_CAPABILITY_MATRIX.md",
+      "purpose": "documentation"
+    },
+    {
+      "path": "docs/DEPUTY_PRODUCT_BIBLE.md",
+      "purpose": "documentation"
+    },
+    {
+      "path": "docs/DEPUTY_PRODUCT_MAP.md",
+      "purpose": "documentation"
+    },
+    {
+      "path": "docs/DEPUTY_PRODUCT_ONE_PAGE.md",
+      "purpose": "documentation"
     },
     {
       "path": "docs/README.md",
