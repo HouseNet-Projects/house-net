@@ -127,7 +127,7 @@ class O02_DraftGovernance(unittest.TestCase):
         p = fake(); d2 = A.prepare(req(cert=False, params={"body": DRAFT["body"] + " (uncertified run)"}), session_id="o6b"); A.approve("GO", action_id=d2["action_id"]); self.assertEqual(A.execute(d2["action_id"])["state"], "VERIFIED")
         self.assertFalse(CAP.WRITE_CERTS.exists(), "a verified action not flagged as certification does not certify")
         p = fake(); d3 = A.prepare(req(cert=True, params={"body": DRAFT["body"] + " (certification run)"}), session_id="o6c"); A.approve("GO", action_id=d3["action_id"]); r3 = A.execute(d3["action_id"])
-        self.assertEqual(r3["state"], "VERIFIED"); c = CAP._write_certs()["INT-OL-MAIL"]["mail.draft"]; self.assertEqual(c["action_id"], d3["action_id"]); self.assertEqual(A.get(d3["action_id"])["certification"]["action_id"], d3["action_id"])
+        self.assertEqual(r3["state"], "VERIFIED"); c = CAP._write_certs()["INT-OL-MAIL"]["mail.draft"]; self.assertEqual(c["certified_once"]["action_id"], d3["action_id"]); self.assertEqual(A.get(d3["action_id"])["certification"]["certified_once"]["action_id"], d3["action_id"])
         self.assertNotIn("mail.send", CAP._write_certs()["INT-OL-MAIL"], "send certification needs its own separate verified evidence")
         # The fake run proves historical certification evidence only.  Current
         # executability still depends on the host executor: Linux must remain

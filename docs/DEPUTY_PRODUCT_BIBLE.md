@@ -362,6 +362,8 @@ A similar name is not enough to merge two people. Ambiguity remains explicit unt
 
 An integration is not “a file exists”. It has configuration, authentication, reachability, read capability, write capability, certification, freshness, failure behavior and source authority. Read paths can be automatic when certified. Material writes always pass through Action Runtime. An optional source outage changes the answer’s completeness; it does not automatically bring Deputy down.
 
+For external writes, `command-center/.claude/state/durable/write_certifications.json` is the single authoritative answer to which operations have ever been certified. Each record separates immutable `certified_once` evidence from host- and configuration-dependent `executable_now` state. Documentation may describe a write as live-executable only when both parts support that claim; historical certification alone never makes a write available on the current host.
+
 ### Current integration truth
 
 | Source | Status | Current capability | Boundary |

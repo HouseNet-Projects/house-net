@@ -4,6 +4,8 @@
 **Main/deployed SHA:** `b4157bae72b84c3af4ba30a9ff59fc3ccc836027`
 **Important:** “Implemented” is not the same as “live-certified”.
 
+For external writes, the authoritative registry is `command-center/.claude/state/durable/write_certifications.json`. It separates immutable historical proof (`certified_once`) from current host/configuration readiness (`executable_now`); neither state is inferred from documentation alone.
+
 | Capability | User value / Օգտվողի արժեք | Current state | Evidence | Dependencies | Remaining work |
 |---|---|---|---|---|---|
 | Core Deputy API | One operator entry point and readiness truth | **CONFIRMED / LIVE** | OCI `/health` alive; `/readiness` READY | OCI service | Keep runtime monitored |

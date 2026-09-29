@@ -139,7 +139,7 @@ class L03_ProvenanceAndEvidence(unittest.TestCase):
     @covers("audit_logging", *GOV, kinds=("unit",))
     def test_existing_verified_write_evidence_and_task_16_closure_are_intact(self):
         wc = json.loads((ROOT / ".claude" / "state" / "durable" / "write_certifications.json").read_text(encoding="utf-8"))
-        c = wc["INT-TASKS"]["tasks.create"]; self.assertEqual(c["action_id"], "ACT-ef5fb6b5d0"); self.assertEqual(c["evidence"]["approved_by"], "Gev"); self.assertEqual(c["evidence"]["id"], 16)
+        c = wc["INT-TASKS"]["tasks.create"]["certified_once"]; self.assertEqual(c["action_id"], "ACT-ef5fb6b5d0"); self.assertEqual(c["evidence"]["approved_by"], "Gev"); self.assertEqual(c["evidence"]["id"], 16)
         t = next(r for r in executors.load_tasks(REAL) if r["id"] == 16); self.assertEqual(t["status"], "Արված"); self.assertIn("ACT-ef5fb6b5d0", str(t["comment"]))
         acts = [json.loads(l) for l in (ROOT / ".claude" / "state" / "durable" / "actions.jsonl").read_text(encoding="utf-8").splitlines() if l.strip()]
         st = {a["op_id"]: a["status"] for a in acts}; self.assertEqual(st.get("ACT-ef5fb6b5d0"), "VERIFIED"); self.assertEqual(st.get("ACT-0854f55fe0"), "VERIFIED")

@@ -1,13 +1,13 @@
 {
-  "authority_id": "CERTIFICATION-DISCOVERY-TASK-FIXTURE-2026-09-29-PR78",
+  "authority_id": "WRITE-CERTIFICATION-STATE-2026-09-29-PR79",
   "approved_by": "GEV",
-  "approval_reference": "owner-explicit-certification-discovery-task-fixture-pr78",
+  "approval_reference": "owner-explicit-write-certification-state-pr79",
   "approved_at": "2026-09-29T00:00:00Z",
-  "mission": "Make certification discovery fail closed and exercise integration safeguards with a synthetic task fixture.",
+  "mission": "Split immutable external-write certification history from host-derived current executability; update readers, documentation and tests.",
   "repository": "HouseNet-Projects/house-net",
-  "base_sha": "eb82f430160f9fffb30d5c78331d3732f3cabc43",
-  "branch": "harden-action-certification-pr-b",
-  "pr": "78",
+  "base_sha": "5928b284b6cb54263bc7544718c742f0728deabb",
+  "branch": "task1-certification-state",
+  "pr": "79",
   "allowed_operations": [
     "branch",
     "edit",
@@ -21,14 +21,19 @@
   ],
   "allowed_paths": [
     ".github/engineering-authority.json",
-    ".github/workflows/house-net-ci.yml",
-    "command-center/.claude/skills/certify.py",
-    "command-center/.claude/policy/sensitive_scan.py",
+    "command-center/.claude/integrations/capabilities.py",
+    "command-center/.claude/integrations/readiness.py",
     "command-center/.claude/policy/workspace_policy.json",
-    "command-center/.claude/tests/test_certify_guards.py",
-    "command-center/.claude/tests/test_boundary.py",
-    "command-center/.claude/tests/test_integrations.py",
-    "command-center/.claude/tests/test_outlook_write.py"
+    "command-center/.claude/state/durable/write_certifications.json",
+    "command-center/.claude/tests/test_actions.py",
+    "command-center/.claude/tests/test_channels.py",
+    "command-center/.claude/tests/test_outlook_write.py",
+    "command-center/.claude/tests/test_truth_remediation.py",
+    "docs/DEPUTY_CAPABILITY_MATRIX.md",
+    "docs/DEPUTY_PRODUCT_BIBLE.md",
+    "docs/DEPUTY_PRODUCT_MAP.md",
+    "docs/DEPUTY_PRODUCT_ONE_PAGE.md",
+    "command-center/.claude/tests/test_live_data.py"
   ],
   "prohibited_operations": [
     "external_write",
@@ -41,8 +46,13 @@
     "action_runtime_bypass"
   ],
   "risk_ceiling": "MEDIUM",
-  "expires_at": "2026-10-28T00:00:00Z",
+  "expires_at": "2026-10-01T00:00:00Z",
   "status": "ACTIVE",
-  "audit_trail": [{"event": "OWNER_EXPLICIT_MISSION_AUTHORIZATION", "reference": "certification-discovery-task-fixture-2026-09-29"}],
+  "audit_trail": [
+    {
+      "event": "OWNER_EXPLICIT_MISSION_AUTHORIZATION",
+      "reference": "write-certification-state-2026-09-29"
+    }
+  ],
   "consumed": false
 }

@@ -1269,7 +1269,8 @@
    "integrations": {
     "purpose": "The integration layer and its adapters (Outlook, Telegram, WhatsApp, Bitrix24, MikroBILL, task register).",
     "paths": [
-     ".claude/integrations/**"
+     ".claude/integrations/**",
+     "command-center/.claude/integrations/**"
     ],
     "systems": [
      "INT-OL-CAL",
@@ -1322,6 +1323,7 @@
     "purpose": "The deterministic Python runtime, the durability/sync machinery and the bootstrap entry point.",
     "paths": [
      ".claude/runtime/**",
+     "command-center/.claude/state/**",
      "bootstrap.py"
     ],
     "systems": [],
@@ -1346,6 +1348,7 @@
     "purpose": "Deputy's charter and the human-facing guides: CLAUDE.md, README.md, .claude/docs.",
     "paths": [
      ".claude/docs/**",
+     "docs/**",
      "CLAUDE.md",
      "README.md"
     ],

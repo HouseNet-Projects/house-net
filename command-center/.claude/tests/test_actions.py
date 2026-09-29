@@ -271,7 +271,7 @@ class H05_CapabilityAndSkill(unittest.TestCase):
             if r["read_or_write"] != "write": continue
             c = certs.get(k[0], {}).get(k[1])
             if r["level"] == "VERIFIED_WRITE":                      # only a durable, Gev-approved, VERIFIED live write may certify — never a test or a code path
-                self.assertIsNotNone(c, f"{k}: VERIFIED_WRITE without durable certification evidence"); self.assertTrue(c.get("action_id", "").startswith("ACT-"), k); self.assertEqual(c["evidence"].get("approved_by"), "Gev", k)
+                self.assertIsNotNone(c, f"{k}: VERIFIED_WRITE without durable certification evidence"); self.assertTrue(c.get("certified_once", {}).get("action_id", "").startswith("ACT-"), k); self.assertEqual(c["certified_once"]["evidence"].get("approved_by"), "Gev", k)
             else: self.assertFalse(c and r["runtime_available"] and r.get("certification_provenance_valid"), f"{k}: usable certification and runtime available, yet level is {r['level']}")
         import adapter_outlook_write as W; self.assertEqual(W.writer_problems(), [])
     @covers(AR, *GOV, kinds=("routing", "unit"))
