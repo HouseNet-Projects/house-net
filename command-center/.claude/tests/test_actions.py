@@ -5,6 +5,7 @@ reconcile first, blind retry prohibited, crash after remote success, stale confl
 unavailable, verification mismatch, concurrency, partial batch, restart), verification (HTTP-200 ≠ complete), and the real Tasks.xlsx
 write adapter on a TEMP COPY of the register (a local technical operation — no business system is touched by this suite)."""
 import unittest, json, os, sys, pathlib, tempfile, shutil, datetime, threading
+from unittest.mock import patch
 HERE = pathlib.Path(__file__).resolve().parent
 ROOT = HERE.parent.parent
 sys.path.insert(0, str(HERE)); sys.path.insert(0, str(ROOT / ".claude" / "skills")); sys.path.insert(0, str(ROOT / ".claude" / "integrations")); sys.path.insert(0, str(ROOT / ".claude" / "policy"))
@@ -49,6 +50,52 @@ def fresh(behaviour=None):
     p = A.FakeProvider(behaviour); A.PROVIDER_OVERRIDES["INT-FAKE"] = p; return p
 
 class H01_Governance(unittest.TestCase):
+    @covers(AR, kinds=("adversarial", "failure"))
+    def test_fixture_provider_fails_closed_without_test_mode(self):
+        old_fixture = os.environ.get("COMMAND_CENTER_ACTIONS_FIXTURE")
+        old_mode = os.environ.get("COMMAND_CENTER_TEST_MODE")
+        fixture = TMP / "actions-provider-fixture.json"
+        fixture.write_text(json.dumps({"INT-FAKE": {"tasks.create": "ok"}}), encoding="utf-8")
+        try:
+            os.environ["COMMAND_CENTER_ACTIONS_FIXTURE"] = str(fixture)
+            os.environ.pop("COMMAND_CENTER_TEST_MODE", None)
+            A.PROVIDER_OVERRIDES.pop("INT-FIXTURE-ONLY", None)
+            with self.assertRaises(A.ActionError) as cm:
+                A.provider("INT-FIXTURE-ONLY")
+            self.assertEqual(cm.exception.code, "FIXTURE_WITHOUT_TEST_MODE")
+        finally:
+            if old_fixture is None: os.environ.pop("COMMAND_CENTER_ACTIONS_FIXTURE", None)
+            else: os.environ["COMMAND_CENTER_ACTIONS_FIXTURE"] = old_fixture
+            if old_mode is None: os.environ.pop("COMMAND_CENTER_TEST_MODE", None)
+            else: os.environ["COMMAND_CENTER_TEST_MODE"] = old_mode
+
+    @covers(AR, "audit_logging", kinds=("adversarial", "unit"))
+    def test_fake_provider_provenance_is_on_action_card_and_audit(self):
+        fresh()
+        a = A.prepare(_req(params={"title": "Fixture-only action", "owner": "Arman"}), session_id="fixture-provenance")
+        self.assertTrue(a["non_production"])
+        self.assertIn("NON-PRODUCTION TEST ACTION", a["card"])
+        A.approve("GO", action_id=a["action_id"])
+        A.execute(a["action_id"])
+        recs = [r for r in engine.read_audit(200) if r.get("execution_id") == a["action_id"]]
+        self.assertTrue(recs)
+        self.assertTrue(all(r.get("non_production") is True for r in recs), recs)
+
+    @covers(AR, "audit_logging", kinds=("adversarial", "failure"))
+    def test_audit_provenance_lookup_failure_is_unknown_not_live(self):
+        captured = []
+        class BrokenStore:
+            def get(self, *args, **kwargs):
+                raise OSError("store lookup unavailable")
+        def capture_audit(record):
+            captured.append(record)
+            return {"audit_id": record["audit_id"]}
+        with patch.object(engine, "_store", return_value=BrokenStore()), patch.object(engine, "audit", side_effect=capture_audit):
+            A._audit({"execution_id": "ACT-unreadable", "result_status": "VERIFIED"}, required=False)
+        self.assertEqual(len(captured), 1)
+        self.assertEqual(captured[0]["non_production"], "UNKNOWN")
+        self.assertEqual(captured[0]["non_production_source"], "lookup_failed")
+
     @covers(AR, *GOV, kinds=("authority", "failure", "unit"))
     def test_no_approval_no_execution_and_reads_stay_free(self):
         p = fresh(); a = A.prepare(_req(), session_id="s1")
