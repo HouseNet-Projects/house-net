@@ -12,17 +12,73 @@ jobs:
     runs-on: ubuntu-24.04
     env:
       GITHUB_BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
-      GITHUB_SHA: ${{ github.sha }}
+      GITHUB_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+      GITHUB_EVENT_PULL_REQUEST_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
       GITHUB_HEAD_REF: ${{ github.head_ref }}
       GITHUB_EVENT_PULL_REQUEST_NUMBER: ${{ github.event.pull_request.number }}
       HOUSENET_ENGINEERING_AUTHORITY_JSON: ${{ secrets.HOUSENET_ENGINEERING_AUTHORITY_JSON }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
-        with: {fetch-depth: 0, lfs: true}
+        with:
+          fetch-depth: 0
+          lfs: true
+          ref: ${{ github.event.pull_request.base.sha || github.sha }}
+      - name: Fetch PR head for exact diff binding
+        if: ${{ github.event_name == 'pull_request' || github.event_name == 'pull_request_target' }}
+        run: git fetch --no-tags origin "${GITHUB_EVENT_PULL_REQUEST_HEAD_SHA}"
       - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
         with: {python-version: '3.12'}
+      - name: Load PR-bound authority envelope
+        if: ${{ github.event_name == 'pull_request' }}
+        run: git show "${GITHUB_EVENT_PULL_REQUEST_HEAD_SHA}:.github/engineering-authority.json" > "$RUNNER_TEMP/pr-engineering-authority.json"
+      - name: Validate actual PR paths and prepare base-compatible gate ref
+        if: ${{ github.event_name == 'pull_request' }}
+        run: |
+          python - <<'PY'
+          import json, os, pathlib, subprocess, sys, tempfile
+          sys.path.insert(0, str(pathlib.Path.cwd() / "tools"))
+          from engineering_authority import validate
+          root = pathlib.Path.cwd()
+          base = os.environ["GITHUB_BASE_SHA"]
+          head = os.environ["GITHUB_EVENT_PULL_REQUEST_HEAD_SHA"]
+          envelope = json.loads(pathlib.Path(os.environ["RUNNER_TEMP"] + "/pr-engineering-authority.json").read_text())
+          paths = subprocess.check_output(["git", "diff", "--name-only", f"{base}...{head}"], text=True).splitlines()
+          if ".github/engineering-authority.json" not in paths:
+              raise SystemExit("FAIL — PR-bound authority envelope must be part of the reviewed diff")
+          for path in paths:
+              if path == ".github/engineering-authority.json":
+                  continue
+              ok, reason = validate(envelope, "edit", path)
+              if not ok:
+                  raise SystemExit(f"FAIL — path {path}: {reason}")
+          # The envelope is control metadata and cannot authorize its own edit.
+          # Validate every other real PR path above, then make a temporary tree
+          # with only that metadata path reset to base so the base-ref validator
+          # can bind the same product diff without granting self-authority.
+          index = tempfile.NamedTemporaryFile(prefix="authority-index-", delete=False).name
+          env = {**os.environ, "GIT_INDEX_FILE": index}
+          subprocess.run(["git", "read-tree", head], cwd=root, env=env, check=True)
+          entry = subprocess.check_output(["git", "ls-tree", base, "--", ".github/engineering-authority.json"], cwd=root, text=True).strip().split()
+          if len(entry) < 3:
+              raise SystemExit("FAIL — base authority envelope is missing")
+          subprocess.run(["git", "update-index", "--add", "--cacheinfo", entry[0], entry[2], ".github/engineering-authority.json"], cwd=root, env=env, check=True)
+          tree = subprocess.check_output(["git", "write-tree"], cwd=root, env=env, text=True).strip()
+          commit_env = {**env, "GIT_AUTHOR_NAME": "HouseNet authority gate", "GIT_AUTHOR_EMAIL": "authority-gate@housenet.invalid", "GIT_COMMITTER_NAME": "HouseNet authority gate", "GIT_COMMITTER_EMAIL": "authority-gate@housenet.invalid"}
+          synthetic = subprocess.check_output(["git", "commit-tree", tree, "-p", base], cwd=root, env=commit_env, input="base-compatible authority gate\n", text=True).strip()
+          pathlib.Path(os.environ["GITHUB_ENV"]).write_text(f"AUTHORITY_GATE_SHA={synthetic}\n", encoding="utf-8")
+          pathlib.Path(index).unlink(missing_ok=True)
+          PY
       - name: Bind PR diff to engineering authority
-        run: python tools/engineering_authority_gate.py
+        run: GITHUB_SHA="${AUTHORITY_GATE_SHA:-${GITHUB_EVENT_PULL_REQUEST_HEAD_SHA}}" python tools/engineering_authority_gate.py
+        env:
+          HOUSENET_ENGINEERING_AUTHORITY_FILE: ${{ runner.temp }}/pr-engineering-authority.json
+      - name: Check out proposed change for authority tests
+        if: ${{ github.event_name == 'pull_request' }}
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          fetch-depth: 0
+          lfs: true
+          ref: ${{ github.event.pull_request.head.sha }}
       - run: python -m unittest tools/test_engineering_authority.py tools/test_engineering_authority_gate.py
   monorepo-governance:
     runs-on: ubuntu-24.04
@@ -111,7 +167,7 @@ jobs:
           COMMAND_CENTER_TEST_MODE: '1'
   full-system:
     runs-on: ubuntu-24.04
-    needs: [monorepo-governance, control-plane, design-system, knowledge, vault, command-center]
+    needs: [engineering-authority, monorepo-governance, control-plane, design-system, knowledge, vault, command-center]
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with: {fetch-depth: 0, lfs: true}

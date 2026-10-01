@@ -1323,6 +1323,7 @@
     "purpose": "The deterministic Python runtime, the durability/sync machinery and the bootstrap entry point.",
     "paths": [
      ".claude/runtime/**",
+     "command-center/.claude/architecture/**",
      "command-center/.claude/state/**",
      "bootstrap.py"
     ],

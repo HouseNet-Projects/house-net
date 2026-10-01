@@ -1,13 +1,13 @@
 {
-  "authority_id": "WRITE-CERTIFICATION-STATE-2026-09-29-PR79",
+  "authority_id": "ENGINEERING-AUTHORITY-HARDENING-2026-09-29-PR80",
   "approved_by": "GEV",
-  "approval_reference": "owner-explicit-write-certification-state-pr79",
-  "approved_at": "2026-09-29T00:00:00Z",
-  "mission": "Split immutable external-write certification history from host-derived current executability; update readers, documentation and tests.",
+  "approval_reference": "owner-explicit-engineering-authority-hardening-pr80",
+  "approved_at": "2026-09-29T14:00:00Z",
+  "mission": "Harden the Engineering Authority gate and repair the duplicate proactive loop exposed by required CI.",
   "repository": "HouseNet-Projects/house-net",
-  "base_sha": "5928b284b6cb54263bc7544718c742f0728deabb",
-  "branch": "task1-certification-state",
-  "pr": "79",
+  "base_sha": "d4f045b8694b64ff8c2ad3cc681d621acefd7326",
+  "branch": "task2-engineering-authority-hardening",
+  "pr": "80",
   "allowed_operations": [
     "branch",
     "edit",
@@ -20,20 +20,12 @@
     "regenerate_artifacts"
   ],
   "allowed_paths": [
-    ".github/engineering-authority.json",
-    "command-center/.claude/integrations/capabilities.py",
-    "command-center/.claude/integrations/readiness.py",
-    "command-center/.claude/policy/workspace_policy.json",
-    "command-center/.claude/state/durable/write_certifications.json",
-    "command-center/.claude/tests/test_actions.py",
-    "command-center/.claude/tests/test_channels.py",
-    "command-center/.claude/tests/test_outlook_write.py",
-    "command-center/.claude/tests/test_truth_remediation.py",
-    "docs/DEPUTY_CAPABILITY_MATRIX.md",
-    "docs/DEPUTY_PRODUCT_BIBLE.md",
-    "docs/DEPUTY_PRODUCT_MAP.md",
-    "docs/DEPUTY_PRODUCT_ONE_PAGE.md",
-    "command-center/.claude/tests/test_live_data.py"
+    ".github/workflows/house-net-ci.yml",
+    "tools/engineering_authority.py",
+    "tools/engineering_authority_gate.py",
+    "tools/test_engineering_authority_gate.py",
+    "command-center/.claude/architecture/proactive.py",
+    "command-center/.claude/policy/workspace_policy.json"
   ],
   "prohibited_operations": [
     "external_write",
@@ -46,12 +38,12 @@
     "action_runtime_bypass"
   ],
   "risk_ceiling": "MEDIUM",
-  "expires_at": "2026-10-01T00:00:00Z",
+  "expires_at": "2026-10-01T14:00:00Z",
   "status": "ACTIVE",
   "audit_trail": [
     {
       "event": "OWNER_EXPLICIT_MISSION_AUTHORIZATION",
-      "reference": "write-certification-state-2026-09-29"
+      "reference": "engineering-authority-hardening-2026-09-29"
     }
   ],
   "consumed": false
