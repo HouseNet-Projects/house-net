@@ -32,7 +32,7 @@ jobs:
         if: ${{ github.event_name == 'pull_request' }}
         run: git show "${GITHUB_EVENT_PULL_REQUEST_HEAD_SHA}:.github/engineering-authority.json" > "$RUNNER_TEMP/pr-engineering-authority.json"
       - name: Bind PR diff to engineering authority
-        run: python tools/engineering_authority_gate.py
+        run: GITHUB_SHA="${GITHUB_EVENT_PULL_REQUEST_HEAD_SHA}" python tools/engineering_authority_gate.py
         env:
           HOUSENET_ENGINEERING_AUTHORITY_FILE: ${{ runner.temp }}/pr-engineering-authority.json
       - name: Check out proposed change for authority tests
