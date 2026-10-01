@@ -36,6 +36,7 @@ jobs:
         run: |
           python - <<'PY'
           import json, os, pathlib, subprocess, sys, tempfile
+          sys.path.insert(0, str(pathlib.Path.cwd() / "tools"))
           from engineering_authority import validate
           root = pathlib.Path.cwd()
           base = os.environ["GITHUB_BASE_SHA"]
