@@ -91,12 +91,23 @@ def run_cycle(*, persist=True):
                           {"op_id": op_id, "who": commitment.get("who"), "what": commitment.get("what"),
                            "due": commitment.get("due"), "evidence": commitment.get("evidence", [])}, response,
                           requires_attention=True))
-        _st().upsert("loops", "followup:" + str(op_id), {
-            "loop_id": "followup:" + str(op_id), "kind": "PREPARED_COMMITMENT_FOLLOW_UP",
-            "summary": commitment.get("what") or commitment.get("text"), "state": "OPEN",
-            "source": commitment.get("source"), "commitment_id": op_id, "lifecycle": lifecycle,
-            "next_action": response, "authority": "INTERNAL_ONLY", "evidence": commitment.get("evidence", []),
-        })
+        # If this commitment originated from an inbound Work loop, enrich that
+        # loop instead of creating a second durable loop for the same obligation.
+        inbound_loop = next((row for row in _st().list("loops")
+                             if row.get("kind") == "PREPARED_INBOUND_WORK"
+                             and op_id in (row.get("commitment_result", {}).get("new", [])
+                                           if isinstance(row.get("commitment_result"), dict) else [])), None)
+        followup = {
+            "kind": "PREPARED_COMMITMENT_FOLLOW_UP", "summary": commitment.get("what") or commitment.get("text"),
+            "state": "OPEN", "source": commitment.get("source"), "commitment_id": op_id,
+            "lifecycle": lifecycle, "next_action": response, "authority": "INTERNAL_ONLY",
+            "evidence": commitment.get("evidence", []),
+        }
+        if inbound_loop:
+            inbound_loop.update({"follow_up": followup, "next_action": response, "lifecycle": lifecycle})
+            _st().upsert("loops", inbound_loop.get("op_id") or inbound_loop["loop_id"], inbound_loop)
+        else:
+            _st().upsert("loops", "followup:" + str(op_id), {"loop_id": "followup:" + str(op_id), **followup})
     # Process normalized inbound observations already written by a certified
     # adapter.  This is internal preparation only: inbound content remains
     # evidence and can never grant approval or perform an external write.

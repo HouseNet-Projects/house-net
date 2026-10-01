@@ -3,7 +3,7 @@
   "approved_by": "GEV",
   "approval_reference": "owner-explicit-engineering-authority-hardening-pr80",
   "approved_at": "2026-09-29T14:00:00Z",
-  "mission": "Harden the Engineering Authority gate: validate from base code, bind real PR diff, exclude self-authorisation, and make full-system depend on the gate.",
+  "mission": "Harden the Engineering Authority gate and repair the duplicate proactive loop exposed by required CI.",
   "repository": "HouseNet-Projects/house-net",
   "base_sha": "d4f045b8694b64ff8c2ad3cc681d621acefd7326",
   "branch": "task2-engineering-authority-hardening",
@@ -23,7 +23,9 @@
     ".github/workflows/house-net-ci.yml",
     "tools/engineering_authority.py",
     "tools/engineering_authority_gate.py",
-    "tools/test_engineering_authority_gate.py"
+    "tools/test_engineering_authority_gate.py",
+    "command-center/.claude/architecture/proactive.py",
+    "command-center/.claude/policy/workspace_policy.json"
   ],
   "prohibited_operations": [
     "external_write",
